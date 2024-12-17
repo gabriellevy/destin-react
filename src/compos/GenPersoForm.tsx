@@ -10,19 +10,20 @@ import {
     Box,
     Typography
 } from '@mui/material';
-import {Perso} from "../types/Perso.ts";
+import {Perso, defaultCharacter} from "../types/Perso.ts";
 
-export default function GenPersoForm() {
-    const { control, handleSubmit, formState: { errors } } = useForm<Perso>();
+interface CharacterFormProps {
+    onSubmit: SubmitHandler<Perso>;
+}
 
-    const onSubmit: SubmitHandler<Perso> = (data) => {
-        console.log(data);
-        // Here you would typically send the data to an API or perform some other action
-    };
+export default function CharacterForm({ onSubmit }: CharacterFormProps) {
+    const { control, handleSubmit, formState: { errors } } = useForm<Perso>({
+        defaultValues: defaultCharacter
+    });
 
     return (
         <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 400, mx: 'auto', mt: 4 }}>
-            <Typography variant="h4" gutterBottom>Créer un personnage</Typography>
+            <Typography variant="h4" gutterBottom>Create a Character</Typography>
 
             <Controller
                 name="name"

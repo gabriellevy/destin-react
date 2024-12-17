@@ -1,13 +1,11 @@
 import './App.css'
-import Histoire from "./compos/Histoire.tsx";
-import GenPersoForm from "./compos/GenPersoForm.tsx";
+import Main from "./Pages/Main.tsx";
 
 function App() {
 
   return (
       <>
-        <GenPersoForm />
-        <Histoire />
+        <Main />
       </>
   )
 }
