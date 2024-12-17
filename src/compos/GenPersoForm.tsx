@@ -96,18 +96,18 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
             />
 
             <Controller
-                name="age"
+                name="ageInDays"
                 control={control}
                 rules={{ required: "Age is required", min: 0 }}
                 render={({ field }) => (
                     <TextField
                         {...field}
-                        label="Age"
+                        label="Age (in days)"
                         type="number"
                         fullWidth
                         margin="normal"
-                        error={!!errors.age}
-                        helperText={errors.age?.message}
+                        error={!!errors.ageInDays}
+                        helperText={errors.ageInDays?.message}
                     />
                 )}
             />
@@ -216,5 +216,6 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
         </Box>
     );
 }
+
 
 

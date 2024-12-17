@@ -21,7 +21,10 @@ export default function AffichagePerso({ character, onExport }: CharacterDisplay
                     <ListItemText primary="Job" secondary={character.job} />
                 </ListItem>
                 <ListItem>
-                    <ListItemText primary="Age" secondary={character.age} />
+                    <ListItemText
+                        primary="Age"
+                        secondary={`${character.ageInDays} days (${Math.floor(character.ageInDays / 365)} years)`}
+                    />
                 </ListItem>
                 <ListItem>
                     <ListItemText primary="Height" secondary={`${character.height} cm`} />

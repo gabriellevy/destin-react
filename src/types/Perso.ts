@@ -2,7 +2,7 @@ export type Perso = {
     name: string;
     sex: 'male' | 'female' | 'other';
     job: string;
-    age: number;
+    ageInDays: number;
     height: number; // in cm
     weight: number; // in kg
     nationality: string;
@@ -15,7 +15,7 @@ export const defaultCharacter: Perso = {
     name: "John Doe",
     sex: "male",
     job: "Adventurer",
-    age: 30,
+    ageInDays: 10950, // Approximately 30 years
     height: 180,
     weight: 80,
     nationality: "American",

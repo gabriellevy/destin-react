@@ -21,15 +21,19 @@ export default function Main() {
         setShowForm(false);
     };
 
+    const handleCharacterUpdate = (updatedCharacter: Perso) => {
+        setSubmittedCharacter(updatedCharacter);
+    };
+
     return (
         <ThemeProvider theme={theme}>
-            <CssBaseline/>
+            <CssBaseline />
             <Container maxWidth="lg">
-                <Typography variant="h3" component="h1" gutterBottom sx={{mt: 4}}>
+                <Typography variant="h3" component="h1" gutterBottom sx={{ mt: 4 }}>
                     Character Creator and Story Generator
                 </Typography>
                 {showForm ? (
-                    <GenPersoForm onSubmit={handleSubmit} onLoadCharacter={handleLoadCharacter}/>
+                    <GenPersoForm onSubmit={handleSubmit} onLoadCharacter={handleLoadCharacter} />
                 ) : (
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={6}>
@@ -47,7 +51,11 @@ export default function Main() {
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <Histoire initialCharacter={submittedCharacter!}/>
+                            <Histoire
+                                key={submittedCharacter.name} // Add this line
+                                initialCharacter={submittedCharacter!}
+                                onCharacterUpdate={handleCharacterUpdate}
+                            />
                         </Grid>
                     </Grid>
                 )}
