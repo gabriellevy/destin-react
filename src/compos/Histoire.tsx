@@ -42,7 +42,7 @@ export default function Histoire({ initialCharacter }: StoryProps) {
     }, [initialCharacter]);
 
     return (
-        <Paper elevation={3} sx={{ p: 3, mt: 4, maxWidth: 600, mx: 'auto' }}>
+        <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%', overflowY: 'auto' }}>
             <Typography variant="h4" gutterBottom>Your Character's Story</Typography>
             <Box>
                 {storyEvents.map((event, index) => (

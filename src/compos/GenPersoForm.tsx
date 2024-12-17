@@ -14,12 +14,33 @@ import {Perso, defaultCharacter} from "../types/Perso.ts";
 
 interface CharacterFormProps {
     onSubmit: SubmitHandler<Perso>;
+    onLoadCharacter: (character: Perso) => void;
 }
 
-export default function CharacterForm({ onSubmit }: CharacterFormProps) {
-    const { control, handleSubmit, formState: { errors } } = useForm<Perso>({
+export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFormProps) {
+    const { control, handleSubmit, formState: { errors }, reset } = useForm<Perso>({
         defaultValues: defaultCharacter
     });
+
+    const handleLoadCharacter = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const content = e.target?.result;
+                if (typeof content === 'string') {
+                    try {
+                        const loadedCharacter = JSON.parse(content) as Perso;
+                        reset(loadedCharacter);
+                        onLoadCharacter(loadedCharacter);
+                    } catch (error) {
+                        console.error('Error parsing JSON:', error);
+                    }
+                }
+            };
+            reader.readAsText(file);
+        }
+    };
 
     return (
         <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 400, mx: 'auto', mt: 4 }}>
@@ -174,10 +195,26 @@ export default function CharacterForm({ onSubmit }: CharacterFormProps) {
                 )}
             />
 
-            <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
-                Submit
-            </Button>
+            <Box mt={2} display="flex" justifyContent="space-between">
+                <Button type="submit" variant="contained" color="primary">
+                    Submit
+                </Button>
+                <Button
+                    component="label"
+                    variant="contained"
+                    color="secondary"
+                >
+                    Load Character
+                    <input
+                        type="file"
+                        hidden
+                        accept=".json"
+                        onChange={handleLoadCharacter}
+                    />
+                </Button>
+            </Box>
         </Box>
     );
 }
+
 
