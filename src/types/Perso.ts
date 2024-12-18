@@ -1,3 +1,5 @@
+import {Lieu} from "./Lieu.ts";
+
 export type Perso = {
     name: string;
     sex: 'male' | 'female' | 'other';
@@ -9,6 +11,7 @@ export type Perso = {
     nationality: string;
     skills: string[];
     backstory: string;
+    lieu: Lieu,
     [key: string]: any; // Allow for dynamic properties
 };
 
@@ -22,5 +25,6 @@ export const defaultCharacter: Perso = {
     weight: 80,
     nationality: "American",
     skills: ["Swordsmanship", "Survival", "Diplomacy"],
+    lieu: Lieu.ubersreik,
     backstory: "A brave adventurer seeking fortune and glory."
 };
