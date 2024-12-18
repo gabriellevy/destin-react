@@ -3,6 +3,7 @@ export type Perso = {
     sex: 'male' | 'female' | 'other';
     job: string;
     ageInDays: number;
+    age: number;
     height: number; // in cm
     weight: number; // in kg
     nationality: string;
@@ -12,10 +13,10 @@ export type Perso = {
 };
 
 export const defaultCharacter: Perso = {
-    name: "John Doe",
+    name: "Wilhelm Hinderten",
     sex: "male",
-    job: "Adventurer",
-    ageInDays: 10950, // Approximately 30 years
+    job: "aucun",
+    ageInDays: 4000,
     height: 180,
     weight: 80,
     nationality: "American",

@@ -40,6 +40,7 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
                 // Add 1D10 days to the character's age
                 const daysToAdd = Math.floor(Math.random() * 10) + 1;
                 currentCharacter.ageInDays += daysToAdd;
+                currentCharacter.age = currentCharacter.ageInDays/400;
 
                 setCharacter(currentCharacter);
                 onCharacterUpdate(currentCharacter);

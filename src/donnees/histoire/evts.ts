@@ -3,6 +3,12 @@ import {Perso} from "../../types/Perso.ts";
 
 export const evts: Evt[] = [
     {
+        id: "evt1",
+        description: "Le pont d'Ubersreik est vraiment gigantesque. Il paraît que ce sont les nains qui l'ont construit avant même la naissance de papa !",
+        conditions: (perso:Perso):boolean => perso.age <= 15,
+        image: "Ubersreik_Bridge.jpg"
+    },
+    {
         id: "event1",
         description: "You embark on a perilous journey through the mountains.",
         conditions: (perso:Perso):boolean => perso.age < 40 && perso.skills.includes("Survival"),
