@@ -33,7 +33,7 @@ export default function AffichagePerso({ character, onExport }: CharacterDisplay
                     <ListItemText primary="Weight" secondary={`${character.weight} kg`} />
                 </ListItem>
                 <ListItem>
-                    <ListItemText primary="Nationality" secondary={character.nationality} />
+                    <ListItemText primary="Lieu" secondary={character.lieu} />
                 </ListItem>
                 <ListItem>
                     <ListItemText

@@ -11,6 +11,7 @@ import {
     Typography
 } from '@mui/material';
 import {Perso, defaultCharacter} from "../types/Perso.ts";
+import {Lieu} from "../types/Lieu.ts";
 
 interface CharacterFormProps {
     onSubmit: SubmitHandler<Perso>;
@@ -147,18 +148,18 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
             />
 
             <Controller
-                name="nationality"
+                name="lieu"
                 control={control}
-                rules={{ required: "Nationality is required" }}
+                rules={{ required: "Un lieu de départ est requis" }}
                 render={({ field }) => (
-                    <TextField
-                        {...field}
-                        label="Nationality"
-                        fullWidth
-                        margin="normal"
-                        error={!!errors.nationality}
-                        helperText={errors.nationality?.message}
-                    />
+                    <FormControl fullWidth margin="normal" error={!!errors.lieu}>
+                        <InputLabel>Lieu</InputLabel>
+                        <Select {...field} label="Lieu">
+                            <MenuItem value={Lieu.ubersreik}>Ubersreik</MenuItem>
+                            <MenuItem value={Lieu.altdorf}>Altdorf</MenuItem>
+                        </Select>
+                        <FormHelperText>{errors.lieu?.message}</FormHelperText>
+                    </FormControl>
                 )}
             />
 
