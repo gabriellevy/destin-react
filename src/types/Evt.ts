@@ -5,4 +5,5 @@ export type Evt = {
     description: string;
     conditions: (character: Perso) => boolean;
     effect?: (character: Perso) => Perso;
+    image?: string;
 };

@@ -8,9 +8,9 @@ interface CharacterDisplayProps {
 
 export default function AffichagePerso({ character, onExport }: CharacterDisplayProps) {
     return (
-        <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%' }}>
-            <Typography variant="h4" gutterBottom>Character Details</Typography>
-            <List>
+        <Paper elevation={3} sx={{ p: 2, mt: 4, height: '100%', overflowY: 'auto' }}>
+            <Typography variant="h5" gutterBottom>Character Details</Typography>
+            <List dense>
                 <ListItem>
                     <ListItemText primary="Name" secondary={character.name} />
                 </ListItem>
@@ -43,11 +43,11 @@ export default function AffichagePerso({ character, onExport }: CharacterDisplay
                 </ListItem>
             </List>
             <Box mt={2}>
-                <Typography variant="h6">Backstory</Typography>
-                <Typography variant="body1">{character.backstory}</Typography>
+                <Typography variant="subtitle1">Backstory</Typography>
+                <Typography variant="body2">{character.backstory}</Typography>
             </Box>
             <Box mt={2}>
-                <Button variant="contained" color="primary" onClick={onExport}>
+                <Button variant="contained" color="primary" onClick={onExport} size="small">
                     Export Character
                 </Button>
             </Box>

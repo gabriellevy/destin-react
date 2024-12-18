@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Typography, Paper } from '@mui/material';
+import {Box, Typography, Paper, Grid} from '@mui/material';
 import {Perso} from "../types/Perso.ts";
 import {evts} from "../donnees/histoire/evts.ts";
 
@@ -9,9 +9,14 @@ interface StoryProps {
     key: string; // Add this line
 }
 
+interface StoryEvent {
+    description: string;
+    image?: string;
+}
+
 export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryProps) {
     const [character, setCharacter] = useState<Perso>(initialCharacter);
-    const [storyEvents, setStoryEvents] = useState<string[]>([]);
+    const [storyEvents, setStoryEvents] = useState<StoryEvent[]>([]);
     const [isComplete, setIsComplete] = useState(false);
 
     useEffect(() => {
@@ -26,7 +31,7 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
 
             if (applicableEvents.length > 0) {
                 const event = applicableEvents[Math.floor(Math.random() * applicableEvents.length)];
-                setStoryEvents(prev => [...prev, event.description]);
+                setStoryEvents(prev => [...prev, { description: event.description, image: event.image }]);
 
                 if (event.effect) {
                     currentCharacter = event.effect(currentCharacter);
@@ -51,16 +56,33 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
             isMounted = false;
             if (timeoutId) clearTimeout(timeoutId);
         };
-    }, []); // Empty dependency array
+    }, []);
 
     return (
         <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%', overflowY: 'auto' }}>
             <Typography variant="h4" gutterBottom>Your Character's Story</Typography>
             <Box>
                 {storyEvents.map((event, index) => (
-                    <Typography key={index} paragraph>
-                        {event}
-                    </Typography>
+                    <Grid container spacing={2} key={index} sx={{ mb: 2 }}>
+                        {event.image && (
+                            <Grid item xs={4}>
+                                <Box
+                                    component="img"
+                                    sx={{
+                                        height: 150,
+                                        width: 200,
+                                        maxHeight: { xs: 233, md: 167 },
+                                        maxWidth: { xs: 350, md: 250 },
+                                    }}
+                                    alt={`Event ${index + 1}`}
+                                    src={event.image}
+                                />
+                            </Grid>
+                        )}
+                        <Grid item xs={event.image ? 8 : 12}>
+                            <Typography paragraph>{event.description}</Typography>
+                        </Grid>
+                    </Grid>
                 ))}
                 {isComplete && (
                     <Typography paragraph fontWeight="bold">
@@ -71,4 +93,3 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
         </Paper>
     );
 }
-

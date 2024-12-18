@@ -36,7 +36,7 @@ export default function Main() {
                     <GenPersoForm onSubmit={handleSubmit} onLoadCharacter={handleLoadCharacter} />
                 ) : (
                     <Grid container spacing={3}>
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={4}>
                             <AffichagePerso
                                 character={submittedCharacter!}
                                 onExport={() => {
@@ -50,9 +50,9 @@ export default function Main() {
                                 }}
                             />
                         </Grid>
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={8}>
                             <Histoire
-                                key={submittedCharacter.name} // Add this line
+                                key={submittedCharacter!.name}
                                 initialCharacter={submittedCharacter!}
                                 onCharacterUpdate={handleCharacterUpdate}
                             />
