@@ -37,8 +37,8 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
                     currentCharacter = event.effect(currentCharacter);
                 }
 
-                // Add 1D10 days to the character's age
-                const daysToAdd = Math.floor(Math.random() * 10) + 1;
+                // ajouter 1D20 jours à l'âge du personnage // TODO : quelle vitesse ? paramétrable ?
+                const daysToAdd = Math.floor(Math.random() * 20) + 1;
                 currentCharacter.ageInDays += daysToAdd;
                 currentCharacter.age = currentCharacter.ageInDays/400;
 

@@ -9,6 +9,12 @@ export const evts: Evt[] = [
         image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Ubersreik_Bridge.jpg"
     },
     {
+        id: "evt2",
+        description: "Le pont d'Ubersreik est vraiment une merveille. Il paraît que les étranges symboles qui le parsèment sont des runes naines qui le feront durer éternellement.",
+        conditions: (perso:Perso):boolean => perso.age >= 30,
+        image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Ubersreik_Bridge.jpg"
+    },
+    {
         id: "event2_au_cas_ou",
         description: "You encounter a fierce dragon guarding a treasure!",
         conditions: (perso:Perso):boolean => perso.skills.includes("Swordsmanship") && perso.age < 50,

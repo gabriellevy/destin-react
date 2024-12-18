@@ -17,6 +17,7 @@ export const defaultCharacter: Perso = {
     sex: "male",
     job: "aucun",
     ageInDays: 4000,
+    age: 10,
     height: 180,
     weight: 80,
     nationality: "American",
