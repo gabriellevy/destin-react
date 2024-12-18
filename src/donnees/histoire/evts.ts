@@ -6,7 +6,7 @@ export const evts: Evt[] = [
         id: "evt1",
         description: "Le pont d'Ubersreik est vraiment gigantesque. Il paraît que ce sont les nains qui l'ont construit avant même la naissance de papa !",
         conditions: (perso:Perso):boolean => perso.age <= 15,
-        image: "Ubersreik_Bridge.jpg"
+        image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Ubersreik_Bridge.jpg"
     },
     {
         id: "event1",
