@@ -94,18 +94,18 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
             />
 
             <Controller
-                name="ageInDays"
+                name="dateNaissance"
                 control={control}
-                rules={{ required: "Age is required", min: 0 }}
+                rules={{ required: "Date de naissance obligatoire", min: 0 }}
                 render={({ field }) => (
                     <TextField
                         {...field}
-                        label="Age (in days)"
+                        label="Date (en jours depuis l'an 0 du calendrier impérial)"
                         type="number"
                         fullWidth
                         margin="normal"
-                        error={!!errors.ageInDays}
-                        helperText={errors.ageInDays?.message}
+                        error={!!errors.dateNaissance}
+                        helperText={errors.dateNaissance?.message}
                     />
                 )}
             />

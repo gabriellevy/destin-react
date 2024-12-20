@@ -1,5 +1,6 @@
 import {Box, Typography, List, ListItem, ListItemText, Paper, Button} from '@mui/material';
 import {Perso} from "../types/Perso.ts";
+import {age} from "../types/Date.ts";
 
 interface AffichagePersoProps {
     perso: Perso;
@@ -24,7 +25,7 @@ export default function AffichagePerso({ perso, exporter }: Readonly<AffichagePe
                 <ListItem>
                     <ListItemText
                         primary="Âge"
-                        secondary={`${perso.age} ans`}
+                        secondary={`${age(perso)} ans`}
                     />
                 </ListItem>
                 <ListItem>
