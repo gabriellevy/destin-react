@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import {Box, Typography, Paper, Grid} from '@mui/material';
 import {Perso} from "../types/Perso.ts";
 import {evts} from "../donnees/histoire/evts.ts";
+import {joursToAnnees} from "../types/Date.ts";
 
 interface StoryProps {
     initialCharacter: Perso;
@@ -21,29 +22,29 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
 
     useEffect(() => {
         let isMounted = true;
-        let currentCharacter = { ...initialCharacter };
+        let perso = { ...initialCharacter };
         let timeoutId: NodeJS.Timeout;
 
         const processNextEvent = () => {
             if (!isMounted) return;
 
-            const applicableEvents = evts.filter(event => event.conditions(currentCharacter));
+            const applicableEvents = evts.filter(event => !event.conditions || event.conditions(perso));
 
             if (applicableEvents.length > 0) {
                 const event = applicableEvents[Math.floor(Math.random() * applicableEvents.length)];
-                setStoryEvents(prev => [...prev, { description: event.description(), image: event.image }]);
+                setStoryEvents(prev => [...prev, { description: event.description(perso), image: event.image }]);
 
                 if (event.effets) {
-                    currentCharacter = event.effets(currentCharacter);
+                    perso = event.effets(perso);
                 }
 
                 // ajouter 1D20 jours à l'âge du personnage // TODO : quelle vitesse ? paramétrable ?
                 const daysToAdd = Math.floor(Math.random() * 20) + 1;
-                currentCharacter.ageInDays += daysToAdd;
-                currentCharacter.age = currentCharacter.ageInDays/400;
+                perso.ageInDays += daysToAdd;
+                perso.age = joursToAnnees(perso.ageInDays);
 
-                setCharacter(currentCharacter);
-                onCharacterUpdate(currentCharacter);
+                setCharacter(perso);
+                onCharacterUpdate(perso);
 
                 timeoutId = setTimeout(processNextEvent, 5000);
             } else {
@@ -86,7 +87,7 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
                 ))}
                 {isComplete && (
                     <Typography paragraph fontWeight="bold">
-                        This is the end of your life.
+                        Vous êtes mort. TODO : faire un truc un peu dapté !!
                     </Typography>
                 )}
             </Box>
