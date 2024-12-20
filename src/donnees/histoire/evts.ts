@@ -43,7 +43,7 @@ export const evts: Evt[] = [
         id: "event5_au_cas_ou",
         description: "You settle down and start a family in a peaceful village.",
         conditions: (perso:Perso):boolean => perso.age >= 40 && !perso.skills.includes("Swordsmanship"),
-        effect: (perso: Perso):Perso => ({ ...perso, job: "Farmer" }),
+        effect: (perso: Perso):Perso => ({ ...perso, travail: "Farmer" }),
         image: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
     }
 ];

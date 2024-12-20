@@ -1,9 +1,9 @@
 import {Lieu} from "./Lieu.ts";
 
 export type Perso = {
-    name: string;
-    sex: 'male' | 'female' | 'other';
-    job: string;
+    nom: string;
+    sexe: 'male' | 'female' | 'other';
+    travail: string;
     ageInDays: number;
     age: number;
     height: number; // in cm
@@ -16,9 +16,9 @@ export type Perso = {
 };
 
 export const defaultCharacter: Perso = {
-    name: "Wilhelm Hinderten",
-    sex: "male",
-    job: "aucun",
+    nom: "Wilhelm Hinderten",
+    sexe: "male",
+    travail: "aucun",
     ageInDays: 4000,
     age: 10,
     height: 180,

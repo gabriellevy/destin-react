@@ -52,7 +52,7 @@ export default function Main() {
                         </Grid>
                         <Grid item xs={12} md={8}>
                             <Histoire
-                                key={submittedCharacter!.name}
+                                key={submittedCharacter!.nom}
                                 initialCharacter={submittedCharacter!}
                                 onCharacterUpdate={handleCharacterUpdate}
                             />

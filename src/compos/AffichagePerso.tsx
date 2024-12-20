@@ -12,13 +12,13 @@ export default function AffichagePerso({ character, onExport }: CharacterDisplay
             <Typography variant="h5" gutterBottom>Character Details</Typography>
             <List dense>
                 <ListItem>
-                    <ListItemText primary="Name" secondary={character.name} />
+                    <ListItemText primary="Name" secondary={character.nom} />
                 </ListItem>
                 <ListItem>
-                    <ListItemText primary="Sex" secondary={character.sex} />
+                    <ListItemText primary="Sex" secondary={character.sexe} />
                 </ListItem>
                 <ListItem>
-                    <ListItemText primary="Job" secondary={character.job} />
+                    <ListItemText primary="Job" secondary={character.travail} />
                 </ListItem>
                 <ListItem>
                     <ListItemText

@@ -48,50 +48,47 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
             <Typography variant="h4" gutterBottom>Create a Character</Typography>
 
             <Controller
-                name="name"
+                name="nom"
                 control={control}
-                rules={{ required: "Name is required" }}
+                rules={{ required: "Vous devez avoir un nom" }}
                 render={({ field }) => (
                     <TextField
                         {...field}
-                        label="Name"
+                        label="Nom"
                         fullWidth
                         margin="normal"
-                        error={!!errors.name}
-                        helperText={errors.name?.message}
+                        error={!!errors.nom}
+                        helperText={errors.nom?.message}
                     />
                 )}
             />
 
             <Controller
-                name="sex"
+                name="sexe"
                 control={control}
-                rules={{ required: "Sex is required" }}
                 render={({ field }) => (
-                    <FormControl fullWidth margin="normal" error={!!errors.sex}>
-                        <InputLabel>Sex</InputLabel>
-                        <Select {...field} label="Sex">
-                            <MenuItem value="male">Male</MenuItem>
-                            <MenuItem value="female">Female</MenuItem>
-                            <MenuItem value="other">Other</MenuItem>
+                    <FormControl fullWidth margin="normal" error={!!errors.sexe}>
+                        <InputLabel>Sexe</InputLabel>e
+                        <Select {...field} label="Sexe">
+                            <MenuItem value="male">Mâle</MenuItem>
+                            <MenuItem value="femelle">Femelle</MenuItem>
                         </Select>
-                        <FormHelperText>{errors.sex?.message}</FormHelperText>
+                        <FormHelperText>{errors.sexe?.message}</FormHelperText>
                     </FormControl>
                 )}
             />
 
             <Controller
-                name="job"
+                name="travail"
                 control={control}
-                rules={{ required: "Job is required" }}
                 render={({ field }) => (
                     <TextField
                         {...field}
-                        label="Job"
+                        label="Travail"
                         fullWidth
                         margin="normal"
-                        error={!!errors.job}
-                        helperText={errors.job?.message}
+                        error={!!errors.travail}
+                        helperText={errors.travail?.message}
                     />
                 )}
             />
