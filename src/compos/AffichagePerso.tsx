@@ -24,7 +24,7 @@ export default function AffichagePerso({ perso, exporter }: Readonly<AffichagePe
                 <ListItem>
                     <ListItemText
                         primary="Âge"
-                        secondary={`${perso.age} ans`}
+                        secondary={`${perso.age} ans`/*TODO : trouver une fonction d'arrondi de perso.age*/}
                     />
                 </ListItem>
                 <ListItem>

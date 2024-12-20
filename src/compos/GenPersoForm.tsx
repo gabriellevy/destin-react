@@ -10,7 +10,7 @@ import {
     Box,
     Typography
 } from '@mui/material';
-import {Perso, defaultCharacter} from "../types/Perso.ts";
+import {Perso, defaultCharacter, Sexe} from "../types/Perso.ts";
 import {Lieu} from "../types/Lieu.ts";
 
 interface CharacterFormProps {
@@ -70,8 +70,8 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                     <FormControl fullWidth margin="normal" error={!!errors.sexe}>
                         <InputLabel>Sexe</InputLabel>e
                         <Select {...field} label="Sexe">
-                            <MenuItem value="male">Mâle</MenuItem>
-                            <MenuItem value="femelle">Femelle</MenuItem>
+                            <MenuItem value={Sexe.male}>{Sexe.male}</MenuItem>
+                            <MenuItem value={Sexe.femelle}>{Sexe.femelle}</MenuItem>
                         </Select>
                         <FormHelperText>{errors.sexe?.message}</FormHelperText>
                     </FormControl>

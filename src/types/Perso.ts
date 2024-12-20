@@ -2,7 +2,7 @@ import {Lieu} from "./Lieu.ts";
 
 export type Perso = {
     nom: string;
-    sexe: 'male' | 'female' | 'other';
+    sexe: Sexe;
     travail: string;
     ageInDays: number;
     age: number;
@@ -15,9 +15,14 @@ export type Perso = {
     [key: string]: any; // Allow for dynamic properties
 };
 
+export enum Sexe {
+    male = 'Mâle',
+    femelle = 'Femelle',
+}
+
 export const defaultCharacter: Perso = {
     nom: "Wilhelm Hinderten",
-    sexe: "male",
+    sexe: Sexe.male,
     travail: "aucun",
     ageInDays: 4000,
     age: 10,
