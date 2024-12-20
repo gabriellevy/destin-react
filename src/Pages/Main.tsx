@@ -38,8 +38,8 @@ export default function Main() {
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={4}>
                             <AffichagePerso
-                                character={submittedCharacter!}
-                                onExport={() => {
+                                perso={submittedCharacter!}
+                                exporter={() => {
                                     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(submittedCharacter));
                                     const downloadAnchorNode = document.createElement('a');
                                     downloadAnchorNode.setAttribute("href", dataStr);
