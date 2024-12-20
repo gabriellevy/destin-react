@@ -111,40 +111,6 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
             />
 
             <Controller
-                name="height"
-                control={control}
-                rules={{ required: "Height is required", min: 0 }}
-                render={({ field }) => (
-                    <TextField
-                        {...field}
-                        label="Height (cm)"
-                        type="number"
-                        fullWidth
-                        margin="normal"
-                        error={!!errors.height}
-                        helperText={errors.height?.message}
-                    />
-                )}
-            />
-
-            <Controller
-                name="weight"
-                control={control}
-                rules={{ required: "Weight is required", min: 0 }}
-                render={({ field }) => (
-                    <TextField
-                        {...field}
-                        label="Weight (kg)"
-                        type="number"
-                        fullWidth
-                        margin="normal"
-                        error={!!errors.weight}
-                        helperText={errors.weight?.message}
-                    />
-                )}
-            />
-
-            <Controller
                 name="lieu"
                 control={control}
                 rules={{ required: "Un lieu de départ est requis" }}

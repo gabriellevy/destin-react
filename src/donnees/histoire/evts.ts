@@ -41,7 +41,7 @@ export const evts: Evt[] = [
         id: "event2_au_cas_ou",
         description: (perso: Perso): string => "You encounter a fierce dragon guarding a treasure!",
         conditions: (perso:Perso):boolean => perso.skills.includes("Swordsmanship") && perso.age < 50,
-        effets: (perso: Perso):Perso => ({ ...perso, weight: perso.weight - 5 }),
+        effets: (perso: Perso):Perso => ({ ...perso, age: perso.age - 5 }),
         image: "https://images.unsplash.com/photo-1577493340887-b7bfff550145?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
     },
     {
