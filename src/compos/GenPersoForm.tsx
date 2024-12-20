@@ -45,7 +45,7 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
 
     return (
         <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 400, mx: 'auto', mt: 4 }}>
-            <Typography variant="h4" gutterBottom>Create a Character</Typography>
+            <Typography variant="h4" gutterBottom>Créer un personnage</Typography>
 
             <Controller
                 name="nom"
@@ -68,7 +68,7 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                 control={control}
                 render={({ field }) => (
                     <FormControl fullWidth margin="normal" error={!!errors.sexe}>
-                        <InputLabel>Sexe</InputLabel>e
+                        <InputLabel>Sexe</InputLabel>
                         <Select {...field} label="Sexe">
                             <MenuItem value={Sexe.male}>{Sexe.male}</MenuItem>
                             <MenuItem value={Sexe.femelle}>{Sexe.femelle}</MenuItem>
