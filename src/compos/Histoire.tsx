@@ -31,10 +31,10 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
 
             if (applicableEvents.length > 0) {
                 const event = applicableEvents[Math.floor(Math.random() * applicableEvents.length)];
-                setStoryEvents(prev => [...prev, { description: event.description, image: event.image }]);
+                setStoryEvents(prev => [...prev, { description: event.description(), image: event.image }]);
 
-                if (event.effect) {
-                    currentCharacter = event.effect(currentCharacter);
+                if (event.effets) {
+                    currentCharacter = event.effets(currentCharacter);
                 }
 
                 // ajouter 1D20 jours à l'âge du personnage // TODO : quelle vitesse ? paramétrable ?
