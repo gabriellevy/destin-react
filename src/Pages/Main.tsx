@@ -8,53 +8,50 @@ import Histoire from "../compos/Histoire.tsx";
 const theme = createTheme();
 
 export default function Main() {
-    const [submittedCharacter, setSubmittedCharacter] = useState<Perso | null>(null);
-    const [showForm, setShowForm] = useState(true);
+    const [persoSoumis, setPersoSoumis] = useState<Perso | null>(null);
+    const [afficherForm, setAfficherForm] = useState(true);
 
-    const handleSubmit = (data: Perso) => {
-        setSubmittedCharacter(data);
-        setShowForm(false);
+    const soumettrePerso = (data: Perso) => {
+        setPersoSoumis(data);
+        setAfficherForm(false);
     };
 
-    const handleLoadCharacter = (loadedCharacter: Perso) => {
-        setSubmittedCharacter(loadedCharacter);
-        setShowForm(false);
+    const chargerPerso = (persoCharge: Perso) => {
+        setPersoSoumis(persoCharge);
+        setAfficherForm(false);
     };
 
-    const handleCharacterUpdate = (updatedCharacter: Perso) => {
-        setSubmittedCharacter(updatedCharacter);
+    const majPerso = (updatedCharacter: Perso) => {
+        setPersoSoumis(updatedCharacter);
     };
 
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Container maxWidth="lg">
-                <Typography variant="h3" component="h1" gutterBottom sx={{ mt: 4 }}>
-                    Character Creator and Story Generator
-                </Typography>
-                {showForm ? (
-                    <GenPersoForm onSubmit={handleSubmit} onLoadCharacter={handleLoadCharacter} />
+                {afficherForm ? (
+                    <GenPersoForm onSubmit={soumettrePerso} onLoadCharacter={chargerPerso} />
                 ) : (
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={4}>
                             <AffichagePerso
-                                perso={submittedCharacter!}
+                                perso={persoSoumis!}
                                 exporter={() => {
-                                    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(submittedCharacter));
-                                    const downloadAnchorNode = document.createElement('a');
-                                    downloadAnchorNode.setAttribute("href", dataStr);
-                                    downloadAnchorNode.setAttribute("download", "character.json");
-                                    document.body.appendChild(downloadAnchorNode);
-                                    downloadAnchorNode.click();
-                                    downloadAnchorNode.remove();
+                                    const persoStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(persoSoumis));
+                                    const baliseTelechargement = document.createElement('a');
+                                    baliseTelechargement.setAttribute("href", persoStr);
+                                    baliseTelechargement.setAttribute("download", "character.json");
+                                    document.body.appendChild(baliseTelechargement);
+                                    baliseTelechargement.click();
+                                    baliseTelechargement.remove();
                                 }}
                             />
                         </Grid>
                         <Grid item xs={12} md={8}>
                             <Histoire
-                                key={submittedCharacter!.nom}
-                                initialCharacter={submittedCharacter!}
-                                onCharacterUpdate={handleCharacterUpdate}
+                                key={persoSoumis!.nom}
+                                initialCharacter={persoSoumis!}
+                                onCharacterUpdate={majPerso}
                             />
                         </Grid>
                     </Grid>

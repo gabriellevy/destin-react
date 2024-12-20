@@ -61,7 +61,6 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
 
     return (
         <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%', overflowY: 'auto' }}>
-            <Typography variant="h4" gutterBottom>Your Character's Story</Typography>
             <Box>
                 {storyEvents.map((event, index) => (
                     <Grid container spacing={2} key={index} sx={{ mb: 2 }}>
