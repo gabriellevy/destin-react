@@ -9,7 +9,7 @@ interface AffichagePersoProps {
 
 export default function AffichagePerso({ perso, exporter }: Readonly<AffichagePersoProps>) {
     return (
-        <Paper elevation={3} sx={{ p: 2, mt: 4, height: '100%', overflowY: 'auto' }}>
+        <>
             <List dense>
                 <ListItem>
                     <Typography variant="h5" gutterBottom>
@@ -45,12 +45,10 @@ export default function AffichagePerso({ perso, exporter }: Readonly<AffichagePe
                 </ListItem>
             </List>
             <Box mt={2}>
-            </Box>
-            <Box mt={2}>
                 <Button variant="contained" color="primary" onClick={exporter} size="small">
                     Exporter le perso
                 </Button>
             </Box>
-        </Paper>
+        </>
     );
 }
