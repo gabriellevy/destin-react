@@ -7,6 +7,7 @@ interface InfosMondeProps {
 }
 
 export default function InfosMonde({ perso }: Readonly<InfosMondeProps>) {
+    console.debug("date en jours : " + perso.date);
     return (
         <List dense>
             <ListItem>
@@ -16,12 +17,6 @@ export default function InfosMonde({ perso }: Readonly<InfosMondeProps>) {
                 <ListItemText
                     primary="Date"
                     secondary={`${jourStr(perso.date)}`}
-                />
-            </ListItem>
-            <ListItem>
-                <ListItemText
-                    primary="débug date"
-                    secondary={`${perso.date}`}
                 />
             </ListItem>
         </List>
