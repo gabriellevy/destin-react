@@ -7,7 +7,6 @@ interface InfosMondeProps {
 }
 
 export default function InfosMonde({ perso }: Readonly<InfosMondeProps>) {
-    console.debug("date en jours : " + perso.date);
     return (
         <List dense>
             <ListItem>

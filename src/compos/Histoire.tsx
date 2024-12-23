@@ -4,6 +4,8 @@ import {Perso} from "../types/Perso.ts";
 import {evts_remplissage} from "../donnees/histoire/evts_remplissage.ts";
 import {evts_ubersreik} from "../donnees/histoire/evts_ubersreik.ts";
 import {Evt} from "../types/Evt.ts";
+import {leTempsPasse} from "../types/Date.ts";
+import {evts_calendrier} from "../donnees/histoire/evts_calendrier.ts";
 
 interface StoryProps {
     initialCharacter: Perso;
@@ -29,8 +31,13 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
         const processNextEvent = () => {
             if (!isMounted) return;
 
+            perso = leTempsPasse(perso);
+
             let evtsApplicables: Evt[] = evts_remplissage.filter(event => !event.conditions || event.conditions(perso));
-            evtsApplicables = [...evtsApplicables, ...evts_ubersreik.filter(event => !event.conditions || event.conditions(perso))];
+            evtsApplicables = [...evtsApplicables,
+                ...evts_ubersreik.filter(event => !event.conditions || event.conditions(perso)),
+                ...evts_calendrier.filter(event => !event.conditions || event.conditions(perso))
+            ];
 
             if (evtsApplicables.length > 0) {
                 const event = evtsApplicables[Math.floor(Math.random() * evtsApplicables.length)];
@@ -39,11 +46,6 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
                 if (event.effets) {
                     perso = event.effets(perso);
                 }
-
-                // ajouter 1D20 jours à l'âge du personnage // TODO : quelle vitesse ? paramétrable ?
-                const daysToAdd = Math.floor(Math.random() * 20) + 1;
-                // const daysToAdd = 1;
-                perso = { ...perso, date: perso.date + daysToAdd };
 
                 setCharacter(perso);
                 onCharacterUpdate(perso);
