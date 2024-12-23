@@ -10,7 +10,8 @@ export type Perso = {
     backstory: string;
     lieu: Lieu,
     // aide à la programmation mais aps à afficher directement :
-    mois?: string, // déduit de date ais pratique pour optimiser les calculs de conditions en masse
+    mois?: string, // déduit de date mais pratique pour optimiser les calculs de conditions en masse
+    jourDuMois?: number, // déduit de date mais pratique pour optimiser les calculs de conditions en masse
     // gadgets probablement à virer
     skills: string[];
 };

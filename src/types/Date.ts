@@ -4,6 +4,7 @@ export const JOURS_PAR_AN = 400;
 export const JOURS_PAR_SEMAINE = 8;
 
 export const HEXENSTAG: string = "Hexenstag";
+export const NACHEXEN: string = "Nachexen";
 
 export function joursToAnnees(jours: number) {return Math.floor(jours / JOURS_PAR_AN)}
 export function anneesToJours(annees: number) {return annees * JOURS_PAR_AN}
@@ -15,35 +16,35 @@ export function jourDansLAnnee(joursDepuis0: number) {return joursDepuis0%JOURS_
 export function jourStr(joursDepuis0: number): string {
     let numeroJourSemaine: number = joursDepuis0 % JOURS_PAR_SEMAINE;
     const annee = joursToAnnees(joursDepuis0);
-    return formatJourStr(numeroJourSemaine, calculMoisEtJourSuMoisStr(joursDepuis0), annee);
+    return formatJourStr(numeroJourSemaine, calculJourDuMois(joursDepuis0), calculMoisStr(joursDepuis0), annee);
 }
 
-function calculMoisEtJourSuMoisStr(joursDepuis0: number): string {
+function calculJourDuMois(joursDepuis0: number): number {
     let joursDepuisDebutAnnee: number = jourDansLAnnee(joursDepuis0);
 
     // détermination du mois
     if (joursDepuisDebutAnnee == 1) {
-        return HEXENSTAG;
+        return -1;
     }
-    else if (joursDepuisDebutAnnee <= 33) return joursDepuisDebutAnnee-1 + " Nachexen";
-    else if (joursDepuisDebutAnnee <= 66) return joursDepuisDebutAnnee-33 + " Jahrdrung";
-    else if (joursDepuisDebutAnnee == 67) return "Mitterfruhl";
-    else if (joursDepuisDebutAnnee <= 100) return joursDepuisDebutAnnee-67 + " Pflugzeit";
-    else if (joursDepuisDebutAnnee <= 133) return joursDepuisDebutAnnee-100 + " Sigmarzeit";
-    else if (joursDepuisDebutAnnee <= 166) return joursDepuisDebutAnnee-133 + " Sommerzei";
-    else if (joursDepuisDebutAnnee == 167) return "Sonnstill";
-    else if (joursDepuisDebutAnnee <= 200) return joursDepuisDebutAnnee-167 + " Vorgeheim";
-    else if (joursDepuisDebutAnnee == 201) return "Geheimnistag";
-    else if (joursDepuisDebutAnnee <= 233) return joursDepuisDebutAnnee-201 + " Nachgeheim";
-    else if (joursDepuisDebutAnnee <= 266) return joursDepuisDebutAnnee-233 + " Erntezeit";
-    else if (joursDepuisDebutAnnee == 267) return "Mittherbst";
-    else if (joursDepuisDebutAnnee <= 300) return joursDepuisDebutAnnee-267 + " Brauzeit";
-    else if (joursDepuisDebutAnnee <= 333) return joursDepuisDebutAnnee-300 + " Kaldezeit";
-    else if (joursDepuisDebutAnnee <= 366) return joursDepuisDebutAnnee-333 + " Ulriczeit ";
-    else if (joursDepuisDebutAnnee == 367) return "Mondstille";
-    else if (joursDepuisDebutAnnee <= 400) return joursDepuisDebutAnnee-367 + " Vorhexen ";
+    else if (joursDepuisDebutAnnee <= 33) return joursDepuisDebutAnnee-1;
+    else if (joursDepuisDebutAnnee <= 66) return joursDepuisDebutAnnee-33;
+    else if (joursDepuisDebutAnnee == 67) return -1;
+    else if (joursDepuisDebutAnnee <= 100) return joursDepuisDebutAnnee-67;
+    else if (joursDepuisDebutAnnee <= 133) return joursDepuisDebutAnnee-100;
+    else if (joursDepuisDebutAnnee <= 166) return joursDepuisDebutAnnee-133;
+    else if (joursDepuisDebutAnnee == 167) return -1;
+    else if (joursDepuisDebutAnnee <= 200) return joursDepuisDebutAnnee-167;
+    else if (joursDepuisDebutAnnee == 201) return -1;
+    else if (joursDepuisDebutAnnee <= 233) return joursDepuisDebutAnnee-201;
+    else if (joursDepuisDebutAnnee <= 266) return joursDepuisDebutAnnee-233;
+    else if (joursDepuisDebutAnnee == 267) return -1;
+    else if (joursDepuisDebutAnnee <= 300) return joursDepuisDebutAnnee-267;
+    else if (joursDepuisDebutAnnee <= 333) return joursDepuisDebutAnnee-300;
+    else if (joursDepuisDebutAnnee <= 366) return joursDepuisDebutAnnee-333;
+    else if (joursDepuisDebutAnnee == 367) return -1;
+    else if (joursDepuisDebutAnnee <= 400) return joursDepuisDebutAnnee-367;
 
-    return "mois inconnu"
+    return -1;
 }
 
 function calculMoisStr(joursDepuis0: number): string {
@@ -53,7 +54,7 @@ function calculMoisStr(joursDepuis0: number): string {
     if (joursDepuisDebutAnnee == 1) {
         return HEXENSTAG;
     }
-    else if (joursDepuisDebutAnnee <= 33) return "Nachexen";
+    else if (joursDepuisDebutAnnee <= 33) return NACHEXEN;
     else if (joursDepuisDebutAnnee <= 66) return "Jahrdrung";
     else if (joursDepuisDebutAnnee == 67) return "Mitterfruhl";
     else if (joursDepuisDebutAnnee <= 100) return "Pflugzeit";
@@ -87,9 +88,12 @@ export function numJourSemaineToStr(numeroJourSemaine: number): string {
     }
 }
 
-export function formatJourStr(numeroJourSemaine: number, moisEtSonNumeroStr: string, annee: number): string {
-    let final = numJourSemaineToStr(numeroJourSemaine);
-    final += " " + moisEtSonNumeroStr;
+export function formatJourStr(numeroJourSemaine: number, jourDuMois:number, moisStr: string, annee: number): string {
+    let final: string = numJourSemaineToStr(numeroJourSemaine);
+    if (jourDuMois != -1) {
+        final += " " + jourDuMois;
+    }
+    final += " " + moisStr;
     final += " " + annee;
     return final;
 }
@@ -99,11 +103,13 @@ export function leTempsPasse(perso: Perso):Perso {
     // const daysToAdd = Math.floor(Math.random() * 20) + 1;
     const daysToAdd: number = 1;
     const nouDate: number = perso.date + daysToAdd;
+    const nouvJourDuMois: number = calculJourDuMois(nouDate);
     const nouvMoisStr: string = calculMoisStr(nouDate);
     console.debug("date en jours : " + perso.date);
     console.debug("nouvMoisStr : " + nouvMoisStr);
     return { ...perso,
         date: nouDate,
-        mois: nouvMoisStr
+        mois: nouvMoisStr,
+        jourDuMois: nouvJourDuMois
     };
 }
