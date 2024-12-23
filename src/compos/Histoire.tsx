@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import {Box, Typography, Paper, Grid} from '@mui/material';
 import {Perso} from "../types/Perso.ts";
-import {evts} from "../donnees/histoire/evts.ts";
-import {joursToAnnees} from "../types/Date.ts";
+import {evts_remplissage} from "../donnees/histoire/evts_remplissage.ts";
+import {evts_ubersreik} from "../donnees/histoire/evts_ubersreik.ts";
+import {Evt} from "../types/Evt.ts";
 
 interface StoryProps {
     initialCharacter: Perso;
@@ -28,10 +29,11 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
         const processNextEvent = () => {
             if (!isMounted) return;
 
-            const applicableEvents = evts.filter(event => !event.conditions || event.conditions(perso));
+            let evtsApplicables: Evt[] = evts_remplissage.filter(event => !event.conditions || event.conditions(perso));
+            evtsApplicables = [...evtsApplicables, ...evts_ubersreik.filter(event => !event.conditions || event.conditions(perso))];
 
-            if (applicableEvents.length > 0) {
-                const event = applicableEvents[Math.floor(Math.random() * applicableEvents.length)];
+            if (evtsApplicables.length > 0) {
+                const event = evtsApplicables[Math.floor(Math.random() * evtsApplicables.length)];
                 setStoryEvents(prev => [...prev, { description: event.description(perso), image: event.image }]);
 
                 if (event.effets) {
