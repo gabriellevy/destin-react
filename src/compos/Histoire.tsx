@@ -48,7 +48,7 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
                 evtsApplicables.forEach(evt => {
                     if (evt.proba) {
                         randomProba -= evt.proba;
-                        if (randomProba <= 0) {
+                        if (!evtExecute && randomProba <= 0) {
                             evtExecute = evt;
                         }
                     }
