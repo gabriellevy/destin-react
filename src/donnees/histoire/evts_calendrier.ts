@@ -1,6 +1,15 @@
 import {Evt, GroupeEvts} from "../../types/Evt.ts";
 import {Perso} from "../../types/Perso.ts";
-import {ERNTEZEIT, GEHEIMISTAG, HEXENSTAG, NACHEXEN, SIGMARZEIT, SOMMERZEIT, SONNSTILL} from "../../types/Date.ts";
+import {
+    ERNTEZEIT,
+    GEHEIMISTAG,
+    HEXENSTAG,
+    MITTHERBST, MONDSTILLE,
+    NACHEXEN,
+    SIGMARZEIT,
+    SOMMERZEIT,
+    SONNSTILL, VORHEXEN
+} from "../../types/Date.ts";
 
 export const evts_calendrier: GroupeEvts = {
     evts: [
@@ -61,6 +70,32 @@ export const evts_calendrier: GroupeEvts = {
                     "Vivement que cela deviennent un jour férié ! " +
                     "Cette année il va même y avoir un concours du plus gros mangeur et un de la meilleure recette. ",
                 conditions: (perso:Perso):boolean => perso.mois === ERNTEZEIT && perso.jourDuMois >= 1 && perso.jourDuMois <= 8,
+            },
+            {
+                id: "calendrier8",
+                description: (perso: Perso): string =>
+                    "Aujourd'hui c'est Mitterbst, le jour de la décroissance, l'équinoxe d'automne. " +
+                    "Le règne de Taal et Rhya s'affaiblit tandis que celui d'Ulric approche. " +
+                    "De grands feux de joie sont élevés en l'honneur de Rhya, mère des moissons automnales. On lui sacrifie une partie des moissons ainsi qu'à Elric. " +
+                    "Cette année il va même y avoir un concours du plus gros mangeur et un de la meilleure recette. ",
+                conditions: (perso:Perso):boolean => perso.mois === MITTHERBST,
+            },
+            {
+                id: "calendrier9",
+                description: (perso: Perso): string =>
+                    "Aujourd'hui c'est Mondstille, je jour du solstice d'hiver, le zénith du règne d'Ulric sur l'empire. " +
+                    "C'est un jour de froid et de désespoir mais où l'espoir renaît car Taal et Rhya sont sur la voie du retour. " +
+                    "On allume de grands feux de joie pour les guider. " +
+                    "Cette année il va même y avoir un concours du plus gros mangeur et un de la meilleure recette. ",
+                conditions: (perso:Perso):boolean => perso.mois === MONDSTILLE,
+            },
+            {
+                id: "calendrier10",
+                description: (perso: Perso): string =>
+                    "Aujourd'hui c'est le jour du Fond du tonneau. " +
+                    "C'est la fin du calendrier des nains paraît-t-il mais ici c'est surtout l'occasion d'une bonne beuverie à la bière en leur honneur. " +
+                    "Attention tout de même : renverser une goutte et c'est le maheure assuré pour toute l'année. ",
+                conditions: (perso:Perso):boolean => perso.mois === VORHEXEN && perso.jourDuMois === 33,
             },
     ],
     probaParDefaut: 10,
