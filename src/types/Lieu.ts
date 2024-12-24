@@ -14,7 +14,7 @@ export type Lieu = {
 
 export const lieuParDefaut: Lieu = {
     pays: Pays.empire,
-    province: Province.Reikland,
+    province: Province.reikland,
     sousProvince: SousProvince.ducheReikland,
     ville: Ville.ubersreik,
     enVoyage:false,
@@ -26,14 +26,23 @@ export enum Pays {
 }
 
 export enum Province {
-    Reikland = 'Raikland',
+    reikland = 'Reikland',
+    middenland = 'Middenland',
 }
 
 export enum SousProvince {
     ducheReikland = "Duché d'Ubersreik",
 }
 
+export function getVilles(province:Province):Ville[] {
+    switch (province) {
+        case Province.reikland : return [Ville.altdorf, Ville.ubersreik];
+        case Province.middenland : return [Ville.dunkelbild];
+    }
+}
+
 export enum Ville {
     ubersreik = 'Ubersreik',
     altdorf = 'Altdorf',
+    dunkelbild = 'Dunkelbild',
 };

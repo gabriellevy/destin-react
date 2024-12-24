@@ -1,6 +1,5 @@
-import {Evt, GroupeEvts} from "../../types/Evt.ts";
+import {GroupeEvts} from "../../types/Evt.ts";
 import {Perso} from "../../types/Perso.ts";
-import {age} from "../../types/Date.ts";
 
 export const PROBA_DEFAUT: number = 0.1; // tous les evts de ce fichier qui n'ont pas de proba auront celle ci
 

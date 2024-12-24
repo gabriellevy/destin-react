@@ -1,4 +1,4 @@
-import {Box, Typography, List, ListItem, ListItemText, Paper, Button} from '@mui/material';
+import {Box, Typography, List, ListItem, ListItemText, Button} from '@mui/material';
 import {Perso} from "../types/Perso.ts";
 import {age} from "../types/Date.ts";
 

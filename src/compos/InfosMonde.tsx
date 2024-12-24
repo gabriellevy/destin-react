@@ -1,6 +1,6 @@
 import {Perso} from "../types/Perso.ts";
-import {Box, Button, List, ListItem, ListItemText, Paper, Typography} from "@mui/material";
-import {age, jourStr} from "../types/Date.ts";
+import {List, ListItem, ListItemText} from "@mui/material";
+import {jourStr} from "../types/Date.ts";
 
 interface InfosMondeProps {
     perso: Perso;
