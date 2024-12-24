@@ -116,13 +116,13 @@ export function formatJourStr(numeroJourSemaine: number, jourDuMois:number, mois
 
 export function leTempsPasse(perso: Perso):Perso {
     // ajouter 1D20 jours à l'âge du personnage // TODO : quelle vitesse ? paramétrable ?
-    // const daysToAdd = Math.floor(Math.random() * 20) + 1;
-    const daysToAdd: number = 1;
+    const daysToAdd = Math.floor(Math.random() * 20) + 1;
+    // const daysToAdd: number = 1;
     const nouDate: number = perso.date + daysToAdd;
     const nouvJourDuMois: number = calculJourDuMois(nouDate);
     const nouvMoisStr: string = calculMoisStr(nouDate);
     console.debug("date en jours : " + perso.date);
-    console.debug("nouvMoisStr : " + nouvMoisStr);
+    // console.debug("nouvMoisStr : " + nouvMoisStr);
     return { ...perso,
         date: nouDate,
         mois: nouvMoisStr,

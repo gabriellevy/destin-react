@@ -13,14 +13,9 @@ interface StoryProps {
     key: string; // Add this line
 }
 
-interface StoryEvent {
-    description: string;
-    image?: string;
-}
-
 export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryProps) {
     const [character, setCharacter] = useState<Perso>(initialCharacter);
-    const [storyEvents, setStoryEvents] = useState<StoryEvent[]>([]);
+    const [storyEvents, setStoryEvents] = useState<Evt[]>([]);
     const [isComplete, setIsComplete] = useState(false);
 
     useEffect(() => {

@@ -1,6 +1,6 @@
 import {Evt, GroupeEvts} from "../../types/Evt.ts";
 import {Perso} from "../../types/Perso.ts";
-import {HEXENSTAG, NACHEXEN, SIGMARZEIT} from "../../types/Date.ts";
+import {HEXENSTAG, NACHEXEN, SIGMARZEIT, SOMMERZEIT} from "../../types/Date.ts";
 
 export const evts_calendrier: GroupeEvts = {
     evts: [
@@ -27,6 +27,14 @@ export const evts_calendrier: GroupeEvts = {
                     "Aujourd'hui est le premier jour de l'été ! Et surtout l'anniversaire de l'accession à la divinité de notre divin Sigmar ! " +
                     "L'occasion de faire une grande fête, de danser, et de se régaler des légendaires saucisses de Sigmar en écoutant des récits des exploits de Sigmar par les prêtres et les saltimbanques. ",
                 conditions: (perso:Perso):boolean => perso.mois === SIGMARZEIT && perso.jourDuMois === 18,
+            },
+            {
+                id: "calendrier4",
+                description: (perso: Perso): string =>
+                    "Aujourd'hui c'est jour de folie en l'honneur de Ranald ! " +
+                    "Les maîtres deviennent serviteurs et les serviteurs maîtres. Chacun porte selon ses moyens un masque pour dissimuler son identité et ses folies." +
+                    "L'ivresse, les danses, les costumes colorés et les farces anodines sont de mises.",
+                conditions: (perso:Perso):boolean => perso.mois === SOMMERZEIT && perso.jourDuMois === 10,
             },
     ],
     probaParDefaut: 10,
