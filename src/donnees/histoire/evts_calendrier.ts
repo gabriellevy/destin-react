@@ -1,6 +1,6 @@
 import {Evt, GroupeEvts} from "../../types/Evt.ts";
 import {Perso} from "../../types/Perso.ts";
-import {HEXENSTAG, NACHEXEN, SIGMARZEIT, SOMMERZEIT} from "../../types/Date.ts";
+import {HEXENSTAG, NACHEXEN, SIGMARZEIT, SOMMERZEIT, SONNSTILL} from "../../types/Date.ts";
 
 export const evts_calendrier: GroupeEvts = {
     evts: [
@@ -35,6 +35,14 @@ export const evts_calendrier: GroupeEvts = {
                     "Les maîtres deviennent serviteurs et les serviteurs maîtres. Chacun porte selon ses moyens un masque pour dissimuler son identité et ses folies." +
                     "L'ivresse, les danses, les costumes colorés et les farces anodines sont de mises.",
                 conditions: (perso:Perso):boolean => perso.mois === SOMMERZEIT && perso.jourDuMois === 10,
+            },
+            {
+                id: "calendrier5",
+                description: (perso: Perso): string =>
+                    "Aujourd'hui c'est sonnstill, le jour du solsctice d'été, le plus long jour de l'année ! " +
+                    "C'est un jour de joie et de fertilité. Les jeunes couples se mettent des fleurs dans les cheveux, dansent et chantent pour honorer Taal et Rhya. " +
+                    "Et il paraît que même les elfes honorent leurs étranges dieux de la nature. ",
+                conditions: (perso:Perso):boolean => perso.mois === SONNSTILL,
             },
     ],
     probaParDefaut: 10,

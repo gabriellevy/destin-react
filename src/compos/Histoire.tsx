@@ -80,9 +80,9 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
     return (
         <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%', overflowY: 'auto' }}>
             <Box>
-                {storyEvents.map((event, index) => (
+                {storyEvents.map((evt: Evt, index: number) => (
                     <Grid container spacing={2} key={index} sx={{ mb: 2 }}>
-                        {event.image && (
+                        {evt.image && (
                             <Grid item xs={4}>
                                 <Box
                                     component="img"
@@ -92,19 +92,19 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
                                         maxHeight: { xs: 233, md: 167 },
                                         maxWidth: { xs: 350, md: 250 },
                                     }}
-                                    alt={`Event ${index + 1}`}
-                                    src={event.image}
+                                    alt={`image de l'événement ${evt.id}`}
+                                    src={evt.image}
                                 />
                             </Grid>
                         )}
-                        <Grid item xs={event.image ? 8 : 12}>
-                            <Typography paragraph>{event.description}</Typography>
+                        <Grid item xs={evt.image ? 8 : 12}>
+                            <Typography paragraph>{evt.description}</Typography>
                         </Grid>
                     </Grid>
                 ))}
                 {isComplete && (
                     <Typography paragraph fontWeight="bold">
-                        Vous êtes mort. TODO : faire un truc un peu dapté !!
+                        Vous êtes mort. TODO : faire un truc un peu adapté !!
                     </Typography>
                 )}
             </Box>
