@@ -9,3 +9,8 @@ export type Evt = {
     effets?: (perso: Perso) => Perso; // modifie le perso
     image?: string;
 };
+
+export type GroupeEvts = {
+    evts: Evt[];
+    probaParDefaut: number;
+}

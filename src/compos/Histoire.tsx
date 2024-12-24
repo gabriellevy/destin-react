@@ -33,10 +33,10 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
 
             perso = leTempsPasse(perso);
 
-            let evtsApplicables: Evt[] = evts_remplissage.filter(event => !event.conditions || event.conditions(perso));
+            let evtsApplicables: Evt[] = evts_remplissage.evts.filter(event => !event.conditions || event.conditions(perso));
             evtsApplicables = [...evtsApplicables,
-                ...evts_ubersreik.filter(event => !event.conditions || event.conditions(perso)),
-                ...evts_calendrier.filter(event => !event.conditions || event.conditions(perso))
+                ...evts_ubersreik.evts.filter(event => !event.conditions || event.conditions(perso)),
+                ...evts_calendrier.evts.filter(event => !event.conditions || event.conditions(perso))
             ];
 
             if (evtsApplicables.length > 0) {
