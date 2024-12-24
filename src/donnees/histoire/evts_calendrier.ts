@@ -10,6 +10,7 @@ export const evts_calendrier: Evt[] = [
             "La ligne qui sépare le monde des vivants de celui des morts est plus ténue cette nuit ci et les esprit de ceux qui nous ont quitté font parfois leur retour. " +
             "Vous et toute votre famille restez cloîtrés chez vous.",
         conditions: (perso:Perso):boolean => perso.mois === HEXENSTAG,
+        image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/hexenstag.jpeg",
     },
     {
         id: "calendrier2",

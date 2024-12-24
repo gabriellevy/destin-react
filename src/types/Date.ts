@@ -5,6 +5,22 @@ export const JOURS_PAR_SEMAINE = 8;
 
 export const HEXENSTAG: string = "Hexenstag";
 export const NACHEXEN: string = "Nachexen";
+export const JAHRDRUNG: string = "Jahrdrung";
+export const PFLUGZEIT: string = "Pflugzeit";
+export const SIGMARZEIT: string = "Sigmarzeit";
+export const SOMMERZEIT: string = "Sommerzeit";
+export const MITTERFRUHL: string = "Mitterfruhl";
+export const SONNSTILL: string = "Sonnstill";
+export const VORGEHEIM: string = "Vorgeheim";
+export const GEHEIMISTAG: string = "Geheimnistag";
+export const NACHGEHEIM: string = "Nachgeheim";
+export const ERNTEZEIT: string = "Erntezeit";
+export const MITTHERBST: string = "Mittherbst";
+export const BRAUZEIT: string = "Brauzeit";
+export const KALDEZEIT: string = "Kaldezeit";
+export const ULRICZEIT: string = "Ulriczeit";
+export const MONDSTILLE: string = "Mondstille";
+export const VORHEXEN: string = "Vorhexen";
 
 export function joursToAnnees(jours: number) {return Math.floor(jours / JOURS_PAR_AN)}
 export function anneesToJours(annees: number) {return annees * JOURS_PAR_AN}
@@ -55,22 +71,22 @@ function calculMoisStr(joursDepuis0: number): string {
         return HEXENSTAG;
     }
     else if (joursDepuisDebutAnnee <= 33) return NACHEXEN;
-    else if (joursDepuisDebutAnnee <= 66) return "Jahrdrung";
-    else if (joursDepuisDebutAnnee == 67) return "Mitterfruhl";
-    else if (joursDepuisDebutAnnee <= 100) return "Pflugzeit";
-    else if (joursDepuisDebutAnnee <= 133) return "Sigmarzeit";
-    else if (joursDepuisDebutAnnee <= 166) return "Sommerzei";
-    else if (joursDepuisDebutAnnee == 167) return "Sonnstill";
-    else if (joursDepuisDebutAnnee <= 200) return "Vorgeheim";
-    else if (joursDepuisDebutAnnee == 201) return "Geheimnistag";
-    else if (joursDepuisDebutAnnee <= 233) return "Nachgeheim";
-    else if (joursDepuisDebutAnnee <= 266) return "Erntezeit";
-    else if (joursDepuisDebutAnnee == 267) return "Mittherbst";
-    else if (joursDepuisDebutAnnee <= 300) return "Brauzeit";
-    else if (joursDepuisDebutAnnee <= 333) return "Kaldezeit";
-    else if (joursDepuisDebutAnnee <= 366) return "Ulriczeit ";
-    else if (joursDepuisDebutAnnee == 367) return "Mondstille";
-    else if (joursDepuisDebutAnnee <= 400) return "Vorhexen";
+    else if (joursDepuisDebutAnnee <= 66) return JAHRDRUNG;
+    else if (joursDepuisDebutAnnee == 67) return MITTERFRUHL;
+    else if (joursDepuisDebutAnnee <= 100) return PFLUGZEIT;
+    else if (joursDepuisDebutAnnee <= 133) return SIGMARZEIT;
+    else if (joursDepuisDebutAnnee <= 166) return SOMMERZEIT;
+    else if (joursDepuisDebutAnnee == 167) return SONNSTILL;
+    else if (joursDepuisDebutAnnee <= 200) return VORGEHEIM;
+    else if (joursDepuisDebutAnnee == 201) return GEHEIMISTAG;
+    else if (joursDepuisDebutAnnee <= 233) return NACHGEHEIM;
+    else if (joursDepuisDebutAnnee <= 266) return ERNTEZEIT;
+    else if (joursDepuisDebutAnnee == 267) return MITTHERBST;
+    else if (joursDepuisDebutAnnee <= 300) return BRAUZEIT;
+    else if (joursDepuisDebutAnnee <= 333) return KALDEZEIT;
+    else if (joursDepuisDebutAnnee <= 366) return ULRICZEIT;
+    else if (joursDepuisDebutAnnee == 367) return MONDSTILLE;
+    else if (joursDepuisDebutAnnee <= 400) return VORHEXEN;
 
     return "mois inconnu"
 }
