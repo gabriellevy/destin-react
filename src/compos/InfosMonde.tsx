@@ -10,7 +10,7 @@ export default function InfosMonde({ perso }: Readonly<InfosMondeProps>) {
     return (
         <List dense>
             <ListItem>
-                <ListItemText primary="Lieu" secondary={perso.lieu} />
+                <ListItemText primary="Lieu" secondary={perso.lieu.ville} />
             </ListItem>
             <ListItem>
                 <ListItemText

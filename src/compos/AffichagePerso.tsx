@@ -28,21 +28,6 @@ export default function AffichagePerso({ perso, exporter }: Readonly<AffichagePe
                         secondary={`${age(perso)} ans`}
                     />
                 </ListItem>
-                <ListItem>
-                    <ListItemText primary="Lieu" secondary={perso.lieu} />
-                </ListItem>
-                <ListItem>
-                    <ListItemText
-                        primary="Compétences"
-                        secondary={perso.skills.join(', ')}
-                    />
-                </ListItem>
-                <ListItem>
-                    <ListItemText
-                        primary="Histoire"
-                        secondary={perso.backstory}
-                    />
-                </ListItem>
             </List>
             <Box mt={2}>
                 <Button variant="contained" color="primary" onClick={exporter} size="small">

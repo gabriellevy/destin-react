@@ -11,7 +11,6 @@ import {
     Typography
 } from '@mui/material';
 import {Perso, defaultCharacter, Sexe} from "../types/Perso.ts";
-import {Lieu} from "../types/Lieu.ts";
 
 interface CharacterFormProps {
     onSubmit: SubmitHandler<Perso>;
@@ -106,55 +105,6 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                         margin="normal"
                         error={!!errors.dateNaissance}
                         helperText={errors.dateNaissance?.message}
-                    />
-                )}
-            />
-
-            <Controller
-                name="lieu"
-                control={control}
-                rules={{ required: "Un lieu de départ est requis" }}
-                render={({ field }) => (
-                    <FormControl fullWidth margin="normal" error={!!errors.lieu}>
-                        <InputLabel>Lieu</InputLabel>
-                        <Select {...field} label="Lieu">
-                            <MenuItem value={Lieu.ubersreik}>Ubersreik</MenuItem>
-                            <MenuItem value={Lieu.altdorf}>Altdorf</MenuItem>
-                        </Select>
-                        <FormHelperText>{errors.lieu?.message}</FormHelperText>
-                    </FormControl>
-                )}
-            />
-
-            <Controller
-                name="skills"
-                control={control}
-                render={({ field }) => (
-                    <TextField
-                        {...field}
-                        label="Skills (comma-separated)"
-                        fullWidth
-                        margin="normal"
-                        error={!!errors.skills}
-                        helperText={errors.skills?.message || "Enter skills separated by commas"}
-                    />
-                )}
-            />
-
-            <Controller
-                name="backstory"
-                control={control}
-                rules={{ required: "Backstory is required" }}
-                render={({ field }) => (
-                    <TextField
-                        {...field}
-                        label="Backstory"
-                        fullWidth
-                        margin="normal"
-                        multiline
-                        rows={4}
-                        error={!!errors.backstory}
-                        helperText={errors.backstory?.message}
                     />
                 )}
             />
