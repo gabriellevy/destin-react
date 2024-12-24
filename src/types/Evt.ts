@@ -14,3 +14,15 @@ export type GroupeEvts = {
     evts: Evt[];
     probaParDefaut: number;
 }
+
+export function filtrerEtPreparerEvts(groupeEvts:GroupeEvts, perso: Perso):Evt[] {
+    const probaParDefaut: number = groupeEvts.probaParDefaut;
+    return groupeEvts.evts
+        .filter(event => !event.conditions || event.conditions(perso))
+        .map(evt => {
+            if (!evt.proba) {
+                evt.proba = probaParDefaut;
+            }
+            return evt;
+        })
+}

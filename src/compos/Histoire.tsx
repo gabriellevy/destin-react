@@ -3,7 +3,7 @@ import {Box, Typography, Paper, Grid} from '@mui/material';
 import {Perso} from "../types/Perso.ts";
 import {evts_remplissage} from "../donnees/histoire/evts_remplissage.ts";
 import {evts_ubersreik} from "../donnees/histoire/evts_ubersreik.ts";
-import {Evt} from "../types/Evt.ts";
+import {Evt, filtrerEtPreparerEvts} from "../types/Evt.ts";
 import {leTempsPasse} from "../types/Date.ts";
 import {evts_calendrier} from "../donnees/histoire/evts_calendrier.ts";
 
@@ -33,13 +33,15 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
 
             perso = leTempsPasse(perso);
 
-            let evtsApplicables: Evt[] = evts_remplissage.evts.filter(event => !event.conditions || event.conditions(perso));
-            evtsApplicables = [...evtsApplicables,
-                ...evts_ubersreik.evts.filter(event => !event.conditions || event.conditions(perso)),
-                ...evts_calendrier.evts.filter(event => !event.conditions || event.conditions(perso))
+            // filtrer les evts non applicables
+            let evtsApplicables: Evt[] = [
+                ...filtrerEtPreparerEvts(evts_remplissage, perso),
+                ...filtrerEtPreparerEvts(evts_ubersreik, perso),
+                ...filtrerEtPreparerEvts(evts_calendrier, perso),
             ];
 
             if (evtsApplicables.length > 0) {
+                // sélectionner un des evts en fonction de leur proba
                 const event = evtsApplicables[Math.floor(Math.random() * evtsApplicables.length)];
                 setStoryEvents(prev => [...prev, { description: event.description(perso), image: event.image }]);
 
