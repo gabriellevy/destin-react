@@ -1,4 +1,4 @@
-import {Evt, GroupeEvts} from "../../types/Evt.ts";
+import {GroupeEvts} from "../../types/Evt.ts";
 import {Perso} from "../../types/Perso.ts";
 import {Lieu} from "../../types/Lieu.ts";
 import {age} from "../../types/Date.ts";
@@ -7,7 +7,7 @@ export const evts_ubersreik: GroupeEvts = {
     evts: [
         {
             id: "evt1",
-            description: (perso: Perso): string =>
+            description: (Perso): string =>
                 "Le pont d'Ubersreik est vraiment gigantesque. Il paraît que ce sont les nains qui l'ont construit avant même la naissance de papa !",
             conditions: (perso: Perso): boolean => perso.lieu == Lieu.ubersreik && age(perso) <= 15,
             image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Ubersreik_Bridge.jpg"

@@ -42,11 +42,27 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
 
             if (evtsApplicables.length > 0) {
                 // sélectionner un des evts en fonction de leur proba
-                const event = evtsApplicables[Math.floor(Math.random() * evtsApplicables.length)];
-                setStoryEvents(prev => [...prev, { description: event.description(perso), image: event.image }]);
+                let completeProba: number = 0;
+                evtsApplicables.forEach(evt => {
+                    if (evt.proba) {
+                        completeProba += evt.proba;
+                    }
+                })
+                let randomProba: number = Math.random() * completeProba;
+                let evtExecute:Evt;
+                evtsApplicables.forEach(evt => {
+                    if (evt.proba) {
+                        randomProba -= evt.proba;
+                        if (randomProba <= 0) {
+                            evtExecute = evt;
+                        }
+                    }
+                })
 
-                if (event.effets) {
-                    perso = event.effets(perso);
+                setStoryEvents(prev => [...prev, { description: evtExecute.description(perso), image: evtExecute.image }]);
+
+                if (evtExecute.effets) {
+                    perso = evtExecute.effets(perso);
                 }
 
                 setCharacter(perso);
