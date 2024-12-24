@@ -1,6 +1,6 @@
 import {Evt, GroupeEvts} from "../../types/Evt.ts";
 import {Perso} from "../../types/Perso.ts";
-import {HEXENSTAG, NACHEXEN} from "../../types/Date.ts";
+import {HEXENSTAG, NACHEXEN, SIGMARZEIT} from "../../types/Date.ts";
 
 export const evts_calendrier: GroupeEvts = {
     evts: [
@@ -20,6 +20,13 @@ export const evts_calendrier: GroupeEvts = {
                     "Chacun est heureux d'avoir survécu à la nuit des sorcières et émerge de son foyer pour demander à la déesse Verena de bénir l'année à venir. " +
                     "Des extraits des paroles de Verena sont lus et tous ceux qui ont de la rancoeur envers un voisin sont priés de l'exposer et de tenter de résoudre le problème devant la prétresse de Véréna..",
                 conditions: (perso:Perso):boolean => perso.mois === NACHEXEN && perso.jourDuMois === 1,
+            },
+            {
+                id: "calendrier3",
+                description: (perso: Perso): string =>
+                    "Aujourd'hui est le premier jour de l'été ! Et surtout l'anniversaire de l'accession à la divinité de notre divin Sigmar ! " +
+                    "L'occasion de faire une grande fête, de danser, et de se régaler des légendaires saucisses de Sigmar en écoutant des récits des exploits de Sigmar par les prêtres et les saltimbanques. ",
+                conditions: (perso:Perso):boolean => perso.mois === SIGMARZEIT && perso.jourDuMois === 18,
             },
     ],
     probaParDefaut: 10,
