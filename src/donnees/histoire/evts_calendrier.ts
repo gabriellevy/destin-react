@@ -1,6 +1,6 @@
 import {Evt, GroupeEvts} from "../../types/Evt.ts";
 import {Perso} from "../../types/Perso.ts";
-import {HEXENSTAG, NACHEXEN, SIGMARZEIT, SOMMERZEIT, SONNSTILL} from "../../types/Date.ts";
+import {ERNTEZEIT, GEHEIMISTAG, HEXENSTAG, NACHEXEN, SIGMARZEIT, SOMMERZEIT, SONNSTILL} from "../../types/Date.ts";
 
 export const evts_calendrier: GroupeEvts = {
     evts: [
@@ -43,6 +43,24 @@ export const evts_calendrier: GroupeEvts = {
                     "C'est un jour de joie et de fertilité. Les jeunes couples se mettent des fleurs dans les cheveux, dansent et chantent pour honorer Taal et Rhya. " +
                     "Et il paraît que même les elfes honorent leurs étranges dieux de la nature. ",
                 conditions: (perso:Perso):boolean => perso.mois === SONNSTILL,
+            },
+            {
+                id: "calendrier6",
+                description: (perso: Perso): string =>
+                    "Aujourd'hui c'est geheiminstag, le jour des mystères. " +
+                    "Mannslieb et Morrslieb sont simultanément pleines et la frontière avec le monde des morts s'affaiblit. " +
+                    "Certaines entendent les esprit, ou vont même consulter les augures du dieu Morr. " +
+                    "Vous préférez rendre sagement hommage à vos ancêtres en demeurant chez vous. ",
+                conditions: (perso:Perso):boolean => perso.mois === GEHEIMISTAG,
+            },
+            {
+                id: "calendrier7",
+                description: (perso: Perso): string =>
+                    "Nous sommes en pleine semaine de la tourte hobbit. " +
+                    "Une bonne occasion de festoyer en mangeant les bonnes tourtes de ces petits vauriens boulimiques de hobbits. " +
+                    "Vivement que cela deviennent un jour férié ! " +
+                    "Cette année il va même y avoir un concours du plus gros mangeur et un de la meilleure recette. ",
+                conditions: (perso:Perso):boolean => perso.mois === ERNTEZEIT && perso.jourDuMois >= 1 && perso.jourDuMois <= 8,
             },
     ],
     probaParDefaut: 10,
