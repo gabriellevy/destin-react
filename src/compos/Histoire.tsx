@@ -4,7 +4,7 @@ import {Perso} from "../types/Perso.ts";
 import {evts_remplissage} from "../donnees/histoire/evts_remplissage.ts";
 import {evts_ubersreik} from "../donnees/histoire/evts_ubersreik.ts";
 import {Evt, EvtExecute, filtrerEtPreparerEvts} from "../types/Evt.ts";
-import {leTempsPasse} from "../types/Date.ts";
+import {jourStr, leTempsPasse} from "../types/Date.ts";
 import {evts_calendrier} from "../donnees/histoire/evts_calendrier.ts";
 import {evts_dunkelbild} from "../donnees/histoire/evts_dunkelbild.ts";
 import {evts_sylvanie} from "../donnees/histoire/evts_sylvanie.ts";
@@ -62,6 +62,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                 })
                 const nouvEvt: EvtExecute = {
                     id: evtExecute.id,
+                    dateStr: jourStr(perso.date),
                     texteFinal: evtExecute.description(perso),
                     image: evtExecute.image,
                 };
@@ -111,12 +112,13 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                         </Grid2>
                     )}
                     <Grid2 item size={evt.image ? 8 : 12}>
-                        <Typography paragraph>{evt.texteFinal}</Typography>
+                        <Typography mb={1} align="left">{evt.dateStr}</Typography>
+                        <Typography mb={2} align="left">{evt.texteFinal}</Typography>
                     </Grid2>
                 </Grid2>
             ))}
             {isComplete && (
-                <Typography paragraph fontWeight="bold">
+                <Typography mb={2} fontWeight="bold">
                     Vous êtes mort. TODO : faire un truc un peu adapté !!
                 </Typography>
             )}

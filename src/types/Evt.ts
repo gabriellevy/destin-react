@@ -13,6 +13,7 @@ export type Evt = {
 // ce qui est affiché après que l'événement ait été exécuté
 export type EvtExecute = {
     id: string;
+    dateStr: string,
     texteFinal: string,
     image?: string;
 }
