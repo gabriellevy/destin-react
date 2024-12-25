@@ -1,4 +1,4 @@
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import {useForm, Controller, SubmitHandler} from 'react-hook-form';
 import {
     TextField,
     Button,
@@ -11,7 +11,7 @@ import {
     Typography
 } from '@mui/material';
 import {Perso, defaultCharacter, Sexe} from "../types/Perso.ts";
-import {Option, provinceOptions} from "../types/Lieu.ts";
+import {getVilles, Option, provinceOptions} from "../types/Lieu.ts";
 
 interface CharacterFormProps {
     onSubmit: SubmitHandler<Perso>;
@@ -19,9 +19,11 @@ interface CharacterFormProps {
 }
 
 export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFormProps) {
-    const { control, handleSubmit, formState: { errors }, reset } = useForm<Perso>({
+    const { control, watch, handleSubmit, formState: { errors }, reset } = useForm<Perso>({
         defaultValues: defaultCharacter
     });
+
+    const provinceSelectionnee = watch("lieu.province");
 
     const handleLoadCharacter = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -82,12 +84,28 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                 control={control}
                 name="lieu.province"
                 render={({ field }) => (
-                    <FormControl fullWidth margin="normal" error={!!errors.sexe}>
+                    <FormControl margin="normal" error={!!errors.lieu?.province}>
                         <InputLabel>Province</InputLabel>
                         <Select {...field}>
                             {Object.values(provinceOptions).map((provinceOption: Option) => (
                                 <MenuItem value={provinceOption.value} key={provinceOption.value}>
                                     {provinceOption.label}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                )}
+            />
+            <Controller
+                control={control}
+                name="lieu.ville"
+                render={({ field }) => (
+                    <FormControl margin="normal" error={!!errors.lieu?.ville}>
+                        <InputLabel>Ville</InputLabel>
+                        <Select {...field}>
+                            {Object.values(getVilles(provinceSelectionnee)).map((villeOption: Option) => (
+                                <MenuItem value={villeOption.value} key={villeOption.value}>
+                                    {villeOption.label}
                                 </MenuItem>
                             ))}
                         </Select>

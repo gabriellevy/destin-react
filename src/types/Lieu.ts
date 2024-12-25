@@ -43,10 +43,17 @@ export enum SousProvince {
     ducheReikland = "Duché d'Ubersreik",
 }
 
-export function getVilles(province:Province):Ville[] {
-    switch (province) {
-        case Province.reikland : return [Ville.altdorf, Ville.ubersreik];
-        case Province.middenland : return [Ville.dunkelbild];
+function toOption(ville: Ville): Option {
+    return {
+        value: ville.valueOf(),
+        label: ville.valueOf()
+    }
+}
+
+export function getVilles(provinceStr: string):Option[] {
+    switch (provinceStr) {
+        case Province.reikland.valueOf() : return [toOption(Ville.altdorf), toOption(Ville.ubersreik)];
+        case Province.middenland.valueOf() : return [toOption(Ville.dunkelbild)];
     }
 }
 
