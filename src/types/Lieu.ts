@@ -27,6 +27,8 @@ export enum Province {
     middenland = 'Middenland',
     sylvanie = 'Sylvanie',
     wissenland = 'Wissenland',
+    talabecland = 'Talabecland',
+    ostermark = 'Ostermark',
 }
 
 export type Option = {
@@ -38,6 +40,8 @@ export const provinceOptions: Option[]= [
     { value: Province.middenland, label: Province.middenland},
     { value: Province.sylvanie, label: Province.sylvanie},
     { value: Province.wissenland, label: Province.wissenland},
+    { value: Province.talabecland, label: Province.talabecland},
+    { value: Province.ostermark, label: Province.ostermark},
 ];
 
 export enum SousProvince {
@@ -57,6 +61,8 @@ export function getVilles(provinceStr: string):Option[] {
         case Province.middenland : return [toOption(Ville.dunkelbild)];
         case Province.sylvanie : return [toOption(Ville.waldenhof)];
         case Province.wissenland : return [toOption(Ville.heisenberg)];
+        case Province.talabecland : return [];
+        case Province.ostermark : return [];
     }
 }
 

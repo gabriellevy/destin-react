@@ -10,6 +10,8 @@ import {evts_dunkelbild} from "../donnees/histoire/evts_dunkelbild.ts";
 import {evts_sylvanie} from "../donnees/histoire/evts_sylvanie.ts";
 import {evts_wissenland} from "../donnees/histoire/evts_wissenland.ts";
 import {evts_altdorf} from "../donnees/histoire/evts_altdorf.ts";
+import {evts_talabecland} from "../donnees/histoire/evts_talabecland.ts";
+import {evts_ostermark} from "../donnees/histoire/evts_ostermark.ts";
 
 interface StoryProps {
     persoInitial: Perso;
@@ -24,7 +26,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
     useEffect(() => {
         let isMounted = true;
         let perso = { ...persoInitial };
-        let timeoutId: NodeJS.Timeout;
+        let timeoutId: number;
 
         const processNextEvent = () => {
             if (!isMounted) return;
@@ -40,6 +42,8 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                 ...filtrerEtPreparerEvts(evts_sylvanie, perso),
                 ...filtrerEtPreparerEvts(evts_wissenland, perso),
                 ...filtrerEtPreparerEvts(evts_altdorf, perso),
+                ...filtrerEtPreparerEvts(evts_talabecland, perso),
+                ...filtrerEtPreparerEvts(evts_ostermark, perso),
             ];
 
             if (evtsApplicables.length > 0) {
