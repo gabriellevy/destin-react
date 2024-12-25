@@ -56,7 +56,7 @@ export default function Main() {
                         <Grid item xs={12} md={8}>
                             <Histoire
                                 key={persoSoumis!.nom}
-                                initialCharacter={persoSoumis!}
+                                persoInitial={persoSoumis!}
                                 onCharacterUpdate={majPerso}
                             />
                         </Grid>

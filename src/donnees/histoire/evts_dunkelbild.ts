@@ -1,14 +1,14 @@
 import {GroupeEvts} from "../../types/Evt.ts";
 import {Perso} from "../../types/Perso.ts";
 import {Ville} from "../../types/Lieu.ts";
-import {age, PFLUGZEIT} from "../../types/Date.ts";
+import {PFLUGZEIT} from "../../types/Date.ts";
 
 
 export const evts_dunkelbild: GroupeEvts = {
     evts: [
         {
             id: "evt1",
-            description: (Perso): string =>
+            description: (): string =>
                 "Aujourd'hui à Dunkelbild c'est le jour de la ronde des eaux." +
                 "Le lac marécageux près du village voit son eau de 'retourner'. L'eau froide du fond prend la place de celle de la surface et vice versa. " +
                 "Cela a pour effet de remuer toutes les algues et la vase du fond et de conférer une teinte verdâtre nauséeuse à la surface et une horrible puanteur. " +

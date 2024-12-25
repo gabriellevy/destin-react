@@ -9,19 +9,18 @@ import {evts_calendrier} from "../donnees/histoire/evts_calendrier.ts";
 import {evts_dunkelbild} from "../donnees/histoire/evts_dunkelbild.ts";
 
 interface StoryProps {
-    initialCharacter: Perso;
+    persoInitial: Perso;
     onCharacterUpdate: (updatedCharacter: Perso) => void;
     key: string; // Add this line
 }
 
-export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryProps) {
-    const [character, setCharacter] = useState<Perso>(initialCharacter);
+export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps) {
     const [storyEvents, setStoryEvents] = useState<EvtExecute[]>([]);
     const [isComplete, setIsComplete] = useState(false);
 
     useEffect(() => {
         let isMounted = true;
-        let perso = { ...initialCharacter };
+        let perso = { ...persoInitial };
         let timeoutId: NodeJS.Timeout;
 
         const processNextEvent = () => {
@@ -70,7 +69,6 @@ export default function Histoire({ initialCharacter, onCharacterUpdate }: StoryP
                     perso = evtExecute.effets(perso);
                 }
 
-                setCharacter(perso);
                 onCharacterUpdate(perso);
 
                 timeoutId = setTimeout(processNextEvent, 5000);

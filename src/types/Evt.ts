@@ -10,9 +10,10 @@ export type Evt = {
     image?: string;
 };
 
+// ce qui est affiché après que l'événement ait été exécuté
 export type EvtExecute = {
     id: string;
-    texteFinal: string, // ce qui esta ffiché après que l'événement ait  été exécuté
+    texteFinal: string,
     image?: string;
 }
 
