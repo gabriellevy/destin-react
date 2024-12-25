@@ -10,6 +10,12 @@ export type Evt = {
     image?: string;
 };
 
+export type EvtExecute = {
+    id: string;
+    texteFinal: string, // ce qui esta ffiché après que l'événement ait  été exécuté
+    image?: string;
+}
+
 export type GroupeEvts = {
     evts: Evt[];
     probaParDefaut: number;
