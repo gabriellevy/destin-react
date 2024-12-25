@@ -11,6 +11,7 @@ import {
     Typography
 } from '@mui/material';
 import {Perso, defaultCharacter, Sexe} from "../types/Perso.ts";
+import {Option, provinceOptions} from "../types/Lieu.ts";
 
 interface CharacterFormProps {
     onSubmit: SubmitHandler<Perso>;
@@ -73,6 +74,23 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                             <MenuItem value={Sexe.femelle}>{Sexe.femelle}</MenuItem>
                         </Select>
                         <FormHelperText>{errors.sexe?.message}</FormHelperText>
+                    </FormControl>
+                )}
+            />
+
+            <Controller
+                control={control}
+                name="lieu.province"
+                render={({ field }) => (
+                    <FormControl fullWidth margin="normal" error={!!errors.sexe}>
+                        <InputLabel>Province</InputLabel>
+                        <Select {...field}>
+                            {Object.values(provinceOptions).map((provinceOption: Option) => (
+                                <MenuItem value={provinceOption.value} key={provinceOption.value}>
+                                    {provinceOption.label}
+                                </MenuItem>
+                            ))}
+                        </Select>
                     </FormControl>
                 )}
             />

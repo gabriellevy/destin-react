@@ -30,6 +30,15 @@ export enum Province {
     middenland = 'Middenland',
 }
 
+export type Option = {
+    value: string,
+    label: string,
+}
+export const provinceOptions: Option[]= [
+    { value: Province.reikland.valueOf(), label: Province.reikland.valueOf()},
+    { value: Province.middenland.valueOf(), label: Province.middenland.valueOf()},
+];
+
 export enum SousProvince {
     ducheReikland = "Duché d'Ubersreik",
 }
@@ -45,4 +54,4 @@ export enum Ville {
     ubersreik = 'Ubersreik',
     altdorf = 'Altdorf',
     dunkelbild = 'Dunkelbild',
-};
+}
