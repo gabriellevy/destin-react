@@ -29,6 +29,7 @@ export enum Province {
     wissenland = 'Wissenland',
     talabecland = 'Talabecland',
     ostermark = 'Ostermark',
+    stirland = 'Stirland',
 }
 
 export type Option = {
@@ -42,6 +43,7 @@ export const provinceOptions: Option[]= [
     { value: Province.wissenland, label: Province.wissenland},
     { value: Province.talabecland, label: Province.talabecland},
     { value: Province.ostermark, label: Province.ostermark},
+    { value: Province.stirland, label: Province.stirland},
 ];
 
 export enum SousProvince {
@@ -63,6 +65,7 @@ export function getVilles(provinceStr: string):Option[] {
         case Province.wissenland : return [toOption(Ville.heisenberg)];
         case Province.talabecland : return [];
         case Province.ostermark : return [];
+        case Province.stirland : return [toOption(Ville.halstedt)];
     }
 }
 
@@ -72,4 +75,5 @@ export enum Ville {
     dunkelbild = 'Dunkelbild',
     waldenhof = 'Waldenhof',
     heisenberg = 'Heisenberg',
+    halstedt = 'Halstedt',
 }
