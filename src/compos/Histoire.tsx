@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {Box, Typography, Paper, Grid} from '@mui/material';
+import {Box, Typography, Paper, Grid2} from '@mui/material';
 import {Perso} from "../types/Perso.ts";
 import {evts_remplissage} from "../donnees/histoire/evts_remplissage.ts";
 import {evts_ubersreik} from "../donnees/histoire/evts_ubersreik.ts";
@@ -89,35 +89,33 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
 
     return (
         <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%', overflowY: 'auto' }}>
-            <Box>
-                {storyEvents.map((evt: EvtExecute, index: number) => (
-                    <Grid container spacing={2} key={index} sx={{ mb: 2 }}>
-                        {evt.image && (
-                            <Grid item xs={4}>
-                                <Box
-                                    component="img"
-                                    sx={{
-                                        height: 150,
-                                        width: 200,
-                                        maxHeight: { xs: 233, md: 167 },
-                                        maxWidth: { xs: 350, md: 250 },
-                                    }}
-                                    alt={`image de l'événement ${evt.id}`}
-                                    src={evt.image}
-                                />
-                            </Grid>
-                        )}
-                        <Grid item xs={evt.image ? 8 : 12}>
-                            <Typography paragraph>{evt.texteFinal}</Typography>
-                        </Grid>
-                    </Grid>
-                ))}
-                {isComplete && (
-                    <Typography paragraph fontWeight="bold">
-                        Vous êtes mort. TODO : faire un truc un peu adapté !!
-                    </Typography>
-                )}
-            </Box>
+            {storyEvents.map((evt: EvtExecute, index: number) => (
+                <Grid2 container spacing={2} key={index} sx={{ mb: 2 }} columns={12}>
+                    {evt.image && (
+                        <Grid2 item size={4}>
+                            <Box
+                                component="img"
+                                sx={{
+                                    height: 150,
+                                    width: 200,
+                                    maxHeight: { xs: 233, md: 167 },
+                                    maxWidth: { xs: 350, md: 250 },
+                                }}
+                                alt={`image de l'événement ${evt.id}`}
+                                src={evt.image}
+                            />
+                        </Grid2>
+                    )}
+                    <Grid2 item size={evt.image ? 8 : 12}>
+                        <Typography paragraph>{evt.texteFinal}</Typography>
+                    </Grid2>
+                </Grid2>
+            ))}
+            {isComplete && (
+                <Typography paragraph fontWeight="bold">
+                    Vous êtes mort. TODO : faire un truc un peu adapté !!
+                </Typography>
+            )}
         </Paper>
     );
 }
