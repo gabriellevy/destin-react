@@ -7,6 +7,7 @@ import {Evt, EvtExecute, filtrerEtPreparerEvts} from "../types/Evt.ts";
 import {leTempsPasse} from "../types/Date.ts";
 import {evts_calendrier} from "../donnees/histoire/evts_calendrier.ts";
 import {evts_dunkelbild} from "../donnees/histoire/evts_dunkelbild.ts";
+import {evts_sylvanie} from "../donnees/histoire/evts_sylvanie.ts";
 
 interface StoryProps {
     persoInitial: Perso;
@@ -34,6 +35,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                 ...filtrerEtPreparerEvts(evts_ubersreik, perso),
                 ...filtrerEtPreparerEvts(evts_calendrier, perso),
                 ...filtrerEtPreparerEvts(evts_dunkelbild, perso),
+                ...filtrerEtPreparerEvts(evts_sylvanie, perso),
             ];
 
             if (evtsApplicables.length > 0) {

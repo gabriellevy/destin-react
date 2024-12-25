@@ -1,6 +1,3 @@
-import {anneesToJours} from "./Date.ts";
-import {Perso, Sexe} from "./Perso.ts";
-
 export type Lieu = {
     pays?: Pays,
     province?: Province,
@@ -28,6 +25,7 @@ export enum Pays {
 export enum Province {
     reikland = 'Reikland',
     middenland = 'Middenland',
+    sylvanie = 'Sylvanie',
 }
 
 export type Option = {
@@ -35,8 +33,9 @@ export type Option = {
     label: string,
 }
 export const provinceOptions: Option[]= [
-    { value: Province.reikland.valueOf(), label: Province.reikland.valueOf()},
-    { value: Province.middenland.valueOf(), label: Province.middenland.valueOf()},
+    { value: Province.reikland, label: Province.reikland},
+    { value: Province.middenland, label: Province.middenland},
+    { value: Province.sylvanie, label: Province.sylvanie},
 ];
 
 export enum SousProvince {
@@ -52,8 +51,9 @@ function toOption(ville: Ville): Option {
 
 export function getVilles(provinceStr: string):Option[] {
     switch (provinceStr) {
-        case Province.reikland.valueOf() : return [toOption(Ville.altdorf), toOption(Ville.ubersreik)];
-        case Province.middenland.valueOf() : return [toOption(Ville.dunkelbild)];
+        case Province.reikland : return [toOption(Ville.altdorf), toOption(Ville.ubersreik)];
+        case Province.middenland : return [toOption(Ville.dunkelbild)];
+        case Province.sylvanie : return [toOption(Ville.waldenhof)];
     }
 }
 
@@ -61,4 +61,5 @@ export enum Ville {
     ubersreik = 'Ubersreik',
     altdorf = 'Altdorf',
     dunkelbild = 'Dunkelbild',
+    waldenhof = 'Waldenhof',
 }
