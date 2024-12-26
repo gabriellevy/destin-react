@@ -1,7 +1,8 @@
+import {Option, Province} from "./Lieu.ts";
 
 
 export type Statut = {
-    numero: number,
+    rang: number,
     metalStatut: MetalStatut,
 }
 
@@ -11,11 +12,17 @@ export enum MetalStatut {
     or = 'Or',
 }
 
+export const metalStatutOptions: Option[]= [
+    { value: MetalStatut.bronze, label: MetalStatut.bronze},
+    { value: MetalStatut.argent, label: MetalStatut.argent},
+    { value: MetalStatut.or, label: MetalStatut.or},
+];
+
 /**
  * return true si statut 1 est supérieur à statut 2
  */
 export function compare(statut1: Statut, statut2: Statut): boolean {
-    if (statut1.metalStatut === statut2.metalStatut) return statut1.numero > statut2.numero;
+    if (statut1.metalStatut === statut2.metalStatut) return statut1.rang > statut2.rang;
     if (statut1.metalStatut === MetalStatut.or &&
         (statut2.metalStatut === MetalStatut.bronze || statut2.metalStatut === MetalStatut.argent)) return true;
     return statut1.metalStatut === MetalStatut.argent &&

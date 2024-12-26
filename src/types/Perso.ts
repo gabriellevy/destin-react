@@ -27,5 +27,5 @@ export const defaultCharacter: Perso = {
     dateNaissance: anneesToJours(2492), // entre 2482 et 2502 comme ça le perso a entre 10 et 30 ans quand l'ennemi intérieur démarre
     date: anneesToJours(2502)-2, // pas laisser trop de liberté au joueur là dessus
     lieu: lieuParDefaut,
-    statut: {numero: 4, metalStatut: MetalStatut.bronze}
+    statut: {rang: 4, metalStatut: MetalStatut.bronze}
 };
