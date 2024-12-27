@@ -20,7 +20,7 @@ export default function AffichagePerso({ perso, exporter }: Readonly<AffichagePe
                     <ListItemText primary="Sexe" secondary={perso.sexe} />
                 </ListItem>
                 <ListItem>
-                    <ListItemText primary="Travail" secondary={perso.travail} />
+                    <ListItemText primary="Travail" secondary={perso.carriere.metier.nom} />
                 </ListItem>
                 <ListItem>
                     <ListItemText
