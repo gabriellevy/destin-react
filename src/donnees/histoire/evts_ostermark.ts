@@ -1,6 +1,6 @@
 import {GroupeEvts} from "../../types/Evt.ts";
 import {Perso} from "../../types/Perso.ts";
-import {Province} from "../../types/Lieu.ts";
+import {Province} from "../../types/lieux/Lieu.ts";
 import {KALDEZEIT} from "../../types/Date.ts";
 
 export const evts_ostermark: GroupeEvts = {

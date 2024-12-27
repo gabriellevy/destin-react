@@ -1,3 +1,5 @@
+import {ResidenceDeVoyage} from "./ResidenceDeVoyage.ts";
+
 export type Lieu = {
     pays?: Pays,
     province?: Province,
@@ -5,8 +7,8 @@ export type Lieu = {
     sousSousProvince?: SousProvince,
     ville?: Ville,
     maison?: string,
-    enVoyage?:boolean,
-    residenceVoyage?:string,
+    enVoyage:boolean,
+    residenceVoyage?:ResidenceDeVoyage,
 };
 
 export const lieuParDefaut: Lieu = {
@@ -15,6 +17,14 @@ export const lieuParDefaut: Lieu = {
     sousProvince: SousProvince.ducheReikland,
     ville: Ville.ubersreik,
     enVoyage:false,
+};
+
+export const enVoyageAUbersreik: Lieu = {
+    pays: Pays.empire,
+    province: Province.reikland,
+    sousProvince: SousProvince.ducheReikland,
+    ville: Ville.ubersreik,
+    enVoyage:true,
 };
 
 export enum Pays {

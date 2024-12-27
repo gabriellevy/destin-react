@@ -1,6 +1,6 @@
 import {GroupeEvts} from "../../types/Evt.ts";
 import {Perso} from "../../types/Perso.ts";
-import {Ville} from "../../types/Lieu.ts";
+import {Ville} from "../../types/lieux/Lieu.ts";
 import {PFLUGZEIT} from "../../types/Date.ts";
 
 

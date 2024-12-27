@@ -1,4 +1,4 @@
-import {Lieu, lieuParDefaut} from "./Lieu.ts";
+import {enVoyageAUbersreik, Lieu, lieuParDefaut} from "./lieux/Lieu.ts";
 import {anneesToJours} from "./Date.ts";
 import {MetalStatut, Statut} from "./Statut.ts";
 
@@ -28,4 +28,14 @@ export const defaultCharacter: Perso = {
     date: anneesToJours(2502)-2, // pas laisser trop de liberté au joueur là dessus
     lieu: lieuParDefaut,
     statut: {rang: 4, metalStatut: MetalStatut.bronze}
+};
+
+export const jeuneHommeEnVoyageAUbersreik: Perso = {
+    nom: "Wilhelm Hinderten",
+    sexe: Sexe.male,
+    travail: "aucun",
+    dateNaissance: anneesToJours(2482), // entre 2482 et 2502 comme ça le perso a entre 10 et 30 ans quand l'ennemi intérieur démarre
+    date: anneesToJours(2502), // pas laisser trop de liberté au joueur là dessus
+    lieu: enVoyageAUbersreik,
+    statut: {rang: 2, metalStatut: MetalStatut.argent}
 };

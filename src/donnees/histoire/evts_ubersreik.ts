@@ -1,7 +1,9 @@
 import {GroupeEvts} from "../../types/Evt.ts";
 import {Perso} from "../../types/Perso.ts";
-import {Ville} from "../../types/Lieu.ts";
+import {Ville} from "../../types/lieux/Lieu.ts";
 import {age, JAHRDRUNG, KALDEZEIT, SIGMARZEIT, SOMMERZEIT} from "../../types/Date.ts";
+import {compareStatut, MetalStatut} from "../../types/Statut.ts";
+import {ResidenceDeVoyage} from "../../types/lieux/ResidenceDeVoyage.ts";
 
 export const evts_ubersreik: GroupeEvts = {
     evts: [
@@ -72,6 +74,28 @@ export const evts_ubersreik: GroupeEvts = {
             conditions: (perso: Perso): boolean => perso.lieu.ville === Ville.ubersreik
                 && perso.mois === JAHRDRUNG
                 && perso.jourDuMois === 1,
+        },
+        {
+            id: "evts_auberge_du_pont_1",
+            description: (perso: Perso): string => {
+                perso.lieu.residenceVoyage = ResidenceDeVoyage.auberge_de_la_maison_du_pont;
+                return "De passage à ubersreik et sans logement vous décidez de vous installer à l'auberge de la maison du pont. " +
+                "Elle est idéalement située en plein centre d'Ubersreik et offre une super vue sur le grand pont construit par les nains. ";
+            },
+            conditions: (perso: Perso): boolean => perso.lieu.ville === Ville.ubersreik
+                && compareStatut(perso.statut, {metalStatut: MetalStatut.argent, rang: 1})
+                && perso.lieu.enVoyage
+                && !perso.lieu.residenceVoyage,
+            proba: 100,
+        },
+        {
+            id: "evts_auberge_du_pont_2",
+            description: (): string => {
+                return "Aujourd'hui vous vous offrez un petit plaisir: vous allez diner à l'auberge de la maison du pont. " +
+                "La cuisine y est bonne et les portions généreuses. ";
+            },
+            conditions: (perso: Perso): boolean => perso.lieu.ville === Ville.ubersreik
+                && compareStatut(perso.statut, {metalStatut: MetalStatut.argent, rang: 1}),
         },
     ],
     probaParDefaut: 1,
