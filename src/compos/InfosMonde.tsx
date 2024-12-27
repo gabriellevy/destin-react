@@ -13,7 +13,7 @@ export default function InfosMonde({ perso }: Readonly<InfosMondeProps>) {
             </ListItem>
             { perso.lieu.residenceVoyage &&
                 <ListItem>
-                    <ListItemText primary="Lieu" secondary={perso.lieu.residenceVoyage} />
+                    <ListItemText secondary={perso.lieu.residenceVoyage} />
                 </ListItem>
             }
         </List>

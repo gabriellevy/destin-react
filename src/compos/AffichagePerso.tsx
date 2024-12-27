@@ -13,23 +13,14 @@ export default function AffichagePerso({ perso, exporter }: Readonly<AffichagePe
             <List dense>
                 <ListItem>
                     <Typography variant="h5" gutterBottom>
-                        <ListItemText primary="Nom" secondary={perso.nom} />
+                        <ListItemText primary={perso.nom} secondary={`${age(perso)} ans`}/>
                     </Typography>
-                </ListItem>
-                <ListItem>
-                    <ListItemText primary="Sexe" secondary={perso.sexe} />
                 </ListItem>
                 {perso.carriere &&
                     <ListItem>
                         <ListItemText primary="Travail" secondary={perso.carriere.metier.nom} />
                     </ListItem>
                 }
-                <ListItem>
-                    <ListItemText
-                        primary="Âge"
-                        secondary={`${age(perso)} ans`}
-                    />
-                </ListItem>
             </List>
             <Box mt={2}>
                 <Button variant="contained" color="primary" onClick={exporter} size="small">
