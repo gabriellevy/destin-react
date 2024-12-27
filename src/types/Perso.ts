@@ -1,7 +1,7 @@
 import {enVoyageAUbersreik, Lieu, lieuParDefaut} from "./lieux/Lieu.ts";
 import {anneesToJours} from "./Date.ts";
 import {MetalStatut, Statut} from "./Statut.ts";
-import {Carriere, serveurDebutant} from "./metiers/metiers.ts";
+import {Carriere} from "./metiers/metiers.ts";
 
 export type Perso = {
     nom: string;
@@ -13,7 +13,7 @@ export type Perso = {
     mois?: string, // déduit de date mais pratique pour optimiser les calculs de conditions en masse
     jourDuMois?: number, // déduit de date mais pratique pour optimiser les calculs de conditions en masse
     statut: Statut;
-    carriere: Carriere,
+    carriere?: Carriere,
 };
 
 export enum Sexe {
@@ -21,13 +21,12 @@ export enum Sexe {
     femelle = 'Femelle',
 }
 
-export const defaultCharacter: Perso = {
+export const enfant: Perso = {
     nom: "Wilhelm Hinderten",
     sexe: Sexe.male,
     dateNaissance: anneesToJours(2492), // entre 2482 et 2502 comme ça le perso a entre 10 et 30 ans quand l'ennemi intérieur démarre
     date: anneesToJours(2502)-2, // pas laisser trop de liberté au joueur là dessus
     lieu: lieuParDefaut,
-    carriere: serveurDebutant,
     statut: {rang: 4, metalStatut: MetalStatut.bronze}
 };
 
@@ -37,6 +36,5 @@ export const jeuneHommeEnVoyageAUbersreik: Perso = {
     dateNaissance: anneesToJours(2482), // entre 2482 et 2502 comme ça le perso a entre 10 et 30 ans quand l'ennemi intérieur démarre
     date: anneesToJours(2502), // pas laisser trop de liberté au joueur là dessus
     lieu: enVoyageAUbersreik,
-    carriere: serveurDebutant,
     statut: {rang: 2, metalStatut: MetalStatut.argent}
 };
