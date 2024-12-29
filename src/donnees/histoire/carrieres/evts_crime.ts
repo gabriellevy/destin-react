@@ -16,7 +16,7 @@ export const evts_crime: GroupeEvts = {
                 competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
             }
             return "À force de trainer parmi les vauriens vous vous êtes intégré à leur bande et commencez à participer à leurs sales coups. " +
-                "Aujourd'hui vous les avez aidés à extorquer de largent à un commerçant. "
+                "Aujourd'hui vous les avez aidés à extorquer de l'argent à un commerçant. "
         },
             conditions: (perso: Perso): boolean => !perso.carriere && !compareStatut(perso.statut, {metalStatut: MetalStatut.argent, rang: 4}),
             proba: 5,

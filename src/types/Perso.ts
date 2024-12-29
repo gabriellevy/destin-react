@@ -3,6 +3,7 @@ import {anneesToJours} from "./Date.ts";
 import {MetalStatut, Statut} from "./Statut.ts";
 import {Carriere} from "./metiers/metiers.ts";
 import {Dieu} from "./Dieu.ts";
+import {caracDeDepartAleatoire} from "./caracs/Caracs.ts";
 
 export type Perso = {
     nom: string;
@@ -16,6 +17,16 @@ export type Perso = {
     statut: Statut;
     carriere?: Carriere,
     dieu?: Dieu, // surtout utile si affilié à un temple (ou très très croyant en un dieu particulier)
+    cc: number,
+    ct: number,
+    f: number,
+    e: number,
+    i: number,
+    ag: number,
+    dex: number,
+    int: number,
+    fm: number,
+    soc: number,
 };
 
 export enum Sexe {
@@ -29,7 +40,17 @@ export const enfant: Perso = {
     dateNaissance: anneesToJours(2492), // entre 2482 et 2502 comme ça le perso a entre 10 et 30 ans quand l'ennemi intérieur démarre
     date: anneesToJours(2502)-2, // pas laisser trop de liberté au joueur là dessus
     lieu: lieuParDefaut,
-    statut: {rang: 4, metalStatut: MetalStatut.bronze}
+    statut: {rang: 4, metalStatut: MetalStatut.bronze},
+    cc: caracDeDepartAleatoire(),
+    ct: caracDeDepartAleatoire(),
+    f: caracDeDepartAleatoire(),
+    e: caracDeDepartAleatoire(),
+    i: caracDeDepartAleatoire(),
+    ag: caracDeDepartAleatoire(),
+    dex: caracDeDepartAleatoire(),
+    int: caracDeDepartAleatoire(),
+    fm: caracDeDepartAleatoire(),
+    soc: caracDeDepartAleatoire(),
 };
 
 export const jeuneHommeEnVoyageAUbersreik: Perso = {
@@ -38,5 +59,15 @@ export const jeuneHommeEnVoyageAUbersreik: Perso = {
     dateNaissance: anneesToJours(2482), // entre 2482 et 2502 comme ça le perso a entre 10 et 30 ans quand l'ennemi intérieur démarre
     date: anneesToJours(2502), // pas laisser trop de liberté au joueur là dessus
     lieu: enVoyageAUbersreik,
-    statut: {rang: 2, metalStatut: MetalStatut.argent}
+    statut: {rang: 2, metalStatut: MetalStatut.argent},
+    cc: caracDeDepartAleatoire(),
+    ct: caracDeDepartAleatoire(),
+    f: caracDeDepartAleatoire(),
+    e: caracDeDepartAleatoire(),
+    i: caracDeDepartAleatoire(),
+    ag: caracDeDepartAleatoire(),
+    dex: caracDeDepartAleatoire(),
+    int: caracDeDepartAleatoire(),
+    fm: caracDeDepartAleatoire(),
+    soc: caracDeDepartAleatoire(),
 };
