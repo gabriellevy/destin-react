@@ -1,4 +1,5 @@
 import {Perso} from "./Perso.ts";
+import {Carriere} from "./metiers/metiers.ts";
 
 export const JOURS_PAR_AN = 400;
 export const JOURS_PAR_SEMAINE = 8;
@@ -116,16 +117,24 @@ export function formatJourStr(numeroJourSemaine: number, jourDuMois:number, mois
 
 export function leTempsPasse(perso: Perso):Perso {
     // ajouter 1D20 jours à l'âge du personnage // TODO : quelle vitesse ? paramétrable ?
-    const daysToAdd = Math.floor(Math.random() * 20) + 1;
-    // const daysToAdd: number = 1;
-    const nouDate: number = perso.date + daysToAdd;
+    const joursAAjouter = Math.floor(Math.random() * 20) + 1;
+    // const joursAAjouter: number = 1;
+    const nouDate: number = perso.date + joursAAjouter;
     const nouvJourDuMois: number = calculJourDuMois(nouDate);
     const nouvMoisStr: string = calculMoisStr(nouDate);
+    let carriere: Carriere|undefined = perso.carriere;
+    if (carriere) {
+        carriere = {
+            ...carriere,
+            duree: carriere.duree + joursAAjouter,
+        };
+    }
     console.debug("date en jours : " + perso.date);
     // console.debug("nouvMoisStr : " + nouvMoisStr);
     return { ...perso,
         date: nouDate,
         mois: nouvMoisStr,
-        jourDuMois: nouvJourDuMois
+        jourDuMois: nouvJourDuMois,
+        carriere: carriere,
     };
 }
