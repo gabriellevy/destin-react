@@ -13,6 +13,7 @@ import {evts_altdorf} from "../donnees/histoire/evts_altdorf.ts";
 import {evts_talabecland} from "../donnees/histoire/evts_talabecland.ts";
 import {evts_ostermark} from "../donnees/histoire/evts_ostermark.ts";
 import {evts_stirland} from "../donnees/histoire/evts_stirland.ts";
+import {evts_crime} from "../donnees/histoire/carrieres/evts_crime.ts";
 
 interface StoryProps {
     persoInitial: Perso;
@@ -46,6 +47,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                 ...filtrerEtPreparerEvts(evts_talabecland, perso),
                 ...filtrerEtPreparerEvts(evts_ostermark, perso),
                 ...filtrerEtPreparerEvts(evts_stirland, perso),
+                ...filtrerEtPreparerEvts(evts_crime, perso),
             ];
 
             if (evtsApplicables.length > 0) {

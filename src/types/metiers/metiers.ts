@@ -27,16 +27,23 @@ export const metiersObjs: Record<string, Metier> = {
         statut: {rang: 2, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 2, metalStatut: MetalStatut.argent},
     },
+    ranconneur : {
+        nom: metiersEnum.ranconneur,
+        statut: {rang: 3, metalStatut: MetalStatut.bronze},
+        statutMax: {rang: 5, metalStatut: MetalStatut.argent},
+    },
 }
 
 export type Carriere = {
     metier: Metier,
+    groupeLieu?: string, // ou et avec quel groupe ?
     duree: number, // temps passé à pratiquer ce métier
     competence: number // sur 100. 1 en débutant
 }
 
 export const serveurDebutant: Carriere = {
     metier: metiersObjs.serveur,
+    groupeLieu: "Auberge du pont",
     duree: 0,
     competence: 1,
 };
@@ -53,4 +60,5 @@ export enum metiersEnum {
     artisan = "Artisan",
     maitre_de_guilde = "Maître de guilde",
     serveur = "Serveur",
+    ranconneur = "Rançonneur",
 }
