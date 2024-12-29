@@ -17,7 +17,7 @@ export type Perso = {
     jourDuMois?: number, // déduit de date mais pratique pour optimiser les calculs de conditions en masse
     statut: Statut;
     carriere?: Carriere,
-    dieu?: Dieu, // surtout utile si affilié à un temple (ou très très croyant en un dieu particulier)
+    dieu: Dieu, // surtout utile si affilié à un temple (ou très très croyant en un dieu particulier)
     cc: number,
     ct: number,
     f: number,
@@ -54,6 +54,7 @@ export const enfant: Perso = {
     fm: caracDeDepartAleatoire(),
     soc: caracDeDepartAleatoire(),
     talents: [],
+    dieu: {id: "panthéon de l'empire"}
 };
 
 export const jeuneHommeEnVoyageAUbersreik: Perso = {
@@ -74,4 +75,5 @@ export const jeuneHommeEnVoyageAUbersreik: Perso = {
     fm: caracDeDepartAleatoire(),
     soc: caracDeDepartAleatoire(),
     talents: [],
+    dieu: {id: "panthéon de l'empire"}
 };

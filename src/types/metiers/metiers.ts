@@ -44,26 +44,26 @@ export const metiersObjs: Record<string, Metier> = {
     novice : {
         nom: metiersEnum.novice,
         intitule: (perso: Perso) => {
-            return metiersEnum.novice + " de " + perso.dieu;
+            return metiersEnum.novice + " de " + perso.dieu.id;
         },
         statut: {rang: 1, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 2, metalStatut: MetalStatut.bronze},
     },
     initie_pretre : {
         nom: metiersEnum.initie_pretre,
-        intitule: (perso: Perso) => metiersEnum.initie_pretre + " de " + perso.dieu,
+        intitule: (perso: Perso) => metiersEnum.initie_pretre + " de " + perso.dieu.id,
         statut: {rang: 2, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 4, metalStatut: MetalStatut.bronze},
     },
     moine : {
         nom: metiersEnum.moine,
-        intitule: (perso: Perso) => metiersEnum.moine + " de " + perso.dieu,
+        intitule: (perso: Perso) => metiersEnum.moine + " de " + perso.dieu.id,
         statut: {rang: 4, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 5, metalStatut: MetalStatut.argent},
     },
     pretre : {
         nom: metiersEnum.pretre,
-        intitule: (perso: Perso) => metiersEnum.pretre + " de " + perso.dieu,
+        intitule: (perso: Perso) => metiersEnum.pretre + " de " + perso.dieu.id,
         statut: {rang: 1, metalStatut: MetalStatut.argent},
         statutMax: {rang: 2, metalStatut: MetalStatut.or},
     },

@@ -12,7 +12,7 @@ export function d100(): number {
 export function testCarac(perso: Perso, test: TestCarac): ResultatTest {
     let caracValue: number = getCaracValue(perso, test.carac);
     let resDe: number = d100();
-    const reussi: boolean = resDe < (caracValue + test.bonusMalus);
+    const reussi: boolean = resDe <= (caracValue + test.bonusMalus);
     const texte: string = `Test de ${test.carac} `
         + (reussi ? "réussi" : "raté")
         + ` (résultat ${resDe} contre compétence ${caracValue} ${test.bonusMalus > 0 ? "+" : ""} ${test.bonusMalus} ) `;
