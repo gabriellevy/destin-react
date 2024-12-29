@@ -32,6 +32,26 @@ export const metiersObjs: Record<string, Metier> = {
         statut: {rang: 3, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 5, metalStatut: MetalStatut.argent},
     },
+    novice : {
+        nom: metiersEnum.novice,
+        statut: {rang: 1, metalStatut: MetalStatut.bronze},
+        statutMax: {rang: 2, metalStatut: MetalStatut.bronze},
+    },
+    initie_pretre : {
+        nom: metiersEnum.initie_pretre,
+        statut: {rang: 2, metalStatut: MetalStatut.bronze},
+        statutMax: {rang: 4, metalStatut: MetalStatut.bronze},
+    },
+    moine : {
+        nom: metiersEnum.moine,
+        statut: {rang: 4, metalStatut: MetalStatut.bronze},
+        statutMax: {rang: 5, metalStatut: MetalStatut.argent},
+    },
+    pretre : {
+        nom: metiersEnum.pretre,
+        statut: {rang: 1, metalStatut: MetalStatut.argent},
+        statutMax: {rang: 2, metalStatut: MetalStatut.or},
+    },
 }
 
 export type Carriere = {
@@ -61,4 +81,8 @@ export enum metiersEnum {
     maitre_de_guilde = "Maître de guilde",
     serveur = "Serveur",
     ranconneur = "Rançonneur",
+    novice = "Moine novice",
+    moine = "Moine",
+    initie_pretre = "Initié prêtre",
+    pretre = "Prêtre",
 }
