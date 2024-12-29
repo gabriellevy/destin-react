@@ -21,6 +21,9 @@ export default function AffichagePerso({ perso, exporter }: Readonly<AffichagePe
                         <ListItemText primary={perso.carriere.metier.intitule(perso)} secondary={`(${perso.carriere.duree} jours)`} />
                     </ListItem>
                 }
+                <ListItem>
+                    <ListItemText primary="Talents" secondary={perso.talents.join(', ')} />
+                </ListItem>
             </List>
             <Stack direction="row" spacing={0}>
                 <ListItemText primary="CC" secondary={perso.cc}/>

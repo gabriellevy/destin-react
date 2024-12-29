@@ -6,6 +6,7 @@ import {Dieu} from "../../../types/Dieu.ts";
 import {ResultatTest} from "../../../types/LancerDe.ts";
 import {testCarac} from "../../../fonctions/des.ts";
 import {Carac} from "../../../types/caracs/Caracs.ts";
+import {talents} from "../../talents.ts";
 
 export const evts_pretres: GroupeEvts = {
     evts: [
@@ -29,6 +30,7 @@ export const evts_pretres: GroupeEvts = {
                         competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
                     }
                     perso.dieu = dieu;
+                    perso.talents.push(talents.beni);
                     texte += `Vous êtes frappé par la révélation de ${dieu.id} et sentez que ${dieu.id} a un destin pour vous et répond à vos prières. ` +
                         `À partir de ce jour vous ne rêvez plus que de servir ${dieu.id} et parvenez à vous faire accepter comme ${metier.nom}. `
                 } else {
@@ -38,10 +40,10 @@ export const evts_pretres: GroupeEvts = {
             },
             conditions: (perso: Perso): boolean =>
                 perso.carriere?.metier != metiersObjs.initie_pretre
-            && perso.carriere?.metier != metiersObjs.novice
-            && perso.carriere?.metier != metiersObjs.pretre
-            && perso.carriere?.metier != metiersObjs.moine,
-            proba: 100,
+                && perso.carriere?.metier != metiersObjs.novice
+                && perso.carriere?.metier != metiersObjs.pretre
+                && perso.carriere?.metier != metiersObjs.moine,
+            proba: 0.1,
         },
     ],
     probaParDefaut: 10,

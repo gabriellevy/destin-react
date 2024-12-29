@@ -4,6 +4,7 @@ import {MetalStatut, Statut} from "./Statut.ts";
 import {Carriere} from "./metiers/metiers.ts";
 import {Dieu} from "./Dieu.ts";
 import {caracDeDepartAleatoire} from "./caracs/Caracs.ts";
+import {talents} from "../donnees/talents.ts";
 
 export type Perso = {
     nom: string;
@@ -27,6 +28,7 @@ export type Perso = {
     int: number,
     fm: number,
     soc: number,
+    talents: talents[],
 };
 
 export enum Sexe {
@@ -51,6 +53,7 @@ export const enfant: Perso = {
     int: caracDeDepartAleatoire(),
     fm: caracDeDepartAleatoire(),
     soc: caracDeDepartAleatoire(),
+    talents: [],
 };
 
 export const jeuneHommeEnVoyageAUbersreik: Perso = {
@@ -70,4 +73,5 @@ export const jeuneHommeEnVoyageAUbersreik: Perso = {
     int: caracDeDepartAleatoire(),
     fm: caracDeDepartAleatoire(),
     soc: caracDeDepartAleatoire(),
+    talents: [],
 };
