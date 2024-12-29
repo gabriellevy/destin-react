@@ -2,6 +2,7 @@ import {enVoyageAUbersreik, Lieu, lieuParDefaut} from "./lieux/Lieu.ts";
 import {anneesToJours} from "./Date.ts";
 import {MetalStatut, Statut} from "./Statut.ts";
 import {Carriere} from "./metiers/metiers.ts";
+import {Dieu} from "./Dieu.ts";
 
 export type Perso = {
     nom: string;
@@ -14,6 +15,7 @@ export type Perso = {
     jourDuMois?: number, // déduit de date mais pratique pour optimiser les calculs de conditions en masse
     statut: Statut;
     carriere?: Carriere,
+    dieu?: Dieu, // surtout utile si affilié à un temple (ou très très croyant en un dieu particulier)
 };
 
 export enum Sexe {
