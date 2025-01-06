@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react';
 import {Box, Typography, Paper, Grid2} from '@mui/material';
 import {Perso} from "../types/Perso.ts";
-import {evts_remplissage} from "../donnees/histoire/evts_remplissage.ts";
-import {evts_ubersreik} from "../donnees/histoire/evts_ubersreik.ts";
+import {evts_ubersreik} from "../donnees/histoire/lieux/evts_ubersreik.ts";
 import {Evt, EvtExecute, filtrerEtPreparerEvts} from "../types/Evt.ts";
 import {jourStr, leTempsPasse} from "../types/Date.ts";
 import {evts_calendrier} from "../donnees/histoire/evts_calendrier.ts";
-import {evts_dunkelbild} from "../donnees/histoire/evts_dunkelbild.ts";
-import {evts_sylvanie} from "../donnees/histoire/evts_sylvanie.ts";
-import {evts_wissenland} from "../donnees/histoire/evts_wissenland.ts";
-import {evts_altdorf} from "../donnees/histoire/evts_altdorf.ts";
-import {evts_talabecland} from "../donnees/histoire/evts_talabecland.ts";
-import {evts_ostermark} from "../donnees/histoire/evts_ostermark.ts";
-import {evts_stirland} from "../donnees/histoire/evts_stirland.ts";
+import {evts_dunkelbild} from "../donnees/histoire/lieux/evts_dunkelbild.ts";
+import {evts_sylvanie} from "../donnees/histoire/lieux/evts_sylvanie.ts";
+import {evts_wissenland} from "../donnees/histoire/lieux/evts_wissenland.ts";
+import {evts_altdorf} from "../donnees/histoire/lieux/evts_altdorf.ts";
+import {evts_talabecland} from "../donnees/histoire/lieux/evts_talabecland.ts";
+import {evts_ostermark} from "../donnees/histoire/lieux/evts_ostermark.ts";
+import {evts_stirland} from "../donnees/histoire/lieux/evts_stirland.ts";
 import {evts_crime} from "../donnees/histoire/carrieres/evts_crime.ts";
 import {evts_pretres} from "../donnees/histoire/carrieres/evts_pretres.ts";
 
@@ -31,14 +30,33 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
         let perso = { ...persoInitial };
         let timeoutId: number;
 
+        function executerEvt(evtExecute: Evt, perso: Perso) {
+            const nouvEvt: EvtExecute = {
+                id: evtExecute.id,
+                dateStr: jourStr(perso.date),
+                texteFinal: evtExecute.description(perso),
+                image: evtExecute.image,
+            };
+
+            setStoryEvents((prev: EvtExecute[]) => [
+                ...prev,
+                nouvEvt
+            ]);
+
+            if (evtExecute.effets) {
+                perso = evtExecute.effets(perso);
+            }
+
+            onCharacterUpdate(perso);
+        }
+
         const processNextEvent = () => {
             if (!isMounted) return;
 
             perso = leTempsPasse(perso);
 
             // filtrer les evts non applicables
-            let evtsApplicables: Evt[] = [
-                ...filtrerEtPreparerEvts(evts_remplissage, perso),
+            const evtsApplicables: Evt[] = [
                 ...filtrerEtPreparerEvts(evts_ubersreik, perso),
                 ...filtrerEtPreparerEvts(evts_calendrier, perso),
                 ...filtrerEtPreparerEvts(evts_dunkelbild, perso),
@@ -61,32 +79,17 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                     }
                 })
                 let randomProba: number = Math.random() * completeProba;
-                let evtExecute:Evt;
-                evtsApplicables.forEach(evt => {
+
+                evtsApplicables.every(evt => {
                     if (evt.proba) {
                         randomProba -= evt.proba;
-                        if (!evtExecute && randomProba <= 0) {
-                            evtExecute = evt;
+                        if (randomProba <= 0) {
+                            executerEvt(evt, perso);
+                            return false;
                         }
                     }
+                    return true
                 })
-                const nouvEvt: EvtExecute = {
-                    id: evtExecute.id,
-                    dateStr: jourStr(perso.date),
-                    texteFinal: evtExecute.description(perso),
-                    image: evtExecute.image,
-                };
-
-                setStoryEvents((prev: EvtExecute[]) => [
-                    ...prev,
-                    nouvEvt
-                ]);
-
-                if (evtExecute.effets) {
-                    perso = evtExecute.effets(perso);
-                }
-
-                onCharacterUpdate(perso);
 
                 timeoutId = setTimeout(processNextEvent, 5000);
             } else {

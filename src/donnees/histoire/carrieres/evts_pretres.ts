@@ -13,7 +13,7 @@ export const evts_pretres: GroupeEvts = {
         {
             id: "evts_pretres1",
             description: (perso: Perso): string => {
-                let dieu:Dieu = dieuAleatoire();
+                const dieu:Dieu = dieuAleatoire();
                 let texte: string = `Un jour où vous entrez dans le temple de ${dieu.id} il vous semble sentir sa présence. Une mise à l'épreuve peut-être ? `
                 const resTest:ResultatTest = testCarac(perso, {carac: Carac.fm, bonusMalus: 20});
                 texte += resTest.resume;
