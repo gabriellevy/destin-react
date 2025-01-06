@@ -1,5 +1,4 @@
 import {Perso} from "./Perso.ts";
-import {Carriere} from "./metiers/metiers.ts";
 
 export const JOURS_PAR_AN = 400;
 export const JOURS_PAR_SEMAINE = 8;
@@ -31,13 +30,13 @@ export function jourDansLAnnee(joursDepuis0: number) {return joursDepuis0%JOURS_
 
 // dénomination complète du jour : "jour_semaine numéro_du_mois mois année"
 export function jourStr(joursDepuis0: number): string {
-    let numeroJourSemaine: number = joursDepuis0 % JOURS_PAR_SEMAINE;
+    const numeroJourSemaine: number = joursDepuis0 % JOURS_PAR_SEMAINE;
     const annee = joursToAnnees(joursDepuis0);
     return formatJourStr(numeroJourSemaine, calculJourDuMois(joursDepuis0), calculMoisStr(joursDepuis0), annee);
 }
 
 function calculJourDuMois(joursDepuis0: number): number {
-    let joursDepuisDebutAnnee: number = jourDansLAnnee(joursDepuis0);
+    const joursDepuisDebutAnnee: number = jourDansLAnnee(joursDepuis0);
 
     // détermination du mois
     if (joursDepuisDebutAnnee == 1) {
@@ -65,7 +64,7 @@ function calculJourDuMois(joursDepuis0: number): number {
 }
 
 function calculMoisStr(joursDepuis0: number): string {
-    let joursDepuisDebutAnnee: number = jourDansLAnnee(joursDepuis0);
+    const joursDepuisDebutAnnee: number = jourDansLAnnee(joursDepuis0);
 
     // détermination du mois
     if (joursDepuisDebutAnnee == 1) {
@@ -103,6 +102,7 @@ export function numJourSemaineToStr(numeroJourSemaine: number): string {
         case 6: return "Angestag";
         case 7: return "Festag";
     }
+    return "non défini !";
 }
 
 export function formatJourStr(numeroJourSemaine: number, jourDuMois:number, moisStr: string, annee: number): string {
@@ -122,19 +122,15 @@ export function leTempsPasse(perso: Perso):Perso {
     const nouDate: number = perso.date + joursAAjouter;
     const nouvJourDuMois: number = calculJourDuMois(nouDate);
     const nouvMoisStr: string = calculMoisStr(nouDate);
-    let carriere: Carriere|undefined = perso.carriere;
-    if (carriere) {
-        carriere = {
-            ...carriere,
-            duree: carriere.duree + joursAAjouter,
-        };
-    }
+    perso.carriere.forEach(carriere => {
+        carriere.duree = carriere.duree + joursAAjouter;
+    });
+
     console.debug("date en jours : " + perso.date);
     // console.debug("nouvMoisStr : " + nouvMoisStr);
     return { ...perso,
         date: nouDate,
         mois: nouvMoisStr,
         jourDuMois: nouvJourDuMois,
-        carriere: carriere,
     };
 }

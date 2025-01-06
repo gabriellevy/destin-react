@@ -1,6 +1,19 @@
 import {MetalStatut, Statut} from "../Statut.ts";
 import {Perso} from "../Perso.ts";
 
+export enum metiersEnum {
+    pamphletaire = "Pamphlétaire",
+    apprenti_artisan = "Apprenti artisan",
+    artisan = "Artisan",
+    maitre_de_guilde = "Maître de guilde",
+    serveur = "Serveur",
+    ranconneur = "Rançonneur",
+    novice = "Moine novice",
+    moine = "Moine",
+    initie_pretre = "Initié prêtre",
+    pretre = "Prêtre",
+}
+
 export const metiersObjs: Record<string, Metier> = {
     // citadins
     pamphletaire : {
@@ -29,8 +42,8 @@ export const metiersObjs: Record<string, Metier> = {
     },
     serveur : {
         nom: metiersEnum.serveur,
-        intitule: (perso: Perso) => {
-            return metiersEnum.serveur + " à " + perso.carriere?.groupeLieu;
+        intitule: (_perso: Perso, carriere: Carriere) => {
+            return metiersEnum.serveur + " à " + carriere?.groupeLieu;
         },
         statut: {rang: 2, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 2, metalStatut: MetalStatut.argent},
@@ -87,18 +100,5 @@ export type Metier = {
     nom: metiersEnum,
     statut: Statut,
     statutMax: Statut,
-    intitule: (perso:Perso) => string,
-}
-
-export enum metiersEnum {
-    pamphletaire = "Pamphlétaire",
-    apprenti_artisan = "Apprenti artisan",
-    artisan = "Artisan",
-    maitre_de_guilde = "Maître de guilde",
-    serveur = "Serveur",
-    ranconneur = "Rançonneur",
-    novice = "Moine novice",
-    moine = "Moine",
-    initie_pretre = "Initié prêtre",
-    pretre = "Prêtre",
+    intitule: (perso: Perso,carriere: Carriere) => string,
 }

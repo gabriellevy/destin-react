@@ -1,6 +1,6 @@
 import {GroupeEvts} from "../../../types/Evt.ts";
-import {Perso} from "../../../types/Perso.ts";
-import {Metier, metiersObjs} from "../../../types/metiers/metiers.ts";
+import {neSuitPasUneCarriereDe, Perso} from "../../../types/Perso.ts";
+import {Metier, metiersEnum, metiersObjs} from "../../../types/metiers/metiers.ts";
 import {dieuAleatoire} from "../../dieux/dieux.ts";
 import {Dieu} from "../../../types/Dieu.ts";
 import {ResultatTest} from "../../../types/LancerDe.ts";
@@ -23,12 +23,12 @@ export const evts_pretres: GroupeEvts = {
                         metier = metiersObjs.novice;
                     }
                     // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
-                    perso.carriere = {
+                    perso.carriere = [{
                         metier: metier,
                         groupeLieu: undefined,
                         duree: 0,
                         competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
-                    }
+                    }];
                     perso.dieu = dieu;
                     perso.talents.push(talents.beni);
                     texte += `Vous êtes frappé par la révélation de ${dieu.id} et sentez que ${dieu.id} a un destin pour vous et répond à vos prières. ` +
@@ -39,10 +39,10 @@ export const evts_pretres: GroupeEvts = {
                 return texte;
             },
             conditions: (perso: Perso): boolean =>
-                perso.carriere?.metier != metiersObjs.initie_pretre
-                && perso.carriere?.metier != metiersObjs.novice
-                && perso.carriere?.metier != metiersObjs.pretre
-                && perso.carriere?.metier != metiersObjs.moine,
+                neSuitPasUneCarriereDe(perso, metiersEnum.initie_pretre)
+                && neSuitPasUneCarriereDe(perso, metiersEnum.novice)
+                && neSuitPasUneCarriereDe(perso, metiersEnum.pretre)
+                && neSuitPasUneCarriereDe(perso, metiersEnum.moine),
             proba: 0.1,
         },
     ],

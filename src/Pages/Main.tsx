@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {ThemeProvider, createTheme, CssBaseline, Container, Typography, Grid, Paper} from '@mui/material';
+import {ThemeProvider, createTheme, CssBaseline, Container, Grid, Paper} from '@mui/material';
 import GenPersoForm from "../compos/GenPersoForm.tsx";
 import {Perso} from "../types/Perso.ts";
 import AffichagePerso from "../compos/AffichagePerso.tsx";

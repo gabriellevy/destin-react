@@ -16,13 +16,16 @@ export default function AffichagePerso({ perso, exporter }: Readonly<AffichagePe
                         <ListItemText primary={perso.nom} secondary={`${age(perso)} ans`}/>
                     </Typography>
                 </ListItem>
-                {perso.carriere &&
-                    <ListItem>
-                        <ListItemText primary={perso.carriere.metier.intitule(perso)} secondary={`(${perso.carriere.duree} jours)`} />
-                    </ListItem>
-                }
                 <ListItem>
-                    <ListItemText primary="Talents" secondary={perso.talents.join(', ')} />
+                {
+                    perso.carriere.map((carriere) => (
+                                <ListItemText primary={carriere.metier.intitule(perso, carriere)}
+                                              secondary={`(${carriere.duree} jours)`}/>
+                    )
+                )}
+                </ListItem>
+                <ListItem>
+                    <ListItemText primary="Talents" secondary={perso.talents.join(', ')}/>
                 </ListItem>
             </List>
             <Stack direction="row" spacing={0}>

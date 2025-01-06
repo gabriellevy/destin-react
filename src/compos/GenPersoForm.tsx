@@ -10,7 +10,7 @@ import {
     Box,
     Typography, Paper, Grid2
 } from '@mui/material';
-import {Perso, Sexe, jeuneHommeEnVoyageAUbersreik, enfant} from "../types/Perso.ts";
+import {Perso, Sexe, jeuneHommeEnVoyageAUbersreik} from "../types/Perso.ts";
 import {getVilles, Option, provinceOptions} from "../types/lieux/Lieu.ts";
 import {metalStatutOptions} from "../types/Statut.ts";
 
@@ -158,21 +158,6 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                             )}
                         />
                     </Grid2>
-
-                    <Controller
-                        name="travail"
-                        control={control}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label="Travail"
-                                fullWidth
-                                margin="normal"
-                                error={!!errors.travail}
-                                helperText={errors.travail?.message}
-                            />
-                        )}
-                    />
 
                     <Controller
                         name="dateNaissance"
