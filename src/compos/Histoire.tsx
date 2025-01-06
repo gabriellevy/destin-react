@@ -110,7 +110,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
             {storyEvents.map((evt: EvtExecute, index: number) => (
                 <Grid2 container spacing={2} key={index} sx={{ mb: 2 }} columns={12}>
                     {evt.image && (
-                        <Grid2 item size={4}>
+                        <Grid2 size={4}>
                             <Box
                                 component="img"
                                 sx={{
@@ -124,7 +124,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                             />
                         </Grid2>
                     )}
-                    <Grid2 item size={evt.image ? 8 : 12}>
+                    <Grid2 size={evt.image ? 8 : 12}>
                         <Typography mb={1} align="left">{evt.dateStr}</Typography>
                         <Typography mb={2} align="left">{evt.texteFinal}</Typography>
                     </Grid2>

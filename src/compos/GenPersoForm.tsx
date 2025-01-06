@@ -51,7 +51,7 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
             <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 400, mx: 'auto', mt: 4 }}>
                 <Typography variant="h4" gutterBottom>Créer un personnage</Typography>
                 <Grid2 container spacing={1} sx={{ mb: 2 }} columns={12}>
-                    <Grid2 item size={8}>
+                    <Grid2 size={8}>
                         <Controller
                             name="nom"
                             control={control}
@@ -67,7 +67,7 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                             )}
                         />
                     </Grid2>
-                    <Grid2 item size={4}>
+                    <Grid2 size={4}>
                         <Controller
                             name="sexe"
                             control={control}
@@ -85,7 +85,7 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                     </Grid2>
 
                     {/* lieux (TODO : refactoriser*/}
-                    <Grid2 item size={6}>
+                    <Grid2 size={6}>
                         <Controller
                             control={control}
                             name="lieu.province"
@@ -103,7 +103,7 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                             )}
                         />
                     </Grid2>
-                    <Grid2 item size={6}>
+                    <Grid2 size={6}>
                         <Controller
                             control={control}
                             name="lieu.ville"
@@ -122,7 +122,7 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                         />
                     </Grid2>
                     {/* statut (TODO : refactoriser*/}
-                    <Grid2 item size={6}>
+                    <Grid2 size={6}>
                         <Controller
                             control={control}
                             name="statut.metalStatut"
@@ -140,7 +140,7 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                             )}
                         />
                     </Grid2>
-                    <Grid2 item size={6}>
+                    <Grid2 size={6}>
                         <Controller
                             name="statut.rang"
                             control={control}
@@ -176,12 +176,12 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                         )}
                     />
 
-                    <Grid2 item size={6}>
+                    <Grid2 size={6}>
                         <Button type="submit" variant="contained" color="primary">
                             Commencer
                         </Button>
                     </Grid2>
-                    <Grid2 item size={6}>
+                    <Grid2 size={6}>
                         <Button
                             component="label"
                             variant="contained"
