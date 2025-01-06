@@ -1,10 +1,14 @@
 import {GroupeEvts} from "../../../types/Evt.ts";
-import {Perso} from "../../../types/Perso.ts";
+import {
+    aUneCarriere,
+    Perso,
+    suitUneCarriereDepuis
+} from "../../../types/Perso.ts";
 import {Ville} from "../../../types/lieux/Lieu.ts";
 import {age, JAHRDRUNG, KALDEZEIT, SIGMARZEIT, SOMMERZEIT} from "../../../types/Date.ts";
 import {compareStatut, MetalStatut} from "../../../types/Statut.ts";
 import {ResidenceDeVoyage} from "../../../types/lieux/ResidenceDeVoyage.ts";
-import {metiersObjs} from "../../../types/metiers/metiers.ts";
+import {metiersEnum, metiersObjs} from "../../../types/metiers/metiers.ts";
 
 export const evts_ubersreik: GroupeEvts = {
     evts: [
@@ -102,12 +106,12 @@ export const evts_ubersreik: GroupeEvts = {
             id: "evts_auberge_du_pont_3",
             description: (perso: Perso): string => {
                 // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
-                perso.carriere = {
+                perso.carriere.push({
                     metier: metiersObjs.serveur,
                     groupeLieu: "Auberge de la maison du pont",
                     duree: 0,
                     competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
-                }
+                });
                 perso.lieu.residenceVoyage = undefined;
                 perso.lieu.maison = ResidenceDeVoyage.auberge_de_la_maison_du_pont;
                 return "Vous avez réussi à vous trouver un travail de serveur à l'auberge de la maison du pont. " +
@@ -116,7 +120,28 @@ export const evts_ubersreik: GroupeEvts = {
                     "À condition de ne pas déplaire au patron Gunther Abend et à bien aider sa femme Hanna et leurs trois enfants à tenir la boutique. "
             },
             conditions: (perso: Perso): boolean => perso.lieu.ville === Ville.ubersreik
-                && !perso.carriere,
+                && !aUneCarriere(perso),
+        },
+        {
+            id: "devenir_confesseur_jungfreud",
+            description: (perso: Perso): string => {
+                const texte: string = `Vos grandes qualité de prêtre ainsi que votre fidélité à leur famille pousse les Jungfreud à vous faire le grand honneur de vous nommer confesseur officiel de leur famille. `
+
+                // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
+                perso.carriere.push({
+                    metier: metiersObjs.confesseur,
+                    groupeLieu: "la famille Jungfreud",
+                    duree: 0,
+                    competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
+                });
+
+                return texte;
+            },
+            conditions: (perso: Perso): boolean => // TODO : ajouter une forme d'allégeance aux Jungfreud ou autre + evt impossible après la prise de la ville par l'empereur
+                (suitUneCarriereDepuis(perso, metiersEnum.pretre, 2)// depuis au moins 2 ans
+                || suitUneCarriereDepuis(perso, metiersEnum.moine, 2))
+                && perso.lieu.ville === Ville.ubersreik,
+            proba: 0.1,
         },
     ],
     probaParDefaut: 1,

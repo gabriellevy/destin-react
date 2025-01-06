@@ -12,6 +12,7 @@ export enum metiersEnum {
     moine = "Moine",
     initie_pretre = "Initié prêtre",
     pretre = "Prêtre",
+    confesseur = "Confesseur", // sorte de prêtre cofesseur spécialisé associé à une famille riche
 }
 
 export const metiersObjs: Record<string, Metier> = {
@@ -80,13 +81,20 @@ export const metiersObjs: Record<string, Metier> = {
         statut: {rang: 1, metalStatut: MetalStatut.argent},
         statutMax: {rang: 2, metalStatut: MetalStatut.or},
     },
+    confesseur : {
+        nom: metiersEnum.confesseur,
+        intitule: (_perso: Perso, carriere: Carriere) => metiersEnum.confesseur + " de " + carriere.employeur,
+        statut: {rang: 1, metalStatut: MetalStatut.or},
+        statutMax: {rang: 2, metalStatut: MetalStatut.or},
+    },
 }
 
 export type Carriere = {
     metier: Metier,
-    groupeLieu?: string, // ou et avec quel groupe ?
+    groupeLieu?: string, // ou ?
+    employeur?: string, // quel groupe ou employeur ?
     duree: number, // temps passé à pratiquer ce métier
-    competence: number // sur 100. 1 en débutant
+    competence: number, // sur 100. 1 en débutant
 }
 
 export const serveurDebutant: Carriere = {
