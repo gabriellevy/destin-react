@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {Box, Typography, Paper, Grid2} from '@mui/material';
 import {Perso} from "../types/Perso.ts";
-import {evts_ubersreik} from "../donnees/histoire/lieux/reikland/evts_ubersreik.ts";
+import {evts_ubersreik} from "../donnees/histoire/lieux/reikland/ubersreik/evts_ubersreik.ts";
 import {Evt, EvtExecute, filtrerEtPreparerEvts} from "../types/Evt.ts";
 import {jourStr, leTempsPasse} from "../types/Date.ts";
 import {evts_calendrier} from "../donnees/histoire/evts_calendrier.ts";
@@ -14,6 +14,7 @@ import {evts_ostermark} from "../donnees/histoire/lieux/evts_ostermark.ts";
 import {evts_stirland} from "../donnees/histoire/lieux/evts_stirland.ts";
 import {evts_crime} from "../donnees/histoire/carrieres/evts_crime.ts";
 import {evts_pretres} from "../donnees/histoire/carrieres/evts_pretres.ts";
+import {evts_ubersreik_nains} from "../donnees/histoire/lieux/reikland/ubersreik/evts_ubersreik_nains.ts";
 
 interface StoryProps {
     persoInitial: Perso;
@@ -58,6 +59,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
             // filtrer les evts non applicables
             const evtsApplicables: Evt[] = [
                 ...filtrerEtPreparerEvts(evts_ubersreik, perso),
+                ...filtrerEtPreparerEvts(evts_ubersreik_nains, perso),
                 ...filtrerEtPreparerEvts(evts_calendrier, perso),
                 ...filtrerEtPreparerEvts(evts_dunkelbild, perso),
                 ...filtrerEtPreparerEvts(evts_sylvanie, perso),

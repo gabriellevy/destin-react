@@ -1,14 +1,14 @@
-import {GroupeEvts} from "../../../../types/Evt.ts";
+import {GroupeEvts} from "../../../../../types/Evt.ts";
 import {
     aUneCarriere,
     Perso,
     suitUneCarriereDepuis
-} from "../../../../types/Perso.ts";
-import {Ville} from "../../../../types/lieux/Lieu.ts";
-import {age, JAHRDRUNG, KALDEZEIT, SIGMARZEIT, SOMMERZEIT} from "../../../../types/Date.ts";
-import {compareStatut, MetalStatut} from "../../../../types/Statut.ts";
-import {ResidenceDeVoyage} from "../../../../types/lieux/ResidenceDeVoyage.ts";
-import {metiersEnum, metiersObjs} from "../../../../types/metiers/metiers.ts";
+} from "../../../../../types/Perso.ts";
+import {Ville} from "../../../../../types/lieux/Lieu.ts";
+import {age, JAHRDRUNG, KALDEZEIT, SIGMARZEIT, SOMMERZEIT} from "../../../../../types/Date.ts";
+import {compareStatut, MetalStatut} from "../../../../../types/Statut.ts";
+import {ResidenceDeVoyage} from "../../../../../types/lieux/ResidenceDeVoyage.ts";
+import {metiersEnum, metiersObjs} from "../../../../../types/metiers/metiers.ts";
 
 export const evts_ubersreik: GroupeEvts = {
     evts: [
@@ -90,7 +90,7 @@ export const evts_ubersreik: GroupeEvts = {
             conditions: (perso: Perso): boolean => perso.lieu.ville === Ville.ubersreik
                 && compareStatut(perso.statut, {metalStatut: MetalStatut.argent, rang: 1})
                 && perso.lieu.enVoyage
-                && !perso.lieu.residenceVoyage,
+                && perso.lieu.residenceVoyage === null,
             proba: 100,
         },
         {
@@ -112,7 +112,7 @@ export const evts_ubersreik: GroupeEvts = {
                     duree: 0,
                     competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
                 });
-                perso.lieu.residenceVoyage = undefined;
+                perso.lieu.residenceVoyage = null;
                 perso.lieu.maison = ResidenceDeVoyage.auberge_de_la_maison_du_pont;
                 return "Vous avez réussi à vous trouver un travail de serveur à l'auberge de la maison du pont. " +
                 "C'est une auberge de qualité dans laquelle vous devriez être assez payé pour subvenir à vos besoins. " +

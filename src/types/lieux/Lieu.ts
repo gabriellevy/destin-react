@@ -1,31 +1,5 @@
 import {ResidenceDeVoyage} from "./ResidenceDeVoyage.ts";
 
-export type Lieu = {
-    pays?: Pays,
-    province?: Province,
-    sousProvince?: SousProvince,
-    sousSousProvince?: SousProvince,
-    ville?: Ville,
-    maison?: string,
-    enVoyage:boolean,
-    residenceVoyage?:ResidenceDeVoyage,
-};
-
-export const lieuParDefaut: Lieu = {
-    pays: Pays.empire,
-    province: Province.reikland,
-    sousProvince: SousProvince.ducheReikland,
-    ville: Ville.ubersreik,
-    enVoyage:false,
-};
-
-export const enVoyageAUbersreik: Lieu = {
-    pays: Pays.empire,
-    province: Province.reikland,
-    sousProvince: SousProvince.ducheReikland,
-    ville: Ville.ubersreik,
-    enVoyage:true,
-};
 
 export enum Pays {
     empire = 'empire',
@@ -42,10 +16,20 @@ export enum Province {
     stirland = 'Stirland',
 }
 
+export enum Ville {
+    ubersreik = 'Ubersreik',
+    altdorf = 'Altdorf',
+    dunkelbild = 'Dunkelbild',
+    waldenhof = 'Waldenhof',
+    heisenberg = 'Heisenberg',
+    halstedt = 'Halstedt',
+}
+
 export type Option = {
     value: string,
     label: string,
 }
+
 export const provinceOptions: Option[]= [
     { value: Province.reikland, label: Province.reikland},
     { value: Province.middenland, label: Province.middenland},
@@ -59,6 +43,37 @@ export const provinceOptions: Option[]= [
 export enum SousProvince {
     ducheReikland = "Duché d'Ubersreik",
 }
+
+export type Lieu = {
+    pays?: Pays,
+    province?: Province,
+    sousProvince?: SousProvince,
+    sousSousProvince?: SousProvince,
+    ville?: Ville,
+    maison: string|null,
+    enVoyage:boolean,
+    residenceVoyage:ResidenceDeVoyage|null,
+};
+
+export const lieuParDefaut: Lieu = {
+    pays: Pays.empire,
+    province: Province.reikland,
+    sousProvince: SousProvince.ducheReikland,
+    ville: Ville.ubersreik,
+    maison: null,
+    enVoyage:false,
+    residenceVoyage: null,
+};
+
+export const enVoyageAUbersreik: Lieu = {
+    pays: Pays.empire,
+    province: Province.reikland,
+    sousProvince: SousProvince.ducheReikland,
+    ville: Ville.ubersreik,
+    maison: null,
+    enVoyage:true,
+    residenceVoyage: null,
+};
 
 function toOption(ville: Ville): Option {
     return {
@@ -77,13 +92,4 @@ export function getVilles(provinceStr: string):Option[] {
         case Province.ostermark : return [];
         case Province.stirland : return [toOption(Ville.halstedt)];
     }
-}
-
-export enum Ville {
-    ubersreik = 'Ubersreik',
-    altdorf = 'Altdorf',
-    dunkelbild = 'Dunkelbild',
-    waldenhof = 'Waldenhof',
-    heisenberg = 'Heisenberg',
-    halstedt = 'Halstedt',
 }
