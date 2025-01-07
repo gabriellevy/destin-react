@@ -1,7 +1,7 @@
-import {GroupeEvts} from "../../../types/Evt.ts";
-import {Perso} from "../../../types/Perso.ts";
-import {Ville} from "../../../types/lieux/Lieu.ts";
-import {SIGMARZEIT} from "../../../types/Date.ts";
+import {GroupeEvts} from "../../../../types/Evt.ts";
+import {Perso} from "../../../../types/Perso.ts";
+import {Ville} from "../../../../types/lieux/Lieu.ts";
+import {SIGMARZEIT} from "../../../../types/Date.ts";
 
 export const evts_altdorf: GroupeEvts = {
     evts: [

@@ -10,7 +10,7 @@ import {
     Box,
     Typography, Paper, Grid2
 } from '@mui/material';
-import {Perso, Sexe, jeuneHommeEnVoyageAUbersreik} from "../types/Perso.ts";
+import {Perso, Sexe, nainEnVoyageAUbersreik} from "../types/Perso.ts";
 import {getVilles, Option, provinceOptions} from "../types/lieux/Lieu.ts";
 import {metalStatutOptions} from "../types/Statut.ts";
 
@@ -21,7 +21,7 @@ interface CharacterFormProps {
 
 export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFormProps) {
     const { control, watch, handleSubmit, formState: { errors }, reset } = useForm<Perso>({
-        defaultValues: jeuneHommeEnVoyageAUbersreik
+        defaultValues: nainEnVoyageAUbersreik
     });
 
     const provinceSelectionnee = watch("lieu.province");

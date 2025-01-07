@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import {Box, Typography, Paper, Grid2} from '@mui/material';
 import {Perso} from "../types/Perso.ts";
-import {evts_ubersreik} from "../donnees/histoire/lieux/evts_ubersreik.ts";
+import {evts_ubersreik} from "../donnees/histoire/lieux/reikland/evts_ubersreik.ts";
 import {Evt, EvtExecute, filtrerEtPreparerEvts} from "../types/Evt.ts";
 import {jourStr, leTempsPasse} from "../types/Date.ts";
 import {evts_calendrier} from "../donnees/histoire/evts_calendrier.ts";
 import {evts_dunkelbild} from "../donnees/histoire/lieux/evts_dunkelbild.ts";
 import {evts_sylvanie} from "../donnees/histoire/lieux/evts_sylvanie.ts";
 import {evts_wissenland} from "../donnees/histoire/lieux/evts_wissenland.ts";
-import {evts_altdorf} from "../donnees/histoire/lieux/evts_altdorf.ts";
+import {evts_altdorf} from "../donnees/histoire/lieux/reikland/evts_altdorf.ts";
 import {evts_talabecland} from "../donnees/histoire/lieux/evts_talabecland.ts";
 import {evts_ostermark} from "../donnees/histoire/lieux/evts_ostermark.ts";
 import {evts_stirland} from "../donnees/histoire/lieux/evts_stirland.ts";
