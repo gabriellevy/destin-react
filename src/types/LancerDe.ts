@@ -1,4 +1,4 @@
-import {Carac} from "./caracs/Caracs.ts";
+import {TypeCarac} from "./caracs/Caracs.ts";
 
 export type ResultatTest = {
     reussi: boolean,
@@ -7,6 +7,6 @@ export type ResultatTest = {
 }
 
 export type TestCarac = {
-    carac: Carac,
+    carac: TypeCarac,
     bonusMalus: number,
 }

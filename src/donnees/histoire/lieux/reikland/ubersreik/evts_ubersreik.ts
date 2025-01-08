@@ -107,7 +107,7 @@ export const evts_ubersreik: GroupeEvts = {
             description: (perso: Perso): string => {
                 // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
                 perso.carriere.push({
-                    metier: metiersObjs.serveur,
+                    metier: metiersObjs[metiersEnum.serveur],
                     groupeLieu: "Auberge de la maison du pont",
                     duree: 0,
                     competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
@@ -129,7 +129,7 @@ export const evts_ubersreik: GroupeEvts = {
 
                 // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
                 perso.carriere.push({
-                    metier: metiersObjs.confesseur,
+                    metier: metiersObjs[metiersEnum.confesseur],
                     groupeLieu: "la famille Jungfreud",
                     duree: 0,
                     competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part

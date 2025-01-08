@@ -10,7 +10,7 @@ export const evts_crime: GroupeEvts = {
                 description: (perso: Perso): string => {
             // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
             perso.carriere.push({
-                metier: metiersObjs.ranconneur,
+                metier: metiersObjs[metiersEnum.ranconneur],
                 groupeLieu: undefined,
                 duree: 0,
                 competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part

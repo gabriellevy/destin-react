@@ -2,11 +2,16 @@ import {d10} from "../../fonctions/des.ts";
 import {Perso} from "../Perso.ts";
 import {Race} from "../../donnees/races/Races.ts";
 
+export type Carac = {
+    val: number,
+    nbDeTestsFaits: number,
+    typeCarac: TypeCarac,
+}
 
-export function caracDeDepartAleatoire(carac: Carac, race: Race): number {
+export function caracDeDepartAleatoire(carac: TypeCarac, race: Race): number {
     let baseValue: number = 20;
     switch(carac) {
-        case Carac.cc : {
+        case TypeCarac.cc : {
             switch (race) {
                 case Race.humain: baseValue = 20; break;
                 case Race.nain: baseValue = 30; break;
@@ -16,7 +21,7 @@ export function caracDeDepartAleatoire(carac: Carac, race: Race): number {
                     baseValue = 30; break;
             }
         } break;
-        case Carac.ct : {
+        case TypeCarac.ct : {
             switch (race) {
                 case Race.humain: baseValue = 20; break;
                 case Race.nain: baseValue = 20; break;
@@ -26,7 +31,7 @@ export function caracDeDepartAleatoire(carac: Carac, race: Race): number {
                     baseValue = 30; break;
             }
         } break;
-        case Carac.f : {
+        case TypeCarac.f : {
             switch (race) {
                 case Race.humain: baseValue = 20; break;
                 case Race.nain: baseValue = 20; break;
@@ -36,7 +41,7 @@ export function caracDeDepartAleatoire(carac: Carac, race: Race): number {
                     baseValue = 20; break;
             }
         } break;
-        case Carac.e : {
+        case TypeCarac.e : {
             switch (race) {
                 case Race.humain: baseValue = 20; break;
                 case Race.nain: baseValue = 30; break;
@@ -46,7 +51,7 @@ export function caracDeDepartAleatoire(carac: Carac, race: Race): number {
                     baseValue = 20; break;
             }
         } break;
-        case Carac.i : {
+        case TypeCarac.i : {
             switch (race) {
                 case Race.humain: baseValue = 20; break;
                 case Race.nain: baseValue = 20; break;
@@ -56,7 +61,7 @@ export function caracDeDepartAleatoire(carac: Carac, race: Race): number {
                     baseValue = 40; break;
             }
         } break;
-        case Carac.ag : {
+        case TypeCarac.ag : {
             switch (race) {
                 case Race.humain: baseValue = 20; break;
                 case Race.nain: baseValue = 10; break;
@@ -66,7 +71,7 @@ export function caracDeDepartAleatoire(carac: Carac, race: Race): number {
                     baseValue = 30; break;
             }
         } break;
-        case Carac.dex : {
+        case TypeCarac.dex : {
             switch (race) {
                 case Race.humain: baseValue = 20; break;
                 case Race.nain: baseValue = 30; break;
@@ -76,7 +81,7 @@ export function caracDeDepartAleatoire(carac: Carac, race: Race): number {
                     baseValue = 30; break;
             }
         } break;
-        case Carac.int : {
+        case TypeCarac.int : {
             switch (race) {
                 case Race.humain: baseValue = 20; break;
                 case Race.nain: baseValue = 20; break;
@@ -86,7 +91,7 @@ export function caracDeDepartAleatoire(carac: Carac, race: Race): number {
                     baseValue = 30; break;
             }
         } break;
-        case Carac.fm : {
+        case TypeCarac.fm : {
             switch (race) {
                 case Race.humain: baseValue = 20; break;
                 case Race.nain: baseValue = 40; break;
@@ -96,7 +101,7 @@ export function caracDeDepartAleatoire(carac: Carac, race: Race): number {
                     baseValue = 30; break;
             }
         } break;
-        case Carac.soc : {
+        case TypeCarac.soc : {
             switch (race) {
                 case Race.humain: baseValue = 20; break;
                 case Race.nain: baseValue = 10; break;
@@ -110,7 +115,7 @@ export function caracDeDepartAleatoire(carac: Carac, race: Race): number {
     return baseValue + d10() + d10();
 }
 
-export enum Carac {
+export enum TypeCarac {
     cc = "CC",
     ct = "CT",
     f = "F",
@@ -123,18 +128,44 @@ export enum Carac {
     soc = "Soc",
 }
 
-export function getCaracValue(perso: Perso, carac: Carac): number {
+export function getCaracValue(perso: Perso, carac: TypeCarac): number {
     switch (carac) {
-        case Carac.cc: return perso.cc;
-        case Carac.ct: return perso.ct;
-        case Carac.f: return perso.f;
-        case Carac.e: return perso.e;
-        case Carac.i: return perso.i;
-        case Carac.ag: return perso.ag;
-        case Carac.dex: return perso.dex;
-        case Carac.int: return perso.int;
-        case Carac.fm: return perso.fm;
-        case Carac.soc: return perso.soc;
+        case TypeCarac.cc:
+            return perso.cc.val;
+        case TypeCarac.ct:
+            return perso.ct.val;
+        case TypeCarac.f:
+            return perso.f.val;
+        case TypeCarac.e:
+            return perso.e.val;
+        case TypeCarac.i:
+            return perso.i.val;
+        case TypeCarac.ag:
+            return perso.ag.val;
+        case TypeCarac.dex:
+            return perso.dex.val;
+        case TypeCarac.int:
+            return perso.int.val;
+        case TypeCarac.fm:
+            return perso.fm.val;
+        case TypeCarac.soc:
+            return perso.soc.val;
     }
     return -1;
+}
+
+// TODO : passage au seuil du dessus
+export function augmenterNbDeTestsFaits(perso: Perso, carac: TypeCarac): void {
+    switch (carac) {
+        case TypeCarac.cc: perso.cc.nbDeTestsFaits += 1; break;
+        case TypeCarac.ct: perso.ct.nbDeTestsFaits += 1; break;
+        case TypeCarac.f: perso.f.nbDeTestsFaits += 1; break;
+        case TypeCarac.e: perso.e.nbDeTestsFaits += 1; break;
+        case TypeCarac.i: perso.i.nbDeTestsFaits += 1; break;
+        case TypeCarac.ag: perso.ag.nbDeTestsFaits += 1; break;
+        case TypeCarac.dex: perso.dex.nbDeTestsFaits += 1; break;
+        case TypeCarac.int: perso.int.nbDeTestsFaits += 1; break;
+        case TypeCarac.fm: perso.fm.nbDeTestsFaits += 1; break;
+        case TypeCarac.soc: perso.soc.nbDeTestsFaits += 1; break;
+    }
 }

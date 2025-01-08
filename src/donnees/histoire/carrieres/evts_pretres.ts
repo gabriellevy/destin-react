@@ -5,7 +5,7 @@ import {dieuAleatoire} from "../../dieux/dieux.ts";
 import {Dieu} from "../../../types/Dieu.ts";
 import {ResultatTest} from "../../../types/LancerDe.ts";
 import {testCarac} from "../../../fonctions/des.ts";
-import {Carac} from "../../../types/caracs/Caracs.ts";
+import {TypeCarac} from "../../../types/caracs/Caracs.ts";
 import {talents} from "../../talents.ts";
 
 export const evts_pretres: GroupeEvts = {
@@ -15,12 +15,12 @@ export const evts_pretres: GroupeEvts = {
             description: (perso: Perso): string => {
                 const dieu:Dieu = dieuAleatoire();
                 let texte: string = `Un jour où vous entrez dans le temple de ${dieu.id} il vous semble sentir sa présence. Une mise à l'épreuve peut-être ? `
-                const resTest:ResultatTest = testCarac(perso, {carac: Carac.fm, bonusMalus: 20});
+                const resTest:ResultatTest = testCarac(perso, {carac: TypeCarac.fm, bonusMalus: 20});
                 texte += resTest.resume;
                 if (resTest.reussi) {
-                    let metier: Metier = metiersObjs.initie_pretre;
+                    let metier: Metier = metiersObjs[metiersEnum.initie_pretre];
                     if (Math.random() > 0.5) {
-                        metier = metiersObjs.novice;
+                        metier = metiersObjs[metiersEnum.novice];
                     }
                     // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
                     perso.carriere = [{

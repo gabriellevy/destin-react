@@ -12,36 +12,59 @@ export enum metiersEnum {
     moine = "Moine",
     initie_pretre = "Initié prêtre",
     pretre = "Prêtre",
-    confesseur = "Confesseur", // sorte de prêtre cofesseur spécialisé associé à une famille riche
+    confesseur = "Confesseur", // sorte de prêtre confesseur spécialisé associé à une famille riche
+    etudiant_ingenieur = "Étudiant ingénieur",
+    ingenieur = "Ingénieur",
 }
 
-export const metiersObjs: Record<string, Metier> = {
+export type Metier = {
+    nom: metiersEnum,
+    statut: Statut,
+    statutMax: Statut,
+    intitule: (perso: Perso,carriere: Carriere) => string,
+}
+
+export type MetierObj = Record<metiersEnum, Metier>;
+
+export const metiersObjs: MetierObj = {
     // citadins
-    pamphletaire : {
+    [metiersEnum.pamphletaire] : {
         nom: metiersEnum.pamphletaire,
         intitule: () => metiersEnum.pamphletaire,
         statut: {rang: 1, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 5, metalStatut: MetalStatut.bronze},
     },
-    apprenti_artisan : {
+    [metiersEnum.apprenti_artisan] : {
         nom: metiersEnum.apprenti_artisan,
         intitule: () => metiersEnum.apprenti_artisan,
         statut: {rang: 2, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 5, metalStatut: MetalStatut.bronze},
     },
-    artisan : {
+    [metiersEnum.artisan] : {
         nom: metiersEnum.artisan,
         intitule: () => metiersEnum.artisan,
         statut: {rang: 1, metalStatut: MetalStatut.argent},
         statutMax: {rang: 4, metalStatut: MetalStatut.argent},
     },
-    maitre_de_guilde : {
+    [metiersEnum.etudiant_ingenieur] : {
+        nom: metiersEnum.etudiant_ingenieur,
+        intitule: () => metiersEnum.etudiant_ingenieur,
+        statut: {rang: 2, metalStatut: MetalStatut.bronze},
+        statutMax: {rang: 5, metalStatut: MetalStatut.bronze},
+    },
+    [metiersEnum.ingenieur] : {
+        nom: metiersEnum.ingenieur,
+        intitule: () => metiersEnum.ingenieur,
+        statut: {rang: 2, metalStatut: MetalStatut.argent},
+        statutMax: {rang: 2, metalStatut: MetalStatut.or},
+    },
+    [metiersEnum.maitre_de_guilde] : {
         nom: metiersEnum.maitre_de_guilde,
         intitule: () => metiersEnum.maitre_de_guilde,
         statut: {rang: 1, metalStatut: MetalStatut.or},
         statutMax: {rang: 2, metalStatut: MetalStatut.or},
     },
-    serveur : {
+    [metiersEnum.serveur] : {
         nom: metiersEnum.serveur,
         intitule: (_perso: Perso, carriere: Carriere) => {
             return metiersEnum.serveur + " à " + carriere?.groupeLieu;
@@ -49,13 +72,13 @@ export const metiersObjs: Record<string, Metier> = {
         statut: {rang: 2, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 2, metalStatut: MetalStatut.argent},
     },
-    ranconneur : {
+    [metiersEnum.ranconneur] : {
         nom: metiersEnum.ranconneur,
         intitule: () => metiersEnum.ranconneur,
         statut: {rang: 3, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 5, metalStatut: MetalStatut.argent},
     },
-    novice : {
+    [metiersEnum.novice] : {
         nom: metiersEnum.novice,
         intitule: (perso: Perso) => {
             return metiersEnum.novice + " de " + perso.dieu.id;
@@ -63,25 +86,25 @@ export const metiersObjs: Record<string, Metier> = {
         statut: {rang: 1, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 2, metalStatut: MetalStatut.bronze},
     },
-    initie_pretre : {
+    [metiersEnum.initie_pretre] : {
         nom: metiersEnum.initie_pretre,
         intitule: (perso: Perso) => metiersEnum.initie_pretre + " de " + perso.dieu.id,
         statut: {rang: 2, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 4, metalStatut: MetalStatut.bronze},
     },
-    moine : {
+    [metiersEnum.moine] : {
         nom: metiersEnum.moine,
         intitule: (perso: Perso) => metiersEnum.moine + " de " + perso.dieu.id,
         statut: {rang: 4, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 5, metalStatut: MetalStatut.argent},
     },
-    pretre : {
+    [metiersEnum.pretre] : {
         nom: metiersEnum.pretre,
         intitule: (perso: Perso) => metiersEnum.pretre + " de " + perso.dieu.id,
         statut: {rang: 1, metalStatut: MetalStatut.argent},
         statutMax: {rang: 2, metalStatut: MetalStatut.or},
     },
-    confesseur : {
+    [metiersEnum.confesseur] : {
         nom: metiersEnum.confesseur,
         intitule: (_perso: Perso, carriere: Carriere) => metiersEnum.confesseur + " de " + carriere.employeur,
         statut: {rang: 1, metalStatut: MetalStatut.or},
@@ -98,15 +121,8 @@ export type Carriere = {
 }
 
 export const serveurDebutant: Carriere = {
-    metier: metiersObjs.serveur,
+    metier: metiersObjs[metiersEnum.serveur],
     groupeLieu: "Auberge du pont",
     duree: 0,
     competence: 1,
 };
-
-export type Metier = {
-    nom: metiersEnum,
-    statut: Statut,
-    statutMax: Statut,
-    intitule: (perso: Perso,carriere: Carriere) => string,
-}
