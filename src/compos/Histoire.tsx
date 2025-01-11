@@ -127,8 +127,10 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                         </Grid2>
                     )}
                     <Grid2 size={evt.image ? 8 : 12}>
-                        <Typography mb={1} align="left">{evt.dateStr}</Typography>
-                        <Typography mb={2} align="left">{evt.texteFinal}</Typography>
+                        <Typography mb={1} align="left" sx={{ fontSize: 18 }}>{evt.dateStr}</Typography>
+                        <Typography mb={2} align="left">
+                            <span dangerouslySetInnerHTML={{ __html: evt.texteFinal}} />
+                        </Typography>
                     </Grid2>
                 </Grid2>
             ))}

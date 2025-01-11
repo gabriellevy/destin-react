@@ -15,10 +15,12 @@ export function testCarac(perso: Perso, test: TestCarac): ResultatTest {
     const texteAugmentation: string = augmenterNbDeTestsFaits(perso, test.carac);
     const resDe: number = d100();
     const reussi: boolean = resDe <= (caracValue + test.bonusMalus);
-    const texte: string = `Test de ${test.carac} `
+    const texte: string = "<i>Test de "
+        + test.carac + " "
         + (reussi ? "réussi" : "raté")
         + ` (résultat ${resDe} contre compétence ${caracValue} ${test.bonusMalus > 0 ? "+" : ""} ${test.bonusMalus} ) `
-        + texteAugmentation;
+        + texteAugmentation
+        + "</i><br/>";
     return {
         reussi : reussi,
         critical: resDe % 10 == Math.floor(resDe / 10) || resDe === 100,
