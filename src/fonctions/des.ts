@@ -12,13 +12,13 @@ export function d100(): number {
 export function testCarac(perso: Perso, test: TestCarac): ResultatTest {
     const caracValue: number = getCaracValue(perso, test.carac);
     // augmenter tests effectués :
-    augmenterNbDeTestsFaits(perso, test.carac);
+    const texteAugmentation: string = augmenterNbDeTestsFaits(perso, test.carac);
     const resDe: number = d100();
     const reussi: boolean = resDe <= (caracValue + test.bonusMalus);
     const texte: string = `Test de ${test.carac} `
         + (reussi ? "réussi" : "raté")
-        + ` (résultat ${resDe} contre compétence ${caracValue} ${test.bonusMalus > 0 ? "+" : ""} ${test.bonusMalus} ) `;
-
+        + ` (résultat ${resDe} contre compétence ${caracValue} ${test.bonusMalus > 0 ? "+" : ""} ${test.bonusMalus} ) `
+        + texteAugmentation;
     return {
         reussi : reussi,
         critical: resDe % 10 == Math.floor(resDe / 10) || resDe === 100,

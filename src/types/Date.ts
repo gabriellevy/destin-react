@@ -126,6 +126,9 @@ export function leTempsPasse(perso: Perso):Perso {
         carriere.duree = carriere.duree + joursAAjouter;
     });
 
+    // vérifier toutes les dates au cas où un evt "forcé" devrait avoir lieu ici avant
+
+
     console.debug("date en jours : " + perso.date);
     // console.debug("nouvMoisStr : " + nouvMoisStr);
     return { ...perso,

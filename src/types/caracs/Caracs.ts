@@ -129,43 +129,37 @@ export enum TypeCarac {
 }
 
 export function getCaracValue(perso: Perso, carac: TypeCarac): number {
-    switch (carac) {
-        case TypeCarac.cc:
-            return perso.cc.val;
-        case TypeCarac.ct:
-            return perso.ct.val;
-        case TypeCarac.f:
-            return perso.f.val;
-        case TypeCarac.e:
-            return perso.e.val;
-        case TypeCarac.i:
-            return perso.i.val;
-        case TypeCarac.ag:
-            return perso.ag.val;
-        case TypeCarac.dex:
-            return perso.dex.val;
-        case TypeCarac.int:
-            return perso.int.val;
-        case TypeCarac.fm:
-            return perso.fm.val;
-        case TypeCarac.soc:
-            return perso.soc.val;
-    }
-    return -1;
+    return perso?.caracs?.get(carac?.toString())?.val || -1;
 }
 
-// TODO : passage au seuil du dessus
-export function augmenterNbDeTestsFaits(perso: Perso, carac: TypeCarac): void {
-    switch (carac) {
-        case TypeCarac.cc: perso.cc.nbDeTestsFaits += 1; break;
-        case TypeCarac.ct: perso.ct.nbDeTestsFaits += 1; break;
-        case TypeCarac.f: perso.f.nbDeTestsFaits += 1; break;
-        case TypeCarac.e: perso.e.nbDeTestsFaits += 1; break;
-        case TypeCarac.i: perso.i.nbDeTestsFaits += 1; break;
-        case TypeCarac.ag: perso.ag.nbDeTestsFaits += 1; break;
-        case TypeCarac.dex: perso.dex.nbDeTestsFaits += 1; break;
-        case TypeCarac.int: perso.int.nbDeTestsFaits += 1; break;
-        case TypeCarac.fm: perso.fm.nbDeTestsFaits += 1; break;
-        case TypeCarac.soc: perso.soc.nbDeTestsFaits += 1; break;
+export function getCaracNbDeTestsFaits(perso: Perso, carac: TypeCarac): number {
+    return perso?.caracs?.get(carac?.toString())?.nbDeTestsFaits || 0;
+}
+
+// seuils de progression des caracs (en nombres de tests sur ces caracs)
+// limite à +25 ??
+const seuils: number[] = [
+    3,
+    7,
+    15,
+    31,
+    63,
+    127,
+    255,
+];
+
+export function augmenterNbDeTestsFaits(perso: Perso, typeCarac: TypeCarac): string {
+    const carac: Carac | undefined = perso.caracs.get(typeCarac);
+    if (carac !== undefined) {
+        const nbTests: number = carac.nbDeTestsFaits + 1;
+        carac.nbDeTestsFaits = nbTests;
+        if (seuils.includes(nbTests)) {
+            // gain d'un point de compétence :
+            if (carac) {
+                carac.val += 1;
+                return "+1 en " + carac.typeCarac.toString() + ". ";
+            }
+        }
     }
+    return "";
 }

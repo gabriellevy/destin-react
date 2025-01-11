@@ -1,4 +1,4 @@
-import {aUneCarriere, Perso} from "../../../types/Perso.ts";
+import {aUneCarriere, Perso, suitUneCarriereDe} from "../../../types/Perso.ts";
 import {metiersEnum, metiersObjs} from "../../../types/metiers/metiers.ts";
 import {GroupeEvts} from "../../../types/Evt.ts";
 import {compareStatut, MetalStatut} from "../../../types/Statut.ts";
@@ -34,6 +34,25 @@ export const evts_ingenieur: GroupeEvts = {
                 !aUneCarriere(perso)
                 && !compareStatut(perso.statut, {metalStatut: MetalStatut.argent, rang: 3}),
             proba: 5,
+        },
+        {
+            id: "evts_ingenieur2",
+            description: (perso: Perso): string => {
+                let texte: string = "";
+                const resTestInt:ResultatTest = testCarac(perso, {carac: TypeCarac.int, bonusMalus: 40});
+                const resTestDex:ResultatTest = testCarac(perso, {carac: TypeCarac.dex, bonusMalus: 40});
+                texte += resTestInt.resume;
+                texte += resTestDex.resume;
+                if (resTestInt.reussi && resTestDex.reussi) {
+                    texte += `Vous travaillez dur et progressez rapidement. Vous serez bientôt un ingénieur de talent, c'est sûr. `;
+                } else {
+                    texte += `Vos notes sont basses, vous avez le sentiment de ne pas progresser, mais refusez d'abandonner. `;
+                }
+                return texte;
+            },
+            conditions: (perso: Perso): boolean =>
+                suitUneCarriereDe(perso, metiersEnum.etudiant_ingenieur),
+            proba: 1,
         },
     ],
     probaParDefaut: 10,

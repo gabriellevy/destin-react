@@ -6,6 +6,7 @@ import {Dieu} from "./Dieu.ts";
 import {Carac, caracDeDepartAleatoire, TypeCarac} from "./caracs/Caracs.ts";
 import {talents} from "../donnees/talents.ts";
 import {Race} from "../donnees/races/Races.ts";
+import {Evt} from "./Evt.ts";
 
 export type Perso = {
     nom: string;
@@ -14,23 +15,16 @@ export type Perso = {
     date: number, // en nombre de jours depuis l'an 0 du calendrier impérial
     lieu: Lieu,
     race: Race,
-    // aide à la programmation mais aps à afficher directement :
+    // aide à la programmation mais pas à afficher directement :
     mois?: string, // déduit de date mais pratique pour optimiser les calculs de conditions en masse
     jourDuMois: number, // déduit de date mais pratique pour optimiser les calculs de conditions en masse
     statut: Statut;
     carriere: Carriere[],
-    dieu: Dieu, // surtout utile si affilié à un temple (ou très très croyant en un dieu particulier)
-    cc: Carac,
-    ct: Carac,
-    f: Carac,
-    e: Carac,
-    i: Carac,
-    ag: Carac,
-    dex: Carac,
-    int: Carac,
-    fm: Carac,
-    soc: Carac,
+    // surtout utile si affilié à un temple (ou très très croyant en un dieu particulier)
+    dieu: Dieu,
+    caracs: Map<string, Carac>,
     talents: talents[],
+    evtsProgrammes?: Map<number, (perso: Perso)=>Evt>
 };
 
 export function aUneCarriere(perso: Perso): boolean {
@@ -56,11 +50,13 @@ export function neSuitPasUneCarriereDe(perso: Perso, metier: metiersEnum): boole
 }
 export function suitUneCarriereDepuis(perso: Perso, metier: metiersEnum, duree: number): boolean {
     let trouve: boolean = false;
-    perso.carriere.forEach(carriere => {
-        if (carriere.metier.nom === metier && carriere.duree >= duree) {
-            trouve = true;
-        }
-    });
+    if (perso.carriere) {
+        perso.carriere.forEach(carriere => {
+            if (carriere.metier.nom === metier && carriere.duree >= duree) {
+                trouve = true;
+            }
+        });
+    }
     return trouve;
 }
 
@@ -68,6 +64,59 @@ export enum Sexe {
     male = 'Mâle',
     femelle = 'Femelle',
 }
+
+export const caracsDeBase = (race: Race) => new Map<string, Carac>([
+    [TypeCarac.cc, {
+        val: caracDeDepartAleatoire(TypeCarac.cc, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.cc,
+    }],
+    [TypeCarac.ct, {
+        val: caracDeDepartAleatoire(TypeCarac.ct, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.ct,
+    }],
+    [TypeCarac.f, {
+        val: caracDeDepartAleatoire(TypeCarac.f, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.f,
+    }],
+    [TypeCarac.e, {
+        val: caracDeDepartAleatoire(TypeCarac.e, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.e,
+    }],
+    [TypeCarac.i, {
+        val: caracDeDepartAleatoire(TypeCarac.i, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.i,
+    }],
+    [TypeCarac.ag, {
+        val: caracDeDepartAleatoire(TypeCarac.ag, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.ag,
+    }],
+    [TypeCarac.dex, {
+        val: caracDeDepartAleatoire(TypeCarac.dex, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.dex,
+    }],
+    [TypeCarac.int, {
+        val: caracDeDepartAleatoire(TypeCarac.int, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.int,
+    }],
+    [TypeCarac.fm, {
+        val: caracDeDepartAleatoire(TypeCarac.fm, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.fm,
+    }],
+    [TypeCarac.soc, {
+        val: caracDeDepartAleatoire(TypeCarac.soc, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.soc,
+    }],
+]);
 
 export const enfant: Perso = {
     nom: "Wilhelm Hinderten",
@@ -79,56 +128,7 @@ export const enfant: Perso = {
     lieu: lieuParDefaut,
     statut: {rang: 4, metalStatut: MetalStatut.bronze},
     carriere: [],
-    cc: {
-        val: caracDeDepartAleatoire(TypeCarac.cc, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.cc,
-    },
-    ct: {
-        val: caracDeDepartAleatoire(TypeCarac.ct, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.ct,
-    },
-    f: {
-        val: caracDeDepartAleatoire(TypeCarac.f, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.f,
-    },
-    e: {
-        val: caracDeDepartAleatoire(TypeCarac.e, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.e,
-    },
-    i: {
-        val: caracDeDepartAleatoire(TypeCarac.i, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.i,
-    },
-    ag: {
-        val: caracDeDepartAleatoire(TypeCarac.ag, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.ag,
-    },
-    dex: {
-        val: caracDeDepartAleatoire(TypeCarac.dex, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.dex,
-    },
-    int: {
-        val: caracDeDepartAleatoire(TypeCarac.int, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.int,
-    },
-    fm: {
-        val: caracDeDepartAleatoire(TypeCarac.fm, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.fm,
-    },
-    soc: {
-        val: caracDeDepartAleatoire(TypeCarac.soc, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.soc,
-    },
+    caracs: caracsDeBase(Race.humain),
     talents: [],
     dieu: {id: "panthéon de l'empire"}
 };
@@ -143,56 +143,7 @@ export const jeuneHommeEnVoyageAUbersreik: Perso = {
     lieu: enVoyageAUbersreik,
     statut: {rang: 2, metalStatut: MetalStatut.argent},
     carriere: [],
-    cc: {
-        val: caracDeDepartAleatoire(TypeCarac.cc, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.cc,
-    },
-    ct: {
-        val: caracDeDepartAleatoire(TypeCarac.ct, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.ct,
-    },
-    f: {
-        val: caracDeDepartAleatoire(TypeCarac.f, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.f,
-    },
-    e: {
-        val: caracDeDepartAleatoire(TypeCarac.e, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.e,
-    },
-    i: {
-        val: caracDeDepartAleatoire(TypeCarac.i, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.i,
-    },
-    ag: {
-        val: caracDeDepartAleatoire(TypeCarac.ag, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.ag,
-    },
-    dex: {
-        val: caracDeDepartAleatoire(TypeCarac.dex, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.dex,
-    },
-    int: {
-        val: caracDeDepartAleatoire(TypeCarac.int, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.int,
-    },
-    fm: {
-        val: caracDeDepartAleatoire(TypeCarac.fm, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.fm,
-    },
-    soc: {
-        val: caracDeDepartAleatoire(TypeCarac.soc, Race.humain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.soc,
-    },
+    caracs: caracsDeBase(Race.humain),
     talents: [],
     dieu: {id: "panthéon de l'empire"}
 };
@@ -207,56 +158,7 @@ export const nainEnVoyageAUbersreik: Perso = {
     lieu: enVoyageAUbersreik,
     statut: {rang: 2, metalStatut: MetalStatut.argent},
     carriere: [],
-    cc: {
-        val: caracDeDepartAleatoire(TypeCarac.cc, Race.nain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.cc,
-    },
-    ct: {
-        val: caracDeDepartAleatoire(TypeCarac.ct, Race.nain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.ct,
-    },
-    f: {
-        val: caracDeDepartAleatoire(TypeCarac.f, Race.nain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.f,
-    },
-    e: {
-        val: caracDeDepartAleatoire(TypeCarac.e, Race.nain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.e,
-    },
-    i: {
-        val: caracDeDepartAleatoire(TypeCarac.i, Race.nain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.i,
-    },
-    ag: {
-        val: caracDeDepartAleatoire(TypeCarac.ag, Race.nain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.ag,
-    },
-    dex: {
-        val: caracDeDepartAleatoire(TypeCarac.dex, Race.nain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.dex,
-    },
-    int: {
-        val: caracDeDepartAleatoire(TypeCarac.int, Race.nain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.int,
-    },
-    fm: {
-        val: caracDeDepartAleatoire(TypeCarac.fm, Race.nain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.fm,
-    },
-    soc: {
-        val: caracDeDepartAleatoire(TypeCarac.soc, Race.nain),
-        nbDeTestsFaits: 0,
-        typeCarac: TypeCarac.soc,
-    },
+    caracs: caracsDeBase(Race.nain),
     talents: [],
     dieu: {id: "panthéon nain"}
 };

@@ -2,12 +2,15 @@ import {aUneCarriere, Perso, suitUneCarriereDe, suitUneCarriereDepuis} from "../
 import {metiersEnum, metiersObjs} from "../../../types/metiers/metiers.ts";
 import {GroupeEvts} from "../../../types/Evt.ts";
 import {compareStatut, MetalStatut} from "../../../types/Statut.ts";
+import {ResultatTest} from "../../../types/LancerDe.ts";
+import {testCarac} from "../../../fonctions/des.ts";
+import {TypeCarac} from "../../../types/caracs/Caracs.ts";
 
 export const evts_crime: GroupeEvts = {
     evts: [
         {
             id: "evts_crime1",
-                description: (perso: Perso): string => {
+            description: (perso: Perso): string => {
             // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
             perso.carriere.push({
                 metier: metiersObjs[metiersEnum.ranconneur],
@@ -15,6 +18,7 @@ export const evts_crime: GroupeEvts = {
                 duree: 0,
                 competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
             });
+
             return "À force de trainer parmi les vauriens vous vous êtes intégré à leur bande et commencez à participer à leurs sales coups. " +
                 "Aujourd'hui vous les avez aidés à extorquer de l'argent à un commerçant. "
         },
@@ -23,8 +27,18 @@ export const evts_crime: GroupeEvts = {
         },
         {
             id: "evts_crime2",
-                description: (): string =>  "Vous prenez un mauvais coup de couteau lors d'une des nombreuses bagarres de votre carrière de malandrin. " +
-                "Vous aurez une vilaine cicatrice près de l'oeil jusqu'à la fin de vos jours en souvenir. ",
+            description: (perso: Perso): string =>  {
+                let texte: string = "";
+                const resTestCC:ResultatTest = testCarac(perso, {carac: TypeCarac.cc, bonusMalus: 0});
+                texte += resTestCC.resume;
+                if (resTestCC.reussi) {
+                    texte += "Bagarre après bagarre, vous vous faites remarquer dans la bande pour votre efficacité au combat. ";
+                } else {
+                    texte += "Vous prenez un mauvais coup de couteau lors d'une des nombreuses bagarres de votre carrière de malandrin. " +
+                    "Vous aurez une vilaine cicatrice près de l'oeil jusqu'à la fin de vos jours en souvenir. ";
+                }
+                return texte;
+            },
             conditions: (perso: Perso): boolean => suitUneCarriereDe(perso, metiersEnum.ranconneur),
             proba: 5,
         },

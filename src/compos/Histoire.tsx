@@ -45,10 +45,6 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                 nouvEvt
             ]);
 
-            if (evtExecute.effets) {
-                perso = evtExecute.effets(perso);
-            }
-
             onCharacterUpdate(perso);
         }
 
