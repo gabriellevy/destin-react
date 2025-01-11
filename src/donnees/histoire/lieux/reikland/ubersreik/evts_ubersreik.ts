@@ -85,7 +85,7 @@ export const evts_ubersreik: GroupeEvts = {
             description: (perso: Perso): string => {
                 perso.lieu.residenceVoyage = ResidenceDeVoyage.auberge_de_la_maison_du_pont;
                 return "De passage à ubersreik et sans logement vous décidez de vous installer à l'auberge de la maison du pont. " +
-                "Elle est idéalement située en plein centre d'Ubersreik et offre une super vue sur le grand pont construit par les nains. ";
+                    "Elle est idéalement située en plein centre d'Ubersreik et offre une superbe vue sur le grand pont construit par les nains. ";
             },
             conditions: (perso: Perso): boolean => perso.lieu.ville === Ville.ubersreik
                 && compareStatut(perso.statut, {metalStatut: MetalStatut.argent, rang: 1})

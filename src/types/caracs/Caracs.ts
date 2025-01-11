@@ -164,3 +164,56 @@ export function augmenterNbDeTestsFaits(perso: Perso, typeCarac: TypeCarac): str
     }
     return "";
 }
+
+export const caracsDeBase = (race: Race) => new Map<string, Carac>([
+    [TypeCarac.cc, {
+        val: caracDeDepartAleatoire(TypeCarac.cc, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.cc,
+    }],
+    [TypeCarac.ct, {
+        val: caracDeDepartAleatoire(TypeCarac.ct, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.ct,
+    }],
+    [TypeCarac.f, {
+        val: caracDeDepartAleatoire(TypeCarac.f, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.f,
+    }],
+    [TypeCarac.e, {
+        val: caracDeDepartAleatoire(TypeCarac.e, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.e,
+    }],
+    [TypeCarac.i, {
+        val: caracDeDepartAleatoire(TypeCarac.i, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.i,
+    }],
+    [TypeCarac.ag, {
+        val: caracDeDepartAleatoire(TypeCarac.ag, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.ag,
+    }],
+    [TypeCarac.dex, {
+        val: caracDeDepartAleatoire(TypeCarac.dex, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.dex,
+    }],
+    [TypeCarac.int, {
+        val: caracDeDepartAleatoire(TypeCarac.int, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.int,
+    }],
+    [TypeCarac.fm, {
+        val: caracDeDepartAleatoire(TypeCarac.fm, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.fm,
+    }],
+    [TypeCarac.soc, {
+        val: caracDeDepartAleatoire(TypeCarac.soc, race),
+        nbDeTestsFaits: 0,
+        typeCarac: TypeCarac.soc,
+    }],
+]);
