@@ -15,6 +15,7 @@ export enum metiersEnum {
     confesseur = "Confesseur", // sorte de prêtre confesseur spécialisé associé à une famille riche
     etudiant_ingenieur = "Étudiant ingénieur",
     ingenieur = "Ingénieur",
+    batelier = "Batelier",
 }
 
 export type Metier = {
@@ -57,6 +58,12 @@ export const metiersObjs: MetierObj = {
         intitule: () => metiersEnum.ingenieur,
         statut: {rang: 2, metalStatut: MetalStatut.argent},
         statutMax: {rang: 2, metalStatut: MetalStatut.or},
+    },
+    [metiersEnum.batelier] : {
+        nom: metiersEnum.batelier,
+        intitule: () => metiersEnum.batelier,
+        statut: {rang: 1, metalStatut: MetalStatut.argent},
+        statutMax: {rang: 5, metalStatut: MetalStatut.argent},
     },
     [metiersEnum.maitre_de_guilde] : {
         nom: metiersEnum.maitre_de_guilde,

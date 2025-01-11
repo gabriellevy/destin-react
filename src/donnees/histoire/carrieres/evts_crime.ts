@@ -23,7 +23,6 @@ export const evts_crime: GroupeEvts = {
                 "Aujourd'hui vous les avez aidés à extorquer de l'argent à un commerçant. "
         },
             conditions: (perso: Perso): boolean => !aUneCarriere(perso) && !compareStatut(perso.statut, {metalStatut: MetalStatut.argent, rang: 4}),
-            proba: 5,
         },
         {
             id: "evts_crime2",
@@ -40,15 +39,13 @@ export const evts_crime: GroupeEvts = {
                 return texte;
             },
             conditions: (perso: Perso): boolean => suitUneCarriereDe(perso, metiersEnum.ranconneur),
-            proba: 5,
         },
         {
             id: "evts_crime3",
                 description: (): string => "Vous êtes maintenant un membre de la bande à part entière. " +
                 "En signe d'appartenance et de fraternité un couteau et une larme vous sont tatoués bien visibles sur le visage. ",
             conditions: (perso: Perso): boolean => suitUneCarriereDepuis(perso, metiersEnum.ranconneur, 40),
-            proba: 5,
         },
     ],
-    probaParDefaut: 10,
+    probaParDefaut: 5,
 };

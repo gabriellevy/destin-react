@@ -1,4 +1,5 @@
 import {ResidenceDeVoyage} from "./ResidenceDeVoyage.ts";
+import {Perso} from "../Perso.ts";
 
 
 export enum Pays {
@@ -92,4 +93,11 @@ export function getVilles(provinceStr: string):Option[] {
         case Province.ostermark : return [];
         case Province.stirland : return [toOption(Ville.halstedt)];
     }
+    return [];
+}
+
+export function auBordDeLaRiviere(perso: Perso): boolean {
+    if (perso.lieu.province === Province.reikland) return true; // il y a des rivières partout là dedans...
+
+    return false;
 }
