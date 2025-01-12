@@ -1,5 +1,6 @@
 import {MetalStatut, Statut} from "../Statut.ts";
 import {Perso} from "../Perso.ts";
+import {titreGuildeEnum} from "./Guilde.ts";
 
 export enum metiersEnum {
     pamphletaire = "Pamphlétaire",
@@ -127,6 +128,7 @@ export type Carriere = {
     competence: number, // sur 100. 1 en débutant
     actif: boolean, // false pour une ancienne carrière (dont on conserve tout de même les compétences etc)
     nbDeTestsFaits: number,
+    guilde?: titreGuildeEnum,
 }
 
 export const serveurDebutant: Carriere = {

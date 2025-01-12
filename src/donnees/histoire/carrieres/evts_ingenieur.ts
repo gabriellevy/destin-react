@@ -7,6 +7,7 @@ import {testCarac, testMetier} from "../../../fonctions/des.ts";
 import {TypeCarac} from "../../../types/caracs/Caracs.ts";
 import {anneesToJours} from "../../../types/Date.ts";
 import {aUneCarriere, suitUneCarriereDe} from "../../../types/metiers/metiersUtils.ts";
+import {appartientALaGuilde, rejointGuilde} from "../../../types/metiers/Guilde.ts";
 
 const passageDiplome: (perso: Perso)=>string = (perso: Perso) => {
     let texte: string =  "C'est le jour du passage de diplôme ! ";
@@ -19,7 +20,7 @@ const passageDiplome: (perso: Perso)=>string = (perso: Perso) => {
             metier: metiersObjs[metiersEnum.ingenieur],
             groupeLieu: undefined,
             duree: 0,
-            competence: 1,
+            competence: 1, // TODO : faire commencer la cmpétence au niveau de la carac associé (intelligence etc)
             actif: true,
             nbDeTestsFaits : 0,
         });
@@ -81,6 +82,26 @@ export const evts_ingenieur: GroupeEvts = {
             conditions: (perso: Perso): boolean =>
                 suitUneCarriereDe(perso, metiersEnum.etudiant_ingenieur),
             proba: 1,
+        },
+        {
+            id: "evts_ingenieur3_entre_a_la_guilde",
+            description: (perso: Perso): string => {
+                let texte: string = "Vous aimeriez bien rejoindre la guilde des ingénieurs.";
+                const resTestInge:ResultatTest = testMetier(perso, {metier: metiersEnum.etudiant_ingenieur, bonusMalus: 0});
+                texte += resTestInge.resume;
+                if (resTestInge.reussi) {
+                    rejointGuilde(perso, metiersEnum.ingenieur);
+
+                    texte += `Vous devenez membre à part entière de la guilde. `;
+                } else {
+                    texte += `Vous êtes jugé trop peu expérimenté pour rejoindre la guilde. Mais cela viendra bientôt. `;
+                }
+                return texte;
+            },
+            conditions: (perso: Perso): boolean =>
+                suitUneCarriereDe(perso, metiersEnum.ingenieur)
+            && !appartientALaGuilde(perso, metiersEnum.ingenieur),
+            proba: 5,
         },
     ],
     probaParDefaut: 10,
