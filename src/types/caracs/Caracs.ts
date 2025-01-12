@@ -138,7 +138,7 @@ export function getCaracNbDeTestsFaits(perso: Perso, carac: TypeCarac): number {
 
 // seuils de progression des caracs (en nombres de tests sur ces caracs)
 // limite à +25 ?? // TODO : remplir ça , éventuellement avec une fonction
-const seuils: number[] = [
+export const seuils: number[] = [
     3,
     7,
     15,
@@ -149,7 +149,7 @@ const seuils: number[] = [
     511,
 ];
 
-export function augmenterNbDeTestsFaits(perso: Perso, typeCarac: TypeCarac): string {
+export function augmenterNbDeTestsFaitsCarac(perso: Perso, typeCarac: TypeCarac): string {
     const carac: Carac | undefined = perso.caracs.get(typeCarac);
     if (carac !== undefined) {
         const nbTests: number = carac.nbDeTestsFaits + 1;
@@ -158,7 +158,7 @@ export function augmenterNbDeTestsFaits(perso: Perso, typeCarac: TypeCarac): str
             // gain d'un point de compétence :
             if (carac) {
                 carac.val += 1;
-                return "+1 en " + carac.typeCarac.toString() + ". ";
+                return "<b>+1 en " + carac.typeCarac.toString() + ". </b> ";
             }
         }
     }

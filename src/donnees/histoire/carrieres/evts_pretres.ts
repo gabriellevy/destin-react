@@ -1,12 +1,13 @@
 import {GroupeEvts} from "../../../types/Evt.ts";
-import {neSuitPasUneCarriereDe, Perso} from "../../../types/Perso.ts";
-import {Metier, metiersEnum, metiersObjs} from "../../../types/metiers/metiers.ts";
+import {Perso} from "../../../types/Perso.ts";
+import {metiersEnum, metiersObjs} from "../../../types/metiers/metiers.ts";
 import {dieuAleatoire} from "../../dieux/dieux.ts";
 import {Dieu} from "../../../types/Dieu.ts";
 import {ResultatTest} from "../../../types/LancerDe.ts";
 import {testCarac} from "../../../fonctions/des.ts";
 import {TypeCarac} from "../../../types/caracs/Caracs.ts";
 import {talents} from "../../talents.ts";
+import {neSuitPasUneCarriereDe} from "../../../types/metiers/metiersUtils.ts";
 
 export const evts_pretres: GroupeEvts = {
     evts: [
@@ -18,21 +19,23 @@ export const evts_pretres: GroupeEvts = {
                 const resTest:ResultatTest = testCarac(perso, {carac: TypeCarac.fm, bonusMalus: 20});
                 texte += resTest.resume;
                 if (resTest.reussi) {
-                    let metier: Metier = metiersObjs[metiersEnum.initie_pretre];
+                    let metierEnum: metiersEnum = metiersEnum.initie_pretre;
                     if (Math.random() > 0.5) {
-                        metier = metiersObjs[metiersEnum.novice];
+                        metierEnum = metiersEnum.novice;
                     }
                     // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
-                    perso.carriere = [{
-                        metier: metier,
+                    perso.carrieres.set(metierEnum, {
+                        metier: metiersObjs[metierEnum],
                         groupeLieu: undefined,
                         duree: 0,
                         competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
-                    }];
+                        actif: true,
+                        nbDeTestsFaits : 0,
+                    });
                     perso.dieu = dieu;
                     perso.talents.push(talents.beni);
                     texte += `Vous êtes frappé par la révélation de ${dieu.id} et sentez que ${dieu.id} a un destin pour vous et répond à vos prières. ` +
-                        `À partir de ce jour vous ne rêvez plus que de servir ${dieu.id} et parvenez à vous faire accepter comme ${metier.nom}. `
+                        `À partir de ce jour vous ne rêvez plus que de servir ${dieu.id} et parvenez à vous faire accepter comme ${metierEnum.toString()}. `
                 } else {
                     texte += `Malheureusement la sensation passe aussi vite qu'elle est arrivée. Avez vous échoué ? Vous êtes vous imaginé des choses ? `;
                 }

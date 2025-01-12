@@ -1,10 +1,11 @@
-import {aUneCarriere, Perso, suitUneCarriereDe, suitUneCarriereDepuis} from "../../../types/Perso.ts";
+import {Perso} from "../../../types/Perso.ts";
 import {metiersEnum, metiersObjs} from "../../../types/metiers/metiers.ts";
 import {GroupeEvts} from "../../../types/Evt.ts";
 import {compareStatut, MetalStatut} from "../../../types/Statut.ts";
 import {ResultatTest} from "../../../types/LancerDe.ts";
 import {testCarac} from "../../../fonctions/des.ts";
 import {TypeCarac} from "../../../types/caracs/Caracs.ts";
+import {aUneCarriere, suitUneCarriereDe, suitUneCarriereDepuis} from "../../../types/metiers/metiersUtils.ts";
 
 export const evts_crime: GroupeEvts = {
     evts: [
@@ -12,11 +13,13 @@ export const evts_crime: GroupeEvts = {
             id: "evts_crime1",
             description: (perso: Perso): string => {
             // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
-            perso.carriere.push({
+            perso.carrieres.set(metiersEnum.ranconneur, {
                 metier: metiersObjs[metiersEnum.ranconneur],
                 groupeLieu: undefined,
                 duree: 0,
                 competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
+                actif: true,
+                nbDeTestsFaits : 0,
             });
 
             return "À force de trainer parmi les vauriens vous vous êtes intégré à leur bande et commencez à participer à leurs sales coups. " +

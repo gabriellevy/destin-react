@@ -1,14 +1,13 @@
 import {GroupeEvts} from "../../../../../types/Evt.ts";
 import {
-    aUneCarriere,
     Perso,
-    suitUneCarriereDepuis
 } from "../../../../../types/Perso.ts";
 import {Ville} from "../../../../../types/lieux/Lieu.ts";
 import {age, JAHRDRUNG, KALDEZEIT, SIGMARZEIT, SOMMERZEIT} from "../../../../../types/Date.ts";
 import {compareStatut, MetalStatut} from "../../../../../types/Statut.ts";
 import {ResidenceDeVoyage} from "../../../../../types/lieux/ResidenceDeVoyage.ts";
 import {metiersEnum, metiersObjs} from "../../../../../types/metiers/metiers.ts";
+import {aUneCarriere, suitUneCarriereDepuis} from "../../../../../types/metiers/metiersUtils.ts";
 
 export const evts_ubersreik: GroupeEvts = {
     evts: [
@@ -106,11 +105,13 @@ export const evts_ubersreik: GroupeEvts = {
             id: "evts_auberge_du_pont_3",
             description: (perso: Perso): string => {
                 // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
-                perso.carriere.push({
+                perso.carrieres.set(metiersEnum.serveur, {
                     metier: metiersObjs[metiersEnum.serveur],
                     groupeLieu: "Auberge de la maison du pont",
                     duree: 0,
                     competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
+                    actif: true,
+                    nbDeTestsFaits : 0,
                 });
                 perso.lieu.residenceVoyage = null;
                 perso.lieu.maison = ResidenceDeVoyage.auberge_de_la_maison_du_pont;
@@ -128,11 +129,13 @@ export const evts_ubersreik: GroupeEvts = {
                 const texte: string = `Vos grandes qualité de prêtre ainsi que votre fidélité à leur famille pousse les Jungfreud à vous faire le grand honneur de vous nommer confesseur officiel de leur famille. `
 
                 // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
-                perso.carriere.push({
+                perso.carrieres.set(metiersEnum.confesseur, {
                     metier: metiersObjs[metiersEnum.confesseur],
                     groupeLieu: "la famille Jungfreud",
                     duree: 0,
                     competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
+                    actif: true,
+                    nbDeTestsFaits : 0,
                 });
 
                 return texte;

@@ -5,6 +5,7 @@ import {MetalStatut} from "../../types/Statut.ts";
 import {Perso, Sexe} from "../../types/Perso.ts";
 import {caracsDeBase} from "../../types/caracs/Caracs.ts";
 import {evts_programmes} from "../histoire/evts_programmes.ts";
+import {Carriere, metiersEnum} from "../../types/metiers/metiers.ts";
 
 export const enfant: Perso = {
     nom: "Wilhelm Hinderten",
@@ -15,7 +16,7 @@ export const enfant: Perso = {
     jourDuMois: -1,
     lieu: lieuParDefaut,
     statut: {rang: 4, metalStatut: MetalStatut.bronze},
-    carriere: [],
+    carrieres: new Map<metiersEnum, Carriere>,
     caracs: caracsDeBase(Race.humain),
     talents: [],
     dieu: {id: "panthéon de l'empire"},
@@ -31,7 +32,7 @@ export const jeuneHommeEnVoyageAUbersreik: Perso = {
     jourDuMois: -1,
     lieu: enVoyageAUbersreik,
     statut: {rang: 2, metalStatut: MetalStatut.argent},
-    carriere: [],
+    carrieres: new Map<metiersEnum, Carriere>,
     caracs: caracsDeBase(Race.humain),
     talents: [],
     dieu: {id: "panthéon de l'empire"},
@@ -47,7 +48,7 @@ export const nainEnVoyageAUbersreik: Perso = {
     jourDuMois: -1,
     lieu: enVoyageAUbersreik,
     statut: {rang: 2, metalStatut: MetalStatut.argent},
-    carriere: [],
+    carrieres: new Map<metiersEnum, Carriere>,
     caracs: caracsDeBase(Race.nain),
     talents: [],
     dieu: {id: "panthéon nain"},

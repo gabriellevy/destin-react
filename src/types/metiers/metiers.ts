@@ -125,6 +125,8 @@ export type Carriere = {
     employeur?: string, // quel groupe ou employeur ?
     duree: number, // temps passé à pratiquer ce métier
     competence: number, // sur 100. 1 en débutant
+    actif: boolean, // false pour une ancienne carrière (dont on conserve tout de même les compétences etc)
+    nbDeTestsFaits: number,
 }
 
 export const serveurDebutant: Carriere = {
@@ -132,4 +134,6 @@ export const serveurDebutant: Carriere = {
     groupeLieu: "Auberge du pont",
     duree: 0,
     competence: 1,
+    actif: true,
+    nbDeTestsFaits: 0,
 };

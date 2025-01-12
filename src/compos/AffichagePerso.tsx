@@ -19,9 +19,9 @@ export default function AffichagePerso({ perso, exporter }: Readonly<AffichagePe
                 </ListItem>
                 <ListItem>
                 {
-                    perso.carriere.map((carriere) => (carriere.metier &&
-                                <ListItemText primary={carriere.metier.intitule(perso, carriere)}
-                                              secondary={`(${carriere.duree} jours)`}/>
+                    Array.from(perso.carrieres).map(([key, value]) => (key && value.metier && value.actif &&
+                                <ListItemText primary={value.metier.intitule(perso, value)}
+                                              secondary={`(${value.duree} jours)`}/>
                     )
                 )}
                 </ListItem>

@@ -1,5 +1,6 @@
 import {Perso} from "./Perso.ts";
 import {Evt} from "./Evt.ts";
+import {Carriere} from "./metiers/metiers.ts";
 
 export const JOURS_PAR_AN = 400;
 export const JOURS_PAR_SEMAINE = 8;
@@ -138,7 +139,7 @@ export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, perso:
     const nouDate: number = perso.date + joursAAjouter;
     const nouvJourDuMois: number = calculJourDuMois(nouDate);
     const nouvMoisStr: string = calculMoisStr(nouDate);
-    perso.carriere.forEach(carriere => {
+    Array.from(perso.carrieres.values()).map((carriere: Carriere) => {
         carriere.duree = carriere.duree + joursAAjouter;
     });
 

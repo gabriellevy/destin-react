@@ -1,10 +1,11 @@
 import {GroupeEvts} from "../../../../../types/Evt.ts";
-import {aUneCarriere, Perso} from "../../../../../types/Perso.ts";
+import {Perso} from "../../../../../types/Perso.ts";
 import {Ville} from "../../../../../types/lieux/Lieu.ts";
 import {ResidenceDeVoyage} from "../../../../../types/lieux/ResidenceDeVoyage.ts";
 import {compareStatut, MetalStatut} from "../../../../../types/Statut.ts";
 import {Race} from "../../../../races/Races.ts";
-import {metiersObjs} from "../../../../../types/metiers/metiers.ts";
+import {metiersEnum, metiersObjs} from "../../../../../types/metiers/metiers.ts";
+import {aUneCarriere} from "../../../../../types/metiers/metiersUtils.ts";
 
 export const evts_ubersreik_nains: GroupeEvts = {
     evts: [
@@ -37,11 +38,13 @@ export const evts_ubersreik_nains: GroupeEvts = {
             id: "evts_ubersreik_nains_3",
             description: (perso: Perso): string => {
                 // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
-                perso.carriere.push({
-                    metier: metiersObjs.serveur,
+                perso.carrieres.set(metiersEnum.serveur, {
+                    metier: metiersObjs[metiersEnum.serveur],
                     groupeLieu: "La hache et le marteau",
                     duree: 0,
                     competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
+                    actif: true,
+                    nbDeTestsFaits : 0,
                 });
                 perso.lieu.residenceVoyage = null;
                 perso.lieu.maison = ResidenceDeVoyage.auberge_de_la_maison_du_pont;
