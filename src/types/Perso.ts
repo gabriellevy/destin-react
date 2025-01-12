@@ -5,7 +5,6 @@ import {Dieu} from "./Dieu.ts";
 import {Carac} from "./caracs/Caracs.ts";
 import {talents} from "../donnees/talents.ts";
 import {Race} from "../donnees/races/Races.ts";
-import {Evt} from "./Evt.ts";
 
 export type Perso = {
     nom: string;
@@ -23,7 +22,7 @@ export type Perso = {
     dieu: Dieu,
     caracs: Map<string, Carac>,
     talents: talents[],
-    evtsProgrammes?: Map<number, (perso: Perso)=>Evt>
+    evtsProgrammes: Map<number, (perso: Perso)=>string>
 };
 
 export function aUneCarriere(perso: Perso): boolean {

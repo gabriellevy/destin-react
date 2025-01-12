@@ -5,6 +5,7 @@ import {compareStatut, MetalStatut} from "../../../types/Statut.ts";
 import {ResultatTest} from "../../../types/LancerDe.ts";
 import {testCarac} from "../../../fonctions/des.ts";
 import {TypeCarac} from "../../../types/caracs/Caracs.ts";
+import {anneesToJours} from "../../../types/Date.ts";
 
 export const evts_ingenieur: GroupeEvts = {
     evts: [
@@ -24,7 +25,12 @@ export const evts_ingenieur: GroupeEvts = {
                         duree: 0,
                         competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
                     });
-                    texte += `Vous êtes reçu à l'école d'ingéniérie ! Maintenant il va falloir travailler dur. `;
+                    texte += `Vous êtes reçu à l'école d'ingéniérie ! Maintenant il va falloir travailler dur pour réussir le diplôme dans 5 ans. `;
+                    // ajout du futur passage de diplôme :
+                    const passageDiplome: (perso: Perso)=>string = () => {
+                        return "TODO : c'est le jour du passage de diplôme !";
+                    }
+                    perso.evtsProgrammes.set(perso.date + anneesToJours(5), passageDiplome);
                 } else {
                     texte += `Malheureusement vous n'avez pas été retenu. Peut-être une autre fois ? `;
                 }

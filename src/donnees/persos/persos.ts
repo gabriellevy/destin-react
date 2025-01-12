@@ -4,7 +4,7 @@ import {enVoyageAUbersreik, lieuParDefaut} from "../../types/lieux/Lieu.ts";
 import {MetalStatut} from "../../types/Statut.ts";
 import {Perso, Sexe} from "../../types/Perso.ts";
 import {caracsDeBase} from "../../types/caracs/Caracs.ts";
-
+import {evts_programmes} from "../histoire/evts_programmes.ts";
 
 export const enfant: Perso = {
     nom: "Wilhelm Hinderten",
@@ -18,7 +18,8 @@ export const enfant: Perso = {
     carriere: [],
     caracs: caracsDeBase(Race.humain),
     talents: [],
-    dieu: {id: "panthéon de l'empire"}
+    dieu: {id: "panthéon de l'empire"},
+    evtsProgrammes: evts_programmes,
 };
 
 export const jeuneHommeEnVoyageAUbersreik: Perso = {
@@ -33,7 +34,8 @@ export const jeuneHommeEnVoyageAUbersreik: Perso = {
     carriere: [],
     caracs: caracsDeBase(Race.humain),
     talents: [],
-    dieu: {id: "panthéon de l'empire"}
+    dieu: {id: "panthéon de l'empire"},
+    evtsProgrammes: evts_programmes,
 };
 
 export const nainEnVoyageAUbersreik: Perso = {
@@ -48,5 +50,6 @@ export const nainEnVoyageAUbersreik: Perso = {
     carriere: [],
     caracs: caracsDeBase(Race.nain),
     talents: [],
-    dieu: {id: "panthéon nain"}
+    dieu: {id: "panthéon nain"},
+    evtsProgrammes: evts_programmes,
 };

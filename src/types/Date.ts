@@ -1,4 +1,5 @@
 import {Perso} from "./Perso.ts";
+import {Evt} from "./Evt.ts";
 
 export const JOURS_PAR_AN = 400;
 export const JOURS_PAR_SEMAINE = 8;
@@ -115,19 +116,31 @@ export function formatJourStr(numeroJourSemaine: number, jourDuMois:number, mois
     return final;
 }
 
-export function leTempsPasse(perso: Perso):Perso {
+export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, perso: Perso)=>void):Perso {
     // ajouter 1D20 jours à l'âge du personnage // TODO : quelle vitesse ? paramétrable ?
     const joursAAjouter = Math.floor(Math.random() * 20) + 1;
     // const joursAAjouter: number = 1;
+
+    // vérifier toutes les dates au cas où un evt "forcé" devrait avoir lieu ici avant
+    for (let j=perso.date; j<=perso.date+joursAAjouter;++j) {
+        perso.evtsProgrammes.forEach((value, key)=>{
+            if (key === j) {
+                const evt: Evt = {
+                    id: "evt",
+                    description:value,
+                };
+                executerEvt(evt, perso);
+                // TODO: ? nettoyage des evts exécutés ??
+            }
+        })
+    }
+
     const nouDate: number = perso.date + joursAAjouter;
     const nouvJourDuMois: number = calculJourDuMois(nouDate);
     const nouvMoisStr: string = calculMoisStr(nouDate);
     perso.carriere.forEach(carriere => {
         carriere.duree = carriere.duree + joursAAjouter;
     });
-
-    // vérifier toutes les dates au cas où un evt "forcé" devrait avoir lieu ici avant
-
 
     console.debug("date en jours : " + perso.date);
     // console.debug("nouvMoisStr : " + nouvMoisStr);

@@ -25,7 +25,7 @@ interface StoryProps {
 }
 
 export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps) {
-    const [storyEvents, setStoryEvents] = useState<EvtExecute[]>([]);
+    const [evtsExecutes, setEvtsExecutes] = useState<EvtExecute[]>([]);
     const [isComplete, setIsComplete] = useState(false);
 
     useEffect(() => {
@@ -41,7 +41,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                 image: evtExecute.image,
             };
 
-            setStoryEvents((prev: EvtExecute[]) => [
+            setEvtsExecutes((prev: EvtExecute[]) => [
                 ...prev,
                 nouvEvt
             ]);
@@ -52,7 +52,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
         const processNextEvent = () => {
             if (!isMounted) return;
 
-            perso = leTempsPasse(perso);
+            perso = leTempsPasse(perso, executerEvt);
 
             // filtrer les evts non applicables
             const evtsApplicables: Evt[] = [
@@ -109,7 +109,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
 
     return (
         <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%', overflowY: 'auto' }}>
-            {storyEvents.map((evt: EvtExecute, index: number) => (
+            {evtsExecutes.map((evt: EvtExecute, index: number) => (
                 <Grid2 container spacing={2} key={index} sx={{ mb: 2 }} columns={12}>
                     {evt.image && (
                         <Grid2 size={4}>
