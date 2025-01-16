@@ -11,9 +11,10 @@ import {
     Typography, Paper, Grid2
 } from '@mui/material';
 import {Perso, Sexe} from "../types/Perso.ts";
-import {getVilles, Option, provinceOptions} from "../types/lieux/Lieu.ts";
+import {Option} from "../types/lieux/Lieu.ts";
 import {metalStatutOptions} from "../types/Statut.ts";
 import {jeuneHommeEnVoyageAUbersreik} from "../donnees/persos/persos.ts";
+import {getVilles, provinceOptions} from "../donnees/geographie/provinces.ts";
 
 interface CharacterFormProps {
     onSubmit: SubmitHandler<Perso>;

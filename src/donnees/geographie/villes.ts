@@ -1,0 +1,18 @@
+import {Option} from "../../types/lieux/Lieu.ts";
+
+export enum Ville {
+    ubersreik = 'Ubersreik',
+    altdorf = 'Altdorf',
+    dunkelbild = 'Dunkelbild',
+    waldenhof = 'Waldenhof',
+    heisenberg = 'Heisenberg',
+    halstedt = 'Halstedt',
+    middenheim = 'Middenheim',
+}
+
+export function toOption(ville: Ville): Option {
+    return {
+        value: ville.valueOf(),
+        label: ville.valueOf()
+    }
+}

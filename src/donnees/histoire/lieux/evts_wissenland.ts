@@ -1,7 +1,7 @@
 import {GroupeEvts} from "../../../types/Evt.ts";
 import {Perso} from "../../../types/Perso.ts";
-import {Ville} from "../../../types/lieux/Lieu.ts";
 import {BRAUZEIT} from "../../../types/Date.ts";
+import {Ville} from "../../geographie/villes.ts";
 
 export const evts_wissenland: GroupeEvts = {
     evts: [

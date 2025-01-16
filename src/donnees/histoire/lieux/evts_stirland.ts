@@ -1,7 +1,7 @@
 import {GroupeEvts} from "../../../types/Evt.ts";
 import {Perso} from "../../../types/Perso.ts";
-import {Province} from "../../../types/lieux/Lieu.ts";
 import {SIGMARZEIT} from "../../../types/Date.ts";
+import {Province} from "../../geographie/provinces.ts";
 
 export const evts_stirland: GroupeEvts = {
     evts: [
