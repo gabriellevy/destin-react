@@ -9,7 +9,10 @@ export default function InfosMonde({ perso }: Readonly<InfosMondeProps>) {
     return (
         <List dense>
             <ListItem>
-                <ListItemText primary="Lieu" secondary={perso.lieu.ville} />
+                <ListItemText
+                    primary="Lieu"
+                    secondary={perso.lieu.ville + " (" + perso.lieu.province + ")"}
+                />
             </ListItem>
             { perso.lieu.residenceVoyage &&
                 <ListItem>
