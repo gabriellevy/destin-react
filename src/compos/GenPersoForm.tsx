@@ -13,7 +13,7 @@ import {
 import {Perso, Sexe} from "../types/Perso.ts";
 import {Option} from "../types/lieux/Lieu.ts";
 import {metalStatutOptions} from "../types/Statut.ts";
-import {jeuneHommeEnVoyageAUbersreik} from "../donnees/persos/persos.ts";
+import {bourgeoisDAltdorf} from "../donnees/persos/persos.ts";
 import {getSousProvinces, Province, provinceOptions} from "../donnees/geographie/provinces.ts";
 import {getVilles, SousProvince} from "../donnees/geographie/sousProvince.ts";
 
@@ -24,7 +24,7 @@ interface CharacterFormProps {
 
 export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFormProps) {
     const { control, watch, handleSubmit, formState: { errors }, reset } = useForm<Perso>({
-        defaultValues: jeuneHommeEnVoyageAUbersreik
+        defaultValues: bourgeoisDAltdorf
     });
 
     const provinceSelectionnee:Province = watch("lieu.province");
@@ -86,7 +86,6 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                                     <FormHelperText>{errors.sexe?.message}</FormHelperText>
                                 </FormControl>
                             )}
-                            sx={{width: '100%'}}
                         />
                     </Grid2>
 

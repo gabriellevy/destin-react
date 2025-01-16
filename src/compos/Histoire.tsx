@@ -17,6 +17,7 @@ import {evts_pretres} from "../donnees/histoire/carrieres/evts_pretres.ts";
 import {evts_ubersreik_nains} from "../donnees/histoire/lieux/reikland/ubersreik/evts_ubersreik_nains.ts";
 import {evts_ingenieur} from "../donnees/histoire/carrieres/evts_ingenieur.ts";
 import {evts_batelier} from "../donnees/histoire/carrieres/evts_bateliers.ts";
+import {evts_carnaval} from "../donnees/histoire/lieux/middenland/middenheim/evts_carnaval.ts";
 
 interface StoryProps {
     persoInitial: Perso;
@@ -69,6 +70,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                 ...filtrerEtPreparerEvts(evts_crime, perso),
                 ...filtrerEtPreparerEvts(evts_pretres, perso),
                 ...filtrerEtPreparerEvts(evts_ingenieur, perso),
+                ...filtrerEtPreparerEvts(evts_carnaval, perso),
                 ...filtrerEtPreparerEvts(evts_batelier, perso),
             ];
 

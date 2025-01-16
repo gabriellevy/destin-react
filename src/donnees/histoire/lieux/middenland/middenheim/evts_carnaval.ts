@@ -1,0 +1,26 @@
+import {GroupeEvts} from "../../../../../types/Evt.ts";
+import {Perso} from "../../../../../types/Perso.ts";
+import {Province} from "../../../../geographie/provinces.ts";
+import {compareStatut, MetalStatut} from "../../../../../types/Statut.ts";
+
+export const evts_carnaval: GroupeEvts = {
+    evts: [
+        {
+            id: "aller_au_carnaval",
+            description: (perso: Perso): string => {
+                let texte: string = "C'est bientôt le carnaval de Middenheim et vous avez une grande envie d'aller vous y changer les idées. ";
+                if (compareStatut(perso.statut, {metalStatut: MetalStatut.bronze, rang: 5})) {
+                    texte += "C'est décidé : vous prendrez la diligence depuis Altdorf et de là direction Middenheim. ";
+                    perso.lieu.enVoyage = true;
+                    perso.lieu.residenceVoyage= null;
+                } else {
+                    texte += "Malheureusement vous n'avez pas les moyens de vous payer le voyage."
+                }
+                return texte;
+            },
+            conditions: (perso: Perso): boolean => perso.lieu.province === Province.reikland,
+            proba: 10
+        },
+    ],
+    probaParDefaut: 5,
+};

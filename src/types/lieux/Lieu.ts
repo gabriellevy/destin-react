@@ -30,6 +30,16 @@ export const lieuParDefaut: Lieu = {
     residenceVoyage: null,
 };
 
+export const lieuAltdorf: Lieu = {
+    pays: Pays.empire,
+    province: Province.reikland,
+    sousProvince: SousProvince.principauteAltdorf,
+    ville: Ville.altdorf,
+    maison: null,
+    enVoyage:false,
+    residenceVoyage: null,
+};
+
 export const enVoyageAUbersreik: Lieu = {
     pays: Pays.empire,
     province: Province.middenland,

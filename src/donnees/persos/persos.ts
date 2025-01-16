@@ -1,6 +1,6 @@
 import {Race} from "../races/Races.ts";
 import {anneesToJours} from "../../types/Date.ts";
-import {enVoyageAUbersreik, lieuParDefaut} from "../../types/lieux/Lieu.ts";
+import {enVoyageAUbersreik, lieuAltdorf, lieuParDefaut} from "../../types/lieux/Lieu.ts";
 import {MetalStatut} from "../../types/Statut.ts";
 import {Perso, Sexe} from "../../types/Perso.ts";
 import {caracsDeBase} from "../../types/caracs/Caracs.ts";
@@ -32,6 +32,23 @@ export const jeuneHommeEnVoyageAUbersreik: Perso = {
     jourDuMois: -1,
     lieu: enVoyageAUbersreik,
     statut: {rang: 2, metalStatut: MetalStatut.argent},
+    carrieres: new Map<metiersEnum, Carriere>,
+    caracs: caracsDeBase(Race.humain),
+    talents: [],
+    dieu: {id: "panthéon de l'empire"},
+    evtsProgrammes: evts_programmes,
+};
+
+// époque du carnaval
+export const bourgeoisDAltdorf: Perso = {
+    nom: "Wilhelm Hinderten",
+    sexe: Sexe.male,
+    race: Race.humain,
+    dateNaissance: anneesToJours(2488),
+    date: anneesToJours(2513), // début du pouvoir derrière le trône 3ème volume
+    jourDuMois: -1,
+    lieu: lieuAltdorf,
+    statut: {rang: 1, metalStatut: MetalStatut.argent},
     carrieres: new Map<metiersEnum, Carriere>,
     caracs: caracsDeBase(Race.humain),
     talents: [],
