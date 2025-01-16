@@ -19,6 +19,13 @@ export function suitUneCarriereDe(perso: Perso, metier: metiersEnum): boolean {
     });
     return trouve;
 }
+
+/**
+ * renvoie tru si le perso travaille actuellement sur cette carrière, donc si il la suit mais aussi qu'il n'est pas en vacances, malade, en voyage...
+ */
+export function travailleEnCeMomentComme(perso: Perso, metier: metiersEnum): boolean {
+    return suitUneCarriereDe(perso, metier) && !perso.lieu.enVoyage;
+}
 export function neSuitPasUneCarriereDe(perso: Perso, metier: metiersEnum): boolean {
     let trouve: boolean = false;
     Array.from(perso.carrieres.values()).forEach(carriere => {

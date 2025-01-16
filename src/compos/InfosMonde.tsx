@@ -11,7 +11,7 @@ export default function InfosMonde({ perso }: Readonly<InfosMondeProps>) {
             <ListItem>
                 <ListItemText
                     primary="Lieu"
-                    secondary={perso.lieu.ville + " (" + perso.lieu.province + ")"}
+                    secondary={perso.lieu.residenceVoyage ?? "En voyage à " + perso.lieu.ville + " (" + perso.lieu.province + ")"}
                 />
             </ListItem>
             { perso.lieu.residenceVoyage &&

@@ -6,7 +6,7 @@ import {testCarac} from "../../../fonctions/des.ts";
 import {TypeCarac} from "../../../types/caracs/Caracs.ts";
 import {age} from "../../../types/Date.ts";
 import {auBordDeLaRiviere} from "../../../types/lieux/Lieu.ts";
-import {aUneCarriere, suitUneCarriereDe} from "../../../types/metiers/metiersUtils.ts";
+import {aUneCarriere, travailleEnCeMomentComme} from "../../../types/metiers/metiersUtils.ts";
 
 export const evts_batelier: GroupeEvts = {
     evts: [
@@ -55,7 +55,7 @@ export const evts_batelier: GroupeEvts = {
                 return texte;
             },
             conditions: (perso: Perso): boolean =>
-                suitUneCarriereDe(perso, metiersEnum.batelier),
+                travailleEnCeMomentComme(perso, metiersEnum.batelier),
         },
     ],
     probaParDefaut: 5,
