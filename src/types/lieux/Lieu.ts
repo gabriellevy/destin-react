@@ -1,8 +1,9 @@
 import {ResidenceDeVoyage} from "./ResidenceDeVoyage.ts";
 import {Perso} from "../Perso.ts";
 import {Pays} from "../../donnees/geographie/pays.ts";
-import {Province, SousProvince} from "../../donnees/geographie/provinces.ts";
+import {Province} from "../../donnees/geographie/provinces.ts";
 import {Ville} from "../../donnees/geographie/villes.ts";
+import {SousProvince} from "../../donnees/geographie/sousProvince.ts";
 
 export type Option = {
     value: string,
@@ -10,11 +11,10 @@ export type Option = {
 }
 
 export type Lieu = {
-    pays?: Pays,
-    province?: Province,
-    sousProvince?: SousProvince,
-    sousSousProvince?: SousProvince,
-    ville?: Ville,
+    pays: Pays,
+    province: Province,
+    sousProvince: SousProvince,
+    ville: Ville,
     maison: string|null,
     enVoyage:boolean,
     residenceVoyage:ResidenceDeVoyage|null,
@@ -23,7 +23,7 @@ export type Lieu = {
 export const lieuParDefaut: Lieu = {
     pays: Pays.empire,
     province: Province.reikland,
-    sousProvince: SousProvince.ducheReikland,
+    sousProvince: SousProvince.ducheUbersreik,
     ville: Ville.ubersreik,
     maison: null,
     enVoyage:false,
@@ -32,9 +32,9 @@ export const lieuParDefaut: Lieu = {
 
 export const enVoyageAUbersreik: Lieu = {
     pays: Pays.empire,
-    province: Province.reikland,
-    sousProvince: SousProvince.ducheReikland,
-    ville: Ville.ubersreik,
+    province: Province.middenland,
+    sousProvince: SousProvince.ducheMiddenheim,
+    ville: Ville.middenheim,
     maison: null,
     enVoyage:true,
     residenceVoyage: null,

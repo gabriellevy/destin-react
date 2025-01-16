@@ -10,7 +10,7 @@ export enum Ville {
     middenheim = 'Middenheim',
 }
 
-export function toOption(ville: Ville): Option {
+export function villeToOption(ville: Ville): Option {
     return {
         value: ville.valueOf(),
         label: ville.valueOf()

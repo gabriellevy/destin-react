@@ -14,7 +14,8 @@ import {Perso, Sexe} from "../types/Perso.ts";
 import {Option} from "../types/lieux/Lieu.ts";
 import {metalStatutOptions} from "../types/Statut.ts";
 import {jeuneHommeEnVoyageAUbersreik} from "../donnees/persos/persos.ts";
-import {getVilles, provinceOptions} from "../donnees/geographie/provinces.ts";
+import {getSousProvinces, Province, provinceOptions} from "../donnees/geographie/provinces.ts";
+import {getVilles, SousProvince} from "../donnees/geographie/sousProvince.ts";
 
 interface CharacterFormProps {
     onSubmit: SubmitHandler<Perso>;
@@ -26,7 +27,8 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
         defaultValues: jeuneHommeEnVoyageAUbersreik
     });
 
-    const provinceSelectionnee = watch("lieu.province");
+    const provinceSelectionnee:Province = watch("lieu.province");
+    const sousProvinceSelectionnee:SousProvince = watch("lieu.sousProvince");
 
     const handleLoadCharacter = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -50,7 +52,7 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
 
     return (
         <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%', overflowY: 'auto' }}>
-            <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 400, mx: 'auto', mt: 4 }}>
+            <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ maxWidth: 800, mx: 'auto', mt: 4 }}>
                 <Typography variant="h4" gutterBottom>Créer un personnage</Typography>
                 <Grid2 container spacing={1} sx={{ mb: 2 }} columns={12}>
                     <Grid2 size={8}>
@@ -65,6 +67,7 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                                     margin="normal"
                                     error={!!errors.nom}
                                     helperText={errors.nom?.message}
+                                    fullWidth
                                 />
                             )}
                         />
@@ -83,16 +86,18 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                                     <FormHelperText>{errors.sexe?.message}</FormHelperText>
                                 </FormControl>
                             )}
+                            sx={{width: '100%'}}
                         />
                     </Grid2>
 
                     {/* lieux (TODO : refactoriser*/}
-                    <Grid2 size={6}>
+                    <Grid2 size={4}>
                         <Controller
                             control={control}
                             name="lieu.province"
                             render={({ field }) => (
-                                <FormControl margin="normal" error={!!errors.lieu?.province}>
+                                <FormControl margin="normal" error={!!errors.lieu?.province}
+                                             fullWidth>
                                     <InputLabel>Province</InputLabel>
                                     <Select {...field}>
                                         {Object.values(provinceOptions).map((provinceOption: Option) => (
@@ -105,15 +110,35 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                             )}
                         />
                     </Grid2>
-                    <Grid2 size={6}>
+                    <Grid2 size={4}>
+                        <Controller
+                            control={control}
+                            name="lieu.sousProvince"
+                            render={({ field }) => (
+                                <FormControl margin="normal" error={!!errors.lieu?.sousProvince}
+                                             fullWidth>
+                                    <InputLabel>Sous province</InputLabel>
+                                    <Select {...field}>
+                                        {Object.values(getSousProvinces(provinceSelectionnee.toString())).map((sousProvinceOption: Option) => (
+                                            <MenuItem value={sousProvinceOption.value} key={sousProvinceOption.value}>
+                                                {sousProvinceOption.label}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            )}
+                        />
+                    </Grid2>
+                    <Grid2 size={4}>
                         <Controller
                             control={control}
                             name="lieu.ville"
                             render={({ field }) => (
-                                <FormControl margin="normal" error={!!errors.lieu?.ville}>
+                                <FormControl margin="normal" error={!!errors.lieu?.ville}
+                                             fullWidth>
                                     <InputLabel>Ville</InputLabel>
                                     <Select {...field}>
-                                        {Object.values(getVilles(provinceSelectionnee)).map((villeOption: Option) => (
+                                        {Object.values(getVilles(sousProvinceSelectionnee.toString())).map((villeOption: Option) => (
                                             <MenuItem value={villeOption.value} key={villeOption.value}>
                                                 {villeOption.label}
                                             </MenuItem>
@@ -129,7 +154,8 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                             control={control}
                             name="statut.metalStatut"
                             render={({ field }) => (
-                                <FormControl margin="normal" error={!!errors.statut?.metalStatut}>
+                                <FormControl margin="normal" error={!!errors.statut?.metalStatut}
+                                             fullWidth>
                                     <InputLabel>Statut</InputLabel>
                                     <Select {...field}>
                                         {Object.values(metalStatutOptions).map((metalOption: Option) => (

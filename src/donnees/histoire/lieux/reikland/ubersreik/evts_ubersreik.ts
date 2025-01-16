@@ -2,12 +2,12 @@ import {GroupeEvts} from "../../../../../types/Evt.ts";
 import {
     Perso,
 } from "../../../../../types/Perso.ts";
-import {Ville} from "../../../../../types/lieux/Lieu.ts";
 import {age, JAHRDRUNG, KALDEZEIT, SIGMARZEIT, SOMMERZEIT} from "../../../../../types/Date.ts";
 import {compareStatut, MetalStatut} from "../../../../../types/Statut.ts";
 import {ResidenceDeVoyage} from "../../../../../types/lieux/ResidenceDeVoyage.ts";
 import {metiersEnum, metiersObjs} from "../../../../../types/metiers/metiers.ts";
 import {aUneCarriere, suitUneCarriereDepuis} from "../../../../../types/metiers/metiersUtils.ts";
+import {Ville} from "../../../../geographie/villes.ts";
 
 export const evts_ubersreik: GroupeEvts = {
     evts: [
