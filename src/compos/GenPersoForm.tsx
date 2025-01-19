@@ -16,6 +16,7 @@ import {metalStatutOptions} from "../types/Statut.ts";
 import {bourgeoisDAltdorf} from "../donnees/persos/persos.ts";
 import {getSousProvinces, Province, provinceOptions} from "../donnees/geographie/provinces.ts";
 import {getVilles, SousProvince} from "../donnees/geographie/sousProvince.ts";
+import {Ville} from "../donnees/geographie/villes.ts";
 
 interface CharacterFormProps {
     onSubmit: SubmitHandler<Perso>;
@@ -118,9 +119,9 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                                              fullWidth>
                                     <InputLabel>Sous province</InputLabel>
                                     <Select {...field}>
-                                        {Object.values(getSousProvinces(provinceSelectionnee.toString())).map((sousProvinceOption: Option) => (
-                                            <MenuItem value={sousProvinceOption.value} key={sousProvinceOption.value}>
-                                                {sousProvinceOption.label}
+                                        {Object.values(getSousProvinces(provinceSelectionnee.toString())).map((sousProvince: SousProvince) => (
+                                            <MenuItem value={sousProvince.valueOf()} key={sousProvince.valueOf()}>
+                                                {sousProvince.valueOf()}
                                             </MenuItem>
                                         ))}
                                     </Select>
@@ -137,9 +138,9 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                                              fullWidth>
                                     <InputLabel>Ville</InputLabel>
                                     <Select {...field}>
-                                        {Object.values(getVilles(sousProvinceSelectionnee.toString())).map((villeOption: Option) => (
-                                            <MenuItem value={villeOption.value} key={villeOption.value}>
-                                                {villeOption.label}
+                                        {Object.values(getVilles(sousProvinceSelectionnee.toString())).map((ville: Ville) => (
+                                            <MenuItem value={ville.valueOf()} key={ville.valueOf()}>
+                                                {ville.valueOf()}
                                             </MenuItem>
                                         ))}
                                     </Select>

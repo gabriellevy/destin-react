@@ -1,30 +1,26 @@
-import {Option} from "../../types/lieux/Lieu.ts";
-import {villeToOption, Ville} from "./villes.ts";
-
+import {Ville} from "./villes.ts";
 
 export enum SousProvince {
     ducheUbersreik = "Duché d'Ubersreik",
     principauteAltdorf = "Principauté d'Altdorf",
+    chaisPasEntreMiddenlandEtReikland = "chaisPasEntreMiddenlandEtReikland",
     ducheMiddenheim = "Duché de Middenheim",
     waldenhof = 'Waldenhof',
     heisenberg = 'Heisenberg',
     halstedt = 'Halstedt',
+
+    sousProvinceInconnue = 'Sous province inconnue',
 }
 
-export function getVilles(provinceStr: string):Option[] {
-    switch (provinceStr) {
-        case SousProvince.ducheUbersreik : return [villeToOption(Ville.ubersreik)];
-        case SousProvince.principauteAltdorf : return [villeToOption(Ville.altdorf)];
-        case SousProvince.ducheMiddenheim : return [villeToOption(Ville.middenheim), villeToOption(Ville.dunkelbild)];
-        case SousProvince.waldenhof : return [villeToOption(Ville.waldenhof)];
-        case SousProvince.heisenberg : return [villeToOption(Ville.heisenberg)];
-        case SousProvince.halstedt : return [villeToOption(Ville.halstedt)];
+export function getVilles(sousProvinceStr: string):Ville[] {
+    switch (sousProvinceStr) {
+        case SousProvince.ducheUbersreik : return [Ville.ubersreik];
+        case SousProvince.principauteAltdorf : return [Ville.altdorf, Ville.frederheim];
+        case SousProvince.chaisPasEntreMiddenlandEtReikland : return [Ville.kutenholz];
+        case SousProvince.ducheMiddenheim : return [Ville.middenheim, Ville.dunkelbild];
+        case SousProvince.waldenhof : return [Ville.waldenhof];
+        case SousProvince.heisenberg : return [Ville.heisenberg];
+        case SousProvince.halstedt : return [Ville.halstedt];
     }
     return [];
-}
-export function sousProvinceToOption(sousProvince: SousProvince): Option {
-    return {
-        value: sousProvince.valueOf(),
-        label: sousProvince.valueOf()
-    }
 }

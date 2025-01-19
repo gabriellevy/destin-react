@@ -1,5 +1,5 @@
 import {Option} from "../../types/lieux/Lieu.ts";
-import {SousProvince, sousProvinceToOption} from "./sousProvince.ts";
+import {SousProvince} from "./sousProvince.ts";
 
 export enum Province {
     reikland = 'Reikland',
@@ -9,6 +9,8 @@ export enum Province {
     talabecland = 'Talabecland',
     ostermark = 'Ostermark',
     stirland = 'Stirland',
+
+    provinceInconnue = 'Province inconnue',
 }
 
 export const provinceOptions: Option[]= [
@@ -21,20 +23,21 @@ export const provinceOptions: Option[]= [
     { value: Province.stirland, label: Province.stirland},
 ];
 
-export function getSousProvinces(provinceStr: string):Option[] {
+export function getSousProvinces(provinceStr: string):SousProvince[] {
     switch (provinceStr) {
         case Province.reikland : return [
-            sousProvinceToOption(SousProvince.ducheUbersreik),
-            sousProvinceToOption(SousProvince.principauteAltdorf)
+            SousProvince.ducheUbersreik,
+            SousProvince.principauteAltdorf
         ];
         case Province.middenland : return [
-            sousProvinceToOption(SousProvince.ducheMiddenheim)
+            SousProvince.ducheMiddenheim,
+            SousProvince.chaisPasEntreMiddenlandEtReikland
         ];
-        case Province.sylvanie : return [sousProvinceToOption(SousProvince.waldenhof)];
-        case Province.wissenland : return [sousProvinceToOption(SousProvince.heisenberg)];
+        case Province.sylvanie : return [SousProvince.waldenhof];
+        case Province.wissenland : return [SousProvince.heisenberg];
         case Province.talabecland : return [];
         case Province.ostermark : return [];
-        case Province.stirland : return [sousProvinceToOption(SousProvince.halstedt)];
+        case Province.stirland : return [SousProvince.halstedt];
     }
     return [];
 }

@@ -26,19 +26,19 @@ interface StoryProps {
 }
 
 export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps) {
-    const [evtsExecutes, setEvtsExecutes] = useState<EvtExecute[]>([]);
-    const [isComplete, setIsComplete] = useState(false);
+    const [evtsExecutes, setEvtsExecutes] = useState<EvtExecute[]>([]); // événements déjà exécutés
+    const [plusDEvts, setPlusDEvts] = useState(false); // true si il n'y a plus aucun evt exécutable
 
     useEffect(() => {
         let isMounted = true;
         let perso = { ...persoInitial };
-        let timeoutId: number;
+        let idCompteARebours: number;
 
         function executerEvt(evtExecute: Evt, perso: Perso) {
             const nouvEvt: EvtExecute = {
                 id: evtExecute.id,
                 dateStr: jourStr(perso.date),
-                texteFinal: evtExecute.description(perso),
+                texteFinal: evtExecute.description(perso), // l'exécution elle-même
                 image: evtExecute.image,
             };
 
@@ -50,7 +50,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
             onCharacterUpdate(perso);
         }
 
-        const processNextEvent = () => {
+        const determinerEvtSuivant = () => {
             if (!isMounted) return;
 
             perso = leTempsPasse(perso, executerEvt);
@@ -95,17 +95,17 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                     return true
                 })
 
-                timeoutId = setTimeout(processNextEvent, 5000);
+                idCompteARebours = setTimeout(determinerEvtSuivant, 5000);
             } else {
-                setIsComplete(true);
+                setPlusDEvts(true);
             }
         };
 
-        processNextEvent();
+        determinerEvtSuivant();
 
         return () => {
             isMounted = false;
-            if (timeoutId) clearTimeout(timeoutId);
+            if (idCompteARebours) clearTimeout(idCompteARebours);
         };
     }, []);
 
@@ -136,7 +136,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                     </Grid2>
                 </Grid2>
             ))}
-            {isComplete && (
+            {plusDEvts && (
                 <Typography mb={2} fontWeight="bold">
                     Vous êtes mort. TODO : faire un truc un peu adapté !!
                 </Typography>

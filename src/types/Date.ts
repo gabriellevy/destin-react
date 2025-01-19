@@ -123,22 +123,23 @@ export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, perso:
     // const joursAAjouter: number = 1;
 
     // vérifier toutes les dates au cas où un evt "forcé" devrait avoir lieu ici avant
-    for (let j=perso.date; j<=perso.date+joursAAjouter;++j) {
+    for (let j=0 ; j <= joursAAjouter ; ++j) {
+        const dateActuelle = perso.date + j;
         perso.evtsProgrammes.forEach((value, key)=>{
-            if (key === j) {
+            if (key === dateActuelle) {
                 const evt: Evt = {
                     id: "evt",
                     description:value,
                 };
-                executerEvt(evt, perso);
+                executerEvt(evt, perso); // TODO ce ci ne marche pas cf evts_carnaval et les voyages jour par jour
                 // TODO: ? nettoyage des evts exécutés ??
             }
         })
+        perso.date = perso.date + 1;
     }
 
-    const nouDate: number = perso.date + joursAAjouter;
-    const nouvJourDuMois: number = calculJourDuMois(nouDate);
-    const nouvMoisStr: string = calculMoisStr(nouDate);
+    const nouvJourDuMois: number = calculJourDuMois(perso.date);
+    const nouvMoisStr: string = calculMoisStr(perso.date);
     Array.from(perso.carrieres.values()).map((carriere: Carriere) => {
         carriere.duree = carriere.duree + joursAAjouter;
     });
@@ -146,7 +147,6 @@ export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, perso:
     console.debug("date en jours : " + perso.date);
     // console.debug("nouvMoisStr : " + nouvMoisStr);
     return { ...perso,
-        date: nouDate,
         mois: nouvMoisStr,
         jourDuMois: nouvJourDuMois,
     };

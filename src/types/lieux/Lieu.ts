@@ -1,9 +1,9 @@
 import {ResidenceDeVoyage} from "./ResidenceDeVoyage.ts";
 import {Perso} from "../Perso.ts";
 import {Pays} from "../../donnees/geographie/pays.ts";
-import {Province} from "../../donnees/geographie/provinces.ts";
+import {getSousProvinces, Province} from "../../donnees/geographie/provinces.ts";
 import {Ville} from "../../donnees/geographie/villes.ts";
-import {SousProvince} from "../../donnees/geographie/sousProvince.ts";
+import {getVilles, SousProvince} from "../../donnees/geographie/sousProvince.ts";
 
 export type Option = {
     value: string,
@@ -49,6 +49,22 @@ export const enVoyageAUbersreik: Lieu = {
     enVoyage:true,
     residenceVoyage: null,
 };
+
+export function vaA(perso: Perso, ville: Ville) {
+    perso.lieu.ville = ville;
+    const sousProvince: SousProvince = getSousProvinceDeVille(ville);
+    perso.lieu.sousProvince = sousProvince;
+    const province: Province = getProvinceDeSousProvince(sousProvince);
+    perso.lieu.province = province;
+}
+
+export function getSousProvinceDeVille(ville: Ville): SousProvince {
+    return Object.values(SousProvince).find(sousProvince=> getVilles(sousProvince).includes(ville)) || SousProvince.sousProvinceInconnue;
+}
+
+export function getProvinceDeSousProvince(sousProvince: SousProvince): Province {
+    return Object.values(Province).find(province=> getSousProvinces(province).includes(sousProvince)) || Province.provinceInconnue;
+}
 
 export function auBordDeLaRiviere(perso: Perso): boolean {
     if (perso.lieu.province === Province.reikland) return true; // il y a des rivières partout là dedans...

@@ -3,7 +3,7 @@ import {Perso} from "../../../../../types/Perso.ts";
 import {Province} from "../../../../geographie/provinces.ts";
 import {compareStatut, MetalStatut} from "../../../../../types/Statut.ts";
 import {Ville} from "../../../../geographie/villes.ts";
-import {SousProvince} from "../../../../geographie/sousProvince.ts";
+import {vaA} from "../../../../../types/lieux/Lieu.ts";
 
 export const evts_carnaval: GroupeEvts = {
     evts: [
@@ -15,23 +15,37 @@ export const evts_carnaval: GroupeEvts = {
                     texte += "C'est décidé : vous prendrez la diligence depuis Altdorf et de là direction Middenheim. ";
                     perso.lieu.enVoyage = true;
                     perso.lieu.residenceVoyage= null;
-                    // TODO : faire un setter qui implique province et sous province à partir de la ville
-                    perso.lieu.ville = Ville.middenheim;
+                    /* TODO : setter tout ça seulement à la fin :
+                        perso.lieu.ville = Ville.middenheim;
                     perso.lieu.sousProvince = SousProvince.ducheMiddenheim;
-                    perso.lieu.province = Province.middenland;
+                    perso.lieu.province = Province.middenland;*/
                     texte += "Dans la diligence les voyageurs sont entousiastes, surtout un marchand nommé Alex Eisen. <br/> "
                         + "<i>Je ne raterais cela pour rien au monde ! "
                         + "Ces gens du nord  sont une vraie bande de coincés à tous les autres moments de l'année mais faites leur boire quelques verres pendant le carnaval et c'est parti ! Oh que oui ! "
                         + "Si vous voyez ce que je veux dire ? "
                         + "</i>";
+
+                    // ajout des evts du voyage jour par jour
+                    const etapeFrederheim: (perso: Perso)=>string = (perso: Perso) => {
+                        const etapeKutenholz: (perso: Perso)=>string = (perso: Perso) => {
+                            const texte: string =  "La diligence s'arrête à Kutenholz. ";
+                            vaA(perso, Ville.kutenholz);
+                            return texte;
+                        }
+                        const texte: string =  "La diligence s'arrête à Frederheim. ";
+                        vaA(perso, Ville.frederheim);
+                        perso.evtsProgrammes.set(perso.date + 2, etapeKutenholz);
+                        return texte;
+                    }
+                    perso.evtsProgrammes.set(perso.date + 1, etapeFrederheim);
                 } else {
                     texte += "Malheureusement vous n'avez pas les moyens de vous payer le voyage."
                 }
                 return texte;
             },
-            conditions: (perso: Perso): boolean => perso.lieu.province === Province.reikland,
+            conditions: (perso: Perso): boolean => perso.lieu.province === Province.reikland && !perso.lieu.enVoyage,
             image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Alex_Eisen.webp",
-            proba: 10
+            proba: 10999999 // TODO : should be 10
         },
     ],
     probaParDefaut: 5,
