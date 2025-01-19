@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect, useContext} from 'react';
 import {Box, Typography, Paper, Grid2} from '@mui/material';
-import {Perso} from "../types/Perso.ts";
 import {evts_ubersreik} from "../donnees/histoire/lieux/reikland/ubersreik/evts_ubersreik.ts";
 import {Evt, EvtExecute, filtrerEtPreparerEvts} from "../types/Evt.ts";
 import {jourStr, leTempsPasse} from "../types/Date.ts";
@@ -18,23 +17,18 @@ import {evts_ubersreik_nains} from "../donnees/histoire/lieux/reikland/ubersreik
 import {evts_ingenieur} from "../donnees/histoire/carrieres/evts_ingenieur.ts";
 import {evts_batelier} from "../donnees/histoire/carrieres/evts_bateliers.ts";
 import {evts_carnaval} from "../donnees/histoire/lieux/middenland/middenheim/evts_carnaval.ts";
+import {PersoContexte, PersoContexteType} from "../contexte/PersoContexte.tsx";
 
-interface StoryProps {
-    persoInitial: Perso;
-    onCharacterUpdate: (updatedCharacter: Perso) => void;
-    key: string; // Add this line
-}
-
-export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps) {
+export default function Histoire() {
     const [evtsExecutes, setEvtsExecutes] = useState<EvtExecute[]>([]); // événements déjà exécutés
     const [plusDEvts, setPlusDEvts] = useState(false); // true si il n'y a plus aucun evt exécutable
+    const { perso, setPerso } = useContext(PersoContexte) as PersoContexteType;
 
     useEffect(() => {
         let isMounted = true;
-        let perso = { ...persoInitial };
         let idCompteARebours: number;
 
-        function executerEvt(evtExecute: Evt, perso: Perso) {
+        function executerEvt(evtExecute: Evt) {
             const nouvEvt: EvtExecute = {
                 id: evtExecute.id,
                 dateStr: jourStr(perso.date),
@@ -47,13 +41,13 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                 nouvEvt
             ]);
 
-            onCharacterUpdate(perso);
+            setPerso(perso);
         }
 
         const determinerEvtSuivant = () => {
             if (!isMounted) return;
 
-            perso = leTempsPasse(perso, executerEvt);
+            setPerso(leTempsPasse(perso, executerEvt));
 
             // filtrer les evts non applicables
             const evtsApplicables: Evt[] = [
@@ -88,7 +82,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
                     if (evt.proba) {
                         randomProba -= evt.proba;
                         if (randomProba <= 0) {
-                            executerEvt(evt, perso);
+                            executerEvt(evt);
                             return false;
                         }
                     }
@@ -107,7 +101,7 @@ export default function Histoire({ persoInitial, onCharacterUpdate }: StoryProps
             isMounted = false;
             if (idCompteARebours) clearTimeout(idCompteARebours);
         };
-    }, []);
+    }, [setPerso]);
 
     return (
         <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%', overflowY: 'auto' }}>

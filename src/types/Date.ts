@@ -120,11 +120,14 @@ export function formatJourStr(numeroJourSemaine: number, jourDuMois:number, mois
 export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, perso: Perso)=>void):Perso {
     // ajouter 1D20 jours à l'âge du personnage // TODO : quelle vitesse ? paramétrable ?
     const joursAAjouter = Math.floor(Math.random() * 20) + 1;
+    let joursRellementAjoutes: number = 0;
     // const joursAAjouter: number = 1;
 
     // vérifier toutes les dates au cas où un evt "forcé" devrait avoir lieu ici avant
-    for (let j=0 ; j <= joursAAjouter ; ++j) {
-        const dateActuelle = perso.date + j;
+    for (joursRellementAjoutes= 0 ; joursRellementAjoutes <= joursAAjouter ; ++joursRellementAjoutes) {
+        const dateActuelle = perso.date + joursRellementAjoutes;
+        perso.date = perso.date + 1;
+        let efvtProgrammeExecute: boolean = false;
         perso.evtsProgrammes.forEach((value, key)=>{
             if (key === dateActuelle) {
                 const evt: Evt = {
@@ -133,15 +136,19 @@ export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, perso:
                 };
                 executerEvt(evt, perso); // TODO ce ci ne marche pas cf evts_carnaval et les voyages jour par jour
                 // TODO: ? nettoyage des evts exécutés ??
+                efvtProgrammeExecute = true;
             }
         })
-        perso.date = perso.date + 1;
+        if (efvtProgrammeExecute) {
+            // interrompt le défilement des jours
+            break;
+        }
     }
 
     const nouvJourDuMois: number = calculJourDuMois(perso.date);
     const nouvMoisStr: string = calculMoisStr(perso.date);
     Array.from(perso.carrieres.values()).map((carriere: Carriere) => {
-        carriere.duree = carriere.duree + joursAAjouter;
+        carriere.duree = carriere.duree + joursRellementAjoutes;
     });
 
     console.debug("date en jours : " + perso.date);

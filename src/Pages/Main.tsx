@@ -1,29 +1,26 @@
-import { useState } from 'react';
+import {useContext, useState} from 'react';
 import {ThemeProvider, createTheme, CssBaseline, Container, Grid, Paper} from '@mui/material';
 import GenPersoForm from "../compos/GenPersoForm.tsx";
-import {Perso} from "../types/Perso.ts";
 import AffichagePerso from "../compos/AffichagePerso.tsx";
 import Histoire from "../compos/Histoire.tsx";
 import InfosMonde from "../compos/InfosMonde.tsx";
+import {PersoContexte, PersoContexteType} from "../contexte/PersoContexte.tsx";
+import {Perso} from "../types/Perso.ts";
 
 const theme = createTheme();
 
 export default function Main() {
-    const [persoSoumis, setPersoSoumis] = useState<Perso | null>(null);
     const [afficherForm, setAfficherForm] = useState(true);
+    const { perso, setPerso } = useContext(PersoContexte) as PersoContexteType;
 
     const soumettrePerso = (data: Perso) => {
-        setPersoSoumis(data);
+        setPerso(data);
         setAfficherForm(false);
     };
 
     const chargerPerso = (persoCharge: Perso) => {
-        setPersoSoumis(persoCharge);
+        setPerso(persoCharge);
         setAfficherForm(false);
-    };
-
-    const majPerso = (updatedCharacter: Perso) => {
-        setPersoSoumis(updatedCharacter);
     };
 
     return (
@@ -36,13 +33,10 @@ export default function Main() {
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={4}>
                             <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%', overflowY: 'auto' }}>
-                                <InfosMonde
-                                    perso={persoSoumis!}
-                                />
+                                <InfosMonde/>
                                 <AffichagePerso
-                                    perso={persoSoumis!}
                                     exporter={() => {
-                                        const persoStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(persoSoumis));
+                                        const persoStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(perso));
                                         const baliseTelechargement = document.createElement('a');
                                         baliseTelechargement.setAttribute("href", persoStr);
                                         baliseTelechargement.setAttribute("download", "character.json");
@@ -54,11 +48,7 @@ export default function Main() {
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={8}>
-                            <Histoire
-                                key={persoSoumis!.nom}
-                                persoInitial={persoSoumis!}
-                                onCharacterUpdate={majPerso}
-                            />
+                            <Histoire />
                         </Grid>
                     </Grid>
                 )}

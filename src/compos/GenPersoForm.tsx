@@ -20,7 +20,7 @@ import {Ville} from "../donnees/geographie/villes.ts";
 
 interface CharacterFormProps {
     onSubmit: SubmitHandler<Perso>;
-    onLoadCharacter: (character: Perso) => void;
+    onLoadCharacter: (perso: Perso) => void;
 }
 
 export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFormProps) {

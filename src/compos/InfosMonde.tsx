@@ -1,11 +1,9 @@
-import {Perso} from "../types/Perso.ts";
 import {List, ListItem, ListItemText} from "@mui/material";
+import {useContext} from "react";
+import {PersoContexte, PersoContexteType} from "../contexte/PersoContexte.tsx";
 
-interface InfosMondeProps {
-    perso: Perso;
-}
-
-export default function InfosMonde({ perso }: Readonly<InfosMondeProps>) {
+export default function InfosMonde() {
+    const { perso } = useContext(PersoContexte) as PersoContexteType;
     return (
         <List dense>
             <ListItem>

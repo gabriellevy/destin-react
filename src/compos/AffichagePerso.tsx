@@ -1,14 +1,15 @@
 import {Box, Button, List, ListItem, ListItemText, Stack, Typography} from '@mui/material';
-import {Perso} from "../types/Perso.ts";
 import {age} from "../types/Date.ts";
 import {getCaracNbDeTestsFaits, getCaracValue, TypeCarac} from "../types/caracs/Caracs.ts";
+import {useContext} from "react";
+import {PersoContexte, PersoContexteType} from "../contexte/PersoContexte.tsx";
 
 interface AffichagePersoProps {
-    perso: Perso;
     exporter: () => void;
 }
 
-export default function AffichagePerso({ perso, exporter }: Readonly<AffichagePersoProps>) {
+export default function AffichagePerso({ exporter }: Readonly<AffichagePersoProps>) {
+    const { perso } = useContext(PersoContexte) as PersoContexteType;
     return (
         <Box component="nav" aria-label="My site" sx={{ flexGrow: 1 }}>
             <List dense>
