@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext} from 'react';
+import {useState, useEffect, useContext, useCallback} from 'react';
 import {Box, Typography, Paper, Grid2} from '@mui/material';
 import {evts_ubersreik} from "../donnees/histoire/lieux/reikland/ubersreik/evts_ubersreik.ts";
 import {Evt, EvtExecute, filtrerEtPreparerEvts} from "../types/Evt.ts";
@@ -24,84 +24,75 @@ export default function Histoire() {
     const [plusDEvts, setPlusDEvts] = useState(false); // true si il n'y a plus aucun evt exécutable
     const { perso, setPerso } = useContext(PersoContexte) as PersoContexteType;
 
-    useEffect(() => {
-        let isMounted = true;
-        let idCompteARebours: number;
+    const executerEvt = useCallback((evtExecute: Evt) => {
+        const nouvEvt: EvtExecute = {
+            id: evtExecute.id,
+            dateStr: jourStr(perso.date),
+            texteFinal: evtExecute.description(perso), // l'exécution elle-même
+            image: evtExecute.image,
+        };
 
-        function executerEvt(evtExecute: Evt) {
-            const nouvEvt: EvtExecute = {
-                id: evtExecute.id,
-                dateStr: jourStr(perso.date),
-                texteFinal: evtExecute.description(perso), // l'exécution elle-même
-                image: evtExecute.image,
-            };
+        setEvtsExecutes((prev: EvtExecute[]) => [
+            ...prev,
+            nouvEvt
+        ]);
 
-            setEvtsExecutes((prev: EvtExecute[]) => [
-                ...prev,
-                nouvEvt
-            ]);
+        setPerso(perso);
+    }, [perso, setPerso]);
 
-            setPerso(perso);
+    const determinerEvtSuivant = useCallback(() => {
+        setPerso(leTempsPasse(perso, executerEvt));
+
+        // filtrer les evts non applicables
+        const evtsApplicables: Evt[] = [
+            ...filtrerEtPreparerEvts(evts_ubersreik, perso),
+            ...filtrerEtPreparerEvts(evts_ubersreik_nains, perso),
+            ...filtrerEtPreparerEvts(evts_calendrier, perso),
+            ...filtrerEtPreparerEvts(evts_dunkelbild, perso),
+            ...filtrerEtPreparerEvts(evts_sylvanie, perso),
+            ...filtrerEtPreparerEvts(evts_wissenland, perso),
+            ...filtrerEtPreparerEvts(evts_altdorf, perso),
+            ...filtrerEtPreparerEvts(evts_talabecland, perso),
+            ...filtrerEtPreparerEvts(evts_ostermark, perso),
+            ...filtrerEtPreparerEvts(evts_stirland, perso),
+            ...filtrerEtPreparerEvts(evts_crime, perso),
+            ...filtrerEtPreparerEvts(evts_pretres, perso),
+            ...filtrerEtPreparerEvts(evts_ingenieur, perso),
+            ...filtrerEtPreparerEvts(evts_carnaval, perso),
+            ...filtrerEtPreparerEvts(evts_batelier, perso),
+        ];
+
+        if (evtsApplicables.length > 0) {
+            // sélectionner un des evts en fonction de leur proba
+            let completeProba: number = 0;
+            evtsApplicables.forEach(evt => {
+                if (evt.proba) {
+                    completeProba += evt.proba;
+                }
+            })
+            let randomProba: number = Math.random() * completeProba;
+
+            evtsApplicables.every(evt => {
+                if (evt.proba) {
+                    randomProba -= evt.proba;
+                    if (randomProba <= 0) {
+                        executerEvt(evt);
+                        return false;
+                    }
+                }
+                return true
+            })
+
+            setTimeout(determinerEvtSuivant, 5000);
+        } else {
+            setPlusDEvts(true);
         }
+    }, [executerEvt, perso, setPerso]);
 
-        const determinerEvtSuivant = () => {
-            if (!isMounted) return;
-
-            setPerso(leTempsPasse(perso, executerEvt));
-
-            // filtrer les evts non applicables
-            const evtsApplicables: Evt[] = [
-                ...filtrerEtPreparerEvts(evts_ubersreik, perso),
-                ...filtrerEtPreparerEvts(evts_ubersreik_nains, perso),
-                ...filtrerEtPreparerEvts(evts_calendrier, perso),
-                ...filtrerEtPreparerEvts(evts_dunkelbild, perso),
-                ...filtrerEtPreparerEvts(evts_sylvanie, perso),
-                ...filtrerEtPreparerEvts(evts_wissenland, perso),
-                ...filtrerEtPreparerEvts(evts_altdorf, perso),
-                ...filtrerEtPreparerEvts(evts_talabecland, perso),
-                ...filtrerEtPreparerEvts(evts_ostermark, perso),
-                ...filtrerEtPreparerEvts(evts_stirland, perso),
-                ...filtrerEtPreparerEvts(evts_crime, perso),
-                ...filtrerEtPreparerEvts(evts_pretres, perso),
-                ...filtrerEtPreparerEvts(evts_ingenieur, perso),
-                ...filtrerEtPreparerEvts(evts_carnaval, perso),
-                ...filtrerEtPreparerEvts(evts_batelier, perso),
-            ];
-
-            if (evtsApplicables.length > 0) {
-                // sélectionner un des evts en fonction de leur proba
-                let completeProba: number = 0;
-                evtsApplicables.forEach(evt => {
-                    if (evt.proba) {
-                        completeProba += evt.proba;
-                    }
-                })
-                let randomProba: number = Math.random() * completeProba;
-
-                evtsApplicables.every(evt => {
-                    if (evt.proba) {
-                        randomProba -= evt.proba;
-                        if (randomProba <= 0) {
-                            executerEvt(evt);
-                            return false;
-                        }
-                    }
-                    return true
-                })
-
-                idCompteARebours = setTimeout(determinerEvtSuivant, 5000);
-            } else {
-                setPlusDEvts(true);
-            }
-        };
-
-        determinerEvtSuivant();
-
-        return () => {
-            isMounted = false;
-            if (idCompteARebours) clearTimeout(idCompteARebours);
-        };
-    }, [setPerso]);
+    // démarrer la boucle d'événements
+    useEffect(() => {
+            determinerEvtSuivant()
+    }, []);
 
     return (
         <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%', overflowY: 'auto' }}>
