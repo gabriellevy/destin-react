@@ -9,6 +9,8 @@ export enum Ville {
     delberz = 'Delberz',
     sotturn = 'Sotturn',
     malstedt = 'Malstedt',
+    grubentreich = 'Grubentreich',
+    schoninghagen = 'Schoninghagen',
     dunkelbild = 'Dunkelbild',
     waldenhof = 'Waldenhof',
     heisenberg = 'Heisenberg',

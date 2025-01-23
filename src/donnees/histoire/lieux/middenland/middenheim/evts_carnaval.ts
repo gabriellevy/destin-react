@@ -5,6 +5,13 @@ import {compareStatut, MetalStatut} from "../../../../../types/Statut.ts";
 import {Ville} from "../../../../geographie/villes.ts";
 import {vaA} from "../../../../../types/lieux/Lieu.ts";
 
+const arriveeMiddenheim: (perso: Perso)=>string = (perso: Perso) => {
+    const texte: string =  "Vous arrivez enfin à <b>Middenheim</b>. ";
+    // TODO arrivée, installation, description, taxes??
+    vaA(perso, Ville.middenheim);
+    return texte;
+}
+
 export const evts_carnaval: GroupeEvts = {
     evts: [
         {
@@ -26,9 +33,22 @@ export const evts_carnaval: GroupeEvts = {
                         + "</i>";
 
                     // ajout des evts du voyage jour par jour
+                    const etapeSchoninghagen: (perso: Perso)=>string = (perso: Perso) => {
+                        const texte: string =  "La diligence s'arrête à <b>Schoninghagen</b>. ";
+                        vaA(perso, Ville.schoninghagen);
+                        perso.evtsProgrammes.set(perso.date + 1, arriveeMiddenheim);
+                        return texte;
+                    }
+                    const etapeGrubentreich: (perso: Perso)=>string = (perso: Perso) => {
+                        const texte: string =  "La diligence s'arrête à <b>Grubentreich</b>, une petite ville marchande réputée pour son succulent fromage de chèvre. ";
+                        vaA(perso, Ville.grubentreich);
+                        perso.evtsProgrammes.set(perso.date + 1, etapeSchoninghagen);
+                        return texte;
+                    }
                     const etapeMalstedt: (perso: Perso)=>string = (perso: Perso) => {
                         const texte: string =  "La diligence sort enfin de la grande forêt oppressante de la Drakwald et s'arrête à <b>Malstedt</b>, au milieu des Collines Ondoyantes. ";
                         vaA(perso, Ville.malstedt);
+                        perso.evtsProgrammes.set(perso.date + 1, etapeGrubentreich);
                         return texte;
                     }
                     const etapeSotturn: (perso: Perso)=>string = (perso: Perso) => {
