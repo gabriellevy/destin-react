@@ -4,6 +4,8 @@ export enum Ville {
     frederheim = 'Frederheim',
     kutenholz = 'Kutenholz',
     coeurDeLaForet = 'Coeur de la forêt',
+    brockel = 'Bröckel',
+    mittelweg = 'Mittelweg',
     dunkelbild = 'Dunkelbild',
     waldenhof = 'Waldenhof',
     heisenberg = 'Heisenberg',

@@ -26,22 +26,39 @@ export const evts_carnaval: GroupeEvts = {
                         + "</i>";
 
                     // ajout des evts du voyage jour par jour
+                    const etapeMittelweg: (perso: Perso)=>string = (perso: Perso) => {
+                        const texte: string =  "L'auberge <b>La maison à Mi-Chemin</b> est la plus ancienne auberge de la route qui relie Altdork à Middenheim. "
+                        + "Son large mur d'enceinte porte encore les marques des attaques subies par les force du chaos deux siècles plus tôt. "
+                        + "La maison à Mi-chemin porte avec fierté son histoire et son emplacement à Mi chemin des deux grandes villes. "
+                        + "Une grande fête de la mi-trajet est organisée avec un repas raffiné (quoique coûteux) , de la boisson à volonté et des souvenirs, y compris les fameuses choppes de demi-pintes. "
+                        + "Ces contenants semblent normal d'un côté mais sont plats de l'autre, comme s'ils étaient coupés en deux verticalement. "
+                        + "Traditionnellement ils sont servis à table par paire avec des pinces en bois qui maintiennent les deux côtés ensemble. ";
+                        vaA(perso, Ville.mittelweg);
+                        return texte;
+                    }
+                    const etapeBrockel: (perso: Perso)=>string = (perso: Perso) => {
+                        const texte: string =  "Vous vous arrêtez dans l'auberge <b>Les armes de Bröckel</b>. ";
+                        vaA(perso, Ville.brockel);
+                        perso.evtsProgrammes.set(perso.date + 1, etapeMittelweg);
+                        return texte;
+                    }
                     const etapeCoeurDeLaForet: (perso: Perso)=>string = (perso: Perso) => {
-                        const texte: string =  "Vous vous arrêtez dans l'auberge relais fortifiée appelée 'Le coeur de la forêt'. "
+                        const texte: string =  "Vous vous arrêtez dans l'auberge relais fortifiée appelée <b>Le coeur de la forêt</b>. "
                             + "Ses murs garnis de pointes font 6 mètres de haut. De quoi décourager les homme-bêtes de la Drakwald";
                         vaA(perso, Ville.coeurDeLaForet);
+                        perso.evtsProgrammes.set(perso.date + 1, etapeBrockel);
                         return texte;
                     }
                     const etapeKutenholz: (perso: Perso)=>string = (perso: Perso) => {
 
-                        const texte: string =  "La diligence s'arrête à Kutenholz, le premier arrêt dans le middenland. "
+                        const texte: string =  "La diligence s'arrête à <b>Kutenholz</b>, le premier arrêt dans le middenland. "
                             + "Un grand sanctuaire dédié à Ulric se trouve à proximité, sans doute est-ce pour cela que l'auberge s'appelle 'la tête du loup'";
                         vaA(perso, Ville.kutenholz);
                         perso.evtsProgrammes.set(perso.date + 1, etapeCoeurDeLaForet);
                         return texte;
                     }
                     const etapeFrederheim: (perso: Perso)=>string = (perso: Perso) => {
-                        const texte: string =  "La diligence s'arrête à Frederheim, connue principalement pour le grand hospice de Shallya. ";
+                        const texte: string =  "La diligence s'arrête à <b>Frederheim</b>, connue principalement pour le grand hospice de Shallya. ";
                         vaA(perso, Ville.frederheim);
                         perso.evtsProgrammes.set(perso.date + 1, etapeKutenholz);
                         return texte;

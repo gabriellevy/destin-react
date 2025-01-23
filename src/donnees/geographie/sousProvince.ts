@@ -16,7 +16,12 @@ export function getVilles(sousProvinceStr: string):Ville[] {
     switch (sousProvinceStr) {
         case SousProvince.ducheUbersreik : return [Ville.ubersreik];
         case SousProvince.principauteAltdorf : return [Ville.altdorf, Ville.frederheim];
-        case SousProvince.middenland : return [Ville.kutenholz, Ville.coeurDeLaForet];
+        case SousProvince.middenland : return [
+            Ville.kutenholz,
+            Ville.coeurDeLaForet,
+            Ville.brockel,
+            Ville.mittelweg
+        ];
         case SousProvince.ducheMiddenheim : return [Ville.middenheim, Ville.dunkelbild];
         case SousProvince.waldenhof : return [Ville.waldenhof];
         case SousProvince.heisenberg : return [Ville.heisenberg];
