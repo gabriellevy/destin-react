@@ -1,6 +1,7 @@
 import {d10} from "../../fonctions/des.ts";
 import {Perso} from "../Perso.ts";
 import {Race} from "../../donnees/races/Races.ts";
+import {ResultatExecution} from "../Evt.ts";
 
 export type Carac = {
     val: number,
@@ -128,12 +129,12 @@ export enum TypeCarac {
     soc = "Soc",
 }
 
-export function getCaracValue(perso: Perso, carac: TypeCarac): number {
-    return perso?.caracs?.get(carac?.toString())?.val || -1;
+export function getCaracValue(perso: Perso, typeCarac: TypeCarac): number {
+    return perso.caracs.find((carac: Carac) => carac.typeCarac === typeCarac)?.val || -1;
 }
 
-export function getCaracNbDeTestsFaits(perso: Perso, carac: TypeCarac): number {
-    return perso?.caracs?.get(carac?.toString())?.nbDeTestsFaits || 0;
+export function getCaracNbDeTestsFaits(perso: Perso, typeCarac: TypeCarac): number {
+    return perso.caracs.find((carac: Carac) => carac.typeCarac === typeCarac)?.nbDeTestsFaits || 0;
 }
 
 // seuils de progression des caracs (en nombres de tests sur ces caracs)
@@ -149,8 +150,9 @@ export const seuils: number[] = [
     511,
 ];
 
-export function augmenterNbDeTestsFaitsCarac(perso: Perso, typeCarac: TypeCarac): string {
-    const carac: Carac | undefined = perso.caracs.get(typeCarac);
+export function augmenterNbDeTestsFaitsCarac(perso: Perso, typeCarac: TypeCarac): ResultatExecution {
+    const carac: Carac | undefined = perso.caracs.find((carac:Carac) => carac.typeCarac === typeCarac);
+    let texte: string = "";
     if (carac !== undefined) {
         const nbTests: number = carac.nbDeTestsFaits + 1;
         carac.nbDeTestsFaits = nbTests;
@@ -158,62 +160,62 @@ export function augmenterNbDeTestsFaitsCarac(perso: Perso, typeCarac: TypeCarac)
             // gain d'un point de compétence :
             if (carac) {
                 carac.val += 1;
-                return "<b>+1 en " + carac.typeCarac.toString() + ". </b> ";
+                texte = "<b>+1 en " + carac.typeCarac.toString() + ". </b> ";
             }
         }
     }
-    return "";
+    return {texte : texte, perso: perso};
 }
 
-export const caracsDeBase = (race: Race) => new Map<string, Carac>([
-    [TypeCarac.cc, {
+export const caracsDeBase = (race: Race) => [
+    {
         val: caracDeDepartAleatoire(TypeCarac.cc, race),
         nbDeTestsFaits: 0,
         typeCarac: TypeCarac.cc,
-    }],
-    [TypeCarac.ct, {
+    },
+    {
         val: caracDeDepartAleatoire(TypeCarac.ct, race),
         nbDeTestsFaits: 0,
         typeCarac: TypeCarac.ct,
-    }],
-    [TypeCarac.f, {
+    },
+    {
         val: caracDeDepartAleatoire(TypeCarac.f, race),
         nbDeTestsFaits: 0,
         typeCarac: TypeCarac.f,
-    }],
-    [TypeCarac.e, {
+    },
+    {
         val: caracDeDepartAleatoire(TypeCarac.e, race),
         nbDeTestsFaits: 0,
         typeCarac: TypeCarac.e,
-    }],
-    [TypeCarac.i, {
+    },
+    {
         val: caracDeDepartAleatoire(TypeCarac.i, race),
         nbDeTestsFaits: 0,
         typeCarac: TypeCarac.i,
-    }],
-    [TypeCarac.ag, {
+    },
+    {
         val: caracDeDepartAleatoire(TypeCarac.ag, race),
         nbDeTestsFaits: 0,
         typeCarac: TypeCarac.ag,
-    }],
-    [TypeCarac.dex, {
+    },
+    {
         val: caracDeDepartAleatoire(TypeCarac.dex, race),
         nbDeTestsFaits: 0,
         typeCarac: TypeCarac.dex,
-    }],
-    [TypeCarac.int, {
+    },
+    {
         val: caracDeDepartAleatoire(TypeCarac.int, race),
         nbDeTestsFaits: 0,
         typeCarac: TypeCarac.int,
-    }],
-    [TypeCarac.fm, {
+    },
+    {
         val: caracDeDepartAleatoire(TypeCarac.fm, race),
         nbDeTestsFaits: 0,
         typeCarac: TypeCarac.fm,
-    }],
-    [TypeCarac.soc, {
+    },
+    {
         val: caracDeDepartAleatoire(TypeCarac.soc, race),
         nbDeTestsFaits: 0,
         typeCarac: TypeCarac.soc,
-    }],
-]);
+    },
+];

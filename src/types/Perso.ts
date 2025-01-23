@@ -5,6 +5,7 @@ import {Dieu} from "./Dieu.ts";
 import {Carac} from "./caracs/Caracs.ts";
 import {talents} from "../donnees/talents.ts";
 import {Race} from "../donnees/races/Races.ts";
+import {ResultatExecution} from "./Evt.ts";
 
 export type Perso = {
     nom: string;
@@ -17,12 +18,12 @@ export type Perso = {
     mois?: string, // déduit de date mais pratique pour optimiser les calculs de conditions en masse
     jourDuMois: number, // déduit de date mais pratique pour optimiser les calculs de conditions en masse
     statut: Statut;
-    carrieres: Map<metiersEnum, Carriere>,
+    carrieres: Map<metiersEnum, Carriere>, // TODO : conversion en tableau plutôt : évitera des pb d'export de json etc
     // surtout utile si affilié à un temple (ou très très croyant en un dieu particulier)
     dieu: Dieu,
-    caracs: Map<string, Carac>,
+    caracs: Carac[],
     talents: talents[],
-    evtsProgrammes: Map<number, (perso: Perso)=>string>
+    evtsProgrammes: Map<number, (perso: Perso)=>ResultatExecution>
 };
 
 export enum Sexe {

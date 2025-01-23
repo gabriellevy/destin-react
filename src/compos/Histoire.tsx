@@ -1,7 +1,7 @@
 import {useState, useEffect, useContext, useCallback} from 'react';
 import {Box, Typography, Paper, Grid2} from '@mui/material';
 import {evts_ubersreik} from "../donnees/histoire/lieux/reikland/ubersreik/evts_ubersreik.ts";
-import {Evt, EvtExecute, filtrerEtPreparerEvts} from "../types/Evt.ts";
+import {Evt, EvtExecute, filtrerEtPreparerEvts, ResultatExecution} from "../types/Evt.ts";
 import {jourStr, leTempsPasse} from "../types/Date.ts";
 import {evts_calendrier} from "../donnees/histoire/evts_calendrier.ts";
 import {evts_dunkelbild} from "../donnees/histoire/lieux/evts_dunkelbild.ts";
@@ -17,7 +17,8 @@ import {evts_ubersreik_nains} from "../donnees/histoire/lieux/reikland/ubersreik
 import {evts_ingenieur} from "../donnees/histoire/carrieres/evts_ingenieur.ts";
 import {evts_batelier} from "../donnees/histoire/carrieres/evts_bateliers.ts";
 import {evts_carnaval} from "../donnees/histoire/lieux/middenland/middenheim/evts_carnaval.ts";
-import {PersoContexte, PersoContexteType} from "../contexte/PersoContexte.tsx";
+import {PersoContexte, PersoContexteType} from "../contexte/ContexteTypes.ts";
+import {Perso} from "../types/Perso.ts";
 
 export default function Histoire() {
     const [evtsExecutes, setEvtsExecutes] = useState<EvtExecute[]>([]); // événements déjà exécutés
@@ -25,10 +26,11 @@ export default function Histoire() {
     const { perso, setPerso } = useContext(PersoContexte) as PersoContexteType;
 
     const executerEvt = useCallback((evtExecute: Evt) => {
+        const res: ResultatExecution = evtExecute.description(perso);
         const nouvEvt: EvtExecute = {
             id: evtExecute.id,
             dateStr: jourStr(perso.date),
-            texteFinal: evtExecute.description(perso), // l'exécution elle-même
+            texteFinal: res.texte, // l'exécution elle-même
             image: evtExecute.image,
         };
 
@@ -37,11 +39,17 @@ export default function Histoire() {
             nouvEvt
         ]);
 
-        setPerso(perso);
+        const updatePerso:Perso = res.perso ?? perso;
+        setPerso({
+            ...updatePerso,
+        });
     }, [perso, setPerso]);
 
     const determinerEvtSuivant = useCallback(() => {
-        setPerso(leTempsPasse(perso, executerEvt));
+        const updatePerso:Perso = leTempsPasse(perso, executerEvt);
+        setPerso({
+            ...updatePerso,
+        });
 
         // filtrer les evts non applicables
         const evtsApplicables: Evt[] = [
@@ -91,7 +99,9 @@ export default function Histoire() {
 
     // démarrer la boucle d'événements
     useEffect(() => {
+        return ()=> {
             determinerEvtSuivant()
+        }
     }, []);
 
     return (

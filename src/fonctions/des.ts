@@ -2,6 +2,7 @@ import {ResultatTest, TestCarac, TestMetier} from "../types/LancerDe.ts";
 import {augmenterNbDeTestsFaitsCarac, getCaracValue} from "../types/caracs/Caracs.ts";
 import {Perso} from "../types/Perso.ts";
 import {augmenterNbDeTestsFaitsMetier, getCompetenceMetier} from "../types/metiers/metiersUtils.ts";
+import {ResultatExecution} from "../types/Evt.ts";
 
 export function d10(): number {
     return Math.floor(Math.random() * 10) + 1;
@@ -13,36 +14,38 @@ export function d100(): number {
 export function testCarac(perso: Perso, test: TestCarac): ResultatTest {
     const caracValue: number = getCaracValue(perso, test.carac);
     // augmenter tests effectués :
-    const texteAugmentation: string = augmenterNbDeTestsFaitsCarac(perso, test.carac);
-    return returnTestResult(texteAugmentation, test.carac, caracValue, test.bonusMalus);
+    const resAugmentation: ResultatExecution = augmenterNbDeTestsFaitsCarac(perso, test.carac);
+    return returnTestResult(resAugmentation, test.carac, caracValue, test.bonusMalus, perso);
 }
 
 export function testMetier(perso: Perso, test: TestMetier): ResultatTest {
     const caracValue: number = getCompetenceMetier(perso, test.metier);
     // augmenter tests effectués :
-    const texteAugmentation: string = augmenterNbDeTestsFaitsMetier(perso, test.metier);
-    return returnTestResult(texteAugmentation, test.metier, caracValue, test.bonusMalus);
+    const resAugmentation: ResultatExecution = augmenterNbDeTestsFaitsMetier(perso, test.metier);
+    return returnTestResult(resAugmentation, test.metier, caracValue, test.bonusMalus, perso);
 }
 
 /**
  *
- * @param texteAugmentation
+ * @param resAugmentation
  * @param intituleTestee
  * @param valeurTestee peut être une compétence, une carac, un métier...
  * @param bonusMalus
+ * @param persoDeSecours
  */
-function returnTestResult(texteAugmentation: string, intituleTestee:string, valeurTestee: number, bonusMalus: number) {
+function returnTestResult(resAugmentation: ResultatExecution, intituleTestee:string, valeurTestee: number, bonusMalus: number, persoDeSecours: Perso): ResultatTest {
     const resDe: number = d100();
     const reussi: boolean = resDe <= (valeurTestee + bonusMalus);
     const texte: string = "<i>Test de "
         + intituleTestee + " "
         + (reussi ? "réussi" : "raté")
         + ` (résultat ${resDe} contre compétence ${valeurTestee} ${bonusMalus > 0 ? "+" : ""} ${bonusMalus} ) `
-        + texteAugmentation
+        + resAugmentation.texte
         + "</i><br/>";
     return {
         reussi : reussi,
         critical: resDe % 10 == Math.floor(resDe / 10) || resDe === 100,
         resume : texte,
+        perso: resAugmentation.perso ?? persoDeSecours,
     }
 }

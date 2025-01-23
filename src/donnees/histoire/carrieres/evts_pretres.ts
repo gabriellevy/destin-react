@@ -1,4 +1,4 @@
-import {GroupeEvts} from "../../../types/Evt.ts";
+import {GroupeEvts, ResultatExecution} from "../../../types/Evt.ts";
 import {Perso} from "../../../types/Perso.ts";
 import {metiersEnum, metiersObjs} from "../../../types/metiers/metiers.ts";
 import {dieuAleatoire} from "../../dieux/dieux.ts";
@@ -13,10 +13,11 @@ export const evts_pretres: GroupeEvts = {
     evts: [
         {
             id: "evts_pretres1",
-            description: (perso: Perso): string => {
+            description: (perso: Perso): ResultatExecution => {
                 const dieu:Dieu = dieuAleatoire();
                 let texte: string = `Un jour où vous entrez dans le temple de ${dieu.id} il vous semble sentir sa présence. Une mise à l'épreuve peut-être ? `
                 const resTest:ResultatTest = testCarac(perso, {carac: TypeCarac.fm, bonusMalus: 20});
+                perso = resTest.perso;
                 texte += resTest.resume;
                 if (resTest.reussi) {
                     let metierEnum: metiersEnum = metiersEnum.initie_pretre;
@@ -39,7 +40,7 @@ export const evts_pretres: GroupeEvts = {
                 } else {
                     texte += `Malheureusement la sensation passe aussi vite qu'elle est arrivée. Avez vous échoué ? Vous êtes vous imaginé des choses ? `;
                 }
-                return texte;
+                return {texte: texte, perso: perso};
             },
             conditions: (perso: Perso): boolean =>
                 neSuitPasUneCarriereDe(perso, metiersEnum.initie_pretre)

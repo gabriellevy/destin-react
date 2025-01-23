@@ -2,7 +2,7 @@ import {Box, Button, List, ListItem, ListItemText, Stack, Typography} from '@mui
 import {age} from "../types/Date.ts";
 import {getCaracNbDeTestsFaits, getCaracValue, TypeCarac} from "../types/caracs/Caracs.ts";
 import {useContext} from "react";
-import {PersoContexte, PersoContexteType} from "../contexte/PersoContexte.tsx";
+import {PersoContexte, PersoContexteType} from "../contexte/ContexteTypes.ts";
 
 interface AffichagePersoProps {
     exporter: () => void;

@@ -127,7 +127,7 @@ export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, perso:
     for (joursRellementAjoutes= 0 ; joursRellementAjoutes <= joursAAjouter ; ++joursRellementAjoutes) {
         const dateActuelle = perso.date + joursRellementAjoutes;
         perso.date = perso.date + 1;
-        let efvtProgrammeExecute: boolean = false;
+        let evtProgrammeExecute: boolean = false;
         perso.evtsProgrammes.forEach((value, key)=>{
             if (key === dateActuelle) {
                 const evt: Evt = {
@@ -136,10 +136,10 @@ export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, perso:
                 };
                 executerEvt(evt, perso); // TODO ce ci ne marche pas cf evts_carnaval et les voyages jour par jour
                 // TODO: ? nettoyage des evts exécutés ??
-                efvtProgrammeExecute = true;
+                evtProgrammeExecute = true;
             }
         })
-        if (efvtProgrammeExecute) {
+        if (evtProgrammeExecute) {
             // interrompt le défilement des jours
             break;
         }

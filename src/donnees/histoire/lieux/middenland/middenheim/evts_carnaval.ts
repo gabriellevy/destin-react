@@ -1,4 +1,4 @@
-import {GroupeEvts} from "../../../../../types/Evt.ts";
+import {GroupeEvts, ResultatExecution} from "../../../../../types/Evt.ts";
 import {Perso} from "../../../../../types/Perso.ts";
 import {Province} from "../../../../geographie/provinces.ts";
 import {compareStatut, MetalStatut} from "../../../../../types/Statut.ts";
@@ -9,7 +9,7 @@ export const evts_carnaval: GroupeEvts = {
     evts: [
         {
             id: "aller_au_carnaval",
-            description: (perso: Perso): string => {
+            description: (perso: Perso): ResultatExecution => {
                 let texte: string = "C'est bientôt le carnaval de Middenheim et vous avez une grande envie d'aller vous y changer les idées. ";
                 if (compareStatut(perso.statut, {metalStatut: MetalStatut.bronze, rang: 5})) {
                     texte += "C'est décidé : vous prendrez la diligence depuis Altdorf et de là direction Middenheim. ";
@@ -26,22 +26,31 @@ export const evts_carnaval: GroupeEvts = {
                         + "</i>";
 
                     // ajout des evts du voyage jour par jour
-                    const etapeFrederheim: (perso: Perso)=>string = (perso: Perso) => {
-                        const etapeKutenholz: (perso: Perso)=>string = (perso: Perso) => {
+                    const etapeFrederheim: (perso: Perso)=>ResultatExecution = (perso: Perso) => {
+                        const etapeKutenholz: (perso: Perso)=>ResultatExecution = (perso: Perso) => {
                             const texte: string =  "La diligence s'arrête à Kutenholz. ";
                             vaA(perso, Ville.kutenholz);
-                            return texte;
+                            return {
+                                texte: texte,
+                                perso: perso,
+                            };
                         }
                         const texte: string =  "La diligence s'arrête à Frederheim. ";
                         vaA(perso, Ville.frederheim);
                         perso.evtsProgrammes.set(perso.date + 2, etapeKutenholz);
-                        return texte;
+                        return {
+                            texte: texte,
+                            perso: perso,
+                        };
                     }
                     perso.evtsProgrammes.set(perso.date + 1, etapeFrederheim);
                 } else {
                     texte += "Malheureusement vous n'avez pas les moyens de vous payer le voyage."
                 }
-                return texte;
+                return {
+                    texte: texte,
+                    perso: perso,
+                };
             },
             conditions: (perso: Perso): boolean => perso.lieu.province === Province.reikland && !perso.lieu.enVoyage,
             image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Alex_Eisen.webp",

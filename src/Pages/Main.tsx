@@ -4,8 +4,8 @@ import GenPersoForm from "../compos/GenPersoForm.tsx";
 import AffichagePerso from "../compos/AffichagePerso.tsx";
 import Histoire from "../compos/Histoire.tsx";
 import InfosMonde from "../compos/InfosMonde.tsx";
-import {PersoContexte, PersoContexteType} from "../contexte/PersoContexte.tsx";
 import {Perso} from "../types/Perso.ts";
+import {PersoContexte, PersoContexteType} from "../contexte/ContexteTypes.ts";
 
 const theme = createTheme();
 

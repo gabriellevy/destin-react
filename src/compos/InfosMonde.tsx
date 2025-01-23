@@ -1,6 +1,6 @@
 import {List, ListItem, ListItemText} from "@mui/material";
 import {useContext} from "react";
-import {PersoContexte, PersoContexteType} from "../contexte/PersoContexte.tsx";
+import {PersoContexte, PersoContexteType} from "../contexte/ContexteTypes.ts";
 
 export default function InfosMonde() {
     const { perso } = useContext(PersoContexte) as PersoContexteType;
