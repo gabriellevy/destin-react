@@ -26,9 +26,21 @@ export const evts_carnaval: GroupeEvts = {
                         + "</i>";
 
                     // ajout des evts du voyage jour par jour
+                    const etapeMalstedt: (perso: Perso)=>string = (perso: Perso) => {
+                        const texte: string =  "La diligence sort enfin de la grande forêt oppressante de la Drakwald et s'arrête à <b>Malstedt</b>, au milieu des Collines Ondoyantes. ";
+                        vaA(perso, Ville.malstedt);
+                        return texte;
+                    }
+                    const etapeSotturn: (perso: Perso)=>string = (perso: Perso) => {
+                        const texte: string =  "Vous vous arrêtez à <b>Sotturn</b>, une petite ville marchande. ";
+                        vaA(perso, Ville.sotturn);
+                        perso.evtsProgrammes.set(perso.date + 1, etapeMalstedt);
+                        return texte;
+                    }
                     const etapeDelberz: (perso: Perso)=>string = (perso: Perso) => {
                         const texte: string =  "Vous vous arrêtez à <b>l'auberge du grand chêne</b> de <b>Delberz</b>. ";
                         vaA(perso, Ville.delberz);
+                        perso.evtsProgrammes.set(perso.date + 1, etapeSotturn);
                         return texte;
                     }
                     const etapeMittelweg: (perso: Perso)=>string = (perso: Perso) => {

@@ -22,6 +22,8 @@ export function getVilles(sousProvinceStr: string):Ville[] {
             Ville.brockel,
             Ville.mittelweg,
             Ville.delberz,
+            Ville.sotturn,
+            Ville.malstedt,
         ];
         case SousProvince.ducheMiddenheim : return [Ville.middenheim, Ville.dunkelbild];
         case SousProvince.waldenhof : return [Ville.waldenhof];

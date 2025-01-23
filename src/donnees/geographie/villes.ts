@@ -7,6 +7,8 @@ export enum Ville {
     brockel = 'Bröckel',
     mittelweg = 'Mittelweg',
     delberz = 'Delberz',
+    sotturn = 'Sotturn',
+    malstedt = 'Malstedt',
     dunkelbild = 'Dunkelbild',
     waldenhof = 'Waldenhof',
     heisenberg = 'Heisenberg',
