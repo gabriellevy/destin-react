@@ -5,7 +5,6 @@ import {Dieu} from "./Dieu.ts";
 import {Carac} from "./caracs/Caracs.ts";
 import {talents} from "../donnees/talents.ts";
 import {Race} from "../donnees/races/Races.ts";
-import {ResultatExecution} from "./Evt.ts";
 
 export type Perso = {
     nom: string;
@@ -23,7 +22,7 @@ export type Perso = {
     dieu: Dieu,
     caracs: Carac[],
     talents: talents[],
-    evtsProgrammes: Map<number, (perso: Perso)=>ResultatExecution>
+    evtsProgrammes: Map<number, (perso: Perso)=>string> // TODO : conversion en tableau plutôt : évitera des pb d'export de json etc
 };
 
 export enum Sexe {
