@@ -1,6 +1,6 @@
 import {Perso} from "../../../types/Perso.ts";
 import {metiersEnum, metiersObjs} from "../../../types/metiers/metiers.ts";
-import {GroupeEvts, ResultatExecution} from "../../../types/Evt.ts";
+import {GroupeEvts} from "../../../types/Evt.ts";
 import {ResultatTest} from "../../../types/LancerDe.ts";
 import {testCarac} from "../../../fonctions/des.ts";
 import {TypeCarac} from "../../../types/caracs/Caracs.ts";
@@ -12,7 +12,7 @@ export const evts_batelier: GroupeEvts = {
     evts: [
         {
             id: "evts_batelier1",
-            description: (perso: Perso): ResultatExecution => {
+            description: (perso: Perso): string => {
                 let texte: string = `Vous hésitez à devenir batelier. `
                 const resTestFor:ResultatTest = testCarac(perso, {carac: TypeCarac.f, bonusMalus: 20});
                 const resTestEnd:ResultatTest = testCarac(perso, {carac: TypeCarac.e, bonusMalus: 20});
@@ -32,7 +32,7 @@ export const evts_batelier: GroupeEvts = {
                 } else {
                     texte += `Malheureusement c'est un métier qui demande une très robuste constitution et vous êtes jugé trop frêle par le capitaine. `;
                 }
-                return {texte: texte, perso: perso};
+                return texte;
             },
             conditions: (perso: Perso): boolean =>
                 !aUneCarriere(perso)
@@ -41,7 +41,7 @@ export const evts_batelier: GroupeEvts = {
         },
         {
             id: "evts_batelier2",
-            description: (perso: Perso): ResultatExecution => {
+            description: (perso: Perso): string => {
                 let texte: string = "";
                 const resTestFor:ResultatTest = testCarac(perso, {carac: TypeCarac.f, bonusMalus: 40});
                 const resTestEnd:ResultatTest = testCarac(perso, {carac: TypeCarac.e, bonusMalus: 40});
@@ -52,7 +52,7 @@ export const evts_batelier: GroupeEvts = {
                 } else {
                     texte += `Vous avez beaucoup de mal à tenir le rythme épuisant de votre métier de batelier. `;
                 }
-                return {texte: texte, perso: perso};
+                return texte;
             },
             conditions: (perso: Perso): boolean =>
                 travailleEnCeMomentComme(perso, metiersEnum.batelier),

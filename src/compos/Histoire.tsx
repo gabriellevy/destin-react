@@ -1,7 +1,7 @@
 import {useState, useEffect, useContext, useCallback} from 'react';
 import {Box, Typography, Paper, Grid2} from '@mui/material';
 import {evts_ubersreik} from "../donnees/histoire/lieux/reikland/ubersreik/evts_ubersreik.ts";
-import {Evt, EvtExecute, filtrerEtPreparerEvts, ResultatExecution} from "../types/Evt.ts";
+import {Evt, EvtExecute, filtrerEtPreparerEvts} from "../types/Evt.ts";
 import {jourStr, leTempsPasse} from "../types/Date.ts";
 import {evts_calendrier} from "../donnees/histoire/evts_calendrier.ts";
 import {evts_dunkelbild} from "../donnees/histoire/lieux/evts_dunkelbild.ts";
@@ -26,11 +26,11 @@ export default function Histoire() {
     const { perso, setPerso } = useContext(PersoContexte) as PersoContexteType;
 
     const executerEvt = useCallback((evtExecute: Evt) => {
-        const res: ResultatExecution = evtExecute.description(perso);
+        const texte = evtExecute.description(perso);
         const nouvEvt: EvtExecute = {
             id: evtExecute.id,
             dateStr: jourStr(perso.date),
-            texteFinal: res.texte, // l'exécution elle-même
+            texteFinal: texte, // l'exécution elle-même
             image: evtExecute.image,
         };
 
@@ -39,9 +39,8 @@ export default function Histoire() {
             nouvEvt
         ]);
 
-        const updatePerso:Perso = res.perso ?? perso;
         setPerso({
-            ...updatePerso,
+            ...perso,
         });
     }, [perso, setPerso]);
 
