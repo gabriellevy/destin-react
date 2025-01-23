@@ -26,15 +26,24 @@ export const evts_carnaval: GroupeEvts = {
                         + "</i>";
 
                     // ajout des evts du voyage jour par jour
+                    const etapeCoeurDeLaForet: (perso: Perso)=>string = (perso: Perso) => {
+                        const texte: string =  "Vous vous arrêtez dans l'auberge relais fortifiée appelée 'Le coeur de la forêt'. "
+                            + "Ses murs garnis de pointes font 6 mètres de haut. De quoi décourager les homme-bêtes de la Drakwald";
+                        vaA(perso, Ville.coeurDeLaForet);
+                        return texte;
+                    }
+                    const etapeKutenholz: (perso: Perso)=>string = (perso: Perso) => {
+
+                        const texte: string =  "La diligence s'arrête à Kutenholz, le premier arrêt dans le middenland. "
+                            + "Un grand sanctuaire dédié à Ulric se trouve à proximité, sans doute est-ce pour cela que l'auberge s'appelle 'la tête du loup'";
+                        vaA(perso, Ville.kutenholz);
+                        perso.evtsProgrammes.set(perso.date + 1, etapeCoeurDeLaForet);
+                        return texte;
+                    }
                     const etapeFrederheim: (perso: Perso)=>string = (perso: Perso) => {
-                        const etapeKutenholz: (perso: Perso)=>string = (perso: Perso) => {
-                            const texte: string =  "La diligence s'arrête à Kutenholz. ";
-                            vaA(perso, Ville.kutenholz);
-                            return texte;
-                        }
-                        const texte: string =  "La diligence s'arrête à Frederheim. ";
+                        const texte: string =  "La diligence s'arrête à Frederheim, connue principalement pour le grand hospice de Shallya. ";
                         vaA(perso, Ville.frederheim);
-                        perso.evtsProgrammes.set(perso.date + 2, etapeKutenholz);
+                        perso.evtsProgrammes.set(perso.date + 1, etapeKutenholz);
                         return texte;
                     }
                     perso.evtsProgrammes.set(perso.date + 1, etapeFrederheim);

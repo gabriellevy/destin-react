@@ -31,7 +31,7 @@ export function getSousProvinces(provinceStr: string):SousProvince[] {
         ];
         case Province.middenland : return [
             SousProvince.ducheMiddenheim,
-            SousProvince.chaisPasEntreMiddenlandEtReikland
+            SousProvince.middenland
         ];
         case Province.sylvanie : return [SousProvince.waldenhof];
         case Province.wissenland : return [SousProvince.heisenberg];
