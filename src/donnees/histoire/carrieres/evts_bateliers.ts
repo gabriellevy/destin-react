@@ -15,9 +15,7 @@ export const evts_batelier: GroupeEvts = {
             description: (perso: Perso): ResultatExecution => {
                 let texte: string = `Vous hésitez à devenir batelier. `
                 const resTestFor:ResultatTest = testCarac(perso, {carac: TypeCarac.f, bonusMalus: 20});
-                perso = resTestFor.perso;
                 const resTestEnd:ResultatTest = testCarac(perso, {carac: TypeCarac.e, bonusMalus: 20});
-                perso = resTestEnd.perso;
                 texte += resTestFor.resume;
                 texte += resTestEnd.resume;
                 if (resTestFor.reussi && resTestEnd.reussi) {
@@ -46,9 +44,7 @@ export const evts_batelier: GroupeEvts = {
             description: (perso: Perso): ResultatExecution => {
                 let texte: string = "";
                 const resTestFor:ResultatTest = testCarac(perso, {carac: TypeCarac.f, bonusMalus: 40});
-                perso = resTestFor.perso;
                 const resTestEnd:ResultatTest = testCarac(perso, {carac: TypeCarac.e, bonusMalus: 40});
-                perso = resTestFor.perso;
                 texte += resTestEnd.resume;
                 texte += resTestEnd.resume;
                 if (resTestFor.reussi && resTestEnd.reussi) {

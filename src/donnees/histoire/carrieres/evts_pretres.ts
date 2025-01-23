@@ -17,7 +17,6 @@ export const evts_pretres: GroupeEvts = {
                 const dieu:Dieu = dieuAleatoire();
                 let texte: string = `Un jour où vous entrez dans le temple de ${dieu.id} il vous semble sentir sa présence. Une mise à l'épreuve peut-être ? `
                 const resTest:ResultatTest = testCarac(perso, {carac: TypeCarac.fm, bonusMalus: 20});
-                perso = resTest.perso;
                 texte += resTest.resume;
                 if (resTest.reussi) {
                     let metierEnum: metiersEnum = metiersEnum.initie_pretre;

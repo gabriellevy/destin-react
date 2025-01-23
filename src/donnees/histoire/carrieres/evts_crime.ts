@@ -33,7 +33,6 @@ export const evts_crime: GroupeEvts = {
             description: (perso: Perso): ResultatExecution =>  {
                 let texte: string = "";
                 const resTestCC:ResultatTest = testCarac(perso, {carac: TypeCarac.cc, bonusMalus: 0});
-                perso = resTestCC.perso;
                 texte += resTestCC.resume;
                 if (resTestCC.reussi) {
                     texte += "Bagarre après bagarre, vous vous faites remarquer dans la bande pour votre efficacité au combat. ";

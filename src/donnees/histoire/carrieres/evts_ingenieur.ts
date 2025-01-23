@@ -12,7 +12,6 @@ import {appartientALaGuilde, rejointGuilde} from "../../../types/metiers/Guilde.
 const passageDiplome: (perso: Perso)=>ResultatExecution = (perso: Perso) => {
     let texte: string =  "C'est le jour du passage de diplôme ! ";
     const resTestInge:ResultatTest = testMetier(perso, {metier: metiersEnum.etudiant_ingenieur, bonusMalus: 20});
-    perso = resTestInge.perso;
     texte += resTestInge.resume;
     if (resTestInge.reussi) {
         texte +=  "Au soir vous avez déjà confirmation que vous avez réussi. Vous êtes maintenant un ingénieur à part entière.";
@@ -39,9 +38,7 @@ export const evts_ingenieur: GroupeEvts = {
             description: (perso: Perso): ResultatExecution => {
                 let texte: string = `Vous avez la ferme intention de devenir apprenti ingénieur, mais les tests d'entrée sont difficiles. `
                 const resTestInt:ResultatTest = testCarac(perso, {carac: TypeCarac.int, bonusMalus: 20});
-                perso = resTestInt.perso;
                 const resTestDex:ResultatTest = testCarac(perso, {carac: TypeCarac.dex, bonusMalus: 20});
-                perso = resTestDex.perso;
                 texte += resTestInt.resume;
                 texte += resTestDex.resume;
                 if (resTestInt.reussi && resTestDex.reussi) {
@@ -72,9 +69,7 @@ export const evts_ingenieur: GroupeEvts = {
             description: (perso: Perso): ResultatExecution => {
                 let texte: string = "";
                 const resTestInt:ResultatTest = testCarac(perso, {carac: TypeCarac.int, bonusMalus: 40});
-                perso = resTestInt.perso;
                 const resTestDex:ResultatTest = testCarac(perso, {carac: TypeCarac.dex, bonusMalus: 40});
-                perso = resTestDex.perso;
                 texte += resTestInt.resume;
                 texte += resTestDex.resume;
                 if (resTestInt.reussi && resTestDex.reussi) {
@@ -93,7 +88,6 @@ export const evts_ingenieur: GroupeEvts = {
             description: (perso: Perso): ResultatExecution => {
                 let texte: string = "Vous aimeriez bien rejoindre la guilde des ingénieurs.";
                 const resTestInge:ResultatTest = testMetier(perso, {metier: metiersEnum.etudiant_ingenieur, bonusMalus: 0});
-                perso = resTestInge.perso;
                 texte += resTestInge.resume;
                 if (resTestInge.reussi) {
                     rejointGuilde(perso, metiersEnum.ingenieur);
