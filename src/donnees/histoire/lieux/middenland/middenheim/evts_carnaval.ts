@@ -26,6 +26,11 @@ export const evts_carnaval: GroupeEvts = {
                         + "</i>";
 
                     // ajout des evts du voyage jour par jour
+                    const etapeDelberz: (perso: Perso)=>string = (perso: Perso) => {
+                        const texte: string =  "Vous vous arrêtez à <b>l'auberge du grand chêne</b> de <b>Delberz</b>. ";
+                        vaA(perso, Ville.delberz);
+                        return texte;
+                    }
                     const etapeMittelweg: (perso: Perso)=>string = (perso: Perso) => {
                         const texte: string =  "L'auberge <b>La maison à Mi-Chemin</b> est la plus ancienne auberge de la route qui relie Altdork à Middenheim. "
                         + "Son large mur d'enceinte porte encore les marques des attaques subies par les force du chaos deux siècles plus tôt. "
@@ -34,6 +39,7 @@ export const evts_carnaval: GroupeEvts = {
                         + "Ces contenants semblent normal d'un côté mais sont plats de l'autre, comme s'ils étaient coupés en deux verticalement. "
                         + "Traditionnellement ils sont servis à table par paire avec des pinces en bois qui maintiennent les deux côtés ensemble. ";
                         vaA(perso, Ville.mittelweg);
+                        perso.evtsProgrammes.set(perso.date + 1, etapeDelberz);
                         return texte;
                     }
                     const etapeBrockel: (perso: Perso)=>string = (perso: Perso) => {
