@@ -6,6 +6,7 @@ import {Perso, Sexe} from "../../types/Perso.ts";
 import {caracsDeBase} from "../../types/caracs/Caracs.ts";
 import {evts_programmes} from "../evts/evts_programmes.ts";
 import {Carriere, metiersEnum} from "../../types/metiers/metiers.ts";
+import {unAnAvantDebutCampagne} from "../dates/ennemi_interieur.ts";
 
 export const enfant: Perso = {
     nom: "Wilhelm Hinderten",
@@ -44,8 +45,8 @@ export const bourgeoisDAltdorf: Perso = {
     nom: "Wilhelm Hinderten",
     sexe: Sexe.male,
     race: Race.humain,
-    dateNaissance: anneesToJours(2488),
-    date: anneesToJours(2513), // début du pouvoir derrière le trône 3ème volume
+    dateNaissance: anneesToJours(2491),
+    date: unAnAvantDebutCampagne, // début du pouvoir derrière le trône 3ème volume
     jourDuMois: -1,
     lieu: lieuAltdorf,
     statut: {rang: 1, metalStatut: MetalStatut.argent},

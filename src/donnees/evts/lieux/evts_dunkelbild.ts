@@ -1,7 +1,7 @@
 import {GroupeEvts} from "../../../types/Evt.ts";
 import {Perso} from "../../../types/Perso.ts";
 import {Ville} from "../../geographie/villes.ts";
-import {enumMois} from "../../../types/Date.ts";
+import {enumMois} from "../../dates/calendrier.ts";
 
 export const evts_dunkelbild: GroupeEvts = {
     evts: [

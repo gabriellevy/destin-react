@@ -18,7 +18,7 @@ import {evts_ingenieur} from "../donnees/evts/carrieres/evts_ingenieur.ts";
 import {evts_batelier} from "../donnees/evts/carrieres/evts_bateliers.ts";
 import {evts_carnaval} from "../donnees/evts/lieux/middenland/middenheim/evts_carnaval.ts";
 import {PersoContexte, PersoContexteType} from "../contexte/ContexteTypes.ts";
-import {evts_empireEnGeneral} from "../donnees/evts/histoire/ennemi_intérieur/empireEnGeneral.ts";
+import {evts_empireEI} from "../donnees/evts/histoire/ennemi_intérieur/evts_empireEI.ts";
 import {evts_middenland} from "../donnees/evts/lieux/middenland/evts_middenland.ts";
 
 export default function Histoire() {
@@ -68,7 +68,7 @@ export default function Histoire() {
             ...filtrerEtPreparerEvts(evts_ingenieur, perso),
             ...filtrerEtPreparerEvts(evts_carnaval, perso),
             ...filtrerEtPreparerEvts(evts_batelier, perso),
-            ...filtrerEtPreparerEvts(evts_empireEnGeneral, perso),
+            ...filtrerEtPreparerEvts(evts_empireEI, perso),
             ...filtrerEtPreparerEvts(evts_middenland, perso),
         ];
 
