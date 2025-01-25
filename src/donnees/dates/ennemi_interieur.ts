@@ -4,7 +4,15 @@ import {enumMois} from "./calendrier.ts";
 // date prévue pour laisser au perso le temps de "vivre" avant que les problèmes commencent
 export const unAnAvantDebutCampagne: number = dateCompleteToJourDepuis0(5, enumMois.JAHRDRUNG, 2511);
 
+// I. L'ennemi intérieur
+
 export const assassinatDeVonTasseninck: number = dateCompleteToJourDepuis0(27, enumMois.PFLUGZEIT, 2512);
 
+// II. Mort sur le Reik
+export const editSurLesMutants: number = dateCompleteToJourDepuis0(5, enumMois.PFLUGZEIT, 2512);
 
+
+
+
+// V. L'empire en flammes
 export const finCampagneInterieur: number = dateCompleteToJourDepuis0(14, enumMois.ERNTEZEIT, 2513);

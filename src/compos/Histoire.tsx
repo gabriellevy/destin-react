@@ -126,7 +126,9 @@ export default function Histoire() {
                         </Grid2>
                     )}
                     <Grid2 size={evt.image ? 8 : 12}>
-                        <Typography mb={1} align="left" sx={{ fontSize: 18 }}>{evt.dateStr}</Typography>
+                        {evt.dateStr != '' &&
+                            <Typography mb={1} align="left" sx={{ fontSize: 18 }}>{evt.dateStr}</Typography>
+                        }
                         <Typography mb={2} align="left">
                             <span dangerouslySetInnerHTML={{ __html: evt.texteFinal}} />
                         </Typography>
