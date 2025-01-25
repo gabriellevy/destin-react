@@ -34,6 +34,15 @@ export const evts_empireEI: GroupeEvts = {
                 && perso.date <= grafBorisArriveAAltdorf,
             proba: 1,
         },
+        {
+            id: "evts_empireEI4",
+            description: (): string => "Tous ces nouveaux impôts ne peuvent signifier qu'une chose : le Graf remplit ses coffres pour engager des troupes et des mercenaires "
+            + "Il se prépare peut-être à intervenir dans le conflit croissant entre l'Ostland et le Talabecland, ou il a peut-être l'intention de rompre avec l'empereur et de fortifier les rives nord du Reik et du Talabec pour se défendre contre les agressions du sud",
+            conditions: (perso: Perso): boolean => perso.lieu.pays === Pays.empire
+                && perso.date >= assassinatDeVonTasseninck
+                && perso.date <= grafBorisArriveAAltdorf,
+            proba: 1,
+        },
     ],
     probaParDefaut: 2,
 }
