@@ -140,7 +140,7 @@ export function formatJourStr(numeroJourSemaine: number, jourDuMois:number, mois
 export function dateCompleteToJourDepuis0(jourDansMois: number, mois: enumMois, annee: number): number {
     return (anneesToJours(annee) +
         nbJourDuDernierJourDuMois[mois] - nbJoursDansMois[mois] + // début du mois
-        jourDansMois + 1);
+        jourDansMois - 1);
 }
 
 export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, dateDejaAffichee: boolean)=>void): boolean {
@@ -176,7 +176,6 @@ export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, dateDe
         carriere.duree = carriere.duree + joursRellementAjoutes;
     });
 
-    console.debug("date en jours : " + perso.date);
     // console.debug("nouvMoisStr : " + nouvMoisStr);
     perso.mois = nouvMoisStr;
     perso.jourDuMois = nouvJourDuMois;
