@@ -6,7 +6,10 @@ import {Ville} from "../../../../geographie/villes.ts";
 import {vaA} from "../../../../../types/lieux/Lieu.ts";
 
 const arriveeMiddenheim: (perso: Perso)=>string = (perso: Perso) => {
-    const texte: string =  "Vous arrivez enfin à <b>Middenheim</b>. ";
+    const texte: string =  "Vous arrivez enfin à <b>Middenheim</b>. "
+    +"Quatre viaducs gigantesques en pierre s'enroulent autour de la base du rocher, en pente douce. "
+    +"Ils font plus d'un km de long et il va vous falloir longtemps pour atteindre le haut, surtout qu'une longue file d'attente s'y trouve et que croiser les véhicules arrivant en sens inverse est laborieux car personne ne veut s'approcher des rebords. "
+    +"Arrivé au bout on vous fait payer <i>une couronne par jambe</i> pour entrer dans al ville.";
     // TODO arrivée, installation, description, taxes??
     vaA(perso, Ville.middenheim);
     return texte;
@@ -22,10 +25,6 @@ export const evts_carnaval: GroupeEvts = {
                     texte += "C'est décidé : vous prendrez la diligence depuis Altdorf et de là direction Middenheim. ";
                     perso.lieu.enVoyage = true;
                     perso.lieu.residenceVoyage= null;
-                    /* TODO : setter tout ça seulement à la fin :
-                        perso.lieu.ville = Ville.middenheim;
-                    perso.lieu.sousProvince = SousProvince.ducheMiddenheim;
-                    perso.lieu.province = Province.middenland;*/
                     texte += "Dans la diligence les voyageurs sont entousiastes, surtout un marchand nommé Alex Eisen. <br/> "
                         + "<i>Je ne raterais cela pour rien au monde ! "
                         + "Ces gens du nord sont une vraie bande de coincés à tous les autres moments de l'année mais faites leur boire quelques verres pendant le carnaval et c'est parti ! Oh que oui ! "
@@ -46,7 +45,8 @@ export const evts_carnaval: GroupeEvts = {
                         return texte;
                     }
                     const etapeMalstedt: (perso: Perso)=>string = (perso: Perso) => {
-                        const texte: string =  "La diligence sort enfin de la grande forêt oppressante de la Drakwald et s'arrête à <b>Malstedt</b>, au milieu des Collines Ondoyantes. ";
+                        const texte: string =  "La diligence sort enfin de la grande forêt oppressante de la Drakwald et s'arrête à <b>Malstedt</b>, au milieu des Collines Ondoyantes. "
+                        +"Au loin vous pouvez appercevoir l'imposant Fauschlag ainsi que la ville fortifiée de Middenheim perchée à son sommet. ";
                         vaA(perso, Ville.malstedt);
                         perso.evtsProgrammes.set(perso.date + 1, etapeGrubentreich);
                         return texte;

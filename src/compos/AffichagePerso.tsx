@@ -1,9 +1,10 @@
 import {Box, Button, List, ListItem, ListItemText, Stack, Typography} from '@mui/material';
-import {age} from "../types/Date.ts";
+import {age, joursToAnnees} from "../types/Date.ts";
 import {getCaracValue, TypeCarac} from "../types/caracs/Caracs.ts";
 import {useContext} from "react";
 import {PersoContexte, PersoContexteType} from "../contexte/ContexteTypes.ts";
 import {Carriere, metiersEnum} from "../types/metiers/metiers.ts";
+import {JOURS_PAR_AN} from "../donnees/dates/calendrier.ts";
 
 interface AffichagePersoProps {
     exporter: () => void;
@@ -17,11 +18,12 @@ export default function AffichagePerso({ exporter }: Readonly<AffichagePersoProp
         if (carriere.guilde) {
             intituleMetier += ' ('+carriere.guilde+')';
         }
+        const dureeCarriere: string = carriere.duree >= JOURS_PAR_AN ?
+            `(${joursToAnnees(carriere.duree)} années)` : `(${carriere.duree} jours)`;
 
         return (carriere.metier && carriere.actif &&
             <ListItem>
-                <ListItemText primary={intituleMetier}
-                              secondary={`(${carriere.duree} jours)`}/>
+                <ListItemText primary={intituleMetier} secondary={dureeCarriere}/>
             </ListItem>
         );
     }
