@@ -25,6 +25,17 @@ export const evts_middenland: GroupeEvts = {
             conditions: (perso: Perso): boolean => perso.lieu.province === Province.middenland,
             proba: 1,
         },
+        {
+            id: "evts_middenland3",
+            description: (): string => "Les mutants et les bandits continuent d'attaquer les diligences qui traversent la Drakwald. "
+            +"Les grandes compagnies de transport engagent des gardes supplémentaires, les patrouilleurs routiers recrutent à Altdorf et dans les environs. "
+            +"Mais l'empereur n'a aps daigné envoyer de troupes pour protéger la route. "
+            +"Pendant ce temps les groupes de réfugiés qui quitent Middenheim sont à la merci des bandits et des hommes-bêtes. ",
+            conditions: (perso: Perso): boolean => perso.lieu.province === Province.middenland
+                && perso.date >= editSurLesMutants
+                && perso.date <= finCampagneInterieur,
+            proba: 1,
+        },
     ],
     probaParDefaut: 4,
 }
