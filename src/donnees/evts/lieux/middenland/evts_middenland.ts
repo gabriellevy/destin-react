@@ -2,8 +2,9 @@ import {GroupeEvts} from "../../../../types/Evt.ts";
 import {Perso} from "../../../../types/Perso.ts";
 import {Province} from "../../../geographie/provinces.ts";
 import {
+    assassinatDeVonTasseninck,
     editSurLesMutants,
-    finCampagneInterieur,
+    finCampagneInterieur, finDuCarnavalPDT,
 } from "../../../dates/ennemi_interieur.ts";
 
 export const evts_middenland: GroupeEvts = {
@@ -16,6 +17,7 @@ export const evts_middenland: GroupeEvts = {
             conditions: (perso: Perso): boolean => perso.lieu.province === Province.middenland
                 && perso.date >= editSurLesMutants
                 && perso.date <= finCampagneInterieur,
+            proba: 5,
         },
         {
             id: "evts_middenland2",
@@ -34,8 +36,18 @@ export const evts_middenland: GroupeEvts = {
             conditions: (perso: Perso): boolean => perso.lieu.province === Province.middenland
                 && perso.date >= editSurLesMutants
                 && perso.date <= finCampagneInterieur,
-            proba: 1,
+            proba: 5,
+        },
+        {
+            id: "evts_middenland4",
+            description: (): string => "Les partisans d'Ulric deviennent de plus en plus radicaux. "
+            +"Non contents de persécuter les sigmarites honnêtes et dévoués, ils ont commencé à s'en prendre aux prêtres de toutes les autres divinités, et même aux nains qui ont aidé à construire Middenheim. "
+            +"Une série de lois fiscales désastreuses a été adoptée, visant en particulier les elfes, les nains, les sorciers et les prêtres. ",
+            conditions: (perso: Perso): boolean => perso.lieu.province === Province.middenland
+                && perso.date >= assassinatDeVonTasseninck
+                && perso.date <= finDuCarnavalPDT,
+            proba: 5,
         },
     ],
-    probaParDefaut: 4,
+    probaParDefaut: 3,
 }

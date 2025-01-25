@@ -11,7 +11,8 @@ export const assassinatDeVonTasseninck: number = dateCompleteToJourDepuis0(27, e
 // II. Mort sur le Reik
 export const editSurLesMutants: number = dateCompleteToJourDepuis0(5, enumMois.PFLUGZEIT, 2512);
 
-
+// III. Pouvoir derrière le trône
+export const finDuCarnavalPDT: number = dateCompleteToJourDepuis0(19, enumMois.ERNTEZEIT, 2512);
 
 
 // V. L'empire en flammes
