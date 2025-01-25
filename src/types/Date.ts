@@ -117,7 +117,7 @@ export function formatJourStr(numeroJourSemaine: number, jourDuMois:number, mois
     return final;
 }
 
-export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, perso: Perso)=>void) {
+export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, perso: Perso)=>void): void {
     // ajouter 1D20 jours à l'âge du personnage // TODO : quelle vitesse ? paramétrable ?
     const joursAAjouter = Math.floor(Math.random() * 20) + 1;
     let joursRellementAjoutes: number = 0;

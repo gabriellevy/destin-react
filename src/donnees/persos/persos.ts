@@ -4,7 +4,7 @@ import {enVoyageAUbersreik, lieuAltdorf, lieuParDefaut} from "../../types/lieux/
 import {MetalStatut} from "../../types/Statut.ts";
 import {Perso, Sexe} from "../../types/Perso.ts";
 import {caracsDeBase} from "../../types/caracs/Caracs.ts";
-import {evts_programmes} from "../histoire/evts_programmes.ts";
+import {evts_programmes} from "../evts/evts_programmes.ts";
 import {Carriere, metiersEnum} from "../../types/metiers/metiers.ts";
 
 export const enfant: Perso = {
