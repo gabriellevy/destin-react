@@ -5,24 +5,26 @@ import {Carriere} from "./metiers/metiers.ts";
 export const JOURS_PAR_AN = 400;
 export const JOURS_PAR_SEMAINE = 8;
 
-export const HEXENSTAG: string = "Hexenstag";
-export const NACHEXEN: string = "Nachexen";
-export const JAHRDRUNG: string = "Jahrdrung";
-export const PFLUGZEIT: string = "Pflugzeit";
-export const SIGMARZEIT: string = "Sigmarzeit";
-export const SOMMERZEIT: string = "Sommerzeit";
-export const MITTERFRUHL: string = "Mitterfruhl";
-export const SONNSTILL: string = "Sonnstill";
-export const VORGEHEIM: string = "Vorgeheim";
-export const GEHEIMISTAG: string = "Geheimnistag";
-export const NACHGEHEIM: string = "Nachgeheim";
-export const ERNTEZEIT: string = "Erntezeit";
-export const MITTHERBST: string = "Mittherbst";
-export const BRAUZEIT: string = "Brauzeit";
-export const KALDEZEIT: string = "Kaldezeit";
-export const ULRICZEIT: string = "Ulriczeit";
-export const MONDSTILLE: string = "Mondstille";
-export const VORHEXEN: string = "Vorhexen";
+export enum enumMois {
+    HEXENSTAG = "Hexenstag",
+    NACHEXEN = "Nachexen",
+    JAHRDRUNG = "Jahrdrung",
+    PFLUGZEIT = "Pflugzeit",
+    SIGMARZEIT = "Sigmarzeit",
+    SOMMERZEIT = "Sommerzeit",
+    MITTERFRUHL = "Mitterfruhl",
+    SONNSTILL = "Sonnstill",
+    VORGEHEIM = "Vorgeheim",
+    GEHEIMISTAG = "Geheimnistag",
+    NACHGEHEIM = "Nachgeheim",
+    ERNTEZEIT = "Erntezeit",
+    MITTHERBST = "Mittherbst",
+    BRAUZEIT = "Brauzeit",
+    KALDEZEIT = "Kaldezeit",
+    ULRICZEIT = "Ulriczeit",
+    MONDSTILLE = "Mondstille",
+    VORHEXEN = "Vorhexen",
+}
 
 export function joursToAnnees(jours: number) {return Math.floor(jours / JOURS_PAR_AN)}
 export function anneesToJours(annees: number) {return annees * JOURS_PAR_AN}
@@ -37,30 +39,91 @@ export function jourStr(joursDepuis0: number): string {
     return formatJourStr(numeroJourSemaine, calculJourDuMois(joursDepuis0), calculMoisStr(joursDepuis0), annee);
 }
 
+export const nbJoursDansMois:Record<enumMois, number> = {
+    [enumMois.HEXENSTAG]: 1,
+    [enumMois.NACHEXEN]: 32,
+    [enumMois.JAHRDRUNG]: 33,
+    [enumMois.MITTERFRUHL]: 1,
+    [enumMois.PFLUGZEIT]: 33,
+    [enumMois.SIGMARZEIT]: 33,
+    [enumMois.SOMMERZEIT]: 33,
+    [enumMois.SONNSTILL]: 1,
+    [enumMois.VORGEHEIM]: 33,
+    [enumMois.GEHEIMISTAG]: 1,
+    [enumMois.NACHGEHEIM]: 32,
+    [enumMois.ERNTEZEIT]: 33,
+    [enumMois.MITTHERBST]: 1,
+    [enumMois.BRAUZEIT]: 33,
+    [enumMois.KALDEZEIT]: 33,
+    [enumMois.ULRICZEIT]: 33,
+    [enumMois.MONDSTILLE]: 1,
+    [enumMois.VORHEXEN]: 33,
+};
+
+// numéro du jour du dernier jour de chaque mois (sur l'échelle de jours dans une année)
+export const nbJourDuDernierJourDuMois:Record<enumMois, number> = {
+    [enumMois.HEXENSTAG]: 1,
+    [enumMois.NACHEXEN]: 33,
+    [enumMois.JAHRDRUNG]: 66,
+    [enumMois.MITTERFRUHL]: 67,
+    [enumMois.PFLUGZEIT]: 100,
+    [enumMois.SIGMARZEIT]: 133,
+    [enumMois.SOMMERZEIT]: 166,
+    [enumMois.SONNSTILL]: 167,
+    [enumMois.VORGEHEIM]: 200,
+    [enumMois.GEHEIMISTAG]: 201,
+    [enumMois.NACHGEHEIM]: 233,
+    [enumMois.ERNTEZEIT]: 266,
+    [enumMois.MITTHERBST]: 267,
+    [enumMois.BRAUZEIT]: 300,
+    [enumMois.KALDEZEIT]: 333,
+    [enumMois.ULRICZEIT]: 366,
+    [enumMois.MONDSTILLE]: 367,
+    [enumMois.VORHEXEN]: 400,
+};
+
 function calculJourDuMois(joursDepuis0: number): number {
     const joursDepuisDebutAnnee: number = jourDansLAnnee(joursDepuis0);
 
     // détermination du mois
-    if (joursDepuisDebutAnnee == 1) {
+    if (joursDepuisDebutAnnee == nbJourDuDernierJourDuMois[enumMois.HEXENSTAG]) {
         return -1;
     }
-    else if (joursDepuisDebutAnnee <= 33) return joursDepuisDebutAnnee-1;
-    else if (joursDepuisDebutAnnee <= 66) return joursDepuisDebutAnnee-33;
-    else if (joursDepuisDebutAnnee == 67) return -1;
-    else if (joursDepuisDebutAnnee <= 100) return joursDepuisDebutAnnee-67;
-    else if (joursDepuisDebutAnnee <= 133) return joursDepuisDebutAnnee-100;
-    else if (joursDepuisDebutAnnee <= 166) return joursDepuisDebutAnnee-133;
-    else if (joursDepuisDebutAnnee == 167) return -1;
-    else if (joursDepuisDebutAnnee <= 200) return joursDepuisDebutAnnee-167;
-    else if (joursDepuisDebutAnnee == 201) return -1;
-    else if (joursDepuisDebutAnnee <= 233) return joursDepuisDebutAnnee-201;
-    else if (joursDepuisDebutAnnee <= 266) return joursDepuisDebutAnnee-233;
-    else if (joursDepuisDebutAnnee == 267) return -1;
-    else if (joursDepuisDebutAnnee <= 300) return joursDepuisDebutAnnee-267;
-    else if (joursDepuisDebutAnnee <= 333) return joursDepuisDebutAnnee-300;
-    else if (joursDepuisDebutAnnee <= 366) return joursDepuisDebutAnnee-333;
-    else if (joursDepuisDebutAnnee == 367) return -1;
-    else if (joursDepuisDebutAnnee <= 400) return joursDepuisDebutAnnee-367;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.NACHEXEN]) {
+        return joursDepuisDebutAnnee - nbJourDuDernierJourDuMois[enumMois.HEXENSTAG];
+    }
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.JAHRDRUNG])
+        return joursDepuisDebutAnnee-nbJourDuDernierJourDuMois[enumMois.HEXENSTAG];
+    else if (joursDepuisDebutAnnee == nbJourDuDernierJourDuMois[enumMois.MITTERFRUHL])
+        return -1;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.PFLUGZEIT])
+        return joursDepuisDebutAnnee-nbJourDuDernierJourDuMois[enumMois.MITTERFRUHL];
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.SIGMARZEIT])
+        return joursDepuisDebutAnnee-nbJourDuDernierJourDuMois[enumMois.PFLUGZEIT];
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.SOMMERZEIT])
+        return joursDepuisDebutAnnee-nbJourDuDernierJourDuMois[enumMois.SIGMARZEIT];
+    else if (joursDepuisDebutAnnee == nbJourDuDernierJourDuMois[enumMois.SONNSTILL])
+        return -1;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.VORGEHEIM])
+        return joursDepuisDebutAnnee-nbJourDuDernierJourDuMois[enumMois.SONNSTILL];
+    else if (joursDepuisDebutAnnee == nbJourDuDernierJourDuMois[enumMois.GEHEIMISTAG])
+        return -1;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.NACHGEHEIM])
+        return joursDepuisDebutAnnee-nbJourDuDernierJourDuMois[enumMois.GEHEIMISTAG];
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.ERNTEZEIT])
+        return joursDepuisDebutAnnee-nbJourDuDernierJourDuMois[enumMois.NACHGEHEIM];
+    else if (joursDepuisDebutAnnee == nbJourDuDernierJourDuMois[enumMois.MITTHERBST])
+        return -1;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.BRAUZEIT])
+        return joursDepuisDebutAnnee-nbJourDuDernierJourDuMois[enumMois.MITTHERBST];
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.KALDEZEIT])
+        return joursDepuisDebutAnnee-nbJourDuDernierJourDuMois[enumMois.BRAUZEIT];
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.ULRICZEIT])
+        return joursDepuisDebutAnnee-nbJourDuDernierJourDuMois[enumMois.KALDEZEIT];
+    else if (joursDepuisDebutAnnee == nbJourDuDernierJourDuMois[enumMois.MONDSTILLE])
+        return -1;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.VORHEXEN])
+        return joursDepuisDebutAnnee-nbJourDuDernierJourDuMois[enumMois.MONDSTILLE];
 
     return -1;
 }
@@ -69,26 +132,43 @@ function calculMoisStr(joursDepuis0: number): string {
     const joursDepuisDebutAnnee: number = jourDansLAnnee(joursDepuis0);
 
     // détermination du mois
-    if (joursDepuisDebutAnnee == 1) {
-        return HEXENSTAG;
+    if (joursDepuisDebutAnnee == nbJourDuDernierJourDuMois[enumMois.HEXENSTAG]) {
+        return enumMois.HEXENSTAG;
     }
-    else if (joursDepuisDebutAnnee <= 33) return NACHEXEN;
-    else if (joursDepuisDebutAnnee <= 66) return JAHRDRUNG;
-    else if (joursDepuisDebutAnnee == 67) return MITTERFRUHL;
-    else if (joursDepuisDebutAnnee <= 100) return PFLUGZEIT;
-    else if (joursDepuisDebutAnnee <= 133) return SIGMARZEIT;
-    else if (joursDepuisDebutAnnee <= 166) return SOMMERZEIT;
-    else if (joursDepuisDebutAnnee == 167) return SONNSTILL;
-    else if (joursDepuisDebutAnnee <= 200) return VORGEHEIM;
-    else if (joursDepuisDebutAnnee == 201) return GEHEIMISTAG;
-    else if (joursDepuisDebutAnnee <= 233) return NACHGEHEIM;
-    else if (joursDepuisDebutAnnee <= 266) return ERNTEZEIT;
-    else if (joursDepuisDebutAnnee == 267) return MITTHERBST;
-    else if (joursDepuisDebutAnnee <= 300) return BRAUZEIT;
-    else if (joursDepuisDebutAnnee <= 333) return KALDEZEIT;
-    else if (joursDepuisDebutAnnee <= 366) return ULRICZEIT;
-    else if (joursDepuisDebutAnnee == 367) return MONDSTILLE;
-    else if (joursDepuisDebutAnnee <= 400) return VORHEXEN;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.NACHEXEN])
+        return enumMois.NACHEXEN;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.JAHRDRUNG])
+        return enumMois.JAHRDRUNG;
+    else if (joursDepuisDebutAnnee == nbJourDuDernierJourDuMois[enumMois.MITTERFRUHL])
+        return enumMois.MITTERFRUHL;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.PFLUGZEIT])
+        return enumMois.PFLUGZEIT;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.SIGMARZEIT])
+        return enumMois.SIGMARZEIT;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.SOMMERZEIT])
+        return enumMois.SOMMERZEIT;
+    else if (joursDepuisDebutAnnee == nbJourDuDernierJourDuMois[enumMois.SONNSTILL])
+        return enumMois.SONNSTILL;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.VORGEHEIM])
+        return enumMois.VORGEHEIM;
+    else if (joursDepuisDebutAnnee == nbJourDuDernierJourDuMois[enumMois.GEHEIMISTAG])
+        return enumMois.GEHEIMISTAG;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.NACHGEHEIM])
+        return enumMois.NACHGEHEIM;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.ERNTEZEIT])
+        return enumMois.ERNTEZEIT;
+    else if (joursDepuisDebutAnnee == nbJourDuDernierJourDuMois[enumMois.MITTHERBST])
+        return enumMois.MITTHERBST;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.BRAUZEIT])
+        return enumMois.BRAUZEIT;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.KALDEZEIT])
+        return enumMois.KALDEZEIT;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.ULRICZEIT])
+        return enumMois.ULRICZEIT;
+    else if (joursDepuisDebutAnnee == nbJourDuDernierJourDuMois[enumMois.MONDSTILLE])
+        return enumMois.MONDSTILLE;
+    else if (joursDepuisDebutAnnee <= nbJourDuDernierJourDuMois[enumMois.VORHEXEN])
+        return enumMois.VORHEXEN;
 
     return "mois inconnu"
 }
@@ -117,23 +197,29 @@ export function formatJourStr(numeroJourSemaine: number, jourDuMois:number, mois
     return final;
 }
 
-export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, perso: Perso)=>void): void {
+export function dateCompleteToJourDepuis0(jourDansMois: number, mois: enumMois, annee: number): number {
+    return (anneesToJours(annee) +
+        nbJoursDansMois[mois] +
+        jourDansMois);
+}
+
+export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, dateDejaAffichee: boolean)=>void): boolean {
     // ajouter 1D20 jours à l'âge du personnage // TODO : quelle vitesse ? paramétrable ?
     const joursAAjouter = Math.floor(Math.random() * 20) + 1;
     let joursRellementAjoutes: number = 0;
     // const joursAAjouter: number = 1;
 
+    let evtProgrammeExecute: boolean = false;
     // vérifier toutes les dates au cas où un evt "forcé" devrait avoir lieu ici avant
     for (joursRellementAjoutes= 0 ; joursRellementAjoutes <= joursAAjouter ; ++joursRellementAjoutes) {
         perso.date = perso.date + 1;
-        let evtProgrammeExecute: boolean = false;
         perso.evtsProgrammes.forEach((value, key)=>{
             if (key == perso.date) {
                 const evt: Evt = {
                     id: "evt",
                     description:value,
                 };
-                executerEvt(evt, perso);
+                executerEvt(evt, evtProgrammeExecute);
                 // TODO: ? nettoyage des evts exécutés ?? suppression de ceux dont la date est dépassée ?
                 evtProgrammeExecute = true;
             }
@@ -154,4 +240,5 @@ export function leTempsPasse(perso: Perso, executerEvt: (evtExecute: Evt, perso:
     // console.debug("nouvMoisStr : " + nouvMoisStr);
     perso.mois = nouvMoisStr;
     perso.jourDuMois = nouvJourDuMois;
+    return evtProgrammeExecute;
 }

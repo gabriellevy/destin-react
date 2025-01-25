@@ -2,7 +2,7 @@ import {GroupeEvts} from "../../../../../types/Evt.ts";
 import {
     Perso,
 } from "../../../../../types/Perso.ts";
-import {age, JAHRDRUNG, KALDEZEIT, SIGMARZEIT, SOMMERZEIT} from "../../../../../types/Date.ts";
+import {age, enumMois} from "../../../../../types/Date.ts";
 import {compareStatut, MetalStatut} from "../../../../../types/Statut.ts";
 import {ResidenceDeVoyage} from "../../../../../types/lieux/ResidenceDeVoyage.ts";
 import {metiersEnum, metiersObjs} from "../../../../../types/metiers/metiers.ts";
@@ -50,7 +50,7 @@ export const evts_ubersreik: GroupeEvts = {
                 "Cette semaine c'est le festival de Zwiebelfest, la fête des oignons ! " +
                 "Tous les fermiers viennent en vendre à tous les étals de la ville et de nombreuses activités à base d'oignons sont organisées. ",
             conditions: (perso: Perso): boolean => perso.lieu.ville === Ville.ubersreik
-                && perso.mois === KALDEZEIT
+                && perso.mois === enumMois.KALDEZEIT
                 && perso.jourDuMois >= 8 && perso.jourDuMois <= 15,
         },
         {
@@ -58,7 +58,7 @@ export const evts_ubersreik: GroupeEvts = {
             description: (): string =>
                 "Aujourd'hui c'est le Silburmesse, la fête de l'argenterie, pour mettre en avant cette grande spécialisation de la ville d'Ubersreik.",
             conditions: (perso: Perso): boolean => perso.lieu.ville === Ville.ubersreik
-                && perso.mois === SOMMERZEIT
+                && perso.mois === enumMois.SOMMERZEIT
                 && perso.jourDuMois === 5,
         },
         {
@@ -67,7 +67,7 @@ export const evts_ubersreik: GroupeEvts = {
                 "Aujourd'hui c'est le Magnustag, la fête de Magnus le pieux. "
             + "C'est une journée complète de carnaval durant laquelle chaque quartier tente de construire la plus grande effigie de Magnus le pieux.",
             conditions: (perso: Perso): boolean => perso.lieu.ville === Ville.ubersreik
-                && perso.mois === SIGMARZEIT
+                && perso.mois === enumMois.SIGMARZEIT
                 && perso.jourDuMois === 10,
         },
         {
@@ -75,7 +75,7 @@ export const evts_ubersreik: GroupeEvts = {
             description: (): string =>
                 "Aujourd'hui c'est le Brynkulti, une foire mettant en avant les parures nains en or faites par les nains de Dawihafen et des montagnes grises. ",
             conditions: (perso: Perso): boolean => perso.lieu.ville === Ville.ubersreik
-                && perso.mois === JAHRDRUNG
+                && perso.mois === enumMois.JAHRDRUNG
                 && perso.jourDuMois === 1,
         },
         {

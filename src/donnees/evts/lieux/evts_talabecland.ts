@@ -1,7 +1,7 @@
 import {GroupeEvts} from "../../../types/Evt.ts";
 import {Perso} from "../../../types/Perso.ts";
-import {SOMMERZEIT} from "../../../types/Date.ts";
 import {Province} from "../../geographie/provinces.ts";
+import {enumMois} from "../../../types/Date.ts";
 
 export const evts_talabecland: GroupeEvts = {
     evts: [
@@ -12,7 +12,7 @@ export const evts_talabecland: GroupeEvts = {
                 "De jeunes hommes se coiffent de bois de cerfs imposants et s'habillent de peaux du même animal. " +
                 "Un autre groupe joue le rôle de chasseurs équipés d'arcs et de flèches à pointe souple." +
                 "Cette chasse dure jusqu'au petit matin jusqu'à ce que tous les cerfs soient capturés puis suivent de longues séances de beuveries et de bombance.",
-            conditions: (perso: Perso): boolean => perso.lieu.province === Province.talabecland && perso.mois === SOMMERZEIT && perso.jourDuMois <= 7,
+            conditions: (perso: Perso): boolean => perso.lieu.province === Province.talabecland && perso.mois === enumMois.SOMMERZEIT && perso.jourDuMois <= 7,
         },
     ],
     probaParDefaut: 100,

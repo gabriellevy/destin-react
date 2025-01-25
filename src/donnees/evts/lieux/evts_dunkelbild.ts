@@ -1,7 +1,7 @@
 import {GroupeEvts} from "../../../types/Evt.ts";
 import {Perso} from "../../../types/Perso.ts";
-import {PFLUGZEIT} from "../../../types/Date.ts";
 import {Ville} from "../../geographie/villes.ts";
+import {enumMois} from "../../../types/Date.ts";
 
 export const evts_dunkelbild: GroupeEvts = {
     evts: [
@@ -15,7 +15,7 @@ export const evts_dunkelbild: GroupeEvts = {
                 "Elle est ensuite versée sur les nouveaux plants ainsi que sur les granges et les foyers par le prêtre de Taal. " +
                 "Le lac a des pouvoirs curatifs donc les malades, les vieillards et les estropiés affluent pour que le prêtre des recouvre de cette eau sainte. " +
                 "L'odeur bien âcre du village en cette période est signe de bénédiction ! ",
-            conditions: (perso: Perso): boolean => perso.lieu.ville === Ville.dunkelbild && perso.mois === PFLUGZEIT && perso.jourDuMois <= 7,
+            conditions: (perso: Perso): boolean => perso.lieu.ville === Ville.dunkelbild && perso.mois === enumMois.PFLUGZEIT && perso.jourDuMois <= 7,
         },
     ],
     probaParDefaut: 100,

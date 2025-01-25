@@ -26,11 +26,11 @@ export default function Histoire() {
     const [plusDEvts, setPlusDEvts] = useState(false); // true si il n'y a plus aucun evt exécutable
     const { perso, setPerso } = useContext(PersoContexte) as PersoContexteType;
 
-    const executerEvt = useCallback((evtExecute: Evt) => {
+    const executerEvt = useCallback((evtExecute: Evt, dateDejaAffichee: boolean) => {
         const texte = evtExecute.description(perso);
         const nouvEvt: EvtExecute = {
             id: evtExecute.id,
-            dateStr: jourStr(perso.date),
+            dateStr: dateDejaAffichee ? '' : jourStr(perso.date),
             texteFinal: texte, // l'exécution elle-même
             image: evtExecute.image,
         };
@@ -46,7 +46,7 @@ export default function Histoire() {
     }, [perso, setPerso]);
 
     const determinerEvtSuivant = useCallback(() => {
-        leTempsPasse(perso, executerEvt);
+        const dateDejaAffichee: boolean = leTempsPasse(perso, executerEvt);
         setPerso({
             ...perso,
         });
@@ -86,7 +86,7 @@ export default function Histoire() {
                 if (evt.proba) {
                     randomProba -= evt.proba;
                     if (randomProba <= 0) {
-                        executerEvt(evt);
+                        executerEvt(evt, dateDejaAffichee);
                         return false;
                     }
                 }
