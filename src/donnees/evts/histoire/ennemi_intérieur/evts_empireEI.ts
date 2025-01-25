@@ -54,6 +54,16 @@ export const evts_empireEI: GroupeEvts = {
                 && perso.date <= grafBorisArriveAAltdorf,
             proba: 1,
         },
+        {
+            id: "evts_empireEI6",
+            description: (): string => "La belle-mère de mon cousin est blanchisseuse au château Reiksguard. "
+            + "Elle rapporte avoir apperçu le prince héritier Wolfgang, <i>et il ressemble plus à un loup qu'à un Prince. "
+            +"si vous voyez ce que je veux dire.</i>",
+            conditions: (perso: Perso): boolean => perso.lieu.pays === Pays.empire
+                && perso.date >= unAnAvantDebutCampagne
+                && perso.date <= grafBorisArriveAAltdorf,
+            proba: 1,
+        },
     ],
     probaParDefaut: 2,
 }
