@@ -15,4 +15,8 @@ export const editSurLesMutants: number = dateCompleteToJourDepuis0(5, enumMois.P
 
 
 // V. L'empire en flammes
+export const grafBorisArriveAAltdorf: number = dateCompleteToJourDepuis0(20, enumMois.SOMMERZEIT, 2513);
+
+
+// ------------------
 export const finCampagneInterieur: number = dateCompleteToJourDepuis0(14, enumMois.ERNTEZEIT, 2513);
