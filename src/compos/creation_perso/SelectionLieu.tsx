@@ -5,7 +5,7 @@ import {getSousProvinces, Province, provinceOptions} from "../../donnees/geograp
 import {Option} from "../../types/lieux/Lieu.ts";
 import {getVilles, SousProvince} from "../../donnees/geographie/sousProvince.ts";
 import {Ville} from "../../donnees/geographie/villes.ts";
-import {bourgeoisDAltdorf} from "../../donnees/persos/persos.ts";
+import {bourgeoisDAltdorf} from "../../donnees/persos/persos_pregens.ts";
 
 export default function SelectionLieu() {
     const { control, watch, formState: { errors } } = useForm<Perso>({

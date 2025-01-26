@@ -8,6 +8,22 @@ import {evts_programmes} from "../evts/evts_programmes.ts";
 import {Carriere, metiersEnum} from "../../types/metiers/metiers.ts";
 import {unAnAvantDebutCampagne} from "../dates/ennemi_interieur.ts";
 
+export const persoVide: Perso = {
+    nom: "Wilhelm Kaburghen",
+    carrieres: new Map<metiersEnum, Carriere>,
+    caracs: caracsDeBase(Race.humain),
+    date: 0,
+    dateNaissance: 0,
+    dieu: {id: "panthéon de l'empire"},
+    evtsProgrammes: evts_programmes,
+    jourDuMois: 0,
+    lieu: lieuParDefaut,
+    race: Race.humain,
+    sexe: Sexe.male,
+    statut: {rang: 4, metalStatut: MetalStatut.bronze},
+    talents: []
+}
+
 export const enfant: Perso = {
     nom: "Wilhelm Hinderten",
     sexe: Sexe.male,

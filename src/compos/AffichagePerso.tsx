@@ -6,12 +6,18 @@ import {PersoContexte, PersoContexteType} from "../contexte/ContexteTypes.ts";
 import {Carriere, metiersEnum} from "../types/metiers/metiers.ts";
 import {JOURS_PAR_AN} from "../donnees/dates/calendrier.ts";
 
-interface AffichagePersoProps {
-    exporter: () => void;
-}
-
-export default function AffichagePerso({ exporter }: Readonly<AffichagePersoProps>) {
+export default function AffichagePerso() {
     const { perso } = useContext(PersoContexte) as PersoContexteType;
+
+    const exporter = () => {
+        const persoStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(perso));
+        const baliseTelechargement = document.createElement('a');
+        baliseTelechargement.setAttribute("href", persoStr);
+        baliseTelechargement.setAttribute("download", "character.json");
+        document.body.appendChild(baliseTelechargement);
+        baliseTelechargement.click();
+        baliseTelechargement.remove();
+    };
 
     const affichageCarriere = (carriere: Carriere) => {
         let intituleMetier: string = carriere.metier.intitule(perso, carriere);

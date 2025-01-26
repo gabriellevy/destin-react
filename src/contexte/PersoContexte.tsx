@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Perso} from "../types/Perso.ts";
-import {jeuneHommeEnVoyageAUbersreik} from "../donnees/persos/persos.ts";
+import {jeuneHommeEnVoyageAUbersreik} from "../donnees/persos/persos_pregens.ts";
 import { PersoContexte } from "./ContexteTypes.ts";
 
 export const PersoContexteProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
