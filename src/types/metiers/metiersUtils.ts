@@ -1,7 +1,6 @@
 import {Carriere, metiersEnum} from "./metiers.ts";
 import {Perso} from "../Perso.ts";
 import {seuils} from "../caracs/Caracs.ts";
-import {ResultatExecution} from "../Evt.ts";
 
 // seulement els carrières actives
 export function aUneCarriere(perso: Perso): boolean {
@@ -60,7 +59,7 @@ export function getCompetenceMetier(perso: Perso, metier: metiersEnum): number {
     }
     return competence;
 }
-export function augmenterNbDeTestsFaitsMetier(perso: Perso, metier: metiersEnum): ResultatExecution {
+export function augmenterNbDeTestsFaitsMetier(perso: Perso, metier: metiersEnum): string {
     const carriere: Carriere | undefined = perso.carrieres.get(metier);
     if (carriere !== undefined) {
         const nbTests: number = carriere.nbDeTestsFaits + 1;
@@ -68,10 +67,10 @@ export function augmenterNbDeTestsFaitsMetier(perso: Perso, metier: metiersEnum)
         if (seuils.includes(nbTests)) {
             // gain d'un point de compétence :
             carriere.competence += 1;
-            return {texte: "+1 en " + metier.toString() + ". ", perso:perso};
+            return "+1 en " + metier.toString() + ". ";
         }
     }
-    return {texte: "", perso:perso};
+    return "";
 }
 
 

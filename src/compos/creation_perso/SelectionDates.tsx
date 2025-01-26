@@ -12,13 +12,13 @@ export default function SelectionDates() {
         <>
             <Grid2 size={6}>
                 <Controller
-                    name="date"
+                    name="anneeDeDepart"
                     control={control}
-                    rules={{ required: "Date de départ", min: 0 }}
+                    rules={{ required: "Année de départ", min: 0 }}
                     render={({ field }) => (
                         <TextField
                             {...field}
-                            label="Date (en jours depuis l'an 0 du calendrier impérial)"
+                            label="Année (depuis l'an 0 du calendrier impérial)"
                             type="number"
                             fullWidth
                             margin="normal"

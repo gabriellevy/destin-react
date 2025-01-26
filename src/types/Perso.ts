@@ -11,6 +11,7 @@ export type Perso = {
     sexe: Sexe;
     dateNaissance: number;
     date: number, // en nombre de jours depuis l'an 0 du calendrier impérial
+    anneeDeDepart?: number, // cette donnée est utilisée pour el formulaire mais inutile ensuite => faire une structure de donnée pour formulaire qui hériterait de celle ci ??
     lieu: Lieu,
     race: Race,
     // aide à la programmation mais pas à afficher directement :

@@ -1,7 +1,6 @@
 import {d10} from "../../fonctions/des.ts";
 import {Perso} from "../Perso.ts";
 import {Race} from "../../donnees/races/Races.ts";
-import {ResultatExecution} from "../Evt.ts";
 
 export type Carac = {
     val: number,
@@ -150,7 +149,7 @@ export const seuils: number[] = [
     511,
 ];
 
-export function augmenterNbDeTestsFaitsCarac(perso: Perso, typeCarac: TypeCarac): ResultatExecution {
+export function augmenterNbDeTestsFaitsCarac(perso: Perso, typeCarac: TypeCarac): string {
     const carac: Carac | undefined = perso.caracs.find((carac:Carac) => carac.typeCarac === typeCarac);
     let texte: string = "";
     if (carac !== undefined) {
@@ -164,7 +163,7 @@ export function augmenterNbDeTestsFaitsCarac(perso: Perso, typeCarac: TypeCarac)
             }
         }
     }
-    return {texte : texte, perso: perso};
+    return texte;
 }
 
 export const caracsDeBase = (race: Race) => [

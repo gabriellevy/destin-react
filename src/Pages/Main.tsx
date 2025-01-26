@@ -6,6 +6,8 @@ import Histoire from "../compos/Histoire.tsx";
 import InfosMonde from "../compos/InfosMonde.tsx";
 import {Perso} from "../types/Perso.ts";
 import {PersoContexte, PersoContexteType} from "../contexte/ContexteTypes.ts";
+import {anneesToJours} from "../types/Date.ts";
+import {d400} from "../fonctions/des.ts";
 
 const theme = createTheme();
 
@@ -14,7 +16,23 @@ export default function Main() {
     const { perso, setPerso } = useContext(PersoContexte) as PersoContexteType;
 
     const soumettrePerso = (data: Perso) => {
-        setPerso(data);
+        let persoFinal: Perso = {
+            ...data,
+        }
+        // conversions de données après soumission de perso :
+        // date en jours est déduite de date en années
+        if (data.anneeDeDepart) {
+            const dateEnJours: number = anneesToJours(data.anneeDeDepart) + d400()-1;
+            persoFinal = {
+                ...persoFinal,
+                date: dateEnJours,
+            }
+        }
+
+        // date de naissance est déduite de l'âge
+
+
+        setPerso(persoFinal);
         setAfficherForm(false);
     };
 
