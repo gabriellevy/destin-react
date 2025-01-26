@@ -10,13 +10,11 @@ import {
     Box,
     Typography, Paper, Grid2
 } from '@mui/material';
-import {Perso, Sexe} from "../types/Perso.ts";
-import {Option} from "../types/lieux/Lieu.ts";
-import {metalStatutOptions} from "../types/Statut.ts";
-import {bourgeoisDAltdorf} from "../donnees/persos/persos.ts";
-import {getSousProvinces, Province, provinceOptions} from "../donnees/geographie/provinces.ts";
-import {getVilles, SousProvince} from "../donnees/geographie/sousProvince.ts";
-import {Ville} from "../donnees/geographie/villes.ts";
+import {Perso, Sexe} from "../../types/Perso.ts";
+import {Option} from "../../types/lieux/Lieu.ts";
+import {metalStatutOptions} from "../../types/Statut.ts";
+import {bourgeoisDAltdorf} from "../../donnees/persos/persos.ts";
+import SelectionLieu from "./SelectionLieu.tsx";
 
 interface CharacterFormProps {
     onSubmit: SubmitHandler<Perso>;
@@ -24,12 +22,9 @@ interface CharacterFormProps {
 }
 
 export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFormProps) {
-    const { control, watch, handleSubmit, formState: { errors }, reset } = useForm<Perso>({
+    const { control, handleSubmit, formState: { errors }, reset } = useForm<Perso>({
         defaultValues: bourgeoisDAltdorf
     });
-
-    const provinceSelectionnee:Province = watch("lieu.province");
-    const sousProvinceSelectionnee:SousProvince = watch("lieu.sousProvince");
 
     const handleLoadCharacter = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -89,65 +84,7 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                             )}
                         />
                     </Grid2>
-
-                    {/* lieux (TODO : refactoriser*/}
-                    <Grid2 size={4}>
-                        <Controller
-                            control={control}
-                            name="lieu.province"
-                            render={({ field }) => (
-                                <FormControl margin="normal" error={!!errors.lieu?.province}
-                                             fullWidth>
-                                    <InputLabel>Province</InputLabel>
-                                    <Select {...field}>
-                                        {Object.values(provinceOptions).map((provinceOption: Option) => (
-                                            <MenuItem value={provinceOption.value} key={provinceOption.value}>
-                                                {provinceOption.label}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            )}
-                        />
-                    </Grid2>
-                    <Grid2 size={4}>
-                        <Controller
-                            control={control}
-                            name="lieu.sousProvince"
-                            render={({ field }) => (
-                                <FormControl margin="normal" error={!!errors.lieu?.sousProvince}
-                                             fullWidth>
-                                    <InputLabel>Sous province</InputLabel>
-                                    <Select {...field}>
-                                        {Object.values(getSousProvinces(provinceSelectionnee.toString())).map((sousProvince: SousProvince) => (
-                                            <MenuItem value={sousProvince.valueOf()} key={sousProvince.valueOf()}>
-                                                {sousProvince.valueOf()}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            )}
-                        />
-                    </Grid2>
-                    <Grid2 size={4}>
-                        <Controller
-                            control={control}
-                            name="lieu.ville"
-                            render={({ field }) => (
-                                <FormControl margin="normal" error={!!errors.lieu?.ville}
-                                             fullWidth>
-                                    <InputLabel>Ville</InputLabel>
-                                    <Select {...field}>
-                                        {Object.values(getVilles(sousProvinceSelectionnee.toString())).map((ville: Ville) => (
-                                            <MenuItem value={ville.valueOf()} key={ville.valueOf()}>
-                                                {ville.valueOf()}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            )}
-                        />
-                    </Grid2>
+                    <SelectionLieu />
                     {/* statut (TODO : refactoriser*/}
                     <Grid2 size={6}>
                         <Controller

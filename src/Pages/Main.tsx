@@ -1,6 +1,6 @@
 import {useContext, useState} from 'react';
 import {ThemeProvider, createTheme, CssBaseline, Container, Grid, Paper} from '@mui/material';
-import GenPersoForm from "../compos/GenPersoForm.tsx";
+import GenPersoForm from "../compos/creation_perso/GenPersoForm.tsx";
 import AffichagePerso from "../compos/AffichagePerso.tsx";
 import Histoire from "../compos/Histoire.tsx";
 import InfosMonde from "../compos/InfosMonde.tsx";
