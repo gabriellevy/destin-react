@@ -83,6 +83,16 @@ export const evts_empireEI: GroupeEvts = {
                 && perso.date <= grafBorisArriveAAltdorf,
             proba: 1,
         },
+        {
+            id: "evts_empireEI9",
+            description: (): string => "L'édit de l'empereur interdisant le massacre ou l'exil des mutants dans l'Empire n'a pas été bien accueilli. "
+            +"Il y a quelques semaines à peine, des villageois du Reikland se sont révoltés après qu'un aubergiste a été reconnu coupable du meurtre d'un client. "
+            +"Le client avait des écailles dans le dos. ",
+            conditions: (perso: Perso): boolean => perso.lieu.pays === Pays.empire
+                && perso.date >= editSurLesMutants
+                && perso.date <= finCampagneInterieur,
+            proba: 1,
+        },
     ],
     probaParDefaut: 2,
 }
