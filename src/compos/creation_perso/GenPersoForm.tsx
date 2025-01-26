@@ -11,10 +11,9 @@ import {
     Typography, Paper, Grid2
 } from '@mui/material';
 import {Perso, Sexe} from "../../types/Perso.ts";
-import {Option} from "../../types/lieux/Lieu.ts";
-import {metalStatutOptions} from "../../types/Statut.ts";
 import {bourgeoisDAltdorf} from "../../donnees/persos/persos.ts";
 import SelectionLieu from "./SelectionLieu.tsx";
+import SelectionStatut from "./SelectionStatut.tsx";
 
 interface CharacterFormProps {
     onSubmit: SubmitHandler<Perso>;
@@ -85,45 +84,7 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                         />
                     </Grid2>
                     <SelectionLieu />
-                    {/* statut (TODO : refactoriser*/}
-                    <Grid2 size={6}>
-                        <Controller
-                            control={control}
-                            name="statut.metalStatut"
-                            render={({ field }) => (
-                                <FormControl margin="normal" error={!!errors.statut?.metalStatut}
-                                             fullWidth>
-                                    <InputLabel>Statut</InputLabel>
-                                    <Select {...field}>
-                                        {Object.values(metalStatutOptions).map((metalOption: Option) => (
-                                            <MenuItem value={metalOption.value} key={metalOption.value}>
-                                                {metalOption.label}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            )}
-                        />
-                    </Grid2>
-                    <Grid2 size={6}>
-                        <Controller
-                            name="statut.rang"
-                            control={control}
-                            rules={{ required: "Rang de statut obligatoire", min: 0, max: 10 }}
-                            render={({ field }) => (
-                                <TextField
-                                    {...field}
-                                    label="Rang de statut"
-                                    type="number"
-                                    fullWidth
-                                    margin="normal"
-                                    error={!!errors.statut?.rang}
-                                    helperText={errors.statut?.message}
-                                />
-                            )}
-                        />
-                    </Grid2>
-
+                    <SelectionStatut />
                     <Controller
                         name="dateNaissance"
                         control={control}

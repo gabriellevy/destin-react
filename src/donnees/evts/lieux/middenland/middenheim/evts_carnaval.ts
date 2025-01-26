@@ -109,7 +109,7 @@ export const evts_carnaval: GroupeEvts = {
             },
             conditions: (perso: Perso): boolean => perso.lieu.province === Province.reikland && !perso.lieu.enVoyage,
             image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Alex_Eisen.webp",
-            proba: 10999999 // TODO : should be 10
+            proba: 10,
         },
     ],
     probaParDefaut: 5,
