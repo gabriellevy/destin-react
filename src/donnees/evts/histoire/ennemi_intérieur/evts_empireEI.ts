@@ -2,7 +2,7 @@ import {GroupeEvts} from "../../../../types/Evt.ts";
 import {Perso} from "../../../../types/Perso.ts";
 import {Pays} from "../../../geographie/pays.ts";
 import {
-    assassinatDeVonTasseninck,
+    assassinatDeVonTasseninck, editSurLesMutants,
     finCampagneInterieur,
     grafBorisArriveAAltdorf, unAnAvantDebutCampagne
 } from "../../../dates/ennemi_interieur.ts";
@@ -61,6 +61,25 @@ export const evts_empireEI: GroupeEvts = {
             +"si vous voyez ce que je veux dire.</i>",
             conditions: (perso: Perso): boolean => perso.lieu.pays === Pays.empire
                 && perso.date >= unAnAvantDebutCampagne
+                && perso.date <= grafBorisArriveAAltdorf,
+            proba: 1,
+        },
+        {
+            id: "evts_empireEI7",
+            description: (): string => "L'état de l'empereur Karl Franz est devenu critique. "
+            +"Les médecins de la cour ont travaillé de concert avec les collèges de magie, mais n'ont pas réussi à découvrir la nature de sa maladie. "
+            +"Et qui s'occupe des affaires de l'état pendant cette crise ? Personne. ",
+            conditions: (perso: Perso): boolean => perso.lieu.pays === Pays.empire
+                && perso.date >= editSurLesMutants
+                && perso.date <= grafBorisArriveAAltdorf,
+            proba: 1,
+        },
+        {
+            id: "evts_empireEI8",
+            description: (): string => "Le grand duc Gustav von Krieglitz du Talabecland a envoyé des émissaires au palais du grand prince Hans-Hals von Tasseninck d'Ostland. "
+            +" Le Grand duc nie l'accusation de meurtre du fils de von Tasseninck, Hergard. Il est également irrité par les récentes attaque de ses patrouilles frontalières par les soldats du Grand prince. ",
+            conditions: (perso: Perso): boolean => perso.lieu.pays === Pays.empire
+                && perso.date >= assassinatDeVonTasseninck
                 && perso.date <= grafBorisArriveAAltdorf,
             proba: 1,
         },
