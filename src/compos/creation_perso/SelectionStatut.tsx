@@ -1,14 +1,11 @@
-import {Controller, useForm} from "react-hook-form";
+import {Controller, useFormContext} from "react-hook-form";
 import {Perso} from "../../types/Perso.ts";
 import {FormControl, Grid2, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import {metalStatutOptions} from "../../types/Statut.ts";
 import {Option} from "../../types/lieux/Lieu.ts";
-import {bourgeoisDAltdorf} from "../../donnees/persos/persos_pregens.ts";
 
 export default function SelectionStatut() {
-    const { control, formState: { errors } } = useForm<Perso>({
-        defaultValues: bourgeoisDAltdorf
-    });
+    const { control, formState: { errors } } = useFormContext<Perso>();
 
     return (
         <>

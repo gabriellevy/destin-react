@@ -1,4 +1,4 @@
-import {useForm, Controller} from 'react-hook-form';
+import {useForm, Controller, FormProvider} from 'react-hook-form';
 import {
     TextField,
     Button,
@@ -6,7 +6,6 @@ import {
     MenuItem,
     FormControl,
     InputLabel,
-    FormHelperText,
     Box,
     Typography, Paper, Grid2
 } from '@mui/material';
@@ -26,7 +25,7 @@ interface CharacterFormProps {
 
 export default function GenPersoForm({ setAfficherForm }: CharacterFormProps) {
     const { setPerso } = useContext(PersoContexte) as PersoContexteType;
-    const { control, handleSubmit, formState: { errors }, reset } = useForm<Perso>({
+    const methods = useForm<Perso>({
         defaultValues: bourgeoisDAltdorf
     });
 
@@ -76,7 +75,7 @@ export default function GenPersoForm({ setAfficherForm }: CharacterFormProps) {
                 if (typeof content === 'string') {
                     try {
                         const loadedCharacter = JSON.parse(content) as Perso;
-                        reset(loadedCharacter);
+                        methods.reset(loadedCharacter);
                         chargerPerso(loadedCharacter);
                     } catch (error) {
                         console.error('Error parsing JSON:', error);
@@ -89,76 +88,75 @@ export default function GenPersoForm({ setAfficherForm }: CharacterFormProps) {
 
     return (
         <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%', overflowY: 'auto' }}>
-            <Box component="form" onSubmit={handleSubmit(soumettrePerso)} sx={{ maxWidth: 800, mx: 'auto', mt: 4 }}>
-                <Typography variant="h4" gutterBottom>Créer un personnage</Typography>
-                <Grid2 container spacing={1} sx={{ mb: 2 }} columns={12}>
-                    <Grid2 size={8}>
-                        <Controller
-                            name="nom"
-                            control={control}
-                            rules={{ required: "Vous devez avoir un nom" }}
-                            render={({ field }) => (
-                                <TextField
-                                    {...field}
-                                    label="Nom"
-                                    margin="normal"
-                                    error={!!errors.nom}
-                                    helperText={errors.nom?.message}
-                                    fullWidth
-                                />
-                            )}
-                        />
-                    </Grid2>
-                    <Grid2 size={4}>
-                        <Controller
-                            name="sexe"
-                            control={control}
-                            render={({ field }) => (
-                                <FormControl fullWidth margin="normal" error={!!errors.sexe}>
-                                    <InputLabel>Sexe</InputLabel>
-                                    <Select {...field} label="Sexe">
-                                        <MenuItem value={Sexe.male}>{Sexe.male}</MenuItem>
-                                        <MenuItem value={Sexe.femelle}>{Sexe.femelle}</MenuItem>
-                                    </Select>
-                                    <FormHelperText>{errors.sexe?.message}</FormHelperText>
-                                </FormControl>
-                            )}
-                        />
-                    </Grid2>
-                    <SelectionLieu />
-                    <SelectionStatut />
-                    <SelectionDates />
-                    <Grid2 size={4}>
-                        <Button type="submit" variant="contained" color="primary">
-                            Commencer
-                        </Button>
-                    </Grid2>
-                    <Grid2 size={4}>
-                        <Button
-                            component="label"
-                            variant="contained"
-                            color="secondary"
-                        >
-                            Charger un personnage
-                            <input
-                                type="file"
-                                hidden
-                                accept=".json"
-                                onChange={handleLoadCharacter}
+            <Box component="form" onSubmit={methods.handleSubmit(soumettrePerso)} sx={{ maxWidth: 800, mx: 'auto', mt: 4 }}>
+                <FormProvider {...methods}>
+                    <Typography variant="h4" gutterBottom>Créer un personnage</Typography>
+                    <Grid2 container spacing={1} sx={{ mb: 2 }} columns={12}>
+                        <Grid2 size={8}>
+                            <Controller
+                                name="nom"
+                                control={methods.control}
+                                rules={{ required: "Vous devez avoir un nom" }}
+                                render={({ field }) => (
+                                    <TextField
+                                        {...field}
+                                        label="Nom"
+                                        margin="normal"
+                                        fullWidth
+                                    />
+                                )}
                             />
-                        </Button>
+                        </Grid2>
+                        <Grid2 size={4}>
+                            <Controller
+                                name="sexe"
+                                control={methods.control}
+                                render={({ field }) => (
+                                    <FormControl fullWidth margin="normal">
+                                        <InputLabel>Sexe</InputLabel>
+                                        <Select {...field} label="Sexe">
+                                            <MenuItem value={Sexe.male}>{Sexe.male}</MenuItem>
+                                            <MenuItem value={Sexe.femelle}>{Sexe.femelle}</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                )}
+                            />
+                        </Grid2>
+                        <SelectionLieu />
+                        <SelectionStatut />
+                        <SelectionDates />
+                        <Grid2 size={4}>
+                            <Button type="submit" variant="contained" color="primary">
+                                Commencer
+                            </Button>
+                        </Grid2>
+                        <Grid2 size={4}>
+                            <Button
+                                component="label"
+                                variant="contained"
+                                color="secondary"
+                            >
+                                Charger un personnage
+                                <input
+                                    type="file"
+                                    hidden
+                                    accept=".json"
+                                    onChange={handleLoadCharacter}
+                                />
+                            </Button>
+                        </Grid2>
+                        <Grid2 size={4}>
+                            <Button
+                                component="label"
+                                variant="contained"
+                                color="secondary"
+                                onClick={persoAleatoire}
+                            >
+                                Personnage aléatoire
+                            </Button>
+                        </Grid2>
                     </Grid2>
-                    <Grid2 size={4}>
-                        <Button
-                            component="label"
-                            variant="contained"
-                            color="secondary"
-                            onClick={persoAleatoire}
-                        >
-                            Personnage aléatoire
-                        </Button>
-                    </Grid2>
-                </Grid2>
+                </FormProvider>
             </Box>
         </Paper>
     );

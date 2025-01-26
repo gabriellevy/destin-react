@@ -1,16 +1,13 @@
-import {Controller, useForm} from "react-hook-form";
+import {Controller, useFormContext} from "react-hook-form";
 import {Perso} from "../../types/Perso.ts";
 import {FormControl, Grid2, InputLabel, MenuItem, Select} from "@mui/material";
 import {getSousProvinces, Province, provinceOptions} from "../../donnees/geographie/provinces.ts";
 import {Option} from "../../types/lieux/Lieu.ts";
 import {getVilles, SousProvince} from "../../donnees/geographie/sousProvince.ts";
 import {Ville} from "../../donnees/geographie/villes.ts";
-import {bourgeoisDAltdorf} from "../../donnees/persos/persos_pregens.ts";
 
 export default function SelectionLieu() {
-    const { control, watch, formState: { errors } } = useForm<Perso>({
-        defaultValues: bourgeoisDAltdorf
-    });
+    const { control, watch, formState: { errors } } = useFormContext<Perso>();
     const provinceSelectionnee:Province = watch("lieu.province");
     const sousProvinceSelectionnee:SousProvince = watch("lieu.sousProvince");
 

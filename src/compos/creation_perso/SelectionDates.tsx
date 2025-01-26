@@ -1,12 +1,9 @@
-import {Controller, useForm} from "react-hook-form";
+import {Controller, useFormContext} from "react-hook-form";
 import {Perso} from "../../types/Perso.ts";
 import {Grid2, TextField} from "@mui/material";
-import {bourgeoisDAltdorf} from "../../donnees/persos/persos_pregens.ts";
 
 export default function SelectionDates() {
-    const { control } = useForm<Perso>({
-        defaultValues: bourgeoisDAltdorf
-    });
+    const { control } = useFormContext<Perso>();
 
     return (
         <>
