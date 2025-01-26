@@ -28,16 +28,18 @@ export default function GenPersoForm({ setAfficherForm }: CharacterFormProps) {
     const methods = useForm<Perso>({
         defaultValues: bourgeoisDAltdorf
     });
+    const { reset } = methods;
 
     const chargerPerso = (persoCharge: Perso) => {
         setPerso({...persoCharge});
+        reset({...persoCharge});
         setAfficherForm(false);
     };
 
     const persoAleatoire = () => {
         const persoAl: Perso = persoVide;
         console.log(JSON.stringify(persoAl, null, 4));
-        setPerso(persoAl);
+        reset({...persoAl});
         setAfficherForm(true);
     };
 
