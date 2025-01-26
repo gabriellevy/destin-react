@@ -28,13 +28,13 @@ export default function SelectionDates() {
             </Grid2>
             <Grid2 size={6}>
                 <Controller
-                    name="dateNaissance"
+                    name="age"
                     control={control}
-                    rules={{ required: "Date de naissance obligatoire", min: 0 }}
+                    rules={{ required: "Age obligatoire", min: 10 }}
                     render={({ field }) => (
                         <TextField
                             {...field}
-                            label="Date (en jours depuis l'an 0 du calendrier impérial)"
+                            label="Âge de départ"
                             type="number"
                             fullWidth
                             margin="normal"

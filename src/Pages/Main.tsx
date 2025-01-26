@@ -28,10 +28,14 @@ export default function Main() {
                 date: dateEnJours,
             }
         }
-
         // date de naissance est déduite de l'âge
-
-
+        if (data.age) {
+            const dateNaissance: number = persoFinal.date - anneesToJours(data.age) - d400() + 1;
+            persoFinal = {
+                ...persoFinal,
+                dateNaissance: dateNaissance,
+            }
+        }
         setPerso(persoFinal);
         setAfficherForm(false);
     };

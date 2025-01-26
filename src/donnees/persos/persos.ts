@@ -48,6 +48,7 @@ export const bourgeoisDAltdorf: Perso = {
     dateNaissance: anneesToJours(2491),
     date: unAnAvantDebutCampagne, // début du pouvoir derrière le trône 3ème volume
     anneeDeDepart: 2511,
+    age: 16,
     jourDuMois: -1,
     lieu: lieuAltdorf,
     statut: {rang: 1, metalStatut: MetalStatut.argent},
