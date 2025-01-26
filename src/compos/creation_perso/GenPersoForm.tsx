@@ -14,6 +14,7 @@ import {Perso, Sexe} from "../../types/Perso.ts";
 import {bourgeoisDAltdorf} from "../../donnees/persos/persos.ts";
 import SelectionLieu from "./SelectionLieu.tsx";
 import SelectionStatut from "./SelectionStatut.tsx";
+import SelectionDates from "./SelectionDates.tsx";
 
 interface CharacterFormProps {
     onSubmit: SubmitHandler<Perso>;
@@ -85,23 +86,7 @@ export default function GenPersoForm({ onSubmit, onLoadCharacter }: CharacterFor
                     </Grid2>
                     <SelectionLieu />
                     <SelectionStatut />
-                    <Controller
-                        name="dateNaissance"
-                        control={control}
-                        rules={{ required: "Date de naissance obligatoire", min: 0 }}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label="Date (en jours depuis l'an 0 du calendrier impérial)"
-                                type="number"
-                                fullWidth
-                                margin="normal"
-                                error={!!errors.dateNaissance}
-                                helperText={errors.dateNaissance?.message}
-                            />
-                        )}
-                    />
-
+                    <SelectionDates />
                     <Grid2 size={6}>
                         <Button type="submit" variant="contained" color="primary">
                             Commencer
