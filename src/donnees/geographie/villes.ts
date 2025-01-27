@@ -16,6 +16,4 @@ export enum Ville {
     heisenberg = 'Heisenberg',
     halstedt = 'Halstedt',
     middenheim = 'Middenheim',
-
-    villeInconnue = 'Ville inconnue',
 }

@@ -1,13 +1,15 @@
-import {useForm, Controller, FormProvider} from 'react-hook-form';
+import {Controller, FormProvider, useForm} from 'react-hook-form';
 import {
-    TextField,
-    Button,
-    Select,
-    MenuItem,
-    FormControl,
-    InputLabel,
     Box,
-    Typography, Paper, Grid2
+    Button,
+    FormControl,
+    Grid2,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    TextField,
+    Typography
 } from '@mui/material';
 import {Perso, Sexe} from "../../types/Perso.ts";
 import SelectionLieu from "./SelectionLieu.tsx";
@@ -18,6 +20,9 @@ import {d400} from "../../fonctions/des.ts";
 import {bourgeoisDAltdorf, persoVide} from "../../donnees/persos/persos_pregens.ts";
 import {useContext} from "react";
 import {PersoContexte, PersoContexteType} from "../../contexte/ContexteTypes.ts";
+import {Ville} from "../../donnees/geographie/villes.ts";
+import {vaA} from "../../types/lieux/Lieu.ts";
+import {getRandomEnumValue, randomStatut} from "../../fonctions/random.ts";
 
 interface CharacterFormProps {
     setAfficherForm: (afficher: boolean) => void;
@@ -38,7 +43,11 @@ export default function GenPersoForm({ setAfficherForm }: CharacterFormProps) {
 
     const persoAleatoire = () => {
         const persoAl: Perso = persoVide;
-        console.log(JSON.stringify(persoAl, null, 4));
+        // age aléatoire
+        persoAl.age = 10 + Math.floor(Math.random() * 35);
+        vaA(persoAl, getRandomEnumValue(Ville));
+        persoAl.statut = randomStatut();
+
         reset({...persoAl});
         setAfficherForm(true);
     };

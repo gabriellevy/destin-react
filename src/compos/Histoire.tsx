@@ -21,6 +21,7 @@ import {PersoContexte, PersoContexteType} from "../contexte/ContexteTypes.ts";
 import {evts_empireEI} from "../donnees/evts/histoire/ennemi_intérieur/evts_empireEI.ts";
 import {evts_middenland} from "../donnees/evts/lieux/middenland/evts_middenland.ts";
 import {evts_tout} from "../donnees/evts/evts_tout.ts";
+import {evts_serveur} from "../donnees/evts/carrieres/evts_serveur.ts";
 
 export default function Histoire() {
     const [evtsExecutes, setEvtsExecutes] = useState<EvtExecute[]>([]); // événements déjà exécutés
@@ -69,6 +70,7 @@ export default function Histoire() {
             ...filtrerEtPreparerEvts(evts_ingenieur, perso),
             ...filtrerEtPreparerEvts(evts_carnaval, perso),
             ...filtrerEtPreparerEvts(evts_batelier, perso),
+            ...filtrerEtPreparerEvts(evts_serveur, perso),
             ...filtrerEtPreparerEvts(evts_empireEI, perso),
             ...filtrerEtPreparerEvts(evts_middenland, perso),
             ...filtrerEtPreparerEvts(evts_tout, perso),
