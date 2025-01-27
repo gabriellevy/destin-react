@@ -26,5 +26,4 @@ export function compareStatut(statut1: Statut, statut2: Statut): boolean {
         (statut2.metalStatut === MetalStatut.bronze || statut2.metalStatut === MetalStatut.argent)) return true;
     return statut1.metalStatut === MetalStatut.argent &&
         statut2.metalStatut === MetalStatut.bronze;
-
 }

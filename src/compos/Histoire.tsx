@@ -141,7 +141,7 @@ export default function Histoire() {
             ))}
             {plusDEvts && (
                 <Typography mb={2} fontWeight="bold">
-                    Vous êtes mort. TODO : faire un truc un peu adapté !!
+                    Plus d'événements à exécuter !!!! Faut en ajouter mon vieux !!
                 </Typography>
             )}
         </Paper>

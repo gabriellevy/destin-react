@@ -17,7 +17,7 @@ export const evts_crime: GroupeEvts = {
                 metier: metiersObjs[metiersEnum.ranconneur],
                 groupeLieu: undefined,
                 duree: 0,
-                competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
+                competence: 1,
                 actif: true,
                 nbDeTestsFaits : 0,
             });

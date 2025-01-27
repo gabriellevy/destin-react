@@ -37,6 +37,7 @@ export const evts_serveur: GroupeEvts = {
                 }
                 return texte;
             },
+            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Klara_Kellner.webp",
             conditions: (perso: Perso): boolean =>
                 !aUneCarriere(perso)
                 && age(perso) >= 14, // TODO : tester que dans une ville ?
@@ -54,9 +55,10 @@ export const evts_serveur: GroupeEvts = {
                 }
                 return texte;
             },
+            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Klara_Kellner.webp",
             conditions: (perso: Perso): boolean =>
                 travailleEnCeMomentComme(perso, metiersEnum.serveur),
         },
     ],
-    probaParDefaut: 59999999999,
+    probaParDefaut: 5,
 };
