@@ -12,7 +12,8 @@ export const evts_serveur: GroupeEvts = {
         {
             id: "evts_serveur1",
             description: (perso: Perso): string => {
-                let texte: string = `Vous hésitez à devenir serveur et décider de postuler à la taverne rouge de Klara Kellner. `
+                const taverne: string = "la taverne rouge";
+                let texte: string = `Vous hésitez à devenir serveur et décider de postuler à ${taverne} de Klara Kellner. `
                 const resTestDex:ResultatTest = testCarac(perso, {carac: TypeCarac.dex, bonusMalus: 40});
                 const resTestSoc:ResultatTest = testCarac(perso, {carac: TypeCarac.soc, bonusMalus: 40});
                 texte += resTestDex.resume;
@@ -27,7 +28,7 @@ export const evts_serveur: GroupeEvts = {
                     // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
                     perso.carrieres.set(metiersEnum.serveur, {
                         metier: metiersObjs[metiersEnum.serveur],
-                        groupeLieu: undefined,
+                        groupeLieu: taverne,
                         duree: 0,
                         competence: 1,
                         actif: true,
