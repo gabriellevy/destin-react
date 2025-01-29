@@ -22,6 +22,7 @@ import {evts_empireEI} from "../donnees/evts/histoire/ennemi_intérieur/evts_emp
 import {evts_middenland} from "../donnees/evts/lieux/middenland/evts_middenland.ts";
 import {evts_tout} from "../donnees/evts/evts_tout.ts";
 import {evts_serveur} from "../donnees/evts/carrieres/evts_serveur.ts";
+import {evts_bourgmestre} from "../donnees/evts/carrieres/evts_bourgmestre.ts";
 
 export default function Histoire() {
     const [evtsExecutes, setEvtsExecutes] = useState<EvtExecute[]>([]); // événements déjà exécutés
@@ -71,6 +72,7 @@ export default function Histoire() {
             ...filtrerEtPreparerEvts(evts_carnaval, perso),
             ...filtrerEtPreparerEvts(evts_batelier, perso),
             ...filtrerEtPreparerEvts(evts_serveur, perso),
+            ...filtrerEtPreparerEvts(evts_bourgmestre, perso),
             ...filtrerEtPreparerEvts(evts_empireEI, perso),
             ...filtrerEtPreparerEvts(evts_middenland, perso),
             ...filtrerEtPreparerEvts(evts_tout, perso),

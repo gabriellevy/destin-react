@@ -8,6 +8,7 @@ export enum metiersEnum {
     artisan = "Artisan",
     maitre_de_guilde = "Maître de guilde",
     serveur = "Serveur",
+    bourgmestre = "Bourgmestre",
     ranconneur = "Rançonneur",
     novice = "Moine novice",
     moine = "Moine",
@@ -79,6 +80,14 @@ export const metiersObjs: MetierObj = {
         },
         statut: {rang: 2, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 2, metalStatut: MetalStatut.argent},
+    },
+    [metiersEnum.bourgmestre] : {
+        nom: metiersEnum.bourgmestre,
+        intitule: (_perso: Perso, carriere: Carriere) => {
+            return metiersEnum.bourgmestre + " à " + carriere?.groupeLieu;
+        },
+        statut: {rang: 4, metalStatut: MetalStatut.argent},
+        statutMax: {rang: 1, metalStatut: MetalStatut.or},
     },
     [metiersEnum.ranconneur] : {
         nom: metiersEnum.ranconneur,

@@ -54,8 +54,7 @@ export function vaA(perso: Perso, ville: Ville) {
     perso.lieu.ville = ville;
     const sousProvince: SousProvince = getSousProvinceDeVille(ville);
     perso.lieu.sousProvince = sousProvince;
-    const province: Province = getProvinceDeSousProvince(sousProvince);
-    perso.lieu.province = province;
+    perso.lieu.province = getProvinceDeSousProvince(sousProvince);
 }
 
 export function getSousProvinceDeVille(ville: Ville): SousProvince {
