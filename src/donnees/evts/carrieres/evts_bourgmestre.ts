@@ -36,7 +36,7 @@ export const evts_bourgmestre: GroupeEvts = {
                 }
                 return texte;
             },
-            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Klara_Kellner.webp",
+            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Wilhelm_Kreigrisch.webp",
             conditions: (perso: Perso): boolean =>
                 compareStatut(perso.statut, {metalStatut: MetalStatut.argent, rang: 4}) // richesse minimum
                 && tailleVille(perso.lieu.ville).valueOf() > 1
@@ -55,7 +55,7 @@ export const evts_bourgmestre: GroupeEvts = {
                 }
                 return texte;
             },
-            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Klara_Kellner.webp",
+            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Wilhelm_Kreigrisch.webp",
             conditions: (perso: Perso): boolean =>
                 travailleEnCeMomentComme(perso, metiersEnum.bourgmestre),
         },

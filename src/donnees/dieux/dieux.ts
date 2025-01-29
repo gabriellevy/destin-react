@@ -1,4 +1,3 @@
-import {GroupeEvts} from "../../types/Evt.ts";
 import {Dieu} from "../../types/Dieu.ts";
 
 export function dieuAleatoire(): Dieu {
