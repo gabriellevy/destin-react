@@ -24,7 +24,7 @@ import {evts_serveur} from "../donnees/evts/carrieres/evts_serveur.ts";
 import {evts_bourgmestre} from "../donnees/evts/carrieres/evts_bourgmestre.ts";
 import {evts_forgeron} from "../donnees/evts/carrieres/evts_forgeron.ts";
 import {evts_brasseur} from "../donnees/evts/carrieres/evts_brasseur.ts";
-import { Paper, Box, Typography, Dialog, IconButton, Grid2 } from '@mui/material';
+import { Box, Typography, Dialog, IconButton, Grid2 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import {evts_macon} from "../donnees/evts/carrieres/evts_macon.ts";
 
@@ -138,7 +138,7 @@ export default function Histoire() {
     }, [determinerEvtSuivant]);
 
     return (
-        <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%', overflowY: 'auto' }}>
+        <>
             {evtsExecutes.map((evt: EvtExecute, index: number) => (
                 <Grid2 container spacing={2} key={index} sx={{ mb: 2 }} columns={12}>
                     {evt.image && (
@@ -190,6 +190,6 @@ export default function Histoire() {
                     />
                 </Dialog>
             }
-        </Paper>
+        </>
     );
 }

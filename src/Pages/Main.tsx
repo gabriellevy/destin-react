@@ -1,9 +1,9 @@
 import {useState} from 'react';
-import {CssBaseline, Container, Grid, Paper} from '@mui/material';
-import GenPersoForm from "../compos/creation_perso/GenPersoForm.tsx";
-import AffichagePerso from "../compos/AffichagePerso.tsx";
-import Histoire from "../compos/Histoire.tsx";
-import InfosMonde from "../compos/InfosMonde.tsx";
+import {CssBaseline, Paper, Grid2} from '@mui/material';
+import GenPersoForm from "../compos/creation_perso/GenPersoForm";
+import AffichagePerso from "../compos/AffichagePerso";
+import Histoire from "../compos/Histoire";
+import InfosMonde from "../compos/InfosMonde";
 
 export default function Main() {
     const [afficherForm, setAfficherForm] = useState(true);
@@ -11,25 +11,25 @@ export default function Main() {
     return (
         <>
             <CssBaseline />
-            <Container maxWidth="lg">
-                {afficherForm ? (
-                    <GenPersoForm
-                        setAfficherForm={setAfficherForm}
-                    />
-                ) : (
-                    <Grid container spacing={3}>
-                        <Grid item xs={12} md={4}>
-                            <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%', overflowY: 'auto' }}>
-                                <InfosMonde/>
-                                <AffichagePerso />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={8}>
+            {afficherForm ? (
+                <GenPersoForm
+                    setAfficherForm={setAfficherForm}
+                />
+            ) : (
+                <Grid2 container spacing={3} sx={{ height: '100vh' }}>
+                    <Grid2 size={4}>
+                        <Paper elevation={3} sx={{ p: 3, mt: 4, height: 'calc(100vh - 64px)', overflowY: 'hidden', position: 'sticky', top: 0 }}>
+                            <InfosMonde/>
+                            <AffichagePerso />
+                        </Paper>
+                    </Grid2>
+                    <Grid2 size={8}>
+                        <Paper elevation={3} sx={{ p: 3, mt: 4, height: 'calc(100vh - 64px)', overflowY: 'auto' }}>
                             <Histoire />
-                        </Grid>
-                    </Grid>
-                )}
-            </Container>
+                        </Paper>
+                    </Grid2>
+                </Grid2>
+            )}
         </>
     );
 }

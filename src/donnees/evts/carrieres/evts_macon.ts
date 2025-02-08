@@ -26,7 +26,7 @@ export const evts_macon: GroupeEvts = {
                 }
                 return texte;
             },
-            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Klara_Kellner.webp",
+            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Kai_Bauerr.webp",
             conditions: (perso: Perso): boolean =>
                 !aUneCarriere(perso)
                 && age(perso) >= 14,
@@ -44,7 +44,7 @@ export const evts_macon: GroupeEvts = {
                 }
                 return texte;
             },
-            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Klara_Kellner.webp",
+            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Kai_Bauerr.webp",
             conditions: (perso: Perso): boolean =>
                 travailleEnCeMomentComme(perso, metiersEnum.macon),
         },

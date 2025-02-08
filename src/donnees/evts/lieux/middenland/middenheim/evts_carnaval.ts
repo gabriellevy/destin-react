@@ -9,7 +9,7 @@ const arriveeMiddenheim: (perso: Perso)=>string = (perso: Perso) => {
     const texte: string =  "Vous arrivez enfin à <b>Middenheim</b>. "
     +"Quatre viaducs gigantesques en pierre s'enroulent autour de la base du rocher, en pente douce. "
     +"Ils font plus d'un km de long et il va vous falloir longtemps pour atteindre le haut, surtout qu'une longue file d'attente s'y trouve et que croiser les véhicules arrivant en sens inverse est laborieux car personne ne veut s'approcher des rebords. "
-    +"Arrivé au bout on vous fait payer <i>une couronne par jambe</i> pour entrer dans al ville.";
+    +"Arrivé au bout on vous fait payer <i>une couronne par jambe</i> pour entrer dans la ville.";
     // TODO arrivée, installation, description, taxes??
     vaA(perso, Ville.middenheim);
     return texte;
