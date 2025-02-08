@@ -1,5 +1,4 @@
 import {useState, useEffect, useContext, useCallback} from 'react';
-import {Box, Typography, Paper, Grid2} from '@mui/material';
 import {evts_ubersreik} from "../donnees/evts/lieux/reikland/ubersreik/evts_ubersreik.ts";
 import {Evt, EvtExecute, filtrerEtPreparerEvts} from "../types/Evt.ts";
 import {jourStr, leTempsPasse} from "../types/Date.ts";
@@ -25,6 +24,8 @@ import {evts_serveur} from "../donnees/evts/carrieres/evts_serveur.ts";
 import {evts_bourgmestre} from "../donnees/evts/carrieres/evts_bourgmestre.ts";
 import {evts_forgeron} from "../donnees/evts/carrieres/evts_forgeron.ts";
 import {evts_brasseur} from "../donnees/evts/carrieres/evts_brasseur.ts";
+import { Paper, Box, Typography, Dialog, IconButton, Grid2 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 let demarre:boolean = false; // le destin a été lancé et est en cours
 
@@ -32,6 +33,18 @@ export default function Histoire() {
     const [evtsExecutes, setEvtsExecutes] = useState<EvtExecute[]>([]); // événements déjà exécutés
     const [plusDEvts, setPlusDEvts] = useState(false); // true si il n'y a plus aucun evt exécutable
     const { perso, setPerso } = useContext(PersoContexte) as PersoContexteType;
+    const [open, setOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+    const handleClickOpen = (image: string): void => {
+        setSelectedImage(image);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        setSelectedImage(null);
+    };
 
     const executerEvt = useCallback((evtExecute: Evt, dateDejaAffichee: boolean) => {
         const texte = evtExecute.description(perso);
@@ -127,21 +140,21 @@ export default function Histoire() {
             {evtsExecutes.map((evt: EvtExecute, index: number) => (
                 <Grid2 container spacing={2} key={index} sx={{ mb: 2 }} columns={12}>
                     {evt.image && (
-                        <Grid2 size={4}>
+                        <Grid2 size={4} order={{ xs: index % 2 === 0 ? 1 : 2, md: index % 2 === 0 ? 1 : 2 }}>
                             <Box
                                 component="img"
                                 sx={{
-                                    height: 150,
-                                    width: 200,
-                                    maxHeight: { xs: 233, md: 167 },
-                                    maxWidth: { xs: 350, md: 250 },
+                                    width: '100%',
+                                    height: 'auto',
+                                    cursor: 'pointer',
                                 }}
                                 alt={`image de l'événement ${evt.id}`}
                                 src={evt.image}
+                                onClick={() => evt.image && handleClickOpen(evt.image)}
                             />
                         </Grid2>
                     )}
-                    <Grid2 size={evt.image ? 8 : 12}>
+                    <Grid2 size={evt.image ? 8 : 12} order={{ xs: index % 2 === 0 ? 2 : 1, md: index % 2 === 0 ? 2 : 1 }}>
                         {evt.dateStr != '' &&
                             <Typography mb={1} align="left" sx={{ fontSize: 18 }}>{evt.dateStr}</Typography>
                         }
@@ -156,6 +169,25 @@ export default function Histoire() {
                     Plus d'événements à exécuter !!!! Faut en ajouter mon vieux !!
                 </Typography>
             )}
+            {selectedImage &&
+                <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+                    <IconButton
+                        edge="end"
+                        color="inherit"
+                        onClick={handleClose}
+                        aria-label="close"
+                        sx={{ position: 'absolute', right: 8, top: 8 }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                    <Box
+                        component="img"
+                        sx={{ width: '100%', height: 'auto' }}
+                        alt="Image agrandie"
+                        src={selectedImage}
+                    />
+                </Dialog>
+            }
         </Paper>
     );
 }

@@ -40,7 +40,7 @@ export const evts_brasseur: GroupeEvts = {
                 }
                 return texte;
             },
-            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Hugo_Schmidt.webp",
+            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Emil_Brauer.webp",
             conditions: (perso: Perso): boolean =>
                 !aUneCarriere(perso)
                 && age(perso) >= 14,
@@ -58,10 +58,10 @@ export const evts_brasseur: GroupeEvts = {
                 }
                 return texte;
             },
-            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Hugo_Schmidt.webp",
+            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Emil_Brauer.webp",
             conditions: (perso: Perso): boolean =>
                 travailleEnCeMomentComme(perso, metiersEnum.brasseur),
         },
     ],
-    probaParDefaut: 5,
+    probaParDefaut: 59999999999,
 };
