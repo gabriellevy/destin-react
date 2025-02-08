@@ -13,7 +13,7 @@ const passageDiplomeBrasseur: (perso: Perso) => string = (perso: Perso) => {
     texte += resTestMetier.resume;
     if (resTestMetier.reussi) {
         texte +=  "Votre maître vous juge prêt. Vous allez pouvoir devenir brasseur à part entière.";
-        commencerCarriere(perso, metiersEnum.ingenieur, '');
+        commencerCarriere(perso, metiersEnum.brasseur, '');
     } else {
         texte += "Malheureusement d'après votre maître vous avez encore beaucoup à apprendre avant de pouvoir travailler seul. ";
         perso.evtsProgrammes.set(perso.date + anneesToJours(1), passageDiplomeBrasseur);
