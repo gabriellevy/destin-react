@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext, useCallback} from 'react';
+import {useState, useEffect, useContext, useCallback, useRef} from 'react';
 import {evts_ubersreik} from "../donnees/evts/lieux/reikland/ubersreik/evts_ubersreik.ts";
 import {Evt, EvtExecute, filtrerEtPreparerEvts} from "../types/Evt.ts";
 import {jourStr, leTempsPasse} from "../types/Date.ts";
@@ -36,6 +36,16 @@ export default function Histoire() {
     const { perso, setPerso } = useContext(PersoContexte) as PersoContexteType;
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+    const messagesEndRef = useRef<null | HTMLDivElement>(null)
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+
+    useEffect(() => {
+        scrollToBottom()
+    }, [perso.date]);
 
     const handleClickOpen = (image: string): void => {
         setSelectedImage(image);
@@ -166,6 +176,7 @@ export default function Histoire() {
                     </Grid2>
                 </Grid2>
             ))}
+            <div ref={messagesEndRef} />
             {plusDEvts && (
                 <Typography mb={2} fontWeight="bold">
                     Plus d'événements à exécuter !!!! Faut en ajouter mon vieux !!
