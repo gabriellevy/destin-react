@@ -52,7 +52,7 @@ export const evts_middenland: GroupeEvts = {
             id: "evts_middenland5",
             description: (): string => "Le représentant principal de l'association des fermiers du Middenland, Dietrich Hoffman, était en ville l'autre jour. "
             +"Il a fait une déclaration devant le conseil, évoquant des prévisions pessimistes, voire désastreuses, pour la récolte de cette année. "
-            +"Il semblerait que els rapports de récolte soient les mêmes dans tout l'empire. "
+            +"Il semblerait que les rapports de récolte soient les mêmes dans tout l'empire. "
             +"Cette année c'est la météo qui est en cause : trop froide en hiver, trop humide au printemps, enfin, c'est ce qu'ils disent. "
             +"Mais bon, les fermiers se plaignent toujours et personne ne se souvient de la dernière fois où leurs prévisions ont été justes. ",
             conditions: (perso: Perso): boolean => perso.lieu.province === Province.middenland,

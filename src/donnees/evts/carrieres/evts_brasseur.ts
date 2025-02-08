@@ -63,5 +63,5 @@ export const evts_brasseur: GroupeEvts = {
                 travailleEnCeMomentComme(perso, metiersEnum.brasseur),
         },
     ],
-    probaParDefaut: 59999999999,
+    probaParDefaut: 5,
 };

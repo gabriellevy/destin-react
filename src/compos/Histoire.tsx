@@ -26,6 +26,7 @@ import {evts_forgeron} from "../donnees/evts/carrieres/evts_forgeron.ts";
 import {evts_brasseur} from "../donnees/evts/carrieres/evts_brasseur.ts";
 import { Paper, Box, Typography, Dialog, IconButton, Grid2 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import {evts_macon} from "../donnees/evts/carrieres/evts_macon.ts";
 
 let demarre:boolean = false; // le destin a été lancé et est en cours
 
@@ -89,6 +90,7 @@ export default function Histoire() {
             ...filtrerEtPreparerEvts(evts_carnaval, perso),
             ...filtrerEtPreparerEvts(evts_batelier, perso),
             ...filtrerEtPreparerEvts(evts_serveur, perso),
+            ...filtrerEtPreparerEvts(evts_macon, perso),
             ...filtrerEtPreparerEvts(evts_bourgmestre, perso),
             ...filtrerEtPreparerEvts(evts_empireEI, perso),
             ...filtrerEtPreparerEvts(evts_middenland, perso),

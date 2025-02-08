@@ -4,10 +4,9 @@ import {titreGuildeEnum} from "./Guilde.ts";
 
 export enum metiersEnum {
     pamphletaire = "Pamphlétaire",
-    apprenti_artisan = "Apprenti artisan",
-    artisan = "Artisan",
     maitre_de_guilde = "Maître de guilde",
     serveur = "Serveur",
+    macon = "Maçon",
     bourgmestre = "Bourgmestre",
     ranconneur = "Rançonneur",
     novice = "Moine novice",
@@ -41,18 +40,8 @@ export const metiersObjs: MetierObj = {
         statut: {rang: 1, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 5, metalStatut: MetalStatut.bronze},
     },
-    [metiersEnum.apprenti_artisan] : {
-        nom: metiersEnum.apprenti_artisan,
-        intitule: () => metiersEnum.apprenti_artisan,
-        statut: {rang: 2, metalStatut: MetalStatut.bronze},
-        statutMax: {rang: 5, metalStatut: MetalStatut.bronze},
-    },
-    [metiersEnum.artisan] : {
-        nom: metiersEnum.artisan,
-        intitule: () => metiersEnum.artisan,
-        statut: {rang: 1, metalStatut: MetalStatut.argent},
-        statutMax: {rang: 4, metalStatut: MetalStatut.argent},
-    },
+
+    // ------ ------- artisans
     [metiersEnum.etudiant_ingenieur] : {
         nom: metiersEnum.etudiant_ingenieur,
         intitule: () => metiersEnum.etudiant_ingenieur,
@@ -83,12 +72,20 @@ export const metiersObjs: MetierObj = {
         statut: {rang: 1, metalStatut: MetalStatut.argent},
         statutMax: {rang: 1, metalStatut: MetalStatut.or},
     },
+    [metiersEnum.macon] : {
+        nom: metiersEnum.macon,
+        intitule: () => metiersEnum.macon,
+        statut: {rang: 2, metalStatut: MetalStatut.bronze},
+        statutMax: {rang: 2, metalStatut: MetalStatut.argent},
+    },
     [metiersEnum.brasseur] : {
         nom: metiersEnum.brasseur,
         intitule: () => metiersEnum.brasseur,
         statut: {rang: 1, metalStatut: MetalStatut.argent},
         statutMax: {rang: 1, metalStatut: MetalStatut.or},
     },
+
+
     [metiersEnum.batelier] : {
         nom: metiersEnum.batelier,
         intitule: () => metiersEnum.batelier,
