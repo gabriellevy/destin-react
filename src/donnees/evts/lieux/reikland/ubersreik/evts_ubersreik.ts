@@ -5,8 +5,8 @@ import {
 import {age} from "../../../../../types/Date.ts";
 import {compareStatut, MetalStatut} from "../../../../../types/Statut.ts";
 import {ResidenceDeVoyage} from "../../../../../types/lieux/ResidenceDeVoyage.ts";
-import {metiersEnum, metiersObjs} from "../../../../../types/metiers/metiers.ts";
-import {aUneCarriere, suitUneCarriereDepuis} from "../../../../../types/metiers/metiersUtils.ts";
+import {metiersEnum} from "../../../../../types/metiers/metiers.ts";
+import {aUneCarriere, commencerCarriere, suitUneCarriereDepuis} from "../../../../../types/metiers/metiersUtils.ts";
 import {Ville} from "../../../../geographie/villes.ts";
 import {enumMois} from "../../../../dates/calendrier.ts";
 
@@ -104,15 +104,7 @@ export const evts_ubersreik: GroupeEvts = {
         {
             id: "evts_auberge_du_pont_3",
             description: (perso: Perso): string => {
-                // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
-                perso.carrieres.set(metiersEnum.serveur, {
-                    metier: metiersObjs[metiersEnum.serveur],
-                    groupeLieu: "Auberge de la maison du pont",
-                    duree: 0,
-                    competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
-                    actif: true,
-                    nbDeTestsFaits : 0,
-                });
+                commencerCarriere(perso, metiersEnum.serveur, "Auberge de la maison du pont");
                 perso.lieu.residenceVoyage = null;
                 perso.lieu.maison = ResidenceDeVoyage.auberge_de_la_maison_du_pont;
                 return "Vous avez réussi à vous trouver un travail de serveur à l'auberge de la maison du pont. " +
@@ -128,15 +120,7 @@ export const evts_ubersreik: GroupeEvts = {
             description: (perso: Perso): string => {
                 const texte: string = `Vos grandes qualité de prêtre ainsi que votre fidélité à leur famille pousse les Jungfreud à vous faire le grand honneur de vous nommer confesseur officiel de leur famille. `
 
-                // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
-                perso.carrieres.set(metiersEnum.confesseur, {
-                    metier: metiersObjs[metiersEnum.confesseur],
-                    groupeLieu: "la famille Jungfreud",
-                    duree: 0,
-                    competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
-                    actif: true,
-                    nbDeTestsFaits : 0,
-                });
+                commencerCarriere(perso, metiersEnum.confesseur, "la famille Jungfreud");
 
                 return texte;
             },

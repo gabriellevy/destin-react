@@ -1,8 +1,8 @@
-import {Carriere, metiersEnum} from "./metiers.ts";
+import {Carriere, metiersEnum, metiersObjs} from "./metiers.ts";
 import {Perso} from "../Perso.ts";
 import {seuils} from "../caracs/Caracs.ts";
 
-// seulement els carrières actives
+// seulement les carrières actives
 export function aUneCarriere(perso: Perso): boolean {
     let trouve: boolean = false;
     Array.from(perso.carrieres.values()).forEach((carriere: Carriere) => {
@@ -71,6 +71,31 @@ export function augmenterNbDeTestsFaitsMetier(perso: Perso, metier: metiersEnum)
         }
     }
     return "";
+}
+
+export function commencerCarriere(perso: Perso, metier: metiersEnum, groupeLieu: string): void {
+    // passer les autres en inactives
+    Array.from(perso.carrieres.values()).forEach((carriere: Carriere) => {
+        carriere.actif = false;
+    });
+
+    // récupérer valeurs de ce métier si déjà pratiqué par le passé
+    let nivCompetence: number = 1;
+    let nbDeTestsFaits: number = 0;
+    const cetteCarriereDejaFaite: Carriere|undefined = perso.carrieres.get(metier);
+    if (cetteCarriereDejaFaite) {
+        nivCompetence = cetteCarriereDejaFaite.competence;
+        nbDeTestsFaits = cetteCarriereDejaFaite.nbDeTestsFaits;
+    }
+    // commencer la nouvelle
+    perso.carrieres.set(metier, {
+        metier: metiersObjs[metier],
+        groupeLieu: groupeLieu,
+        duree: 0,
+        competence: nivCompetence,
+        actif: true,
+        nbDeTestsFaits : nbDeTestsFaits,
+    });
 }
 
 

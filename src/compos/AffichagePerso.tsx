@@ -27,6 +27,8 @@ export default function AffichagePerso() {
         const dureeCarriere: string = carriere.duree >= JOURS_PAR_AN ?
             `(${joursToAnnees(carriere.duree)} années)` : `(${carriere.duree} jours)`;
 
+        // TODO : afficher niveau de compétence dans ce métier
+
         return (carriere.metier && carriere.actif &&
             <ListItem>
                 <ListItemText primary={intituleMetier} secondary={dureeCarriere}/>

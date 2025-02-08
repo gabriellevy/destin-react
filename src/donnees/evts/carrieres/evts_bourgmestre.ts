@@ -1,11 +1,11 @@
 import {Perso} from "../../../types/Perso.ts";
-import {metiersEnum, metiersObjs} from "../../../types/metiers/metiers.ts";
+import {metiersEnum} from "../../../types/metiers/metiers.ts";
 import {GroupeEvts} from "../../../types/Evt.ts";
 import {ResultatTest} from "../../../types/LancerDe.ts";
 import {testCarac, testMetier} from "../../../fonctions/des.ts";
 import {TypeCarac} from "../../../types/caracs/Caracs.ts";
 import {age} from "../../../types/Date.ts";
-import {travailleEnCeMomentComme} from "../../../types/metiers/metiersUtils.ts";
+import {commencerCarriere, travailleEnCeMomentComme} from "../../../types/metiers/metiersUtils.ts";
 import {compareStatut, MetalStatut} from "../../../types/Statut.ts";
 import {tailleVille} from "../../geographie/villes.ts";
 
@@ -14,7 +14,7 @@ export const evts_bourgmestre: GroupeEvts = {
         {
             id: "evts_bourgmestre1",
             description: (perso: Perso): string => {
-                let texte: string = `Vous sentez qu'avec votre âge, votre expérience et votre respectabilité, vous feriez un excellent bourmestre. `
+                let texte: string = `Vous sentez qu'avec votre âge, votre expérience et votre respectabilité, vous feriez un excellent bourgmestre. `
                 const resTestInt:ResultatTest = testCarac(perso, {carac: TypeCarac.int, bonusMalus: 0});
                 const resTestSoc:ResultatTest = testCarac(perso, {carac: TypeCarac.soc, bonusMalus: 0});
                 texte += resTestInt.resume;
@@ -23,15 +23,7 @@ export const evts_bourgmestre: GroupeEvts = {
                     texte += `Malheureusement vos concitoyens sont d'un autre avis et vous n'êtes pas choisi par les notables de la ville. `;
                 }
                 else {
-                    // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
-                    perso.carrieres.set(metiersEnum.bourgmestre, {
-                        metier: metiersObjs[metiersEnum.bourgmestre],
-                        groupeLieu: perso.lieu.ville,
-                        duree: 0,
-                        competence: 1,
-                        actif: true,
-                        nbDeTestsFaits : 0,
-                    });
+                    commencerCarriere(perso, metiersEnum.bourgmestre, perso.lieu.ville);
                     texte += `À votre grande joie les notables jugent en effet que vous êtes le meilleur candidat. Vous voilà bourgmestre. `;
                 }
                 return texte;

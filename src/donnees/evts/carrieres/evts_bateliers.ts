@@ -1,12 +1,12 @@
 import {Perso} from "../../../types/Perso.ts";
-import {metiersEnum, metiersObjs} from "../../../types/metiers/metiers.ts";
+import {metiersEnum} from "../../../types/metiers/metiers.ts";
 import {GroupeEvts} from "../../../types/Evt.ts";
 import {ResultatTest} from "../../../types/LancerDe.ts";
 import {testCarac} from "../../../fonctions/des.ts";
 import {TypeCarac} from "../../../types/caracs/Caracs.ts";
 import {age} from "../../../types/Date.ts";
 import {auBordDeLaRiviere} from "../../../types/lieux/Lieu.ts";
-import {aUneCarriere, travailleEnCeMomentComme} from "../../../types/metiers/metiersUtils.ts";
+import {aUneCarriere, commencerCarriere, travailleEnCeMomentComme} from "../../../types/metiers/metiersUtils.ts";
 
 export const evts_batelier: GroupeEvts = {
     evts: [
@@ -19,15 +19,7 @@ export const evts_batelier: GroupeEvts = {
                 texte += resTestFor.resume;
                 texte += resTestEnd.resume;
                 if (resTestFor.reussi && resTestEnd.reussi) {
-                    // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
-                    perso.carrieres.set(metiersEnum.batelier, {
-                        metier: metiersObjs[metiersEnum.batelier],
-                        groupeLieu: undefined,
-                        duree: 0,
-                        competence: 1, // TODO stocker les compétences passées de chaque métier dans un tableau quelque part
-                        actif: true,
-                        nbDeTestsFaits : 0,
-                    });
+                    commencerCarriere(perso, metiersEnum.batelier, '');
                     texte += `Coriace comme vous l'êtes, vous impressionnez le capitaine qui vous engage à l'essai. `;
                 } else {
                     texte += `Malheureusement c'est un métier qui demande une très robuste constitution et vous êtes jugé trop frêle par le capitaine. `;

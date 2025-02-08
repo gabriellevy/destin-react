@@ -1,11 +1,11 @@
 import {Perso} from "../../../types/Perso.ts";
-import {metiersEnum, metiersObjs} from "../../../types/metiers/metiers.ts";
+import {metiersEnum} from "../../../types/metiers/metiers.ts";
 import {GroupeEvts} from "../../../types/Evt.ts";
 import {ResultatTest} from "../../../types/LancerDe.ts";
 import {testCarac, testMetier} from "../../../fonctions/des.ts";
 import {TypeCarac} from "../../../types/caracs/Caracs.ts";
 import {age} from "../../../types/Date.ts";
-import {aUneCarriere, travailleEnCeMomentComme} from "../../../types/metiers/metiersUtils.ts";
+import {aUneCarriere, commencerCarriere, travailleEnCeMomentComme} from "../../../types/metiers/metiersUtils.ts";
 
 export const evts_serveur: GroupeEvts = {
     evts: [
@@ -25,15 +25,7 @@ export const evts_serveur: GroupeEvts = {
                     texte += `Malheureusement votre manque de tact et votre physique peu facile rebute la patronne qui vous conseille de vous lancer dans autre chose. `;
                 }
                 else {
-                    // TODO : faire une fonction spécifique au changement de métier qui inclut le changement de statut et la maj de la compétence
-                    perso.carrieres.set(metiersEnum.serveur, {
-                        metier: metiersObjs[metiersEnum.serveur],
-                        groupeLieu: taverne,
-                        duree: 0,
-                        competence: 1,
-                        actif: true,
-                        nbDeTestsFaits : 0,
-                    });
+                    commencerCarriere(perso, metiersEnum.serveur, taverne);
                     texte += `La patronne n'est pas très exigeante à l'embauche mais il va falloir lui prouver votre motivation. `;
                 }
                 return texte;
