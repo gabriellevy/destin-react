@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {CssBaseline, Paper, Grid2} from '@mui/material';
+import {Paper, Grid2} from '@mui/material';
 import GenPersoForm from "../compos/creation_perso/GenPersoForm";
 import AffichagePerso from "../compos/AffichagePerso";
 import Histoire from "../compos/Histoire";
@@ -10,7 +10,6 @@ export default function Main() {
 
     return (
         <>
-            <CssBaseline />
             {afficherForm ? (
                 <GenPersoForm
                     setAfficherForm={setAfficherForm}
