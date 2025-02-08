@@ -40,6 +40,7 @@ export const evts_forgeron: GroupeEvts = {
                 }
                 return texte;
             },
+            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Hugo_Schmidt.webp",
             conditions: (perso: Perso): boolean =>
                 !aUneCarriere(perso)
                 && age(perso) >= 14,
@@ -50,7 +51,7 @@ export const evts_forgeron: GroupeEvts = {
                 let texte: string = "";
                 const resTestFor:ResultatTest = testCarac(perso, {carac: TypeCarac.f, bonusMalus: 20});
                 const resTestDex:ResultatTest = testCarac(perso, {carac: TypeCarac.e, bonusMalus: 20});
-                const resTestMetier:ResultatTest = testMetier(perso, {metier: metiersEnum.apprenti_Forgeron, bonusMalus: 0});
+                const resTestMetier:ResultatTest = testMetier(perso, {metier: metiersEnum.forgeron, bonusMalus: 0});
                 texte += resTestMetier.resume;
                 texte += resTestFor.resume;
                 texte += resTestDex.resume;
@@ -61,6 +62,7 @@ export const evts_forgeron: GroupeEvts = {
                 }
                 return texte;
             },
+            image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/Hugo_Schmidt.webp",
             conditions: (perso: Perso): boolean =>
                 travailleEnCeMomentComme(perso, metiersEnum.forgeron),
         },

@@ -20,6 +20,8 @@ export enum metiersEnum {
     batelier = "Batelier",
     apprenti_Forgeron = "Apprenti forgeron",
     forgeron = "Forgeron",
+    apprenti_brasseur = "Apprenti brasseur",
+    brasseur = "Brasseur",
 }
 
 export type Metier = {
@@ -63,6 +65,12 @@ export const metiersObjs: MetierObj = {
         statut: {rang: 2, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 5, metalStatut: MetalStatut.bronze},
     },
+    [metiersEnum.apprenti_brasseur] : {
+        nom: metiersEnum.apprenti_brasseur,
+        intitule: () => metiersEnum.apprenti_brasseur,
+        statut: {rang: 2, metalStatut: MetalStatut.bronze},
+        statutMax: {rang: 5, metalStatut: MetalStatut.bronze},
+    },
     [metiersEnum.ingenieur] : {
         nom: metiersEnum.ingenieur,
         intitule: () => metiersEnum.ingenieur,
@@ -72,6 +80,12 @@ export const metiersObjs: MetierObj = {
     [metiersEnum.forgeron] : {
         nom: metiersEnum.forgeron,
         intitule: () => metiersEnum.forgeron,
+        statut: {rang: 1, metalStatut: MetalStatut.argent},
+        statutMax: {rang: 1, metalStatut: MetalStatut.or},
+    },
+    [metiersEnum.brasseur] : {
+        nom: metiersEnum.brasseur,
+        intitule: () => metiersEnum.brasseur,
         statut: {rang: 1, metalStatut: MetalStatut.argent},
         statutMax: {rang: 1, metalStatut: MetalStatut.or},
     },

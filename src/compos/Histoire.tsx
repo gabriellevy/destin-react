@@ -24,8 +24,9 @@ import {evts_tout} from "../donnees/evts/evts_tout.ts";
 import {evts_serveur} from "../donnees/evts/carrieres/evts_serveur.ts";
 import {evts_bourgmestre} from "../donnees/evts/carrieres/evts_bourgmestre.ts";
 import {evts_forgeron} from "../donnees/evts/carrieres/evts_forgeron.ts";
+import {evts_brasseur} from "../donnees/evts/carrieres/evts_brasseur.ts";
 
-let demarre:boolean = false; //
+let demarre:boolean = false; // le destin a été lancé et est en cours
 
 export default function Histoire() {
     const [evtsExecutes, setEvtsExecutes] = useState<EvtExecute[]>([]); // événements déjà exécutés
@@ -79,6 +80,7 @@ export default function Histoire() {
             ...filtrerEtPreparerEvts(evts_empireEI, perso),
             ...filtrerEtPreparerEvts(evts_middenland, perso),
             ...filtrerEtPreparerEvts(evts_forgeron, perso),
+            ...filtrerEtPreparerEvts(evts_brasseur, perso),
             ...filtrerEtPreparerEvts(evts_tout, perso),
         ];
 
@@ -103,17 +105,22 @@ export default function Histoire() {
                 return true
             })
 
-            setTimeout(determinerEvtSuivant, 5000);
+            if (demarre) {
+                setTimeout(determinerEvtSuivant, 5000);
+            }
         } else {
             setPlusDEvts(true);
+            demarre= false;
         }
     }, [executerEvt, perso, setPerso]);
 
     // démarrer la boucle d'événements
-    if (demarre) {
-        demarre = true;
-        determinerEvtSuivant();
-    }
+    useEffect(() => {
+        if (!demarre) {
+            demarre = true;
+            determinerEvtSuivant();
+        }
+    }, [determinerEvtSuivant]);
 
     return (
         <Paper elevation={3} sx={{ p: 3, mt: 4, height: '100%', overflowY: 'auto' }}>
