@@ -23,6 +23,8 @@ export enum metiersEnum {
     brasseur = "Brasseur",
     apprenti_boulanger = "Apprenti boulanger",
     boulanger = "Boulanger",
+    apprenti_boucher = "Apprenti boucher",
+    boucher = "boucher",
     apprenti_barbier_chirurgien = "Apprenti barbier chirurgien",
     barbier_chirurgien = "Barbier chirurgien",
 }
@@ -70,6 +72,12 @@ export const metiersObjs: MetierObj = {
         statut: {rang: 2, metalStatut: MetalStatut.bronze},
         statutMax: {rang: 5, metalStatut: MetalStatut.bronze},
     },
+    [metiersEnum.apprenti_boucher] : {
+        nom: metiersEnum.apprenti_boucher,
+        intitule: () => metiersEnum.apprenti_boucher,
+        statut: {rang: 2, metalStatut: MetalStatut.bronze},
+        statutMax: {rang: 5, metalStatut: MetalStatut.bronze},
+    },
     [metiersEnum.ingenieur] : {
         nom: metiersEnum.ingenieur,
         intitule: () => metiersEnum.ingenieur,
@@ -97,6 +105,12 @@ export const metiersObjs: MetierObj = {
     [metiersEnum.boulanger] : {
         nom: metiersEnum.boulanger,
         intitule: () => metiersEnum.boulanger,
+        statut: {rang: 1, metalStatut: MetalStatut.argent},
+        statutMax: {rang: 1, metalStatut: MetalStatut.or},
+    },
+    [metiersEnum.boucher] : {
+        nom: metiersEnum.boucher,
+        intitule: () => metiersEnum.boucher,
         statut: {rang: 1, metalStatut: MetalStatut.argent},
         statutMax: {rang: 1, metalStatut: MetalStatut.or},
     },
