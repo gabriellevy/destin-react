@@ -28,6 +28,7 @@ import { Box, Typography, Dialog, IconButton, Grid2 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import {evts_macon} from "../donnees/evts/carrieres/evts_macon.ts";
 import {evts_boulanger} from "../donnees/evts/carrieres/evts_boulanger.ts";
+import {evts_barbierChirurgien} from "../donnees/evts/carrieres/evts_barbierChirurgien.ts";
 
 let demarre:boolean = false; // le destin a été lancé et est en cours
 
@@ -108,6 +109,7 @@ export default function Histoire() {
             ...filtrerEtPreparerEvts(evts_middenland, perso),
             ...filtrerEtPreparerEvts(evts_forgeron, perso),
             ...filtrerEtPreparerEvts(evts_brasseur, perso),
+            ...filtrerEtPreparerEvts(evts_barbierChirurgien, perso),
             ...filtrerEtPreparerEvts(evts_tout, perso),
         ];
 
