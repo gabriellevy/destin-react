@@ -139,7 +139,7 @@ export default function Histoire() {
                 return true
             })
 
-            if (demarre && !perso.mort) {
+            if (demarre) {
                 if (perso.mort) {
                     const evt: Evt = {
                         id: "mort",

@@ -53,7 +53,6 @@ export const evts_gotheim: GroupeEvts = {
                         } else {
                             texte += "Vous sautez et vous rompez le coup misérablement.";
                             perso.mort = true;
-                            // TODO : mort
                         }
                     } break;
 

@@ -37,7 +37,7 @@ export function testMetier(perso: Perso, test: TestMetier): ResultatTest {
 function returnTestResult(resAugmentation: string, intituleTestee:string, valeurTestee: number, bonusMalus: number): ResultatTest {
     const resDe: number = d100();
     const reussi: boolean = resDe <= (valeurTestee + bonusMalus);
-    const texte: string = "<i>Test de "
+    const texte: string = "<br/><i>Test de "
         + intituleTestee + " "
         + (reussi ? "réussi" : "raté")
         + ` (résultat ${resDe} contre compétence ${valeurTestee} ${bonusMalus > 0 ? "+" : ""} ${bonusMalus} ) `
