@@ -215,3 +215,12 @@ export const serveurDebutant: Carriere = {
     actif: true,
     nbDeTestsFaits: 0,
 };
+
+export const metierTest: Carriere = {
+    metier: metiersObjs[metiersEnum.bourgmestre],
+    groupeLieu: undefined,
+    duree: 0,
+    competence: 1,
+    actif: true,
+    nbDeTestsFaits: 0,
+};

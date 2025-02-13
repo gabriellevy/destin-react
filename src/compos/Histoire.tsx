@@ -139,8 +139,16 @@ export default function Histoire() {
                 return true
             })
 
-            if (demarre) {
-                setTimeout(determinerEvtSuivant, perso.vitesseExecution);
+            if (demarre && !perso.mort) {
+                if (perso.mort) {
+                    const evt: Evt = {
+                        id: "mort",
+                        description: () => "Vous êtes mort.",
+                    };
+                    executerEvt(evt, true);
+                } else {
+                    setTimeout(determinerEvtSuivant, perso.vitesseExecution);
+                }
             }
         } else {
             setPlusDEvts(true);

@@ -75,7 +75,7 @@ export function descriptionVille(ville: Ville) {
         + "Gotheim dispose d'une forge bien équipée, de son propre cabinet de barbier-chirurgien, d'une grande auberge relais, et d'un temple de Sigmar qui fait aussi office d'école. "
         + "Au nord du village, une digue de pierre brute retient les eaux d'un ruisseau forestier, fournissant au village un réservoir et une source d'énergie pour les moulins.<br> "
         + "Mais ce vernis de raffinement urbain est bien mince."
-        + "Les traditions et les mdoes de vie ruraux prédominent encore. "
+        + "Les traditions et les modes de vie ruraux prédominent encore. "
         + "Pendant les mois d'hiver, le village est silencieux, comme endormi. "
         + "Un petit cercle de pierres levées à proximité est dédié à l'Ancienne foi. "
         + "À chaque Mitterfruhl, les villageois s'y rassemblent afin de prendre part à des rites de fertilité rustiques qui provoquent suspicien, mépris et embarras chez les viciteurs enus de la ville. "

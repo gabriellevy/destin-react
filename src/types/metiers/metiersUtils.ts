@@ -12,9 +12,11 @@ export function aUneCarriere(perso: Perso): boolean {
 }
 
 export function getCarriereActive(perso: Perso): Carriere|undefined {
-    Array.from(perso.carrieres.values()).forEach((carriere: Carriere) => {
+    const carrieres = Array.from(perso.carrieres.values());
+    for(let i = 0; i < carrieres.length; i++) {
+        const carriere = carrieres[i];
         if (carriere.actif) return carriere;
-    });
+    }
     return undefined;
 }
 export function suitUneCarriereDe(perso: Perso, metier: metiersEnum): boolean {

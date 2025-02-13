@@ -52,6 +52,7 @@ export const evts_gotheim: GroupeEvts = {
                             + "À la prochaine pleine lune de Morrslieb, vous deviendrez bègue."; // TODO : baisser Soc ??
                         } else {
                             texte += "Vous sautez et vous rompez le coup misérablement.";
+                            perso.mort = true;
                             // TODO : mort
                         }
                     } break;
@@ -63,5 +64,5 @@ export const evts_gotheim: GroupeEvts = {
             image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/monstres/Jabberslythe.webp"
         },
     ],
-    probaParDefaut: 2,
+    probaParDefaut: 2999999999999999,
 };

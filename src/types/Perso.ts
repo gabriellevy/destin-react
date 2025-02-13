@@ -26,6 +26,7 @@ export type Perso = {
     talents: talents[],
     evtsProgrammes: Map<number, (perso: Perso)=>string> // TODO : conversion en tableau plutôt : évitera des pb d'export de json etc
     vitesseExecution: number, // en millisecondes entre chaque événement
+    mort?: boolean,
 };
 
 export enum Sexe {

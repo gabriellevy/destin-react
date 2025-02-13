@@ -5,7 +5,7 @@ import {MetalStatut} from "../../types/Statut.ts";
 import {Perso, Sexe} from "../../types/Perso.ts";
 import {caracsDeBase} from "../../types/caracs/Caracs.ts";
 import {evts_programmes} from "../evts/evts_programmes.ts";
-import {Carriere, metiersEnum} from "../../types/metiers/metiers.ts";
+import {Carriere, metiersEnum, metierTest} from "../../types/metiers/metiers.ts";
 import {unAnAvantDebutCampagne} from "../dates/ennemi_interieur.ts";
 
 export const persoVide: Perso = {
@@ -71,7 +71,7 @@ export const bourgeoisDAltdorf: Perso = {
     jourDuMois: -1,
     lieu: lieuAltdorf,
     statut: {rang: 1, metalStatut: MetalStatut.argent},
-    carrieres: new Map<metiersEnum, Carriere>,
+    carrieres: new Map<metiersEnum, Carriere>([[metiersEnum.bourgmestre, metierTest]]),
     caracs: caracsDeBase(Race.humain),
     talents: [],
     dieu: {id: "panthéon de l'empire"},
