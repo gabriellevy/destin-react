@@ -1,5 +1,6 @@
 export enum Ville {
     ubersreik = 'Ubersreik',
+    gotheim = 'Gotheim',
     altdorf = 'Altdorf',
     frederheim = 'Frederheim',
     kutenholz = 'Kutenholz',
@@ -40,6 +41,7 @@ export function tailleVille(ville: Ville): tailleVilles {
         case Ville.waldenhof:
         case Ville.heisenberg:
         case Ville.halstedt:
+        case Ville.gotheim:
             return tailleVilles.village;
 
         case Ville.frederheim:
@@ -55,5 +57,33 @@ export function tailleVille(ville: Ville): tailleVilles {
         case Ville.altdorf:
         case Ville.middenheim:
             return tailleVilles.metropole;
+    }
+}
+
+export function descriptionVille(ville: Ville) {
+    switch (ville) {
+        case Ville.gotheim:
+            return "Vous vivez à <b>Gotheim</b>.<br>"
+        + "Gotheim est une petite communauté agricole vivant essentiellement de la culture du blé et de l'élevage de chèvres. "
+        + "Le village sert également de centre local pour les fermiers des environs, qui y apportent leurs récoltes pour les y moudre ou pour les vedre avant qu'elles ne partent pour des marchés plus éloignés.<br> "
+        + "Grâce à sa position sur une importante route commerciale, Gotheim a l'air d'une petite ville, offrant divers services que l'on ne trouve normalement pas dans les villages. "
+        + "Les fermiers du coin aiment plaisanter en appelant Gotheim 'la ville', même si elle ne compte en réalité qu'une poignée de bâtiments. "
+        + "Gotheim dispose d'une forge bien équipée, de son propre cabinet de barbier-chirurgien, d'une grande auberge relais, et d'un temple de Sigmar qui fait aussi office d'école. "
+        + "Au nord du village, une digue de pierre brute retient les eaux d'un ruisseau forestier, fournissant au village un réservoir et une source d'énergie pour les moulins.<br> "
+        + "Mais ce vernis de raffinement urbain est bien mince."
+        + "Les traditions et les mdoes de vie ruraux prédominent encore. "
+        + "Pendant les mois d'hiver, le village est silencieux, comme endormi. "
+        + "Un petit cercle de pierres levées à proximité est dédié à l'Ancienne foi. "
+        + "À chaque Mitterfruhl, les villageois s'y rassemblent afin de prendre part à des rites de fertilité rustiques qui provoquent suspicien, mépris et embarras chez les viciteurs enus de la ville. "
+        + "<br>Gotheim est défendue par une grande palissade en bois et une grande porte entre deux tours de pierre sèche. "
+        + "La porte est gardée par des archers qui patrouillent le périmère et guettent les environs du haut des tours.";
+        default:
+            switch (tailleVille(ville)) {
+                case tailleVilles.petit_village: return ville + " est un petit village.";
+                case tailleVilles.village: return ville + " est un village.";
+                case tailleVilles.petite_ville: return ville + " est une petite ville.";
+                case tailleVilles.grande_ville: return ville + " est une grande ville.";
+                case tailleVilles.metropole: return ville + " est un ville gigantesque.";
+            }
     }
 }

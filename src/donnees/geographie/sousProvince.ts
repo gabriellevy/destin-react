@@ -14,7 +14,7 @@ export enum SousProvince {
 
 export function getVilles(sousProvinceStr: string):Ville[] {
     switch (sousProvinceStr) {
-        case SousProvince.ducheUbersreik : return [Ville.ubersreik];
+        case SousProvince.ducheUbersreik : return [Ville.ubersreik, Ville.gotheim];
         case SousProvince.principauteAltdorf : return [Ville.altdorf, Ville.frederheim];
         case SousProvince.middenland : return [
             Ville.kutenholz,

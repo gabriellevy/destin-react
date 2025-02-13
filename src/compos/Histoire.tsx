@@ -30,6 +30,7 @@ import {evts_macon} from "../donnees/evts/carrieres/evts_macon.ts";
 import {evts_boulanger} from "../donnees/evts/carrieres/evts_boulanger.ts";
 import {evts_barbierChirurgien} from "../donnees/evts/carrieres/evts_barbierChirurgien.ts";
 import {evts_boucher} from "../donnees/evts/carrieres/evts_boucher.ts";
+import {descriptionVille} from "../donnees/geographie/villes.ts";
 
 let demarre:boolean = false; // le destin a été lancé et est en cours
 
@@ -137,7 +138,7 @@ export default function Histoire() {
             })
 
             if (demarre) {
-                setTimeout(determinerEvtSuivant, 5000);
+                setTimeout(determinerEvtSuivant, perso.vitesseExecution);
             }
         } else {
             setPlusDEvts(true);
@@ -149,9 +150,23 @@ export default function Histoire() {
     useEffect(() => {
         if (!demarre) {
             demarre = true;
-            determinerEvtSuivant();
+            // événement d'intro :
+            const texte = descriptionVille(perso.lieu.ville);
+            const nouvEvt: EvtExecute = {
+                id: "intro",
+                dateStr: jourStr(perso.date),
+                texteFinal: texte, // l'exécution elle-même
+                //image: evtExecute.image,
+            };
+
+            setEvtsExecutes((prev: EvtExecute[]) => [
+                ...prev,
+                nouvEvt
+            ]);
+
+            setTimeout(determinerEvtSuivant, perso.vitesseExecution);
         }
-    }, [determinerEvtSuivant]);
+    }, [determinerEvtSuivant, perso.date, perso.lieu.ville, perso.vitesseExecution]);
 
     return (
         <>
