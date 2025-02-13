@@ -10,6 +10,13 @@ export function aUneCarriere(perso: Perso): boolean {
     });
     return trouve;
 }
+
+export function getCarriereActive(perso: Perso): Carriere|undefined {
+    Array.from(perso.carrieres.values()).forEach((carriere: Carriere) => {
+        if (carriere.actif) return carriere;
+    });
+    return undefined;
+}
 export function suitUneCarriereDe(perso: Perso, metier: metiersEnum): boolean {
     let trouve: boolean = false;
     Array.from(perso.carrieres.values()).forEach(carriere => {
@@ -21,7 +28,7 @@ export function suitUneCarriereDe(perso: Perso, metier: metiersEnum): boolean {
 }
 
 /**
- * renvoie tru si le perso travaille actuellement sur cette carrière, donc si il la suit mais aussi qu'il n'est pas en vacances, malade, en voyage...
+ * renvoie true si le perso travaille actuellement sur cette carrière, donc si il la suit mais aussi qu'il n'est pas en vacances, malade, en voyage...
  */
 export function travailleEnCeMomentComme(perso: Perso, metier: metiersEnum): boolean {
     return suitUneCarriereDe(perso, metier) && !perso.lieu.enVoyage;

@@ -31,6 +31,7 @@ import {evts_boulanger} from "../donnees/evts/carrieres/evts_boulanger.ts";
 import {evts_barbierChirurgien} from "../donnees/evts/carrieres/evts_barbierChirurgien.ts";
 import {evts_boucher} from "../donnees/evts/carrieres/evts_boucher.ts";
 import {descriptionVille} from "../donnees/geographie/villes.ts";
+import {evts_gotheim} from "../donnees/evts/lieux/reikland/ubersreik/evts_gotheim.ts";
 
 let demarre:boolean = false; // le destin a été lancé et est en cours
 
@@ -89,6 +90,7 @@ export default function Histoire() {
         // filtrer les evts non applicables
         const evtsApplicables: Evt[] = [
             ...filtrerEtPreparerEvts(evts_ubersreik, perso),
+            ...filtrerEtPreparerEvts(evts_gotheim, perso),
             ...filtrerEtPreparerEvts(evts_ubersreik_nains, perso),
             ...filtrerEtPreparerEvts(evts_calendrier, perso),
             ...filtrerEtPreparerEvts(evts_dunkelbild, perso),

@@ -62,6 +62,10 @@ export function tailleVille(ville: Ville): tailleVilles {
 
 export function descriptionVille(ville: Ville) {
     switch (ville) {
+        case Ville.altdorf:
+            return "Altdorf, la majestueuse capitale de l'Empire, se dresse fièrement au cœur du Vieux Monde de Warhammer. Surnommée la \"Cité des Sigmarites\", elle est le centre politique, religieux et culturel de l'Empire. Ses rues pavées et ses bâtiments imposants témoignent de son riche passé et de son importance stratégique. Le Grand Temple de Sigmar, un édifice monumental, domine la ville et attire des pèlerins de tout l'Empire. Les quartiers d'Altdorf sont variés, allant des somptueuses demeures des nobles aux ruelles étroites et animées des quartiers marchands.\n" +
+                "<br>" +
+                "La ville est également un carrefour commercial dynamique, où les marchands de toutes les provinces viennent échanger leurs biens. Le fleuve Reik, qui traverse Altdorf, est une artère vitale pour le commerce fluvial, reliant la ville à d'autres grandes cités comme Nuln et Marienburg. Malgré sa splendeur, Altdorf n'est pas épargnée par les intrigues politiques et les complots. Les grandes familles nobles y exercent une influence considérable, et les luttes de pouvoir sont monnaie courante. La présence de l'Empereur et de sa cour ajoute une dimension de prestige et de danger à la vie quotidienne de ses habitants."
         case Ville.gotheim:
             return "Vous vivez à <b>Gotheim</b>.<br>"
         + "Gotheim est une petite communauté agricole vivant essentiellement de la culture du blé et de l'élevage de chèvres. "
