@@ -33,8 +33,8 @@ export const lieuParDefaut: Lieu = {
 export const lieuAltdorf: Lieu = {
     pays: Pays.empire,
     province: Province.reikland,
-    sousProvince: SousProvince.principauteAltdorf,
-    ville: Ville.altdorf,
+    sousProvince: SousProvince.ducheUbersreik,
+    ville: Ville.gotheim,
     maison: null,
     enVoyage:false,
     residenceVoyage: null,
