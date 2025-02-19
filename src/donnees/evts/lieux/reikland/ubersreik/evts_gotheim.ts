@@ -18,6 +18,7 @@ export const evts_gotheim: GroupeEvts = {
                 let forgeBrule: boolean = false;
                 let aAgit: boolean = false;
                 const villageInonde: boolean = false;
+                const dansLeVillage: boolean = true;
                 let texte = "Vous êtes réveillé en sursaut en pleine nuit. "
                 + "Un grand fracas a lieu très près, des hommes hurlent. Vous avez l'impression d'apercevoir une silhouette massive par la fenêtre mais il fait trop sombre et votre tête vous torture trop pour être sûr de vous."
                 + "Un grand beuglement se fait entendre. Jamais vous n'avez rien entendu de semblable. ";
@@ -115,9 +116,16 @@ export const evts_gotheim: GroupeEvts = {
                     case metiersEnum.barbier_chirurgien:
                     case metiersEnum.apprenti_barbier_chirurgien: {
                         texte +="Une terreur vous frappe et vous empêche de penser correctement, vous restez caché jusqu'au petit matin. ";
-                        texte += "";
+                        texte +="Quand vous sortez vous constatez que le village a presque entièrement été détruit et voyez une scène de amssacre autour du temple de Sigmar. "
+                        + "Trois enfants du village, escapés, y jouent."
+                        + "Vous sentez confusément que c'est à vous de retrouver et tuer le monstre. Son sang répandu partout prouve qu'il a été gravement blessé."
+                        + "Après avoir pris diverses notes dans les marges de <i>La vie de Sigmar</i> vous avez un plan : "
+                        + "Il faut utiliser les enfants comme appât près du repaire du monstre qui est sur une colline dans la foret au nord. "
+                        + "Alors vous surgiez avec votre arc et battrez le monstre de vos flèches ! ";
+                        texte += "C'est ce que vous faites mais même en emmenant les enfants dans la foret, en les attachant et en les faisant crier, rien ne se passe... ";
                         forgeBrule = true;
                         aAgit = true;
+                        dansLeVillage = false;
                     } break;
                     case metiersEnum.pretre: // TODO : ajouter ici tous les métiers de guerriers (sauf garde et milicien)
                     case metiersEnum.initie_pretre: {
