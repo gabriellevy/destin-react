@@ -8,6 +8,7 @@ import {Carriere, metiersEnum} from "../../../../../types/metiers/metiers.ts";
 import {ResultatTest} from "../../../../../types/LancerDe.ts";
 import {testCarac} from "../../../../../fonctions/des.ts";
 import {TypeCarac} from "../../../../../types/caracs/Caracs.ts";
+import {aLeTalent, talents} from "../../../../talents.ts";
 
 export const evts_gotheim: GroupeEvts = {
     evts: [
@@ -17,8 +18,8 @@ export const evts_gotheim: GroupeEvts = {
                 const carriere: Carriere|undefined = getCarriereActive(perso);
                 let forgeBrule: boolean = false;
                 let aAgit: boolean = false;
-                const villageInonde: boolean = false;
-                const dansLeVillage: boolean = true;
+                const villageInonde: boolean = true; // si on ne fait rien...
+                let dansLeVillage: boolean = true;
                 let texte = "Vous êtes réveillé en sursaut en pleine nuit. "
                 + "Un grand fracas a lieu très près, des hommes hurlent. Vous avez l'impression d'apercevoir une silhouette massive par la fenêtre mais il fait trop sombre et votre tête vous torture trop pour être sûr de vous."
                 + "Un grand beuglement se fait entendre. Jamais vous n'avez rien entendu de semblable. ";
@@ -152,6 +153,16 @@ export const evts_gotheim: GroupeEvts = {
                         forgeBrule = true;
                         aAgit = true;
                     } break;
+                    case metiersEnum.boucher:
+                    case metiersEnum.apprenti_boucher: {
+                        texte += "Une terreur vous frappe et vous empêche de penser correctement, vous restez caché jusqu'au petit matin. ";
+                        texte += "Là vous surmontez votre terreur : le monstre a fuit vers le cercle de pierre, vous êtes sûr de l'avoir vu s'envoler par là. "
+                        + "Il suffit de détruire le barrage du ruisseau, le Mühlbach, pour inonder la zone et noyer le monstre ! "
+                        + "Vous vous mettez rapidement à détruire le digue avec l'aide de Maria la boulangère.";
+                        forgeBrule = true;
+                        aAgit = true;
+                        dansLeVillage = false;
+                    } break;
                 }
                 if (!aAgit) {
                     // pour ceux n'ayant pas agi selon leur métier
@@ -168,6 +179,21 @@ export const evts_gotheim: GroupeEvts = {
                 }
                 if (forgeBrule) {
                     texte += "Emportés dans leur élan et leur folie, les villageois alimentent la forge à l'excès et elle prend feu, détruisant tout le bâtiment. ";
+                }
+                if (villageInonde) {
+                    texte += "La digue est rompue ! "
+                    + "Les eaux qu'elle contenaient descendent la colline, noient le cercle de pierre et le village tout entier ! ";
+                    if (dansLeVillage) {
+                        const resTestI: ResultatTest = testCarac(perso, {carac: TypeCarac.i, bonusMalus: 0});
+                        if (resTestI.reussi || aLeTalent(perso, talents.natation)) {
+                            texte += "Vous parvenez à vous mettre à l'abri mais le village est complètement détruit. ";
+                        } else {
+                            texte += "Vous vous noyez dans la catastrophe. ";
+                            perso.mort = true;
+                        }
+                    }
+                    texte += "Le village est complètement détruit. Les récoltes sont ruinées, les chèvres sont noyées... "
+                    + "Jamais il ne s'en relèvera. ";
                 }
 
                 return texte;
