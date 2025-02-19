@@ -67,6 +67,13 @@ export default function AffichagePerso() {
                 <ListItemText primary="FM" secondary={getCaracValue(perso, TypeCarac.fm)}/>
                 <ListItemText primary="Soc" secondary={getCaracValue(perso, TypeCarac.soc)}/>
             </Stack>
+            {
+                perso.corruption > 0 && (
+                    <ListItem>
+                        <ListItemText primary="Corruption" secondary={perso.corruption}/>
+                    </ListItem>
+                )
+            }
             <Box mt={2}>
                 <Button variant="contained" color="primary" onClick={exporter} size="small">
                     Exporter le perso

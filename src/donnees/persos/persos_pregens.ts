@@ -23,6 +23,7 @@ export const persoVide: Perso = {
     statut: {rang: 4, metalStatut: MetalStatut.bronze},
     talents: [],
     vitesseExecution: 5000,
+    corruption: 0,
 }
 
 export const enfant: Perso = {
@@ -40,6 +41,7 @@ export const enfant: Perso = {
     dieu: {id: "panthéon de l'empire"},
     evtsProgrammes: evts_programmes,
     vitesseExecution: 5000,
+    corruption: 0,
 };
 
 export const jeuneHommeEnVoyageAUbersreik: Perso = {
@@ -57,6 +59,7 @@ export const jeuneHommeEnVoyageAUbersreik: Perso = {
     dieu: {id: "panthéon de l'empire"},
     evtsProgrammes: evts_programmes,
     vitesseExecution: 5000,
+    corruption: 0,
 };
 
 // époque du carnaval
@@ -77,6 +80,7 @@ export const bourgeoisDAltdorf: Perso = {
     dieu: {id: "panthéon de l'empire"},
     evtsProgrammes: evts_programmes,
     vitesseExecution: 5000,
+    corruption: 0,
 };
 
 export const nainEnVoyageAUbersreik: Perso = {
@@ -94,4 +98,5 @@ export const nainEnVoyageAUbersreik: Perso = {
     dieu: {id: "panthéon nain"},
     evtsProgrammes: evts_programmes,
     vitesseExecution: 5000,
+    corruption: 0,
 };

@@ -9,6 +9,7 @@ import {ResultatTest} from "../../../../../types/LancerDe.ts";
 import {testCarac} from "../../../../../fonctions/des.ts";
 import {TypeCarac} from "../../../../../types/caracs/Caracs.ts";
 import {aLeTalent, talents} from "../../../../talents.ts";
+import {testCorruptionMentale, testCorruptionPhysique} from "../../../../../fonctions/corruption.ts";
 
 export const evts_gotheim: GroupeEvts = {
     evts: [
@@ -21,8 +22,13 @@ export const evts_gotheim: GroupeEvts = {
                 const villageInonde: boolean = true; // si on ne fait rien...
                 let dansLeVillage: boolean = true;
                 let texte = "Vous êtes réveillé en sursaut en pleine nuit. "
-                + "Un grand fracas a lieu très près, des hommes hurlent. Vous avez l'impression d'apercevoir une silhouette massive par la fenêtre mais il fait trop sombre et votre tête vous torture trop pour être sûr de vous."
+                + "Un grand fracas a lieu très près, des hommes hurlent. "
+                + "Vous avez l'impression d'apercevoir une silhouette massive par la fenêtre mais il fait trop sombre et votre tête vous torture trop pour être sûr de vous."
                 + "Un grand beuglement se fait entendre. Jamais vous n'avez rien entendu de semblable. ";
+
+                texte += testCorruptionMentale(perso).resume;
+                texte += testCorruptionPhysique(perso).resume;
+
                 switch(carriere?.metier.nom) {
                     case metiersEnum.serveur: {
                         texte +="Une terreur vous frappe et vous empêche de penser correctement, vous restez caché jusqu'au petit matin. ";
@@ -202,5 +208,5 @@ export const evts_gotheim: GroupeEvts = {
             image: "https://raw.githubusercontent.com/gabriellevy/destin-react/refs/heads/main/images/monstres/Jabberslythe.webp"
         },
     ],
-    probaParDefaut: 2999999999999999,
+    probaParDefaut: 2,
 };
