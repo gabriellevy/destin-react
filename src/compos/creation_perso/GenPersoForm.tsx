@@ -22,7 +22,8 @@ import {useContext} from "react";
 import {PersoContexte, PersoContexteType} from "../../contexte/ContexteTypes.ts";
 import {Ville} from "../../donnees/geographie/villes.ts";
 import {vaA} from "../../types/lieux/Lieu.ts";
-import {getRandomEnumValue, randomStatut} from "../../fonctions/random.ts";
+import {getRandomEnumValue, getRandomInt, randomStatut} from "../../fonctions/random.ts";
+import {EMPIRE_NOMS, EMPIRE_PRENOMS_F, EMPIRE_PRENOMS_M} from "../../donnees/noms/humains/empire.ts";
 
 interface CharacterFormProps {
     setAfficherForm: (afficher: boolean) => void;
@@ -48,7 +49,11 @@ export default function GenPersoForm({ setAfficherForm }: CharacterFormProps) {
         vaA(persoAl, getRandomEnumValue(Ville));
         persoAl.statut = randomStatut();
         persoAl.sexe = d2() == 1 ? Sexe.femelle : Sexe.male;
-        // nom aléatoire
+        // nom aléatoire (TODO : selon nation, race etc)
+        persoAl.prenom = persoAl.sexe ?
+            EMPIRE_PRENOMS_M[getRandomInt(EMPIRE_PRENOMS_M.length)] :
+            EMPIRE_PRENOMS_F[getRandomInt(EMPIRE_PRENOMS_F.length)];
+        persoAl.nom = EMPIRE_NOMS[getRandomInt(EMPIRE_NOMS.length)];
 
         reset({...persoAl});
         setAfficherForm(true);
@@ -105,7 +110,22 @@ export default function GenPersoForm({ setAfficherForm }: CharacterFormProps) {
                 <FormProvider {...methods}>
                     <Typography variant="h4" gutterBottom>Créer un personnage</Typography>
                     <Grid2 container spacing={1} sx={{ mb: 2 }} columns={12}>
-                        <Grid2 size={8}>
+                        <Grid2 size={4}>
+                            <Controller
+                                name="prenom"
+                                control={methods.control}
+                                rules={{ required: "Vous devez avoir un prénom" }}
+                                render={({ field }) => (
+                                    <TextField
+                                        {...field}
+                                        label="Nom"
+                                        margin="normal"
+                                        fullWidth
+                                    />
+                                )}
+                            />
+                        </Grid2>
+                        <Grid2 size={4}>
                             <Controller
                                 name="nom"
                                 control={methods.control}
