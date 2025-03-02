@@ -41,7 +41,7 @@ export default function AffichagePerso() {
             <List dense>
                 <ListItem>
                     <Typography variant="h5" gutterBottom>
-                        <ListItemText primary={perso.nom} secondary={`${age(perso)} ans`}/>
+                        <ListItemText primary={`${perso.prenom} ${perso.nom}`} secondary={`${age(perso)} ans`}/>
                     </Typography>
                 </ListItem>
                 {

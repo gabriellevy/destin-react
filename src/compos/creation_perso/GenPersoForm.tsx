@@ -16,7 +16,7 @@ import SelectionLieu from "./SelectionLieu.tsx";
 import SelectionStatut from "./SelectionStatut.tsx";
 import SelectionDates from "./SelectionDates.tsx";
 import {anneesToJours} from "../../types/Date.ts";
-import {d400} from "../../fonctions/des.ts";
+import {d2, d400} from "../../fonctions/des.ts";
 import {bourgeoisDAltdorf, persoVide} from "../../donnees/persos/persos_pregens.ts";
 import {useContext} from "react";
 import {PersoContexte, PersoContexteType} from "../../contexte/ContexteTypes.ts";
@@ -47,6 +47,8 @@ export default function GenPersoForm({ setAfficherForm }: CharacterFormProps) {
         persoAl.age = 10 + Math.floor(Math.random() * 35);
         vaA(persoAl, getRandomEnumValue(Ville));
         persoAl.statut = randomStatut();
+        persoAl.sexe = d2() == 1 ? Sexe.femelle : Sexe.male;
+        // nom aléatoire
 
         reset({...persoAl});
         setAfficherForm(true);

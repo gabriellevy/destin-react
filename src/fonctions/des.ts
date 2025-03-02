@@ -3,6 +3,9 @@ import {augmenterNbDeTestsFaitsCarac, getCaracValue} from "../types/caracs/Carac
 import {Perso} from "../types/Perso.ts";
 import {augmenterNbDeTestsFaitsMetier, getCompetenceMetier} from "../types/metiers/metiersUtils.ts";
 
+export function d2(): number {
+    return Math.floor(Math.random() * 2) + 1;
+}
 export function d10(): number {
     return Math.floor(Math.random() * 10) + 1;
 }

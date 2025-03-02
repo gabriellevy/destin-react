@@ -7,6 +7,7 @@ import {talents} from "../donnees/talents.ts";
 import {Race} from "../donnees/races/Races.ts";
 
 export type Perso = {
+    prenom: string;
     nom: string;
     sexe: Sexe;
     dateNaissance: number;

@@ -9,7 +9,8 @@ import {Carriere, metiersEnum, metierTest} from "../../types/metiers/metiers.ts"
 import {unAnAvantDebutCampagne} from "../dates/ennemi_interieur.ts";
 
 export const persoVide: Perso = {
-    nom: "Wilhelm Kaburghen",
+    prenom: "Wilhelm",
+    nom: "Kaburghen",
     carrieres: new Map<metiersEnum, Carriere>,
     caracs: caracsDeBase(Race.humain),
     date: 0,
@@ -27,7 +28,8 @@ export const persoVide: Perso = {
 }
 
 export const enfant: Perso = {
-    nom: "Wilhelm Hinderten",
+    prenom: "Wilhelm",
+    nom: "Kaburghen",
     sexe: Sexe.male,
     race: Race.humain,
     dateNaissance: anneesToJours(2492), // entre 2482 et 2502 comme ça le perso a entre 10 et 30 ans quand l'ennemi intérieur démarre
@@ -45,7 +47,8 @@ export const enfant: Perso = {
 };
 
 export const jeuneHommeEnVoyageAUbersreik: Perso = {
-    nom: "Wilhelm Hinderten",
+    prenom: "Wilhelm",
+    nom: "Kaburghen",
     sexe: Sexe.male,
     race: Race.humain,
     dateNaissance: anneesToJours(2482), // entre 2482 et 2502 comme ça le perso a entre 10 et 30 ans quand l'ennemi intérieur démarre
@@ -64,7 +67,8 @@ export const jeuneHommeEnVoyageAUbersreik: Perso = {
 
 // époque du carnaval
 export const bourgeoisDAltdorf: Perso = {
-    nom: "Wilhelm Hinderten",
+    prenom: "Wilhelm",
+    nom: "Kaburghen",
     sexe: Sexe.male,
     race: Race.humain,
     dateNaissance: anneesToJours(2491),
@@ -84,7 +88,8 @@ export const bourgeoisDAltdorf: Perso = {
 };
 
 export const nainEnVoyageAUbersreik: Perso = {
-    nom: "Hurfin Surmarteau",
+    prenom: "Hurfin",
+    nom: "Surmarteau",
     sexe: Sexe.male,
     race: Race.nain,
     dateNaissance: anneesToJours(2018),
